@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Road to 300</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <style>
+      #chartContainer {
+        width: 1200px;
+        height: 600px;
+        margin: 20px auto;
+      }
+
+      button {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+
+      #daysInfo {
+        text-align: center;
+        margin: 10px auto;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="daysInfo"></div>
+    <div id="chartContainer">
+      <canvas id="myChart"></canvas>
+    </div>
+    <button onclick="replayAnimation()">Replay Animation</button>
+    <script>
+      let myChart;
+      const colors = [
+        "#FF6B6B",
+        "#4ECDC4",
+        "#45B7D1",
+        "#96CEB4",
+        "#FFEEAD",
+        "#D4A5A5",
+        "#9B59B6",
+        "#3498DB",
+        "#E74C3C",
+        "#2ECC71",
+      ];
+
+      // Process JSON data into chart format with daily points
+      async function loadAndProcessData() {
+        const response = await fetch("data.json");
+        const data = await response.json();
+        const runners = data.runners;
+        const startDate = new Date("2025-01-01");
+        const currentDate = new Date();
+        const daysSoFar =
+          Math.floor((currentDate - startDate) / (24 * 60 * 60 * 1000)) + 1;
+        const animationPoints = Math.min(daysSoFar, 100); // Increased to 100 for finer time resolution
+        const stepSize = Math.max(1, Math.floor(daysSoFar / animationPoints));
+
+        const datasets = [];
+        let colorIndex = 0;
+
+        Object.values(runners).forEach((runner) => {
+          if (runner.activities.length === 0) return;
+
+          const sortedActivities = runner.activities
+            .filter((activity) => activity.type === "Running")
+            .sort((a, b) => {
+              const dateA = new Date(
+                `2025-${a.date.split("/")[0]}-${a.date.split("/")[1]}`,
+              );
+              const dateB = new Date(
+                `2025-${b.date.split("/")[0]}-${b.date.split("/")[1]}`,
+              );
+              return dateA - dateB;
+            });
+
+          const runnerData = [];
+          let cumulativeDistance = 0;
+          let activityIndex = 0;
+
+          // Create points for every day (or step) up to current date
+          for (let i = 0; i < daysSoFar; i += stepSize) {
+            const currentDay = new Date(
+              startDate.getTime() + i * 24 * 60 * 60 * 1000,
+            );
+            if (currentDay > currentDate) break;
+
+            // Check if there are activities up to this date
+            while (activityIndex < sortedActivities.length) {
+              const activityDate = new Date(
+                `2025-${sortedActivities[activityIndex].date.split("/")[0]}-${sortedActivities[activityIndex].date.split("/")[1]}`,
+              );
+              if (activityDate <= currentDay) {
+                cumulativeDistance += sortedActivities[activityIndex].distance;
+                activityIndex++;
+              } else {
+                break;
+              }
+            }
+
+            runnerData.push({
+              x: currentDay,
+              y: cumulativeDistance,
+              hasActivity:
+                activityIndex > 0 &&
+                new Date(
+                  `2025-${sortedActivities[activityIndex - 1].date.split("/")[0]}-${sortedActivities[activityIndex - 1].date.split("/")[1]}`,
+                ).getTime() === currentDay.getTime(),
+            });
+          }
+
+          datasets.push({
+            label: runner.name,
+            borderColor: colors[colorIndex % colors.length],
+            borderWidth: 3,
+            pointRadius: (context) =>
+              context.raw && context.raw.hasActivity ? 4 : 0, // Only show points on activity days
+            pointBackgroundColor: colors[colorIndex % colors.length],
+            data: runnerData,
+            fill: false,
+            showLine: true,
+            tension: 0,
+          });
+          colorIndex++;
+        });
+
+        return { datasets, animationPoints, daysSoFar };
+      }
+
+      // Animation configuration for growing line
+      const totalDuration = 4500;
+
+      function createGrowingLineAnimation(animationPoints) {
+        const delayBetweenPoints = totalDuration / animationPoints;
+
+        // Get the previous Y value to start animation from
+        const previousY = (ctx) => {
+          if (ctx.index === 0) {
+            return ctx.chart.scales.y.getPixelForValue(0); // Start from 0
+          }
+          return ctx.chart
+            .getDatasetMeta(ctx.datasetIndex)
+            .data[ctx.index - 1].getProps(["y"], true).y;
+        };
+
+        return {
+          x: {
+            type: "number",
+            easing: "linear",
+            duration: delayBetweenPoints,
+            from: NaN, // the point is initially skipped
+            delay(ctx) {
+              if (ctx.type !== "data" || ctx.xStarted) {
+                return 0;
+              }
+              ctx.xStarted = true;
+              return ctx.index * delayBetweenPoints;
+            },
+          },
+          y: {
+            type: "number",
+            easing: "linear",
+            duration: delayBetweenPoints,
+            from: previousY,
+            delay(ctx) {
+              if (ctx.type !== "data" || ctx.yStarted) {
+                return 0;
+              }
+              ctx.yStarted = true;
+              return ctx.index * delayBetweenPoints;
+            },
+          },
+        };
+      }
+
+      async function createChart() {
+        const { datasets, animationPoints, daysSoFar } =
+          await loadAndProcessData();
+
+        // Find the highest runner's total miles
+        const maxMiles = Math.max(
+          ...datasets.flatMap((d) => d.data.map((point) => point.y)),
+        );
+
+        // Round up to the next multiple of 50
+        const yMax = Math.ceil(maxMiles / 50) * 50;
+
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const monthsShown = currentMonth + 1;
+        const dayInterval = monthsShown <= 2 ? 7 : monthsShown <= 6 ? 14 : 30;
+        const daysInYear = 365;
+        const daysRemaining = daysInYear - daysSoFar;
+
+        document.getElementById("daysInfo").innerHTML =
+          `Days Passed: ${daysSoFar} | Days Remaining: ${daysRemaining}`;
+
+        const config = {
+          type: "line",
+          data: {
+            datasets: datasets,
+          },
+          options: {
+            animation: createGrowingLineAnimation(animationPoints),
+            interaction: {
+              intersect: false,
+            },
+            plugins: {
+              legend: {
+                display: true,
+                position: "bottom",
+                labels: {
+                  usePointStyle: true,
+                  pointStyle: "circle",
+                  font: {
+                    weight: "bold",
+                  },
+                },
+              },
+            },
+            scales: {
+              x: {
+                type: "time",
+                time: {
+                  unit: "day",
+                  stepSize: dayInterval,
+                  displayFormats: {
+                    day: "MMM d",
+                  },
+                  min: new Date("2025-01-01"),
+                  max: new Date(2025, currentMonth + 1, 0),
+                },
+                title: {
+                  display: true,
+                  text: "Date (2025)",
+                  font: {
+                    weight: "bold",
+                  },
+                },
+                grid: {
+                  color: "rgba(0, 0, 0, 0.1)",
+                },
+                ticks: {
+                  font: {
+                    weight: "bold",
+                  },
+                  callback: function (value) {
+                    const date = new Date(value);
+                    return `${date.toLocaleString("default", { month: "short" })} ${date.getDate()}`;
+                  },
+                },
+              },
+              y: {
+                min: 0,
+                max: yMax, // Dynamically set max value rounded up to the next 50
+                title: {
+                  display: true,
+                  text: "Miles",
+                  font: {
+                    weight: "bold",
+                  },
+                },
+                ticks: {
+                  font: {
+                    weight: "bold",
+                  },
+                },
+              },
+            },
+          },
+        };
+
+        const ctx = document.getElementById("myChart").getContext("2d");
+        if (myChart) {
+          myChart.destroy();
+        }
+        myChart = new Chart(ctx, config);
+      }
+
+      // Replay animation function
+      function replayAnimation() {
+        createChart();
+      }
+
+      // Initial chart creation
+      window.onload = createChart;
+    </script>
+  </body>
+</html>
