@@ -88,6 +88,24 @@
       .text-blue-600 {
         color: #2563eb;
       }
+
+      /* Custom legend styles */
+      .legend-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 10px;
+      }
+
+      .legend-name {
+        font-weight: bold;
+        margin-bottom: 2px;
+      }
+
+      .legend-total {
+        font-size: 0.85em;
+        color: #666;
+      }
     </style>
   </head>
 
@@ -211,6 +229,10 @@
             });
           }
 
+          // Calculate the total miles (take the last data point's y value)
+          const totalMiles =
+            runnerData.length > 0 ? runnerData[runnerData.length - 1].y : 0;
+
           datasets.push({
             label: runner.name,
             borderColor: colors[colorIndex % colors.length],
@@ -222,6 +244,8 @@
             fill: false,
             showLine: true,
             tension: 0,
+            // Store total miles as a custom property for the legend
+            totalMiles: totalMiles,
           });
 
           colorIndex++;
@@ -319,6 +343,63 @@
         document.getElementById("daysInfo").innerHTML =
           `<span class="text-green-600">${daysSoFar} Days Passed</span> | <span class="text-blue-600">${daysRemaining} Days Remaining</span>`;
 
+        // Custom legend plugin
+        const customLegendPlugin = {
+          id: "customLegend",
+          afterUpdate: (chart) => {
+            // Create our own legend to replace the default one
+            chart.options.plugins.legend.display = false;
+          },
+          afterRender: (chart) => {
+            // Get the chart's legend container (this is where Chart.js would render the legend)
+            const legendContainer = document.getElementById("customLegend");
+
+            // If the container doesn't exist yet, create it
+            if (!legendContainer) {
+              const container = document.createElement("div");
+              container.id = "customLegend";
+              container.style.display = "flex";
+              container.style.flexWrap = "wrap";
+              container.style.justifyContent = "center";
+              container.style.marginTop = "15px";
+
+              // Add legend items
+              chart.data.datasets.forEach((dataset, i) => {
+                const item = document.createElement("div");
+                item.className = "legend-item";
+
+                // Create color indicator
+                const colorBox = document.createElement("div");
+                colorBox.style.width = "12px";
+                colorBox.style.height = "12px";
+                colorBox.style.borderRadius = "50%";
+                colorBox.style.backgroundColor = dataset.borderColor;
+                colorBox.style.display = "inline-block";
+                colorBox.style.marginRight = "5px";
+
+                // Create runner name
+                const nameSpan = document.createElement("div");
+                nameSpan.className = "legend-name";
+                nameSpan.innerHTML = `<span style="display:inline-block;vertical-align:middle;">${colorBox.outerHTML}</span> ${dataset.label}`;
+
+                // Create miles total
+                const totalSpan = document.createElement("div");
+                totalSpan.className = "legend-total";
+                totalSpan.textContent = `${dataset.totalMiles.toFixed(1)}`;
+
+                // Add to legend item
+                item.appendChild(nameSpan);
+                item.appendChild(totalSpan);
+                container.appendChild(item);
+              });
+
+              // Add to chart container
+              const chartContainer = chart.canvas.parentNode;
+              chartContainer.appendChild(container);
+            }
+          },
+        };
+
         const config = {
           type: "line",
           data: {
@@ -361,35 +442,21 @@
                       result += `\n(+${point.gainFromLastActivity.toFixed(1)})`;
                     }
 
-                    // Add last activity info if available and not the same day
-                    if (
-                      point.lastActivityDate &&
-                      !point.isSameDayAsLastActivity &&
-                      point.lastActivityDistance > 0
-                    ) {
-                      const lastActivityFormatted = formatDate(
-                        point.lastActivityDate,
-                      );
-                      result += `\n→ Last activity: ${lastActivityFormatted} (+${point.lastActivityDistance.toFixed(1)} miles)`;
-                    }
+                    // // Add last activity info if available and not the same day
+                    // if (point.lastActivityDate && !point.isSameDayAsLastActivity && point.lastActivityDistance > 0) {
+                    //   const lastActivityFormatted = formatDate(point.lastActivityDate);
+                    //   result += `\n→ Last activity: ${lastActivityFormatted} (+${point.lastActivityDistance.toFixed(1)})`;
+                    // }
 
                     return result;
                   },
                 },
               },
               legend: {
-                display: true,
-                position: "bottom",
-                labels: {
-                  usePointStyle: true,
-                  pointStyle: "circle",
-                  padding: 20,
-                  font: {
-                    weight: "bold",
-                    size: 12,
-                  },
-                },
+                // We'll disable the built-in legend since we're creating our own
+                display: false,
               },
+              customLegend: true, // Enable our custom legend plugin
             },
             scales: {
               x: {
@@ -458,9 +525,17 @@
             responsive: true,
             maintainAspectRatio: true,
           },
+          plugins: [customLegendPlugin],
         };
 
         const ctx = document.getElementById("myChart").getContext("2d");
+
+        // Clean up any existing custom legend
+        const existingLegend = document.getElementById("customLegend");
+        if (existingLegend) {
+          existingLegend.remove();
+        }
+
         if (myChart) {
           myChart.destroy();
         }
