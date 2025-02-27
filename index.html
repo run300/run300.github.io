@@ -85,11 +85,6 @@
             (a, b) => a.parsedDate - b.parsedDate,
           );
 
-          // Debug: log the dates
-          sortedActivities.forEach((activity) => {
-            console.log(activity.date);
-          });
-
           const runnerData = [];
           let cumulativeDistance = 0;
           let activityIndex = 0;
