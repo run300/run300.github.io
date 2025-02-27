@@ -53,6 +53,7 @@
       async function loadAndProcessData() {
         const response = await fetch("data.json");
         const data = await response.json();
+        // Embedded data - last updated: 2025-02-26 16:59:38
         const runners = data.runners;
         const startDate = new Date("2025-01-01");
         const currentDate = new Date();
@@ -60,24 +61,34 @@
           Math.floor((currentDate - startDate) / (24 * 60 * 60 * 1000)) + 1;
         const animationPoints = Math.min(daysSoFar, 100); // Increased to 100 for finer time resolution
         const stepSize = Math.max(1, Math.floor(daysSoFar / animationPoints));
-
         const datasets = [];
         let colorIndex = 0;
 
+        // Process all runners
         Object.values(runners).forEach((runner) => {
           if (runner.activities.length === 0) return;
 
-          const sortedActivities = runner.activities
-            .filter((activity) => activity.type === "Running")
-            .sort((a, b) => {
-              const dateA = new Date(
-                `2025-${a.date.split("/")[0]}-${a.date.split("/")[1]}`,
-              );
-              const dateB = new Date(
-                `2025-${b.date.split("/")[0]}-${b.date.split("/")[1]}`,
-              );
-              return dateA - dateB;
-            });
+          // Parse all dates once at the beginning
+          runner.activities = runner.activities.map((activity) => {
+            const [month, day, year] = activity.date.split("/");
+            const parsedDate = new Date(
+              `20${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`,
+            );
+            return {
+              ...activity,
+              parsedDate, // Add the parsed date to each activity
+            };
+          });
+
+          // Sort activities using the parsed date
+          const sortedActivities = runner.activities.sort(
+            (a, b) => a.parsedDate - b.parsedDate,
+          );
+
+          // Debug: log the dates
+          sortedActivities.forEach((activity) => {
+            console.log(activity.date);
+          });
 
           const runnerData = [];
           let cumulativeDistance = 0;
@@ -92,10 +103,7 @@
 
             // Check if there are activities up to this date
             while (activityIndex < sortedActivities.length) {
-              const activityDate = new Date(
-                `2025-${sortedActivities[activityIndex].date.split("/")[0]}-${sortedActivities[activityIndex].date.split("/")[1]}`,
-              );
-              if (activityDate <= currentDay) {
+              if (sortedActivities[activityIndex].parsedDate <= currentDay) {
                 cumulativeDistance += sortedActivities[activityIndex].distance;
                 activityIndex++;
               } else {
@@ -108,9 +116,10 @@
               y: cumulativeDistance,
               hasActivity:
                 activityIndex > 0 &&
-                new Date(
-                  `2025-${sortedActivities[activityIndex - 1].date.split("/")[0]}-${sortedActivities[activityIndex - 1].date.split("/")[1]}`,
-                ).getTime() === currentDay.getTime(),
+                isSameDay(
+                  sortedActivities[activityIndex - 1].parsedDate,
+                  currentDay,
+                ),
             });
           }
 
@@ -126,10 +135,20 @@
             showLine: true,
             tension: 0,
           });
+
           colorIndex++;
         });
 
         return { datasets, animationPoints, daysSoFar };
+      }
+
+      // Helper function to check if two dates represent the same day
+      function isSameDay(date1, date2) {
+        return (
+          date1.getFullYear() === date2.getFullYear() &&
+          date1.getMonth() === date2.getMonth() &&
+          date1.getDate() === date2.getDate()
+        );
       }
 
       // Animation configuration for growing line
@@ -304,4 +323,3 @@
     </script>
   </body>
 </html>
-
