@@ -1,554 +1,636 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Road to 300</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
-    <style>
-      /* Reset and base styles */
-      body {
-        background-color: #f9fafb;
-        min-height: 100vh;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Helvetica, Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-      }
 
-      .container {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem 1rem;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <title>Road to 300</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+  <style>
+    /* Reset and base styles */
+    body {
+      background-color: #f9fafb;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
 
-      /* Typography */
-      h1 {
-        font-size: 1.875rem;
-        font-weight: 700;
-        text-align: center;
-        color: #1f2937;
-        margin-bottom: 1rem;
-      }
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
 
-      #daysInfo {
-        text-align: center;
-        margin-bottom: 1rem;
-        color: #4b5563;
-        font-weight: 600;
-      }
+    /* Typography */
+    h1 {
+      font-size: 1.875rem;
+      font-weight: 700;
+      text-align: center;
+      color: #1f2937;
+      margin-bottom: 1rem;
+    }
 
-      /* Chart container */
-      .chart-container {
-        background-color: white;
-        padding: 1.5rem;
-        border-radius: 0.75rem;
-        margin-bottom: 1.5rem;
-        box-shadow:
-          0 10px 25px -5px rgba(0, 0, 0, 0.1),
-          0 10px 10px -5px rgba(0, 0, 0, 0.04);
-      }
+    #daysInfo {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #4b5563;
+      font-weight: 600;
+    }
 
-      .chart-wrapper {
-        width: 100%;
-        max-width: 1152px;
-        margin: 0 auto;
-      }
+    /* Chart container */
+    .chart-container {
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      margin-bottom: 1.5rem;
+      box-shadow:
+        0 10px 25px -5px rgba(0, 0, 0, 0.1),
+        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      position: relative;
+    }
 
-      /* Button */
-      button {
-        background-color: #2563eb;
-        color: white;
-        font-weight: 700;
-        padding: 0.5rem 1.5rem;
-        border-radius: 0.5rem;
-        border: none;
-        display: block;
-        margin: 0 auto;
-        cursor: pointer;
-        transition: background-color 0.2s;
-      }
+    .chart-wrapper {
+      width: 100%;
+      max-width: 1152px;
+      margin: 0 auto;
+      position: relative;
+    }
 
-      button:hover {
-        background-color: #1d4ed8;
-      }
+    /* Button */
+    button {
+      background-color: #2563eb;
+      color: white;
+      font-weight: 700;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.5rem;
+      border: none;
+      display: block;
+      margin: 0 auto;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
 
-      button:focus {
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.5);
-      }
+    button:hover {
+      background-color: #1d4ed8;
+    }
 
-      /* Color Helpers */
-      .text-green-600 {
-        color: #059669;
-      }
+    button:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.5);
+    }
 
-      .text-blue-600 {
-        color: #2563eb;
-      }
+    /* Color Helpers */
+    .text-green-600 {
+      color: #059669;
+    }
 
-      /* Custom legend styles */
-      .legend-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 0 10px;
-      }
+    .text-blue-600 {
+      color: #2563eb;
+    }
 
-      .legend-name {
-        font-weight: bold;
-        margin-bottom: 2px;
-      }
+    /* Custom legend styles */
+    .legend-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 10px;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
 
-      .legend-total {
-        font-size: 0.85em;
-        color: #666;
-      }
-    </style>
-  </head>
+    .legend-item:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
 
-  <body>
-    <div class="container">
-      <h1>Road to 300</h1>
+    .legend-item.active {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
 
-      <div id="daysInfo"></div>
+    .legend-name {
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
 
-      <div class="chart-container">
-        <div class="chart-wrapper">
-          <canvas id="myChart"></canvas>
-        </div>
+    .legend-total {
+      font-size: 0.85em;
+      color: #666;
+    }
+
+    /* Gain label styles */
+    .gain-label {
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 3px 6px;
+      border-radius: 3px;
+      font-size: 12px;
+      pointer-events: none;
+      z-index: 10;
+      text-align: center;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Road to 300</h1>
+    <div id="daysInfo"></div>
+    <div class="chart-container">
+      <div class="chart-wrapper">
+        <canvas id="myChart"></canvas>
+        <div id="gainLabelsContainer"></div>
       </div>
-
-      <button onclick="replayAnimation()">Replay Animation</button>
     </div>
+    <button onclick="replayAnimation()">Replay Animation</button>
+  </div>
 
-    <script>
-      let myChart;
-      const colors = [
-        "#FF6B6B",
-        "#4ECDC4",
-        "#45B7D1",
-        "#96CEB4",
-        "#FFEEAD",
-        "#D4A5A5",
-        "#9B59B6",
-        "#3498DB",
-        "#E74C3C",
-        "#2ECC71",
-      ];
+  <script>
+    let myChart;
+    let activeRunnerIndex = -1; // Track which runner is active
+    const colors = [
+      "#4ECDC4",
+      "#FF6B6B",
+      "#45B7D1",
+      "#96CEB4",
+      "#9B59B6",
+      "#D4A5A5",
+      "#FFEEAD",
+      "#3498DB",
+      "#E74C3C",
+      "#2ECC71",
+    ];
 
-      // Process JSON data into chart format with daily points
-      async function loadAndProcessData() {
-        const response = await fetch("data.json");
-        const data = await response.json();
-        // Embedded data - last updated: 2025-02-26 16:59:38
-        const runners = data.runners;
-        const startDate = new Date("2025-01-01");
-        const currentDate = new Date();
-        const daysSoFar = Math.floor(
-          (currentDate - startDate) / (24 * 60 * 60 * 1000),
-        );
-        const animationPoints = Math.min(daysSoFar, 100); // Increased to 100 for finer time resolution
-        const stepSize = Math.max(1, Math.floor(daysSoFar / animationPoints));
-        const datasets = [];
-        let colorIndex = 0;
+    // Debounce function to limit rapid hover events
+    function debounce(func, wait) {
+      let timeout;
+      return function (...args) {
+        const context = this;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), wait);
+      };
+    }
 
-        // Process all runners
-        Object.values(runners).forEach((runner) => {
-          if (runner.activities.length === 0) return;
+    // Helper function to check if two dates represent the same day
+    function isSameDay(date1, date2) {
+      if (!date1 || !date2) return false;
+      return (
+        date1.getFullYear() === date2.getFullYear() &&
+        date1.getMonth() === date2.getMonth() &&
+        date1.getDate() === date2.getDate()
+      );
+    }
 
-          // Parse all dates once at the beginning
-          runner.activities = runner.activities.map((activity) => {
-            const [month, day, year] = activity.date.split("/");
-            const parsedDate = new Date(
-              `20${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}T12:00:00`,
-            );
-            return {
-              ...activity,
-              parsedDate, // Add the parsed date to each activity
-            };
-          });
+    // Process JSON data into chart format with daily points
+    async function loadAndProcessData() {
+      const response = await fetch("data.json");
+      const data = await response.json();
+      const runners = data.runners;
+      const startDate = new Date("2025-01-01");
+      const currentDate = new Date();
+      const daysSoFar = Math.floor(
+        (currentDate - startDate) / (24 * 60 * 60 * 1000),
+      );
+      const animationPoints = Math.min(daysSoFar, 100);
+      const stepSize = Math.max(1, Math.floor(daysSoFar / animationPoints));
+      const datasets = [];
+      let colorIndex = 0;
 
-          // Sort activities using the parsed date
-          const sortedActivities = runner.activities.sort(
-            (a, b) => a.parsedDate - b.parsedDate,
+      // Process all runners
+      Object.values(runners).forEach((runner) => {
+        if (runner.activities.length === 0) return;
+
+        // Parse all dates once at the beginning
+        runner.activities = runner.activities.map((activity) => {
+          const [month, day, year] = activity.date.split("/");
+          const parsedDate = new Date(
+            `20${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}T12:00:00`,
           );
+          return {
+            ...activity,
+            parsedDate,
+          };
+        });
 
-          const runnerData = [];
-          let cumulativeDistance = 0;
-          let activityIndex = 0;
-          let lastActivityDistance = 0;
-          let lastActivityDate = null;
+        // Sort activities using the parsed date
+        const sortedActivities = runner.activities.sort(
+          (a, b) => a.parsedDate - b.parsedDate,
+        );
 
-          // Create points for every day (or step) up to current date
-          for (let i = 0; i < daysSoFar; i += stepSize) {
-            const currentDay = new Date(
-              startDate.getTime() + i * 24 * 60 * 60 * 1000,
-            );
-            if (currentDay > currentDate) break;
+        const runnerData = [];
+        let cumulativeDistance = 0;
+        let activityIndex = 0;
+        let lastActivityDistance = 0;
+        let lastActivityDate = null;
 
-            let gainFromLastActivity = 0;
-            let hasNewActivity = false;
+        // Create points for every day (or step) up to current date
+        for (let i = 0; i < daysSoFar; i += stepSize) {
+          const currentDay = new Date(
+            startDate.getTime() + i * 24 * 60 * 60 * 1000,
+          );
+          if (currentDay > currentDate) break;
 
-            // Check if there are activities up to this date
-            while (activityIndex < sortedActivities.length) {
-              if (sortedActivities[activityIndex].parsedDate <= currentDay) {
-                // If this is a new activity, record its distance gain
-                const activityDistance =
-                  sortedActivities[activityIndex].distance;
-                gainFromLastActivity += activityDistance;
-                hasNewActivity = true;
+          let gainFromLastActivity = 0;
+          let hasNewActivity = false;
 
-                // Update the last activity info when we find a new activity
-                lastActivityDistance = activityDistance;
-                lastActivityDate = new Date(
-                  sortedActivities[activityIndex].parsedDate,
-                );
+          // Check if there are activities up to this date
+          while (activityIndex < sortedActivities.length) {
+            if (sortedActivities[activityIndex].parsedDate <= currentDay) {
+              gainFromLastActivity +=
+                sortedActivities[activityIndex].distance;
+              hasNewActivity = true;
+              lastActivityDistance = sortedActivities[activityIndex].distance;
+              lastActivityDate = new Date(
+                sortedActivities[activityIndex].parsedDate,
+              );
+              cumulativeDistance += sortedActivities[activityIndex].distance;
+              activityIndex++;
+            } else {
+              break;
+            }
+          }
 
-                cumulativeDistance += activityDistance;
-                activityIndex++;
-              } else {
+          const isSameDayAsLastActivity =
+            lastActivityDate && isSameDay(lastActivityDate, currentDay);
+
+          runnerData.push({
+            x: currentDay,
+            y: cumulativeDistance,
+            hasActivity: hasNewActivity,
+            gainFromLastActivity:
+              gainFromLastActivity > 0 ? gainFromLastActivity : 0,
+            lastActivityDistance: lastActivityDistance || 0,
+            lastActivityDate: lastActivityDate,
+            isSameDayAsLastActivity: isSameDayAsLastActivity,
+          });
+        }
+
+        // Calculate the total miles
+        const totalMiles =
+          runnerData.length > 0 ? runnerData[runnerData.length - 1].y : 0;
+
+        datasets.push({
+          label: runner.name,
+          borderColor: colors[colorIndex % colors.length],
+          borderWidth: 3,
+          pointRadius: (context) => {
+            if (
+              activeRunnerIndex === context.datasetIndex &&
+              context.raw &&
+              context.raw.hasActivity
+            ) {
+              return 6;
+            } else if (context.raw && context.raw.hasActivity) {
+              return 4;
+            }
+            return 0;
+          },
+          pointBackgroundColor: colors[colorIndex % colors.length],
+          data: runnerData,
+          fill: false,
+          showLine: true,
+          tension: 0,
+          totalMiles: totalMiles,
+        });
+
+        colorIndex++;
+      });
+
+      return {datasets, animationPoints, daysSoFar};
+    }
+
+    // Animation configuration for growing line
+    const totalDuration = 2500;
+
+    function createGrowingLineAnimation(animationPoints) {
+      const delayBetweenPoints = totalDuration / animationPoints;
+      const previousY = (ctx) => {
+        if (ctx.index === 0) {
+          return ctx.chart.scales.y.getPixelForValue(0);
+        }
+        return ctx.chart
+          .getDatasetMeta(ctx.datasetIndex)
+          .data[ctx.index - 1].getProps(["y"], true).y;
+      };
+
+      return {
+        x: {
+          type: "number",
+          easing: "linear",
+          duration: delayBetweenPoints,
+          from: NaN,
+          delay(ctx) {
+            if (ctx.type !== "data" || ctx.xStarted) {
+              return 0;
+            }
+            ctx.xStarted = true;
+            return ctx.index * delayBetweenPoints;
+          },
+        },
+        y: {
+          type: "number",
+          easing: "linear",
+          duration: delayBetweenPoints,
+          from: previousY,
+          delay(ctx) {
+            if (ctx.type !== "data" || ctx.yStarted) {
+              return 0;
+            }
+            ctx.yStarted = true;
+            return ctx.index * delayBetweenPoints;
+          },
+        },
+      };
+    }
+
+    // Format date helper function
+    function formatDate(date) {
+      if (!date) return "N/A";
+      return date.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      });
+    } // Modify the showGainLabels function to alternate label positions
+    function showGainLabels(chart, runnerIndex) {
+      hideGainLabels(); // Clear previous labels
+
+      // If runnerIndex is -1, just hide all labels
+      if (runnerIndex === -1) {
+        activeRunnerIndex = -1;
+        chart.update("none");
+        return;
+      }
+
+      const labelsContainer = document.getElementById("gainLabelsContainer");
+      const dataset = chart.data.datasets[runnerIndex];
+      const meta = chart.getDatasetMeta(runnerIndex);
+      const color = dataset.borderColor;
+
+      // Track recent positions to detect overlaps
+      const recentPositions = [];
+      const minDistance = 30; // Minimum pixel distance to consider separate positioning
+
+      dataset.data.forEach((point, i) => {
+        if (point.hasActivity && point.gainFromLastActivity > 0) {
+          const element = meta.data[i];
+          if (!element) return;
+
+          const position = element.getCenterPoint();
+          if (position.x >= 0 && position.y >= 0) {
+            // Determine if this point is close to recent ones
+            let positionBelow = false;
+
+            for (const recentPos of recentPositions) {
+              const xDistance = Math.abs(recentPos.x - position.x);
+              if (xDistance < minDistance) {
+                // If close to a recent point, position opposite to that point
+                positionBelow = !recentPos.below;
                 break;
               }
             }
 
-            const isSameDayAsLastActivity =
-              lastActivityDate && isSameDay(lastActivityDate, currentDay);
-
-            runnerData.push({
-              x: currentDay,
-              y: cumulativeDistance,
-              hasActivity: hasNewActivity,
-              gainFromLastActivity:
-                gainFromLastActivity > 0 ? gainFromLastActivity : 0,
-              lastActivityDistance: lastActivityDistance || 0,
-              lastActivityDate: lastActivityDate,
-              isSameDayAsLastActivity: isSameDayAsLastActivity,
+            // Add this position to recent positions
+            recentPositions.push({
+              x: position.x,
+              y: position.y,
+              below: positionBelow,
             });
+
+            // If there are too many recent positions, remove the oldest
+            if (recentPositions.length > 5) {
+              recentPositions.shift();
+            }
+
+            const label = document.createElement("div");
+            label.className = "gain-label";
+            label.textContent = `+${point.gainFromLastActivity.toFixed(1)}`;
+            label.style.backgroundColor = color;
+            label.style.left = `${position.x}px`;
+
+            if (positionBelow) {
+              // Position below the point
+              label.style.transform = "translate(-50%, 10px)";
+              label.style.top = `${position.y}px`;
+            } else {
+              // Position above the point (default)
+              label.style.transform = "translate(-50%, -25px)";
+              label.style.top = `${position.y}px`;
+            }
+
+            labelsContainer.appendChild(label);
           }
+        }
+      });
+    }
 
-          // Calculate the total miles (take the last data point's y value)
-          const totalMiles =
-            runnerData.length > 0 ? runnerData[runnerData.length - 1].y : 0;
-
-          datasets.push({
-            label: runner.name,
-            borderColor: colors[colorIndex % colors.length],
-            borderWidth: 3,
-            pointRadius: (context) =>
-              context.raw && context.raw.hasActivity ? 4 : 0, // Only show points on activity days
-            pointBackgroundColor: colors[colorIndex % colors.length],
-            data: runnerData,
-            fill: false,
-            showLine: true,
-            tension: 0,
-            // Store total miles as a custom property for the legend
-            totalMiles: totalMiles,
-          });
-
-          colorIndex++;
-        });
-
-        return { datasets, animationPoints, daysSoFar };
+    // Function to hide all gain labels
+    function hideGainLabels() {
+      const labelsContainer = document.getElementById("gainLabelsContainer");
+      if (labelsContainer) {
+        labelsContainer.innerHTML = "";
       }
+    }
 
-      // Helper function to check if two dates represent the same day
-      function isSameDay(date1, date2) {
-        if (!date1 || !date2) return false;
+    // Replay animation function
+    function replayAnimation() {
+      createChart();
+    }
 
-        return (
-          date1.getFullYear() === date2.getFullYear() &&
-          date1.getMonth() === date2.getMonth() &&
-          date1.getDate() === date2.getDate()
-        );
-      }
+    // Initial chart creation
+    async function createChart() {
+      const {datasets, animationPoints, daysSoFar} =
+        await loadAndProcessData();
+      const maxMiles = Math.max(
+        ...datasets.flatMap((d) => d.data.map((point) => point.y)),
+      );
+      const yMax = Math.ceil(maxMiles / 50) * 50;
+      const currentDate = new Date();
+      const currentMonth = currentDate.getMonth();
+      const dayInterval = currentMonth <= 2 ? 7 : currentMonth <= 6 ? 14 : 30;
+      const daysInYear = 365;
+      const daysRemaining = daysInYear - daysSoFar;
 
-      // Animation configuration for growing line
-      const totalDuration = 4500;
+      document.getElementById("daysInfo").innerHTML =
+        `<span class="text-green-600">${daysSoFar} Days Passed</span> | <span class="text-blue-600">${daysRemaining} Days Remaining</span>`;
 
-      function createGrowingLineAnimation(animationPoints) {
-        const delayBetweenPoints = totalDuration / animationPoints;
+      // Custom legend plugin
+      const customLegendPlugin = {
+        id: "customLegend",
+        afterUpdate: (chart) => {
+          chart.options.plugins.legend.display = false;
+        },
+        afterRender: (chart) => {
+          const legendContainer = document.getElementById("customLegend");
+          if (!legendContainer) {
+            const container = document.createElement("div");
+            container.id = "customLegend";
+            container.style.display = "flex";
+            container.style.flexWrap = "wrap";
+            container.style.justifyContent = "center";
+            container.style.marginTop = "15px";
 
-        // Get the previous Y value to start animation from
-        const previousY = (ctx) => {
-          if (ctx.index === 0) {
-            return ctx.chart.scales.y.getPixelForValue(0); // Start from 0
-          }
-          return ctx.chart
-            .getDatasetMeta(ctx.datasetIndex)
-            .data[ctx.index - 1].getProps(["y"], true).y;
-        };
+            // Create a single debounced update function to prevent multiple rapid updates
+            const debouncedShowGains = debounce((index) => {
+              activeRunnerIndex = index;
+              showGainLabels(chart, index);
+              chart.update("none"); // Use 'none' for the animation mode to prevent flicker
+            }, 50);
 
-        return {
-          x: {
-            type: "number",
-            easing: "linear",
-            duration: delayBetweenPoints,
-            from: NaN, // the point is initially skipped
-            delay(ctx) {
-              if (ctx.type !== "data" || ctx.xStarted) {
-                return 0;
-              }
-              ctx.xStarted = true;
-              return ctx.index * delayBetweenPoints;
-            },
-          },
-          y: {
-            type: "number",
-            easing: "linear",
-            duration: delayBetweenPoints,
-            from: previousY,
-            delay(ctx) {
-              if (ctx.type !== "data" || ctx.yStarted) {
-                return 0;
-              }
-              ctx.yStarted = true;
-              return ctx.index * delayBetweenPoints;
-            },
-          },
-        };
-      }
+            chart.data.datasets.forEach((dataset, i) => {
+              const item = document.createElement("div");
+              item.className = "legend-item";
+              item.dataset.index = i;
 
-      // Format date helper function
-      function formatDate(date) {
-        if (!date) return "N/A";
-        return date.toLocaleDateString("en-US", {
-          month: "short",
-          day: "numeric",
-          year: "numeric",
-        });
-      }
+              const colorBox = document.createElement("div");
+              colorBox.style.width = "12px";
+              colorBox.style.height = "12px";
+              colorBox.style.borderRadius = "50%";
+              colorBox.style.backgroundColor = dataset.borderColor;
+              colorBox.style.display = "inline-block";
+              colorBox.style.marginRight = "5px";
 
-      async function createChart() {
-        const { datasets, animationPoints, daysSoFar } =
-          await loadAndProcessData();
+              const nameSpan = document.createElement("div");
+              nameSpan.className = "legend-name";
+              nameSpan.innerHTML = `<span style="display:inline-block;vertical-align:middle;">${colorBox.outerHTML}</span> ${dataset.label}`;
 
-        // Find the highest runner's total miles
-        const maxMiles = Math.max(
-          ...datasets.flatMap((d) => d.data.map((point) => point.y)),
-        );
+              const totalSpan = document.createElement("div");
+              totalSpan.className = "legend-total";
+              totalSpan.textContent = `${dataset.totalMiles.toFixed(1)}`;
 
-        // Round up to the next multiple of 50
-        const yMax = Math.ceil(maxMiles / 50) * 50;
+              item.appendChild(nameSpan);
+              item.appendChild(totalSpan);
 
-        const currentDate = new Date();
-        const currentMonth = currentDate.getMonth();
-        const monthsShown = currentMonth + 1;
-        const dayInterval = monthsShown <= 2 ? 7 : monthsShown <= 6 ? 14 : 30;
-        const daysInYear = 365;
-        const daysRemaining = daysInYear - daysSoFar;
-
-        document.getElementById("daysInfo").innerHTML =
-          `<span class="text-green-600">${daysSoFar} Days Passed</span> | <span class="text-blue-600">${daysRemaining} Days Remaining</span>`;
-
-        // Custom legend plugin
-        const customLegendPlugin = {
-          id: "customLegend",
-          afterUpdate: (chart) => {
-            // Create our own legend to replace the default one
-            chart.options.plugins.legend.display = false;
-          },
-          afterRender: (chart) => {
-            // Get the chart's legend container (this is where Chart.js would render the legend)
-            const legendContainer = document.getElementById("customLegend");
-
-            // If the container doesn't exist yet, create it
-            if (!legendContainer) {
-              const container = document.createElement("div");
-              container.id = "customLegend";
-              container.style.display = "flex";
-              container.style.flexWrap = "wrap";
-              container.style.justifyContent = "center";
-              container.style.marginTop = "15px";
-
-              // Add legend items
-              chart.data.datasets.forEach((dataset, i) => {
-                const item = document.createElement("div");
-                item.className = "legend-item";
-
-                // Create color indicator
-                const colorBox = document.createElement("div");
-                colorBox.style.width = "12px";
-                colorBox.style.height = "12px";
-                colorBox.style.borderRadius = "50%";
-                colorBox.style.backgroundColor = dataset.borderColor;
-                colorBox.style.display = "inline-block";
-                colorBox.style.marginRight = "5px";
-
-                // Create runner name
-                const nameSpan = document.createElement("div");
-                nameSpan.className = "legend-name";
-                nameSpan.innerHTML = `<span style="display:inline-block;vertical-align:middle;">${colorBox.outerHTML}</span> ${dataset.label}`;
-
-                // Create miles total
-                const totalSpan = document.createElement("div");
-                totalSpan.className = "legend-total";
-                totalSpan.textContent = `${dataset.totalMiles.toFixed(1)}`;
-
-                // Add to legend item
-                item.appendChild(nameSpan);
-                item.appendChild(totalSpan);
-                container.appendChild(item);
+              // Use mouseenter without debounce for immediate visual feedback
+              item.addEventListener("mouseenter", () => {
+                document
+                  .querySelectorAll(".legend-item")
+                  .forEach((el) => el.classList.remove("active"));
+                item.classList.add("active");
+                debouncedShowGains(i); // But use the debounced function for the expensive operations
               });
 
-              // Add to chart container
-              const chartContainer = chart.canvas.parentNode;
-              chartContainer.appendChild(container);
-            }
-          },
-        };
+              item.addEventListener("mouseleave", () => {
+                item.classList.remove("active");
+                debouncedShowGains(-1); // Pass -1 to indicate no active runner
+              });
 
-        const config = {
-          type: "line",
-          data: {
-            datasets: datasets,
-          },
-          options: {
-            animation: createGrowingLineAnimation(animationPoints),
-            interaction: {
-              intersect: true,
-              mode: "nearest",
+              container.appendChild(item);
+            });
+
+            const chartContainer = chart.canvas.parentNode;
+            chartContainer.appendChild(container);
+          }
+        },
+      };
+
+      const config = {
+        type: "line",
+        data: {datasets},
+        options: {
+          animation: createGrowingLineAnimation(animationPoints),
+          transitions: {
+            active: {
+              animation: {
+                duration: 0, // Instant transitions when hovering
+              },
             },
-            plugins: {
-              tooltip: {
-                backgroundColor: "rgba(50, 50, 50, 0.9)",
-                titleFont: {
-                  weight: "bold",
-                  size: 14,
-                },
-                bodyFont: {
-                  size: 13,
-                },
-                padding: 12,
-                cornerRadius: 6,
-                callbacks: {
-                  title: (tooltipItems) => {
-                    const date = tooltipItems[0].raw.x;
-                    return formatDate(date);
-                  },
-                  label: (context) => {
-                    const point = context.raw;
-                    if (!point) return "";
-
-                    const label = context.dataset.label || "";
-                    const total = point.y.toFixed(1);
-
-                    let result = `${label}: ${total}`;
-
-                    // Add gain information if available
-                    if (point.hasActivity && point.gainFromLastActivity > 0) {
-                      result += `\n(+${point.gainFromLastActivity.toFixed(1)})`;
-                    }
-
-                    // // Add last activity info if available and not the same day
-                    // if (point.lastActivityDate && !point.isSameDayAsLastActivity && point.lastActivityDistance > 0) {
-                    //   const lastActivityFormatted = formatDate(point.lastActivityDate);
-                    //   result += `\n→ Last activity: ${lastActivityFormatted} (+${point.lastActivityDistance.toFixed(1)})`;
-                    // }
-
-                    return result;
-                  },
-                },
-              },
-              legend: {
-                // We'll disable the built-in legend since we're creating our own
-                display: false,
-              },
-              customLegend: true, // Enable our custom legend plugin
-            },
-            scales: {
-              x: {
-                type: "time",
-                time: {
-                  unit: "day",
-                  stepSize: dayInterval,
-                  displayFormats: {
-                    day: "MMM d",
-                  },
-                  min: new Date("2025-01-01"),
-                  max: new Date(2025, currentMonth + 1, 0),
-                },
-                title: {
-                  display: true,
-                  text: "Date (2025)",
-                  padding: {
-                    top: 10,
-                    bottom: 10,
-                  },
-                  font: {
-                    weight: "bold",
-                    size: 14,
-                  },
-                },
-                grid: {
-                  color: "rgba(0, 0, 0, 0.05)",
-                },
-                ticks: {
-                  font: {
-                    weight: "bold",
-                    size: 12,
-                  },
-                  callback: function (value) {
-                    const date = new Date(value);
-                    return `${date.toLocaleString("default", { month: "short" })} ${date.getDate()}`;
-                  },
-                },
-              },
-              y: {
-                min: 0,
-                max: yMax, // Dynamically set max value rounded up to the next 50
-                title: {
-                  display: true,
-                  text: "Miles",
-                  padding: {
-                    top: 10,
-                    bottom: 10,
-                  },
-                  font: {
-                    weight: "bold",
-                    size: 14,
-                  },
-                },
-                grid: {
-                  color: "rgba(0, 0, 0, 0.05)",
-                },
-                ticks: {
-                  font: {
-                    weight: "bold",
-                    size: 12,
-                  },
+          },
+          interaction: {intersect: true, mode: "nearest"},
+          plugins: {
+            tooltip: {
+              backgroundColor: "rgba(50, 50, 50, 0.9)",
+              titleFont: {weight: "bold", size: 14},
+              bodyFont: {size: 13},
+              padding: 12,
+              cornerRadius: 6,
+              callbacks: {
+                title: (tooltipItems) => formatDate(tooltipItems[0].raw.x),
+                label: (context) => {
+                  const point = context.raw;
+                  if (!point) return "";
+                  const label = context.dataset.label || "";
+                  const total = point.y.toFixed(1);
+                  let result = `${label}: ${total}`;
+                  if (point.hasActivity && point.gainFromLastActivity > 0) {
+                    result += `\n(+${point.gainFromLastActivity.toFixed(1)})`;
+                  }
+                  return result;
                 },
               },
             },
-            responsive: true,
-            maintainAspectRatio: true,
+            legend: {display: false},
+            customLegend: true,
           },
-          plugins: [customLegendPlugin],
-        };
+          scales: {
+            x: {
+              type: "time",
+              time: {
+                unit: "day",
+                stepSize: dayInterval,
+                displayFormats: {day: "MMM d"},
+                min: new Date("2025-01-01"),
+                // max: new Date(2025, currentMonth + 1, 0),
+                max: new Date(
+                  currentDate.getFullYear(),
+                  currentDate.getMonth(),
+                  currentDate.getDate(),
+                  23,
+                  59,
+                  59,
+                ),
+              },
+              title: {
+                display: true,
+                text: "Date (2025)",
+                padding: {top: 10, bottom: 10},
+                font: {weight: "bold", size: 14},
+              },
+              grid: {color: "rgba(0, 0, 0, 0.05)"},
+              ticks: {
+                font: {weight: "bold", size: 12},
+                callback: function (value) {
+                  const date = new Date(value);
+                  return `${date.toLocaleString("default", {month: "short"})} ${date.getDate()}`;
+                },
+              },
+            },
+            y: {
+              min: 0,
+              max: yMax,
+              title: {
+                display: true,
+                text: "Miles",
+                padding: {top: 10, bottom: 10},
+                font: {weight: "bold", size: 14},
+              },
+              grid: {color: "rgba(0, 0, 0, 0.05)"},
+              ticks: {font: {weight: "bold", size: 12}},
+            },
+          },
+          responsive: true,
+          maintainAspectRatio: true,
+        },
+        plugins: [customLegendPlugin],
+      };
 
-        const ctx = document.getElementById("myChart").getContext("2d");
+      const ctx = document.getElementById("myChart").getContext("2d");
+      const existingLegend = document.getElementById("customLegend");
+      if (existingLegend) existingLegend.remove();
 
-        // Clean up any existing custom legend
-        const existingLegend = document.getElementById("customLegend");
-        if (existingLegend) {
-          existingLegend.remove();
-        }
+      if (myChart) myChart.destroy();
+      myChart = new Chart(ctx, config);
+    }
 
-        if (myChart) {
-          myChart.destroy();
-        }
-        myChart = new Chart(ctx, config);
-      }
+    window.onload = createChart;
+  </script>
+</body>
 
-      // Replay animation function
-      function replayAnimation() {
-        createChart();
-      }
-
-      // Initial chart creation
-      window.onload = createChart;
-    </script>
-  </body>
 </html>
