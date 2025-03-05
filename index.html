@@ -162,7 +162,7 @@
       "#96CEB4",
       "#9B59B6",
       "#D4A5A5",
-      "#FFEEAD",
+      "#FFC300",
       "#3498DB",
       "#E74C3C",
       "#2ECC71",
@@ -195,7 +195,7 @@
       const runners = data.runners;
       const startDate = new Date("2025-01-01");
       const currentDate = new Date();
-      const daysSoFar = Math.floor(
+      const daysSoFar = Math.ceil(
         (currentDate - startDate) / (24 * 60 * 60 * 1000),
       );
       const animationPoints = Math.min(daysSoFar, 100);
@@ -231,7 +231,7 @@
         let lastActivityDate = null;
 
         // Create points for every day (or step) up to current date
-        for (let i = 0; i < daysSoFar; i += stepSize) {
+        for (let i = 0; i <= daysSoFar; i += stepSize) {
           const currentDay = new Date(
             startDate.getTime() + i * 24 * 60 * 60 * 1000,
           );
@@ -307,7 +307,7 @@
     }
 
     // Animation configuration for growing line
-    const totalDuration = 2500;
+    const totalDuration = 1500;
 
     function createGrowingLineAnimation(animationPoints) {
       const delayBetweenPoints = totalDuration / animationPoints;
@@ -508,18 +508,33 @@
               item.appendChild(nameSpan);
               item.appendChild(totalSpan);
 
-              // Use mouseenter without debounce for immediate visual feedback
-              item.addEventListener("mouseenter", () => {
+              // Create a function to handle both mouse and touch interactions
+              const handleInteraction = (isEnter) => {
                 document
                   .querySelectorAll(".legend-item")
                   .forEach((el) => el.classList.remove("active"));
-                item.classList.add("active");
-                debouncedShowGains(i); // But use the debounced function for the expensive operations
+
+                if (isEnter) {
+                  item.classList.add("active");
+                  debouncedShowGains(i);
+                } else {
+                  debouncedShowGains(-1);
+                }
+              };
+
+              // Mouse events for desktop
+              item.addEventListener("mouseenter", () => handleInteraction(true));
+              item.addEventListener("mouseleave", () => handleInteraction(false));
+
+              // Touch events for mobile
+              item.addEventListener("touchstart", (e) => {
+                e.preventDefault(); // Prevent additional mouse events
+                handleInteraction(true);
               });
 
-              item.addEventListener("mouseleave", () => {
-                item.classList.remove("active");
-                debouncedShowGains(-1); // Pass -1 to indicate no active runner
+              item.addEventListener("touchend", (e) => {
+                e.preventDefault();
+                handleInteraction(false);
               });
 
               container.appendChild(item);
@@ -530,7 +545,6 @@
           }
         },
       };
-
       const config = {
         type: "line",
         data: {datasets},
