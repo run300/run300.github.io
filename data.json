@@ -3,8 +3,8 @@
     "Bruce": {
       "name": "Bruce",
       "stats": {
-        "totalActivities": 44,
-        "totalDistance": 49.09,
+        "totalActivities": 46,
+        "totalDistance": 53.44,
         "activityTypes": [
           "Running"
         ]
@@ -228,6 +228,16 @@
         {
           "date": "03/3/25",
           "distance": 1.12,
+          "type": "Running"
+        },
+        {
+          "date": "03/4/25",
+          "distance": 2.13,
+          "type": "Running"
+        },
+        {
+          "date": "03/4/25",
+          "distance": 2.22,
           "type": "Running"
         }
       ]
@@ -592,8 +602,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 23,
-        "totalDistance": 78.3,
+        "totalActivities": 24,
+        "totalDistance": 80.39,
         "activityTypes": [
           "Running"
         ]
@@ -712,6 +722,11 @@
         {
           "date": "03/1/25",
           "distance": 4.92,
+          "type": "Running"
+        },
+        {
+          "date": "03/4/25",
+          "distance": 2.09,
           "type": "Running"
         }
       ]
@@ -853,8 +868,8 @@
     "Muscles": {
       "name": "Muscles",
       "stats": {
-        "totalActivities": 31,
-        "totalDistance": 53.44,
+        "totalActivities": 32,
+        "totalDistance": 54.76,
         "activityTypes": [
           "Running",
           "Walking"
@@ -1015,6 +1030,11 @@
           "date": "03/1/25",
           "distance": 4.94,
           "type": "Running"
+        },
+        {
+          "date": "03/4/25",
+          "distance": 1.32,
+          "type": "Running"
         }
       ]
     },
@@ -1142,8 +1162,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-03-04T11:10:19.676779",
+    "lastUpdated": "2025-03-05T08:26:41.847648",
     "totalRunners": 11,
-    "totalActivities": 202
+    "totalActivities": 206
   }
 }
