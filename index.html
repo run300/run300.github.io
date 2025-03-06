@@ -149,23 +149,15 @@
         <div id="gainLabelsContainer"></div>
       </div>
     </div>
-    <button onclick="replayAnimation()">Replay Animation</button>
   </div>
 
   <script>
     let myChart;
     let activeRunnerIndex = -1; // Track which runner is active
     const colors = [
-      "#4ECDC4",
-      "#FF6B6B",
-      "#45B7D1",
-      "#96CEB4",
-      "#9B59B6",
-      "#D4A5A5",
-      "#FFC300",
-      "#3498DB",
-      "#E74C3C",
-      "#2ECC71",
+      "#4ECDC4", "#FF6B6B", "#45B7D1", "#96CEB4", "#9B59B6",
+      "#D4A5A5", "#FFC300", "#3498DB", "#E74C3C", "#2ECC71",
+      "#8E44AD", "#2980B9", "#27AE60", "#D35400", "#16A085"
     ];
 
     // Debounce function to limit rapid hover events
@@ -198,8 +190,6 @@
       const daysSoFar = Math.ceil(
         (currentDate - startDate) / (24 * 60 * 60 * 1000),
       );
-      const animationPoints = Math.min(daysSoFar, 100);
-      const stepSize = Math.max(1, Math.floor(daysSoFar / animationPoints));
       const datasets = [];
       let colorIndex = 0;
 
@@ -230,8 +220,8 @@
         let lastActivityDistance = 0;
         let lastActivityDate = null;
 
-        // Create points for every day (or step) up to current date
-        for (let i = 0; i <= daysSoFar; i += stepSize) {
+        // Create points for every day up to current date
+        for (let i = 0; i <= daysSoFar; i++) {
           const currentDay = new Date(
             startDate.getTime() + i * 24 * 60 * 60 * 1000,
           );
@@ -303,51 +293,7 @@
         colorIndex++;
       });
 
-      return {datasets, animationPoints, daysSoFar};
-    }
-
-    // Animation configuration for growing line
-    const totalDuration = 1500;
-
-    function createGrowingLineAnimation(animationPoints) {
-      const delayBetweenPoints = totalDuration / animationPoints;
-      const previousY = (ctx) => {
-        if (ctx.index === 0) {
-          return ctx.chart.scales.y.getPixelForValue(0);
-        }
-        return ctx.chart
-          .getDatasetMeta(ctx.datasetIndex)
-          .data[ctx.index - 1].getProps(["y"], true).y;
-      };
-
-      return {
-        x: {
-          type: "number",
-          easing: "linear",
-          duration: delayBetweenPoints,
-          from: NaN,
-          delay(ctx) {
-            if (ctx.type !== "data" || ctx.xStarted) {
-              return 0;
-            }
-            ctx.xStarted = true;
-            return ctx.index * delayBetweenPoints;
-          },
-        },
-        y: {
-          type: "number",
-          easing: "linear",
-          duration: delayBetweenPoints,
-          from: previousY,
-          delay(ctx) {
-            if (ctx.type !== "data" || ctx.yStarted) {
-              return 0;
-            }
-            ctx.yStarted = true;
-            return ctx.index * delayBetweenPoints;
-          },
-        },
-      };
+      return {datasets, daysSoFar};
     }
 
     // Format date helper function
@@ -358,7 +304,9 @@
         day: "numeric",
         year: "numeric",
       });
-    } // Modify the showGainLabels function to alternate label positions
+    }
+
+    // Show gain labels function (unchanged from previous version)
     function showGainLabels(chart, runnerIndex) {
       hideGainLabels(); // Clear previous labels
 
@@ -439,24 +387,28 @@
       }
     }
 
-    // Replay animation function
-    function replayAnimation() {
-      createChart();
-    }
-
     // Initial chart creation
     async function createChart() {
-      const {datasets, animationPoints, daysSoFar} =
-        await loadAndProcessData();
+      const {datasets, daysSoFar} = await loadAndProcessData();
       const maxMiles = Math.max(
         ...datasets.flatMap((d) => d.data.map((point) => point.y)),
       );
       const yMax = Math.ceil(maxMiles / 50) * 50;
       const currentDate = new Date();
-      const currentMonth = currentDate.getMonth();
-      const dayInterval = currentMonth <= 2 ? 7 : currentMonth <= 6 ? 14 : 30;
       const daysInYear = 365;
       const daysRemaining = daysInYear - daysSoFar;
+
+      // Calculate dynamic step size
+      const desiredMarkerCount = 14; // Consistent number of markers
+      const yearProgress = daysSoFar / daysInYear;
+
+      // Progressive step size - increases as the year progresses
+      const baseStepSize = 7; // Start with a 7-day interval
+      const maxStepSize = 30; // Maximum interval of 30 days
+      const dynamicStepSize = Math.min(
+        Math.ceil(baseStepSize * (1 + yearProgress * 3)),
+        maxStepSize
+      );
 
       document.getElementById("daysInfo").innerHTML =
         `<span class="text-green-600">${daysSoFar} Days Passed</span> | <span class="text-blue-600">${daysRemaining} Days Remaining</span>`;
@@ -545,18 +497,12 @@
           }
         },
       };
+
       const config = {
         type: "line",
         data: {datasets},
         options: {
-          animation: createGrowingLineAnimation(animationPoints),
-          transitions: {
-            active: {
-              animation: {
-                duration: 0, // Instant transitions when hovering
-              },
-            },
-          },
+          animation: false,
           interaction: {intersect: true, mode: "nearest"},
           plugins: {
             tooltip: {
@@ -588,10 +534,9 @@
               type: "time",
               time: {
                 unit: "day",
-                stepSize: dayInterval,
+                stepSize: dynamicStepSize,
                 displayFormats: {day: "MMM d"},
                 min: new Date("2025-01-01"),
-                // max: new Date(2025, currentMonth + 1, 0),
                 max: new Date(
                   currentDate.getFullYear(),
                   currentDate.getMonth(),
@@ -603,13 +548,35 @@
               },
               title: {
                 display: true,
-                text: "Date (2025)",
+                text: `Date (2025) - Step: ${dynamicStepSize} days`,
                 padding: {top: 10, bottom: 10},
                 font: {weight: "bold", size: 14},
               },
               grid: {color: "rgba(0, 0, 0, 0.05)"},
               ticks: {
                 font: {weight: "bold", size: 12},
+                color: function (context) {
+                  // Alternating month colors
+                  const date = new Date(context.tick.value);
+                  const month = date.getMonth();
+
+                  const monthColors = [
+                    'rgba(0,0,0,0.7)',   // Jan
+                    'rgba(0,0,0,0.5)',   // Feb
+                    'rgba(0,0,0,0.7)',   // Mar
+                    'rgba(0,0,0,0.5)',   // Apr
+                    'rgba(0,0,0,0.7)',   // May
+                    'rgba(0,0,0,0.5)',   // Jun
+                    'rgba(0,0,0,0.7)',   // Jul
+                    'rgba(0,0,0,0.5)',   // Aug
+                    'rgba(0,0,0,0.7)',   // Sep
+                    'rgba(0,0,0,0.5)',   // Oct
+                    'rgba(0,0,0,0.7)',   // Nov
+                    'rgba(0,0,0,0.5)',   // Dec
+                  ];
+
+                  return monthColors[month];
+                },
                 callback: function (value) {
                   const date = new Date(value);
                   return `${date.toLocaleString("default", {month: "short"})} ${date.getDate()}`;
@@ -642,6 +609,7 @@
       if (myChart) myChart.destroy();
       myChart = new Chart(ctx, config);
     }
+
 
     window.onload = createChart;
   </script>
