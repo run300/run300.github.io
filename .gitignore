@@ -6,5 +6,5 @@
 !data.json
 !.gitignore
 !.github/
-!.github/workflows/
 !.github/workflows/update-data.yml
+!.github/workflows/update_runkeeper_miles.py
