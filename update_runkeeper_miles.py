@@ -246,7 +246,8 @@ def main():
         print("Exported cookie to GCP Secrets")
     else:
         print("Using cookie from GCP Secrets")
-        formatted_cookie = cookie
+        formatted_cookie = format_cookie_for_playwright(cookie)
+        # formatted_cookie = cookie
 
     all_activities = {}
 

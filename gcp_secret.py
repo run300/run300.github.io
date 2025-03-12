@@ -22,13 +22,14 @@ def gcp_get_secret(
     try:
         # Attempt to parse the payload as JSON.
         payload_dict = json.loads(payload_str)
-        if "checker" in payload_dict:  # check if checker is in the dictionary.
-            return [payload_dict["checker"]]  # Return the checker dictionary as a list.
+        print(f"{payload_dict=}")
+        if payload_dict:  # check if checker is in the dictionary.
+            return payload_dict  # Return the checker dictionary as a list.
         else:
             return []  # return an empty list if checker is not found.
     except json.JSONDecodeError:
         # If parsing fails, it's not valid JSON.
-        print(f"Warning: Secret payload is not valid JSON. Returning None.")
+        print("Warning: Secret payload is not valid JSON. Returning None.")
         return None  # Return None so the format_cookies function can handle it.
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
