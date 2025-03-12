@@ -1,10 +1,10 @@
 # Ignore everything
 *
 
-
 # Except for the following
 !index.html
 !data.json
 !.gitignore
-!.github
+!.github/
+!.github/workflows/
 !.github/workflows/update-data.yml
