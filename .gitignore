@@ -7,3 +7,4 @@
 !.gitignore
 !.github/workflows/update-data.yml
 !update_runkeeper_miles.py
+!gcp_secret.py
