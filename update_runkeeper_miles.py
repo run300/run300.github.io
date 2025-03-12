@@ -231,7 +231,6 @@ def export_to_json(activities_data, filename="../../data.json"):
 def main():
     # Try to get cookies from GCP first
     cookie = gcp_get_secret()
-    cookie = None
 
     # If no cookies from GCP, get from browser and update GCP
     if not cookie:
