@@ -6,4 +6,4 @@
 !index.html
 !data.json
 !.gitignore
-!.github/*
+!.github/workflows/update-data.yml
