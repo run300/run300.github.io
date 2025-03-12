@@ -641,7 +641,7 @@
         {
           "date": "03/11/25",
           "distance": 1.58,
-          "type": "Walking"
+          "type": "Running"
         },
         {
           "date": "03/2/25",
@@ -1283,7 +1283,7 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-03-11T20:49:26.866181",
+    "lastUpdated": "2025-03-12T08:00:00.295338",
     "totalRunners": 11,
     "totalActivities": 230
   }
