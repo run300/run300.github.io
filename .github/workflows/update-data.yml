@@ -24,6 +24,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install playwright
           pip install google-cloud-secret-manager
+          pip install browser_cookie3
           # Install any other dependencies your script needs
           playwright install firefox
           
