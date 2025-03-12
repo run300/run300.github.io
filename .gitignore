@@ -6,4 +6,4 @@
 !data.json
 !.gitignore
 !.github/workflows/update-data.yml
-!.github/workflows/update_runkeeper_miles.py
+!update_runkeeper_miles.py
