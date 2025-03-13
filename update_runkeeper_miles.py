@@ -279,16 +279,16 @@ def main():
 if __name__ == "__main__":
     spartans = {
         "3458344072": "Bruce",
-        # "1703449362": "PT",
-        # "499228564": "Scotch",
-        # "1306204356": "Trinspiration",
-        # "2522499234": "Moose",
-        # "2920829518": "AutumnBreeze",
-        # "2953059004": "Jon",
-        # "2948464110": "Tin",
-        # "2966454388": "Muscles",
-        # "3338995094": "Gato",
-        # "3486035198": "Alfredo",
+        "1703449362": "PT",
+        "499228564": "Scotch",
+        "1306204356": "Trinspiration",
+        "2522499234": "Moose",
+        "2920829518": "AutumnBreeze",
+        "2953059004": "Jon",
+        "2948464110": "Tin",
+        "2966454388": "Muscles",
+        "3338995094": "Gato",
+        "3486035198": "Alfredo",
         # KnockKnck
     }
     months = get_months_until_now()
