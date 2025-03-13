@@ -22,7 +22,6 @@ def gcp_get_secret(
     try:
         # Attempt to parse the payload as JSON.
         payload_dict = json.loads(payload_str)
-        print(f"{payload_dict=}")
         if payload_dict:  # check if checker is in the dictionary.
             return payload_dict  # Return the checker dictionary as a list.
         else:

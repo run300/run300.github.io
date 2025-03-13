@@ -191,7 +191,7 @@ def scrape_activities(page, user_id, months):
     return activities
 
 
-def export_to_json(activities_data, filename="../../data.json"):
+def export_to_json(activities_data, filename="data.json"):
     """Export activities data to a JSON file"""
     # Calculate some useful statistics while formatting the data
     formatted_data = {
