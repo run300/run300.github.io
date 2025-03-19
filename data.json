@@ -3,8 +3,8 @@
     "Bruce": {
       "name": "Bruce",
       "stats": {
-        "totalActivities": 53,
-        "totalDistance": 65.38,
+        "totalActivities": 52,
+        "totalDistance": 65.67,
         "activityTypes": [
           "Running"
         ]
@@ -157,11 +157,6 @@
         },
         {
           "date": "02/25/25",
-          "distance": 0.29,
-          "type": "Running"
-        },
-        {
-          "date": "02/25/25",
           "distance": 0.3,
           "type": "Running"
         },
@@ -212,17 +207,7 @@
         },
         {
           "date": "03/11/25",
-          "distance": 1.7,
-          "type": "Running"
-        },
-        {
-          "date": "03/11/25",
           "distance": 1.77,
-          "type": "Running"
-        },
-        {
-          "date": "03/12/25",
-          "distance": 1.16,
           "type": "Running"
         },
         {
@@ -243,6 +228,16 @@
         {
           "date": "03/17/25",
           "distance": 1.66,
+          "type": "Running"
+        },
+        {
+          "date": "03/18/25",
+          "distance": 1.68,
+          "type": "Running"
+        },
+        {
+          "date": "03/18/25",
+          "distance": 1.76,
           "type": "Running"
         },
         {
@@ -969,8 +964,8 @@
         "totalActivities": 16,
         "totalDistance": 19.33,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -1398,8 +1393,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-03-18T03:06:54.203535",
+    "lastUpdated": "2025-03-19T03:05:42.954809",
     "totalRunners": 11,
-    "totalActivities": 253
+    "totalActivities": 252
   }
 }
