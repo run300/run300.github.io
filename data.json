@@ -3,8 +3,8 @@
     "Bruce": {
       "name": "Bruce",
       "stats": {
-        "totalActivities": 56,
-        "totalDistance": 72.77,
+        "totalActivities": 52,
+        "totalDistance": 65.96,
         "activityTypes": [
           "Running"
         ]
@@ -222,17 +222,7 @@
         },
         {
           "date": "03/17/25",
-          "distance": 1.64,
-          "type": "Running"
-        },
-        {
-          "date": "03/17/25",
           "distance": 1.66,
-          "type": "Running"
-        },
-        {
-          "date": "03/18/25",
-          "distance": 1.68,
           "type": "Running"
         },
         {
@@ -242,17 +232,7 @@
         },
         {
           "date": "03/19/25",
-          "distance": 1.19,
-          "type": "Running"
-        },
-        {
-          "date": "03/19/25",
           "distance": 1.28,
-          "type": "Running"
-        },
-        {
-          "date": "03/24/25",
-          "distance": 2.3,
           "type": "Running"
         },
         {
@@ -667,9 +647,9 @@
         "totalActivities": 24,
         "totalDistance": 58.35,
         "activityTypes": [
-          "Hiking",
           "Walking",
-          "Running"
+          "Running",
+          "Hiking"
         ]
       },
       "activities": [
@@ -1069,11 +1049,11 @@
     "Tin": {
       "name": "Tin",
       "stats": {
-        "totalActivities": 17,
-        "totalDistance": 20.71,
+        "totalActivities": 19,
+        "totalDistance": 22.97,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -1156,6 +1136,16 @@
           "date": "03/19/25",
           "distance": 1.38,
           "type": "Running"
+        },
+        {
+          "date": "03/25/25",
+          "distance": 1.3,
+          "type": "Running"
+        },
+        {
+          "date": "03/25/25",
+          "distance": 0.96,
+          "type": "Walking"
         },
         {
           "date": "03/3/25",
@@ -1526,8 +1516,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-03-25T03:07:53.305102",
+    "lastUpdated": "2025-03-26T03:06:44.567013",
     "totalRunners": 11,
-    "totalActivities": 278
+    "totalActivities": 276
   }
 }
