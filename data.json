@@ -3,8 +3,8 @@
     "Bruce": {
       "name": "Bruce",
       "stats": {
-        "totalActivities": 52,
-        "totalDistance": 65.96,
+        "totalActivities": 54,
+        "totalDistance": 71.77,
         "activityTypes": [
           "Running"
         ]
@@ -241,6 +241,16 @@
           "type": "Running"
         },
         {
+          "date": "03/26/25",
+          "distance": 2.79,
+          "type": "Running"
+        },
+        {
+          "date": "03/26/25",
+          "distance": 3.02,
+          "type": "Running"
+        },
+        {
           "date": "03/3/25",
           "distance": 0.3,
           "type": "Running"
@@ -275,8 +285,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 40,
-        "totalDistance": 87.54,
+        "totalActivities": 41,
+        "totalDistance": 88.71,
         "activityTypes": [
           "Running"
         ]
@@ -468,6 +478,11 @@
           "type": "Running"
         },
         {
+          "date": "03/26/25",
+          "distance": 1.17,
+          "type": "Running"
+        },
+        {
           "date": "03/4/25",
           "distance": 4.91,
           "type": "Running"
@@ -487,8 +502,8 @@
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 29,
-        "totalDistance": 84.37,
+        "totalActivities": 30,
+        "totalDistance": 87.49,
         "activityTypes": [
           "Running"
         ]
@@ -630,6 +645,11 @@
           "type": "Running"
         },
         {
+          "date": "03/26/25",
+          "distance": 3.12,
+          "type": "Running"
+        },
+        {
           "date": "03/6/25",
           "distance": 3.11,
           "type": "Running"
@@ -644,8 +664,8 @@
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 24,
-        "totalDistance": 58.35,
+        "totalActivities": 25,
+        "totalDistance": 61.49,
         "activityTypes": [
           "Walking",
           "Running",
@@ -759,6 +779,11 @@
           "type": "Running"
         },
         {
+          "date": "03/26/25",
+          "distance": 3.14,
+          "type": "Running"
+        },
+        {
           "date": "03/6/25",
           "distance": 2.64,
           "type": "Running"
@@ -778,8 +803,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 34,
-        "totalDistance": 113.69,
+        "totalActivities": 35,
+        "totalDistance": 117.06,
         "activityTypes": [
           "Running"
         ]
@@ -941,6 +966,11 @@
           "type": "Running"
         },
         {
+          "date": "03/26/25",
+          "distance": 3.37,
+          "type": "Running"
+        },
+        {
           "date": "03/4/25",
           "distance": 2.09,
           "type": "Running"
@@ -960,8 +990,8 @@
     "AutumnBreeze": {
       "name": "AutumnBreeze",
       "stats": {
-        "totalActivities": 11,
-        "totalDistance": 12.06,
+        "totalActivities": 12,
+        "totalDistance": 13.22,
         "activityTypes": [
           "Running"
         ]
@@ -1020,6 +1050,11 @@
         {
           "date": "03/24/25",
           "distance": 1.13,
+          "type": "Running"
+        },
+        {
+          "date": "03/26/25",
+          "distance": 1.16,
           "type": "Running"
         }
       ]
@@ -1157,8 +1192,8 @@
     "Muscles": {
       "name": "Muscles",
       "stats": {
-        "totalActivities": 38,
-        "totalDistance": 67.22,
+        "totalActivities": 39,
+        "totalDistance": 70.58,
         "activityTypes": [
           "Walking",
           "Running"
@@ -1346,6 +1381,11 @@
           "type": "Running"
         },
         {
+          "date": "03/26/25",
+          "distance": 3.36,
+          "type": "Running"
+        },
+        {
           "date": "03/4/25",
           "distance": 1.32,
           "type": "Running"
@@ -1516,8 +1556,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-03-26T03:06:44.567013",
+    "lastUpdated": "2025-03-27T03:07:37.803631",
     "totalRunners": 11,
-    "totalActivities": 276
+    "totalActivities": 284
   }
 }
