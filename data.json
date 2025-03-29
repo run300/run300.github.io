@@ -3,8 +3,8 @@
     "Bruce": {
       "name": "Bruce",
       "stats": {
-        "totalActivities": 54,
-        "totalDistance": 71.77,
+        "totalActivities": 56,
+        "totalDistance": 71.61,
         "activityTypes": [
           "Running"
         ]
@@ -242,12 +242,22 @@
         },
         {
           "date": "03/26/25",
-          "distance": 2.79,
+          "distance": 3.02,
           "type": "Running"
         },
         {
-          "date": "03/26/25",
-          "distance": 3.02,
+          "date": "03/28/25",
+          "distance": 0.21,
+          "type": "Running"
+        },
+        {
+          "date": "03/28/25",
+          "distance": 1.31,
+          "type": "Running"
+        },
+        {
+          "date": "03/28/25",
+          "distance": 1.11,
           "type": "Running"
         },
         {
@@ -667,9 +677,9 @@
         "totalActivities": 25,
         "totalDistance": 61.49,
         "activityTypes": [
-          "Walking",
           "Hiking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -1087,8 +1097,8 @@
         "totalActivities": 19,
         "totalDistance": 22.97,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -1195,8 +1205,8 @@
         "totalActivities": 39,
         "totalDistance": 70.58,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -1409,11 +1419,11 @@
     "Alfredo": {
       "name": "Alfredo",
       "stats": {
-        "totalActivities": 28,
-        "totalDistance": 84.39,
+        "totalActivities": 29,
+        "totalDistance": 88.61,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -1543,6 +1553,11 @@
           "type": "Running"
         },
         {
+          "date": "03/28/25",
+          "distance": 4.22,
+          "type": "Running"
+        },
+        {
           "date": "03/6/25",
           "distance": 3.02,
           "type": "Running"
@@ -1561,8 +1576,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-03-28T03:09:31.223656",
+    "lastUpdated": "2025-03-29T03:05:26.904706",
     "totalRunners": 11,
-    "totalActivities": 285
+    "totalActivities": 288
   }
 }
