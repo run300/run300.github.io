@@ -677,8 +677,8 @@
         "totalActivities": 27,
         "totalDistance": 65.0,
         "activityTypes": [
-          "Hiking",
           "Walking",
+          "Hiking",
           "Running"
         ]
       },
@@ -823,8 +823,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 35,
-        "totalDistance": 117.06,
+        "totalActivities": 36,
+        "totalDistance": 120.74,
         "activityTypes": [
           "Running"
         ]
@@ -988,6 +988,11 @@
         {
           "date": "03/26/25",
           "distance": 3.37,
+          "type": "Running"
+        },
+        {
+          "date": "03/30/25",
+          "distance": 3.68,
           "type": "Running"
         },
         {
@@ -1212,8 +1217,8 @@
     "Muscles": {
       "name": "Muscles",
       "stats": {
-        "totalActivities": 39,
-        "totalDistance": 70.58,
+        "totalActivities": 40,
+        "totalDistance": 71.67,
         "activityTypes": [
           "Walking",
           "Running"
@@ -1406,6 +1411,11 @@
           "type": "Running"
         },
         {
+          "date": "03/30/25",
+          "distance": 1.09,
+          "type": "Running"
+        },
+        {
           "date": "03/4/25",
           "distance": 1.32,
           "type": "Running"
@@ -1591,8 +1601,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-03-30T00:55:43.039963",
+    "lastUpdated": "2025-03-31T00:54:38.030645",
     "totalRunners": 11,
-    "totalActivities": 291
+    "totalActivities": 293
   }
 }
