@@ -708,8 +708,8 @@
         "totalDistance": 70.89,
         "activityTypes": [
           "Walking",
-          "Running",
-          "Hiking"
+          "Hiking",
+          "Running"
         ]
       },
       "activities": [
@@ -1681,7 +1681,7 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-04-05T00:50:19.700741",
+    "lastUpdated": "2025-04-06T00:55:17.777520",
     "totalRunners": 11,
     "totalActivities": 309
   }
