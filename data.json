@@ -3,8 +3,8 @@
     "Bruce": {
       "name": "Bruce",
       "stats": {
-        "totalActivities": 59,
-        "totalDistance": 74.19,
+        "totalActivities": 61,
+        "totalDistance": 81.26,
         "activityTypes": [
           "Running"
         ]
@@ -304,14 +304,24 @@
           "date": "03/8/25",
           "distance": 3.52,
           "type": "Running"
+        },
+        {
+          "date": "04/9/25",
+          "distance": 3.33,
+          "type": "Running"
+        },
+        {
+          "date": "04/9/25",
+          "distance": 3.74,
+          "type": "Running"
         }
       ]
     },
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 43,
-        "totalDistance": 98.54,
+        "totalActivities": 44,
+        "totalDistance": 99.71,
         "activityTypes": [
           "Running"
         ]
@@ -531,14 +541,19 @@
           "date": "04/7/25",
           "distance": 4.93,
           "type": "Running"
+        },
+        {
+          "date": "04/9/25",
+          "distance": 1.17,
+          "type": "Running"
         }
       ]
     },
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 32,
-        "totalDistance": 92.04,
+        "totalActivities": 33,
+        "totalDistance": 95.41,
         "activityTypes": [
           "Running"
         ]
@@ -703,18 +718,23 @@
           "date": "04/2/25",
           "distance": 2.75,
           "type": "Running"
+        },
+        {
+          "date": "04/9/25",
+          "distance": 3.37,
+          "type": "Running"
         }
       ]
     },
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 30,
-        "totalDistance": 70.89,
+        "totalActivities": 31,
+        "totalDistance": 72.55,
         "activityTypes": [
-          "Hiking",
           "Running",
-          "Walking"
+          "Walking",
+          "Hiking"
         ]
       },
       "activities": [
@@ -867,14 +887,19 @@
           "date": "04/2/25",
           "distance": 1.02,
           "type": "Running"
+        },
+        {
+          "date": "04/9/25",
+          "distance": 1.66,
+          "type": "Walking"
         }
       ]
     },
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 38,
-        "totalDistance": 130.09,
+        "totalActivities": 39,
+        "totalDistance": 133.95,
         "activityTypes": [
           "Running"
         ]
@@ -1069,14 +1094,19 @@
           "date": "04/3/25",
           "distance": 6.12,
           "type": "Running"
+        },
+        {
+          "date": "04/9/25",
+          "distance": 3.86,
+          "type": "Running"
         }
       ]
     },
     "AutumnBreeze": {
       "name": "AutumnBreeze",
       "stats": {
-        "totalActivities": 12,
-        "totalDistance": 13.22,
+        "totalActivities": 13,
+        "totalDistance": 14.37,
         "activityTypes": [
           "Running"
         ]
@@ -1140,6 +1170,11 @@
         {
           "date": "03/26/25",
           "distance": 1.16,
+          "type": "Running"
+        },
+        {
+          "date": "04/9/25",
+          "distance": 1.15,
           "type": "Running"
         }
       ]
@@ -1277,8 +1312,8 @@
     "Muscles": {
       "name": "Muscles",
       "stats": {
-        "totalActivities": 44,
-        "totalDistance": 76.89,
+        "totalActivities": 45,
+        "totalDistance": 79.9,
         "activityTypes": [
           "Running",
           "Walking"
@@ -1504,6 +1539,11 @@
           "date": "04/8/25",
           "distance": 2.51,
           "type": "Running"
+        },
+        {
+          "date": "04/9/25",
+          "distance": 3.01,
+          "type": "Running"
         }
       ]
     },
@@ -1519,8 +1559,8 @@
     "Alfredo": {
       "name": "Alfredo",
       "stats": {
-        "totalActivities": 32,
-        "totalDistance": 93.02,
+        "totalActivities": 33,
+        "totalDistance": 96.56,
         "activityTypes": [
           "Running",
           "Walking"
@@ -1686,13 +1726,18 @@
           "date": "04/2/25",
           "distance": 2.25,
           "type": "Running"
+        },
+        {
+          "date": "04/9/25",
+          "distance": 3.54,
+          "type": "Running"
         }
       ]
     }
   },
   "metadata": {
-    "lastUpdated": "2025-04-09T00:51:52.036370",
+    "lastUpdated": "2025-04-10T00:51:47.085624",
     "totalRunners": 11,
-    "totalActivities": 311
+    "totalActivities": 320
   }
 }
