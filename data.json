@@ -557,8 +557,8 @@
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 33,
-        "totalDistance": 95.41,
+        "totalActivities": 34,
+        "totalDistance": 101.75,
         "activityTypes": [
           "Running"
         ]
@@ -720,6 +720,11 @@
           "type": "Running"
         },
         {
+          "date": "04/12/25",
+          "distance": 6.34,
+          "type": "Running"
+        },
+        {
           "date": "04/2/25",
           "distance": 2.75,
           "type": "Running"
@@ -737,8 +742,8 @@
         "totalActivities": 31,
         "totalDistance": 72.55,
         "activityTypes": [
-          "Hiking",
           "Running",
+          "Hiking",
           "Walking"
         ]
       },
@@ -1214,8 +1219,8 @@
     "Tin": {
       "name": "Tin",
       "stats": {
-        "totalActivities": 19,
-        "totalDistance": 22.97,
+        "totalActivities": 20,
+        "totalDistance": 24.25,
         "activityTypes": [
           "Running",
           "Walking"
@@ -1315,6 +1320,11 @@
         {
           "date": "03/3/25",
           "distance": 1.53,
+          "type": "Running"
+        },
+        {
+          "date": "04/12/25",
+          "distance": 1.28,
           "type": "Running"
         }
       ]
@@ -1746,8 +1756,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-04-12T00:51:39.939519",
+    "lastUpdated": "2025-04-13T02:19:43.853264",
     "totalRunners": 11,
-    "totalActivities": 322
+    "totalActivities": 324
   }
 }
