@@ -572,8 +572,8 @@
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 35,
-        "totalDistance": 104.88,
+        "totalActivities": 36,
+        "totalDistance": 107.95,
         "activityTypes": [
           "Running"
         ]
@@ -745,6 +745,11 @@
           "type": "Running"
         },
         {
+          "date": "04/16/25",
+          "distance": 3.07,
+          "type": "Running"
+        },
+        {
           "date": "04/2/25",
           "distance": 2.75,
           "type": "Running"
@@ -759,12 +764,12 @@
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 33,
-        "totalDistance": 78.04,
+        "totalActivities": 34,
+        "totalDistance": 79.99,
         "activityTypes": [
+          "Walking",
           "Running",
-          "Hiking",
-          "Walking"
+          "Hiking"
         ]
       },
       "activities": [
@@ -919,6 +924,11 @@
           "type": "Walking"
         },
         {
+          "date": "04/16/25",
+          "distance": 1.95,
+          "type": "Running"
+        },
+        {
           "date": "04/2/25",
           "distance": 1.39,
           "type": "Running"
@@ -938,8 +948,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 41,
-        "totalDistance": 143.66,
+        "totalActivities": 42,
+        "totalDistance": 147.73,
         "activityTypes": [
           "Running"
         ]
@@ -1136,6 +1146,11 @@
           "type": "Running"
         },
         {
+          "date": "04/16/25",
+          "distance": 4.07,
+          "type": "Running"
+        },
+        {
           "date": "04/2/25",
           "distance": 3.23,
           "type": "Running"
@@ -1262,8 +1277,8 @@
         "totalActivities": 20,
         "totalDistance": 24.25,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -1372,11 +1387,11 @@
     "Muscles": {
       "name": "Muscles",
       "stats": {
-        "totalActivities": 46,
-        "totalDistance": 82.71,
+        "totalActivities": 47,
+        "totalDistance": 85.93,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -1586,6 +1601,11 @@
           "type": "Running"
         },
         {
+          "date": "04/16/25",
+          "distance": 3.22,
+          "type": "Running"
+        },
+        {
           "date": "04/2/25",
           "distance": 1.38,
           "type": "Running"
@@ -1624,11 +1644,11 @@
     "Alfredo": {
       "name": "Alfredo",
       "stats": {
-        "totalActivities": 34,
-        "totalDistance": 100.08,
+        "totalActivities": 36,
+        "totalDistance": 103.85,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -1793,6 +1813,16 @@
           "type": "Running"
         },
         {
+          "date": "04/16/25",
+          "distance": 3.77,
+          "type": "Running"
+        },
+        {
+          "date": "04/16/25",
+          "distance": null,
+          "type": "Walking"
+        },
+        {
           "date": "04/2/25",
           "distance": 2.25,
           "type": "Running"
@@ -1806,8 +1836,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-04-16T00:53:52.539810",
+    "lastUpdated": "2025-04-17T00:52:43.931860",
     "totalRunners": 11,
-    "totalActivities": 334
+    "totalActivities": 340
   }
 }
