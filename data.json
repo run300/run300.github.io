@@ -325,8 +325,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 48,
-        "totalDistance": 106.91,
+        "totalActivities": 49,
+        "totalDistance": 108.05,
         "activityTypes": [
           "Running"
         ]
@@ -563,6 +563,11 @@
           "type": "Running"
         },
         {
+          "date": "04/20/25",
+          "distance": 1.14,
+          "type": "Running"
+        },
+        {
           "date": "04/7/25",
           "distance": 4.93,
           "type": "Running"
@@ -772,9 +777,9 @@
         "totalActivities": 34,
         "totalDistance": 79.99,
         "activityTypes": [
-          "Hiking",
+          "Walking",
           "Running",
-          "Walking"
+          "Hiking"
         ]
       },
       "activities": [
@@ -1180,8 +1185,8 @@
     "AutumnBreeze": {
       "name": "AutumnBreeze",
       "stats": {
-        "totalActivities": 14,
-        "totalDistance": 15.51,
+        "totalActivities": 15,
+        "totalDistance": 16.65,
         "activityTypes": [
           "Running"
         ]
@@ -1253,6 +1258,11 @@
           "type": "Running"
         },
         {
+          "date": "04/20/25",
+          "distance": 1.14,
+          "type": "Running"
+        },
+        {
           "date": "04/9/25",
           "distance": 1.15,
           "type": "Running"
@@ -1287,8 +1297,8 @@
         "totalActivities": 20,
         "totalDistance": 24.25,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -1400,8 +1410,8 @@
         "totalActivities": 47,
         "totalDistance": 85.93,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -1657,8 +1667,8 @@
         "totalActivities": 37,
         "totalDistance": 108.55,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -1851,8 +1861,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-04-20T00:57:10.218973",
+    "lastUpdated": "2025-04-21T00:56:05.169734",
     "totalRunners": 11,
-    "totalActivities": 343
+    "totalActivities": 345
   }
 }
