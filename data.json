@@ -592,8 +592,8 @@
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 38,
-        "totalDistance": 114.42,
+        "totalActivities": 39,
+        "totalDistance": 120.06,
         "activityTypes": [
           "Running"
         ]
@@ -785,6 +785,11 @@
           "type": "Running"
         },
         {
+          "date": "04/26/25",
+          "distance": 5.64,
+          "type": "Running"
+        },
+        {
           "date": "04/9/25",
           "distance": 3.37,
           "type": "Running"
@@ -797,9 +802,9 @@
         "totalActivities": 36,
         "totalDistance": 83.49,
         "activityTypes": [
-          "Hiking",
+          "Walking",
           "Running",
-          "Walking"
+          "Hiking"
         ]
       },
       "activities": [
@@ -1455,8 +1460,8 @@
         "totalActivities": 48,
         "totalDistance": 87.62,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -1714,11 +1719,11 @@
     "Alfredo": {
       "name": "Alfredo",
       "stats": {
-        "totalActivities": 39,
-        "totalDistance": 114.39,
+        "totalActivities": 40,
+        "totalDistance": 120.76,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -1913,6 +1918,11 @@
           "type": "Running"
         },
         {
+          "date": "04/25/25",
+          "distance": 6.37,
+          "type": "Running"
+        },
+        {
           "date": "04/9/25",
           "distance": 3.54,
           "type": "Running"
@@ -1921,8 +1931,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-04-26T00:52:02.402376",
+    "lastUpdated": "2025-04-27T00:57:10.886672",
     "totalRunners": 11,
-    "totalActivities": 357
+    "totalActivities": 359
   }
 }
