@@ -340,8 +340,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 52,
-        "totalDistance": 119.06,
+        "totalActivities": 53,
+        "totalDistance": 123.98,
         "activityTypes": [
           "Running"
         ]
@@ -606,14 +606,19 @@
           "date": "04/9/25",
           "distance": 1.17,
           "type": "Running"
+        },
+        {
+          "date": "05/5/25",
+          "distance": 4.92,
+          "type": "Running"
         }
       ]
     },
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 41,
-        "totalDistance": 126.62,
+        "totalActivities": 42,
+        "totalDistance": 129.97,
         "activityTypes": [
           "Running"
         ]
@@ -823,14 +828,19 @@
           "date": "04/9/25",
           "distance": 3.37,
           "type": "Running"
+        },
+        {
+          "date": "05/5/25",
+          "distance": 3.35,
+          "type": "Running"
         }
       ]
     },
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 37,
-        "totalDistance": 85.33,
+        "totalActivities": 38,
+        "totalDistance": 87.38,
         "activityTypes": [
           "Hiking",
           "Walking",
@@ -1022,14 +1032,19 @@
           "date": "04/9/25",
           "distance": 1.66,
           "type": "Walking"
+        },
+        {
+          "date": "05/5/25",
+          "distance": 2.05,
+          "type": "Walking"
         }
       ]
     },
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 48,
-        "totalDistance": 174.06,
+        "totalActivities": 49,
+        "totalDistance": 177.74,
         "activityTypes": [
           "Running"
         ]
@@ -1273,6 +1288,11 @@
         {
           "date": "04/9/25",
           "distance": 3.86,
+          "type": "Running"
+        },
+        {
+          "date": "05/5/25",
+          "distance": 3.68,
           "type": "Running"
         }
       ]
@@ -2001,8 +2021,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-05-05T00:57:04.806317",
+    "lastUpdated": "2025-05-06T00:55:00.590654",
     "totalRunners": 11,
-    "totalActivities": 373
+    "totalActivities": 377
   }
 }
