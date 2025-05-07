@@ -1799,8 +1799,8 @@
     "Alfredo": {
       "name": "Alfredo",
       "stats": {
-        "totalActivities": 42,
-        "totalDistance": 127.18,
+        "totalActivities": 44,
+        "totalDistance": 129.86,
         "activityTypes": [
           "Walking",
           "Running"
@@ -2016,13 +2016,23 @@
           "date": "04/9/25",
           "distance": 3.54,
           "type": "Running"
+        },
+        {
+          "date": "05/1/25",
+          "distance": 0.68,
+          "type": "Walking"
+        },
+        {
+          "date": "05/6/25",
+          "distance": 2.0,
+          "type": "Running"
         }
       ]
     }
   },
   "metadata": {
-    "lastUpdated": "2025-05-06T00:55:00.590654",
+    "lastUpdated": "2025-05-07T00:55:04.181482",
     "totalRunners": 11,
-    "totalActivities": 377
+    "totalActivities": 379
   }
 }
