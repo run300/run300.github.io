@@ -350,8 +350,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 53,
-        "totalDistance": 123.98,
+        "totalActivities": 54,
+        "totalDistance": 127.04,
         "activityTypes": [
           "Running"
         ]
@@ -615,6 +615,11 @@
         {
           "date": "04/9/25",
           "distance": 1.17,
+          "type": "Running"
+        },
+        {
+          "date": "05/10/25",
+          "distance": 3.06,
           "type": "Running"
         },
         {
@@ -1320,8 +1325,8 @@
     "AutumnBreeze": {
       "name": "AutumnBreeze",
       "stats": {
-        "totalActivities": 16,
-        "totalDistance": 17.71,
+        "totalActivities": 17,
+        "totalDistance": 20.8,
         "activityTypes": [
           "Running"
         ]
@@ -1405,6 +1410,11 @@
         {
           "date": "04/9/25",
           "distance": 1.15,
+          "type": "Running"
+        },
+        {
+          "date": "05/10/25",
+          "distance": 3.09,
           "type": "Running"
         }
       ]
@@ -2056,8 +2066,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-05-10T00:52:39.750615",
+    "lastUpdated": "2025-05-11T00:58:44.456361",
     "totalRunners": 11,
-    "totalActivities": 384
+    "totalActivities": 386
   }
 }
