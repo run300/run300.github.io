@@ -350,8 +350,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 54,
-        "totalDistance": 127.04,
+        "totalActivities": 55,
+        "totalDistance": 131.94,
         "activityTypes": [
           "Running"
         ]
@@ -623,6 +623,11 @@
           "type": "Running"
         },
         {
+          "date": "05/12/25",
+          "distance": 4.9,
+          "type": "Running"
+        },
+        {
           "date": "05/5/25",
           "distance": 4.92,
           "type": "Running"
@@ -854,12 +859,12 @@
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 40,
-        "totalDistance": 90.84,
+        "totalActivities": 41,
+        "totalDistance": 92.64,
         "activityTypes": [
           "Hiking",
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -1051,6 +1056,11 @@
         {
           "date": "05/11/25",
           "distance": 1.68,
+          "type": "Walking"
+        },
+        {
+          "date": "05/12/25",
+          "distance": 1.8,
           "type": "Walking"
         },
         {
@@ -1452,8 +1462,8 @@
         "totalActivities": 20,
         "totalDistance": 24.25,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -1565,8 +1575,8 @@
         "totalActivities": 51,
         "totalDistance": 97.7,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -1842,8 +1852,8 @@
         "totalActivities": 44,
         "totalDistance": 129.86,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -2071,8 +2081,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-05-12T00:58:13.200570",
+    "lastUpdated": "2025-05-13T00:55:46.505849",
     "totalRunners": 11,
-    "totalActivities": 387
+    "totalActivities": 389
   }
 }
