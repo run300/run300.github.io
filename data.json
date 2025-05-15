@@ -637,8 +637,8 @@
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 42,
-        "totalDistance": 129.97,
+        "totalActivities": 43,
+        "totalDistance": 133.17,
         "activityTypes": [
           "Running"
         ]
@@ -850,6 +850,11 @@
           "type": "Running"
         },
         {
+          "date": "05/14/25",
+          "distance": 3.2,
+          "type": "Running"
+        },
+        {
           "date": "05/5/25",
           "distance": 3.35,
           "type": "Running"
@@ -859,8 +864,8 @@
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 41,
-        "totalDistance": 92.64,
+        "totalActivities": 32,
+        "totalDistance": 75.79,
         "activityTypes": [
           "Walking",
           "Running",
@@ -1009,51 +1014,6 @@
           "type": "Running"
         },
         {
-          "date": "04/13/25",
-          "distance": 3.61,
-          "type": "Walking"
-        },
-        {
-          "date": "04/14/25",
-          "distance": 1.88,
-          "type": "Walking"
-        },
-        {
-          "date": "04/16/25",
-          "distance": 1.95,
-          "type": "Running"
-        },
-        {
-          "date": "04/2/25",
-          "distance": 1.39,
-          "type": "Running"
-        },
-        {
-          "date": "04/2/25",
-          "distance": 1.02,
-          "type": "Running"
-        },
-        {
-          "date": "04/21/25",
-          "distance": 1.74,
-          "type": "Walking"
-        },
-        {
-          "date": "04/23/25",
-          "distance": 1.76,
-          "type": "Walking"
-        },
-        {
-          "date": "04/30/25",
-          "distance": 1.84,
-          "type": "Walking"
-        },
-        {
-          "date": "04/9/25",
-          "distance": 1.66,
-          "type": "Walking"
-        },
-        {
           "date": "05/11/25",
           "distance": 1.68,
           "type": "Walking"
@@ -1078,8 +1038,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 51,
-        "totalDistance": 185.11,
+        "totalActivities": 52,
+        "totalDistance": 190.58,
         "activityTypes": [
           "Running"
         ]
@@ -1331,6 +1291,11 @@
           "type": "Running"
         },
         {
+          "date": "05/14/25",
+          "distance": 5.47,
+          "type": "Running"
+        },
+        {
           "date": "05/5/25",
           "distance": 3.68,
           "type": "Running"
@@ -1464,8 +1429,8 @@
     "Tin": {
       "name": "Tin",
       "stats": {
-        "totalActivities": 20,
-        "totalDistance": 24.25,
+        "totalActivities": 21,
+        "totalDistance": 26.39,
         "activityTypes": [
           "Walking",
           "Running"
@@ -1570,6 +1535,11 @@
         {
           "date": "04/12/25",
           "distance": 1.28,
+          "type": "Running"
+        },
+        {
+          "date": "05/14/25",
+          "distance": 2.14,
           "type": "Running"
         }
       ]
@@ -2086,8 +2056,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-05-14T00:55:14.351338",
+    "lastUpdated": "2025-05-15T00:54:42.945803",
     "totalRunners": 11,
-    "totalActivities": 390
+    "totalActivities": 384
   }
 }
