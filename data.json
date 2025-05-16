@@ -864,12 +864,12 @@
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 32,
-        "totalDistance": 75.79,
+        "totalActivities": 41,
+        "totalDistance": 92.64,
         "activityTypes": [
+          "Hiking",
           "Walking",
-          "Running",
-          "Hiking"
+          "Running"
         ]
       },
       "activities": [
@@ -1012,6 +1012,51 @@
           "date": "03/8/25",
           "distance": 3.14,
           "type": "Running"
+        },
+        {
+          "date": "04/13/25",
+          "distance": 3.61,
+          "type": "Walking"
+        },
+        {
+          "date": "04/14/25",
+          "distance": 1.88,
+          "type": "Walking"
+        },
+        {
+          "date": "04/16/25",
+          "distance": 1.95,
+          "type": "Running"
+        },
+        {
+          "date": "04/2/25",
+          "distance": 1.39,
+          "type": "Running"
+        },
+        {
+          "date": "04/2/25",
+          "distance": 1.02,
+          "type": "Running"
+        },
+        {
+          "date": "04/21/25",
+          "distance": 1.74,
+          "type": "Walking"
+        },
+        {
+          "date": "04/23/25",
+          "distance": 1.76,
+          "type": "Walking"
+        },
+        {
+          "date": "04/30/25",
+          "distance": 1.84,
+          "type": "Walking"
+        },
+        {
+          "date": "04/9/25",
+          "distance": 1.66,
+          "type": "Walking"
         },
         {
           "date": "05/11/25",
@@ -1429,8 +1474,8 @@
     "Tin": {
       "name": "Tin",
       "stats": {
-        "totalActivities": 21,
-        "totalDistance": 26.39,
+        "totalActivities": 22,
+        "totalDistance": 28.1,
         "activityTypes": [
           "Walking",
           "Running"
@@ -1541,6 +1586,11 @@
           "date": "05/14/25",
           "distance": 2.14,
           "type": "Running"
+        },
+        {
+          "date": "05/15/25",
+          "distance": 1.71,
+          "type": "Walking"
         }
       ]
     },
@@ -2056,8 +2106,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-05-15T00:54:42.945803",
+    "lastUpdated": "2025-05-16T00:56:09.064315",
     "totalRunners": 11,
-    "totalActivities": 384
+    "totalActivities": 394
   }
 }
