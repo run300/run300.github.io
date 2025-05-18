@@ -637,8 +637,8 @@
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 43,
-        "totalDistance": 133.17,
+        "totalActivities": 44,
+        "totalDistance": 139.49,
         "activityTypes": [
           "Running"
         ]
@@ -852,6 +852,11 @@
         {
           "date": "05/14/25",
           "distance": 3.2,
+          "type": "Running"
+        },
+        {
+          "date": "05/17/25",
+          "distance": 6.32,
           "type": "Running"
         },
         {
@@ -1083,8 +1088,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 52,
-        "totalDistance": 190.58,
+        "totalActivities": 53,
+        "totalDistance": 194.25,
         "activityTypes": [
           "Running"
         ]
@@ -1338,6 +1343,11 @@
         {
           "date": "05/14/25",
           "distance": 5.47,
+          "type": "Running"
+        },
+        {
+          "date": "05/17/25",
+          "distance": 3.67,
           "type": "Running"
         },
         {
@@ -1879,8 +1889,8 @@
     "Alfredo": {
       "name": "Alfredo",
       "stats": {
-        "totalActivities": 44,
-        "totalDistance": 129.86,
+        "totalActivities": 46,
+        "totalDistance": 133.41,
         "activityTypes": [
           "Running",
           "Walking"
@@ -2103,6 +2113,16 @@
           "type": "Walking"
         },
         {
+          "date": "05/15/25",
+          "distance": 0.55,
+          "type": "Walking"
+        },
+        {
+          "date": "05/17/25",
+          "distance": 3.0,
+          "type": "Running"
+        },
+        {
           "date": "05/6/25",
           "distance": 2.0,
           "type": "Running"
@@ -2111,8 +2131,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-05-17T00:54:20.726451",
+    "lastUpdated": "2025-05-18T00:59:30.505712",
     "totalRunners": 11,
-    "totalActivities": 395
+    "totalActivities": 399
   }
 }
