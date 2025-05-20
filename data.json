@@ -345,8 +345,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 55,
-        "totalDistance": 131.94,
+        "totalActivities": 45,
+        "totalDistance": 106.49,
         "activityTypes": [
           "Running"
         ]
@@ -560,56 +560,6 @@
         {
           "date": "03/7/25",
           "distance": 1.15,
-          "type": "Running"
-        },
-        {
-          "date": "04/11/25",
-          "distance": 1.14,
-          "type": "Running"
-        },
-        {
-          "date": "04/14/25",
-          "distance": 2.73,
-          "type": "Running"
-        },
-        {
-          "date": "04/14/25",
-          "distance": 2.18,
-          "type": "Running"
-        },
-        {
-          "date": "04/15/25",
-          "distance": 1.15,
-          "type": "Running"
-        },
-        {
-          "date": "04/20/25",
-          "distance": 1.14,
-          "type": "Running"
-        },
-        {
-          "date": "04/21/25",
-          "distance": 4.91,
-          "type": "Running"
-        },
-        {
-          "date": "04/28/25",
-          "distance": 1.08,
-          "type": "Running"
-        },
-        {
-          "date": "04/28/25",
-          "distance": 5.02,
-          "type": "Running"
-        },
-        {
-          "date": "04/7/25",
-          "distance": 4.93,
-          "type": "Running"
-        },
-        {
-          "date": "04/9/25",
-          "distance": 1.17,
           "type": "Running"
         },
         {
@@ -867,9 +817,9 @@
         "totalActivities": 41,
         "totalDistance": 92.64,
         "activityTypes": [
+          "Walking",
           "Running",
-          "Hiking",
-          "Walking"
+          "Hiking"
         ]
       },
       "activities": [
@@ -1083,8 +1033,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 53,
-        "totalDistance": 194.25,
+        "totalActivities": 54,
+        "totalDistance": 200.35,
         "activityTypes": [
           "Running"
         ]
@@ -1346,6 +1296,11 @@
           "type": "Running"
         },
         {
+          "date": "05/19/25",
+          "distance": 6.1,
+          "type": "Running"
+        },
+        {
           "date": "05/5/25",
           "distance": 3.68,
           "type": "Running"
@@ -1479,11 +1434,11 @@
     "Tin": {
       "name": "Tin",
       "stats": {
-        "totalActivities": 23,
-        "totalDistance": 30.07,
+        "totalActivities": 24,
+        "totalDistance": 32.21,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -1601,17 +1556,22 @@
           "date": "05/16/25",
           "distance": 1.97,
           "type": "Walking"
+        },
+        {
+          "date": "05/19/25",
+          "distance": 2.14,
+          "type": "Walking"
         }
       ]
     },
     "Muscles": {
       "name": "Muscles",
       "stats": {
-        "totalActivities": 51,
-        "totalDistance": 97.7,
+        "totalActivities": 53,
+        "totalDistance": 98.59,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -1866,6 +1826,16 @@
           "type": "Running"
         },
         {
+          "date": "05/19/25",
+          "distance": 0.5,
+          "type": "Walking"
+        },
+        {
+          "date": "05/19/25",
+          "distance": 0.39,
+          "type": "Walking"
+        },
+        {
           "date": "05/8/25",
           "distance": 3.52,
           "type": "Walking"
@@ -1887,8 +1857,8 @@
         "totalActivities": 46,
         "totalDistance": 133.41,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -2126,8 +2096,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-05-19T00:58:29.571823",
+    "lastUpdated": "2025-05-20T00:56:53.829980",
     "totalRunners": 11,
-    "totalActivities": 398
+    "totalActivities": 392
   }
 }
