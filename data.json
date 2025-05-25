@@ -897,9 +897,9 @@
         "totalActivities": 41,
         "totalDistance": 92.64,
         "activityTypes": [
-          "Walking",
           "Hiking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -1113,8 +1113,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 55,
-        "totalDistance": 203.91,
+        "totalActivities": 56,
+        "totalDistance": 207.57,
         "activityTypes": [
           "Running"
         ]
@@ -1386,6 +1386,11 @@
           "type": "Running"
         },
         {
+          "date": "05/23/25",
+          "distance": 3.66,
+          "type": "Running"
+        },
+        {
           "date": "05/5/25",
           "distance": 3.68,
           "type": "Running"
@@ -1522,8 +1527,8 @@
         "totalActivities": 27,
         "totalDistance": 38.69,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -1670,8 +1675,8 @@
         "totalActivities": 58,
         "totalDistance": 101.32,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -1979,11 +1984,11 @@
     "Alfredo": {
       "name": "Alfredo",
       "stats": {
-        "totalActivities": 47,
-        "totalDistance": 136.55,
+        "totalActivities": 48,
+        "totalDistance": 138.55,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -2218,6 +2223,11 @@
           "type": "Running"
         },
         {
+          "date": "05/24/25",
+          "distance": 2.0,
+          "type": "Running"
+        },
+        {
           "date": "05/6/25",
           "distance": 2.0,
           "type": "Running"
@@ -2226,8 +2236,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-05-24T00:53:44.406766",
+    "lastUpdated": "2025-05-25T01:00:51.758000",
     "totalRunners": 11,
-    "totalActivities": 418
+    "totalActivities": 420
   }
 }
