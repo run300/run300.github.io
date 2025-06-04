@@ -922,9 +922,9 @@
         "totalActivities": 41,
         "totalDistance": 92.64,
         "activityTypes": [
-          "Walking",
+          "Running",
           "Hiking",
-          "Running"
+          "Walking"
         ]
       },
       "activities": [
@@ -1569,11 +1569,11 @@
     "Tin": {
       "name": "Tin",
       "stats": {
-        "totalActivities": 27,
-        "totalDistance": 38.69,
+        "totalActivities": 28,
+        "totalDistance": 40.57,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -1711,6 +1711,11 @@
           "date": "05/22/25",
           "distance": 2.6,
           "type": "Walking"
+        },
+        {
+          "date": "06/3/25",
+          "distance": 1.88,
+          "type": "Walking"
         }
       ]
     },
@@ -1720,8 +1725,8 @@
         "totalActivities": 58,
         "totalDistance": 101.32,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -2032,8 +2037,8 @@
         "totalActivities": 50,
         "totalDistance": 143.96,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -2291,8 +2296,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-06-03T00:57:25.545871",
+    "lastUpdated": "2025-06-04T00:57:13.281081",
     "totalRunners": 11,
-    "totalActivities": 431
+    "totalActivities": 432
   }
 }
