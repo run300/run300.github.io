@@ -1722,8 +1722,8 @@
     "Muscles": {
       "name": "Muscles",
       "stats": {
-        "totalActivities": 58,
-        "totalDistance": 101.32,
+        "totalActivities": 59,
+        "totalDistance": 102.4,
         "activityTypes": [
           "Running",
           "Walking"
@@ -2019,6 +2019,11 @@
           "date": "05/8/25",
           "distance": 3.52,
           "type": "Walking"
+        },
+        {
+          "date": "06/4/25",
+          "distance": 1.08,
+          "type": "Walking"
         }
       ]
     },
@@ -2296,8 +2301,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-06-04T00:57:13.281081",
+    "lastUpdated": "2025-06-05T00:56:33.664117",
     "totalRunners": 11,
-    "totalActivities": 432
+    "totalActivities": 433
   }
 }
