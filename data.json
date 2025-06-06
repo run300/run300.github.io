@@ -922,9 +922,9 @@
         "totalActivities": 41,
         "totalDistance": 92.64,
         "activityTypes": [
-          "Running",
+          "Walking",
           "Hiking",
-          "Walking"
+          "Running"
         ]
       },
       "activities": [
@@ -1569,11 +1569,11 @@
     "Tin": {
       "name": "Tin",
       "stats": {
-        "totalActivities": 28,
-        "totalDistance": 40.57,
+        "totalActivities": 29,
+        "totalDistance": 42.44,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -1716,6 +1716,11 @@
           "date": "06/3/25",
           "distance": 1.88,
           "type": "Walking"
+        },
+        {
+          "date": "06/4/25",
+          "distance": 1.87,
+          "type": "Walking"
         }
       ]
     },
@@ -1725,8 +1730,8 @@
         "totalActivities": 59,
         "totalDistance": 102.4,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -2039,11 +2044,11 @@
     "Alfredo": {
       "name": "Alfredo",
       "stats": {
-        "totalActivities": 50,
-        "totalDistance": 143.96,
+        "totalActivities": 52,
+        "totalDistance": 148.9,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -2296,13 +2301,23 @@
           "date": "06/2/25",
           "distance": 2.56,
           "type": "Running"
+        },
+        {
+          "date": "06/3/25",
+          "distance": 2.93,
+          "type": "Walking"
+        },
+        {
+          "date": "06/4/25",
+          "distance": 2.01,
+          "type": "Running"
         }
       ]
     }
   },
   "metadata": {
-    "lastUpdated": "2025-06-05T00:56:33.664117",
+    "lastUpdated": "2025-06-06T00:56:10.906611",
     "totalRunners": 11,
-    "totalActivities": 433
+    "totalActivities": 436
   }
 }
