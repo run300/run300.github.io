@@ -677,8 +677,8 @@
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 46,
-        "totalDistance": 146.17,
+        "totalActivities": 47,
+        "totalDistance": 148.64,
         "activityTypes": [
           "Running"
         ]
@@ -912,6 +912,11 @@
         {
           "date": "06/2/25",
           "distance": 3.56,
+          "type": "Running"
+        },
+        {
+          "date": "06/7/25",
+          "distance": 2.47,
           "type": "Running"
         }
       ]
@@ -2321,8 +2326,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-06-07T00:55:55.148370",
+    "lastUpdated": "2025-06-08T01:02:14.459917",
     "totalRunners": 11,
-    "totalActivities": 437
+    "totalActivities": 438
   }
 }
