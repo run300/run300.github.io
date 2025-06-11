@@ -375,8 +375,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 58,
-        "totalDistance": 138.86,
+        "totalActivities": 61,
+        "totalDistance": 146.87,
         "activityTypes": [
           "Running"
         ]
@@ -671,14 +671,29 @@
           "date": "06/1/25",
           "distance": 2.19,
           "type": "Running"
+        },
+        {
+          "date": "06/10/25",
+          "distance": 1.12,
+          "type": "Running"
+        },
+        {
+          "date": "06/10/25",
+          "distance": 4.69,
+          "type": "Running"
+        },
+        {
+          "date": "06/8/25",
+          "distance": 2.2,
+          "type": "Running"
         }
       ]
     },
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 47,
-        "totalDistance": 148.64,
+        "totalActivities": 48,
+        "totalDistance": 150.19,
         "activityTypes": [
           "Running"
         ]
@@ -918,6 +933,11 @@
           "date": "06/7/25",
           "distance": 2.47,
           "type": "Running"
+        },
+        {
+          "date": "06/9/25",
+          "distance": 1.55,
+          "type": "Running"
         }
       ]
     },
@@ -928,8 +948,8 @@
         "totalDistance": 92.64,
         "activityTypes": [
           "Running",
-          "Hiking",
-          "Walking"
+          "Walking",
+          "Hiking"
         ]
       },
       "activities": [
@@ -1143,8 +1163,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 61,
-        "totalDistance": 225.37,
+        "totalActivities": 63,
+        "totalDistance": 232.47,
         "activityTypes": [
           "Running"
         ]
@@ -1454,14 +1474,24 @@
           "date": "06/5/25",
           "distance": 6.11,
           "type": "Running"
+        },
+        {
+          "date": "06/8/25",
+          "distance": 4.66,
+          "type": "Running"
+        },
+        {
+          "date": "06/9/25",
+          "distance": 2.44,
+          "type": "Running"
         }
       ]
     },
     "AutumnBreeze": {
       "name": "AutumnBreeze",
       "stats": {
-        "totalActivities": 17,
-        "totalDistance": 20.8,
+        "totalActivities": 18,
+        "totalDistance": 21.91,
         "activityTypes": [
           "Running"
         ]
@@ -1551,14 +1581,19 @@
           "date": "05/10/25",
           "distance": 3.09,
           "type": "Running"
+        },
+        {
+          "date": "06/10/25",
+          "distance": 1.11,
+          "type": "Running"
         }
       ]
     },
     "Jon": {
       "name": "Jon",
       "stats": {
-        "totalActivities": 2,
-        "totalDistance": 2.54,
+        "totalActivities": 3,
+        "totalDistance": 4.99,
         "activityTypes": [
           "Running"
         ]
@@ -1572,6 +1607,11 @@
         {
           "date": "03/24/25",
           "distance": 1.4,
+          "type": "Running"
+        },
+        {
+          "date": "06/9/25",
+          "distance": 2.45,
           "type": "Running"
         }
       ]
@@ -2054,8 +2094,8 @@
     "Alfredo": {
       "name": "Alfredo",
       "stats": {
-        "totalActivities": 52,
-        "totalDistance": 148.9,
+        "totalActivities": 53,
+        "totalDistance": 153.51,
         "activityTypes": [
           "Running",
           "Walking"
@@ -2321,13 +2361,18 @@
           "date": "06/4/25",
           "distance": 2.01,
           "type": "Running"
+        },
+        {
+          "date": "06/4/25",
+          "distance": 4.61,
+          "type": "Walking"
         }
       ]
     }
   },
   "metadata": {
-    "lastUpdated": "2025-06-08T01:02:14.459917",
+    "lastUpdated": "2025-06-11T21:27:03.560934",
     "totalRunners": 11,
-    "totalActivities": 438
+    "totalActivities": 447
   }
 }
