@@ -988,8 +988,8 @@
         "totalDistance": 92.64,
         "activityTypes": [
           "Hiking",
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -1647,8 +1647,8 @@
     "Jon": {
       "name": "Jon",
       "stats": {
-        "totalActivities": 3,
-        "totalDistance": 4.99,
+        "totalActivities": 4,
+        "totalDistance": 10.01,
         "activityTypes": [
           "Running"
         ]
@@ -1665,6 +1665,11 @@
           "type": "Running"
         },
         {
+          "date": "06/22/25",
+          "distance": 5.02,
+          "type": "Running"
+        },
+        {
           "date": "06/9/25",
           "distance": 2.45,
           "type": "Running"
@@ -1677,8 +1682,8 @@
         "totalActivities": 35,
         "totalDistance": 57.2,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -1865,8 +1870,8 @@
         "totalActivities": 62,
         "totalDistance": 110.74,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -2197,8 +2202,8 @@
         "totalActivities": 70,
         "totalDistance": 188.15,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -2556,8 +2561,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-06-22T01:02:58.846294",
+    "lastUpdated": "2025-06-23T01:01:19.149207",
     "totalRunners": 11,
-    "totalActivities": 484
+    "totalActivities": 485
   }
 }
