@@ -1022,9 +1022,9 @@
         "totalActivities": 41,
         "totalDistance": 92.64,
         "activityTypes": [
-          "Walking",
           "Hiking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -1742,8 +1742,8 @@
         "totalActivities": 41,
         "totalDistance": 67.51,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -1957,11 +1957,12 @@
     "Muscles": {
       "name": "Muscles",
       "stats": {
-        "totalActivities": 67,
-        "totalDistance": 115.16,
+        "totalActivities": 68,
+        "totalDistance": 116.9,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Hiking",
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -2299,6 +2300,11 @@
           "date": "07/2/25",
           "distance": 1.54,
           "type": "Running"
+        },
+        {
+          "date": "07/5/25",
+          "distance": 1.74,
+          "type": "Hiking"
         }
       ]
     },
@@ -2317,8 +2323,8 @@
         "totalActivities": 83,
         "totalDistance": 230.85,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -2741,8 +2747,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-07-05T00:55:55.309422",
+    "lastUpdated": "2025-07-06T01:03:29.260479",
     "totalRunners": 11,
-    "totalActivities": 521
+    "totalActivities": 522
   }
 }
