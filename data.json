@@ -420,8 +420,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 67,
-        "totalDistance": 158.78,
+        "totalActivities": 69,
+        "totalDistance": 161.45,
         "activityTypes": [
           "Running"
         ]
@@ -761,6 +761,16 @@
           "date": "07/1/25",
           "distance": 2.74,
           "type": "Running"
+        },
+        {
+          "date": "07/7/25",
+          "distance": 1.51,
+          "type": "Running"
+        },
+        {
+          "date": "07/7/25",
+          "distance": 1.16,
+          "type": "Running"
         }
       ]
     },
@@ -1029,8 +1039,8 @@
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 42,
-        "totalDistance": 93.7,
+        "totalActivities": 43,
+        "totalDistance": 94.85,
         "activityTypes": [
           "Walking",
           "Running",
@@ -1247,14 +1257,19 @@
           "date": "07/6/25",
           "distance": 1.06,
           "type": "Walking"
+        },
+        {
+          "date": "07/7/25",
+          "distance": 1.15,
+          "type": "Walking"
         }
       ]
     },
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 70,
-        "totalDistance": 269.78,
+        "totalActivities": 71,
+        "totalDistance": 275.63,
         "activityTypes": [
           "Running"
         ]
@@ -1608,6 +1623,11 @@
         {
           "date": "07/6/25",
           "distance": 6.39,
+          "type": "Running"
+        },
+        {
+          "date": "07/7/25",
+          "distance": 5.85,
           "type": "Running"
         }
       ]
@@ -2350,11 +2370,12 @@
     "Alfredo": {
       "name": "Alfredo",
       "stats": {
-        "totalActivities": 83,
-        "totalDistance": 230.85,
+        "totalActivities": 86,
+        "totalDistance": 237.02,
         "activityTypes": [
           "Walking",
-          "Running"
+          "Running",
+          "Cycling"
         ]
       },
       "activities": [
@@ -2772,13 +2793,28 @@
           "date": "06/9/25",
           "distance": 1.89,
           "type": "Running"
+        },
+        {
+          "date": "07/5/25",
+          "distance": null,
+          "type": "Cycling"
+        },
+        {
+          "date": "07/5/25",
+          "distance": 0.34,
+          "type": "Walking"
+        },
+        {
+          "date": "07/7/25",
+          "distance": 5.83,
+          "type": "Running"
         }
       ]
     }
   },
   "metadata": {
-    "lastUpdated": "2025-07-07T01:02:24.425445",
+    "lastUpdated": "2025-07-08T00:58:27.824661",
     "totalRunners": 11,
-    "totalActivities": 528
+    "totalActivities": 535
   }
 }
