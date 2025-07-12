@@ -802,8 +802,8 @@
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 50,
-        "totalDistance": 156.12,
+        "totalActivities": 51,
+        "totalDistance": 157.34,
         "activityTypes": [
           "Running"
         ]
@@ -1058,6 +1058,11 @@
           "date": "06/9/25",
           "distance": 1.55,
           "type": "Running"
+        },
+        {
+          "date": "07/11/25",
+          "distance": 1.22,
+          "type": "Running"
         }
       ]
     },
@@ -1067,9 +1072,9 @@
         "totalActivities": 44,
         "totalDistance": 96.46,
         "activityTypes": [
-          "Running",
+          "Hiking",
           "Walking",
-          "Hiking"
+          "Running"
         ]
       },
       "activities": [
@@ -1298,8 +1303,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 71,
-        "totalDistance": 275.63,
+        "totalActivities": 72,
+        "totalDistance": 279.3,
         "activityTypes": [
           "Running"
         ]
@@ -1648,6 +1653,11 @@
         {
           "date": "06/9/25",
           "distance": 2.44,
+          "type": "Running"
+        },
+        {
+          "date": "07/10/25",
+          "distance": 3.67,
           "type": "Running"
         },
         {
@@ -2045,9 +2055,9 @@
         "totalActivities": 69,
         "totalDistance": 121.75,
         "activityTypes": [
-          "Running",
+          "Hiking",
           "Walking",
-          "Hiking"
+          "Running"
         ]
       },
       "activities": [
@@ -2413,8 +2423,8 @@
         "totalActivities": 85,
         "totalDistance": 237.02,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -2847,8 +2857,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-07-11T00:59:44.691853",
+    "lastUpdated": "2025-07-12T01:01:14.507719",
     "totalRunners": 11,
-    "totalActivities": 542
+    "totalActivities": 544
   }
 }
