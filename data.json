@@ -1072,9 +1072,9 @@
         "totalActivities": 44,
         "totalDistance": 96.46,
         "activityTypes": [
-          "Hiking",
           "Running",
-          "Walking"
+          "Walking",
+          "Hiking"
         ]
       },
       "activities": [
@@ -1303,8 +1303,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 72,
-        "totalDistance": 279.3,
+        "totalActivities": 74,
+        "totalDistance": 286.05,
         "activityTypes": [
           "Running"
         ]
@@ -1658,6 +1658,16 @@
         {
           "date": "07/10/25",
           "distance": 3.67,
+          "type": "Running"
+        },
+        {
+          "date": "07/13/25",
+          "distance": 3.68,
+          "type": "Running"
+        },
+        {
+          "date": "07/14/25",
+          "distance": 3.07,
           "type": "Running"
         },
         {
@@ -2055,9 +2065,9 @@
         "totalActivities": 69,
         "totalDistance": 121.75,
         "activityTypes": [
-          "Hiking",
           "Running",
-          "Walking"
+          "Walking",
+          "Hiking"
         ]
       },
       "activities": [
@@ -2420,8 +2430,8 @@
     "Alfredo": {
       "name": "Alfredo",
       "stats": {
-        "totalActivities": 85,
-        "totalDistance": 237.02,
+        "totalActivities": 93,
+        "totalDistance": 247.06,
         "activityTypes": [
           "Running",
           "Walking"
@@ -2844,6 +2854,31 @@
           "type": "Running"
         },
         {
+          "date": "07/10/25",
+          "distance": 0.86,
+          "type": "Walking"
+        },
+        {
+          "date": "07/12/25",
+          "distance": 1.07,
+          "type": "Walking"
+        },
+        {
+          "date": "07/12/25",
+          "distance": 0.5,
+          "type": "Walking"
+        },
+        {
+          "date": "07/12/25",
+          "distance": 2.03,
+          "type": "Walking"
+        },
+        {
+          "date": "07/14/25",
+          "distance": 3.26,
+          "type": "Running"
+        },
+        {
           "date": "07/5/25",
           "distance": 0.34,
           "type": "Walking"
@@ -2852,13 +2887,28 @@
           "date": "07/7/25",
           "distance": 5.83,
           "type": "Running"
+        },
+        {
+          "date": "07/8/25",
+          "distance": 1.36,
+          "type": "Walking"
+        },
+        {
+          "date": "07/9/25",
+          "distance": 0.4,
+          "type": "Walking"
+        },
+        {
+          "date": "07/9/25",
+          "distance": 0.56,
+          "type": "Walking"
         }
       ]
     }
   },
   "metadata": {
-    "lastUpdated": "2025-07-14T01:02:52.372751",
+    "lastUpdated": "2025-07-15T01:01:58.898504",
     "totalRunners": 11,
-    "totalActivities": 544
+    "totalActivities": 554
   }
 }
