@@ -3,8 +3,8 @@
     "Bruce": {
       "name": "Bruce",
       "stats": {
-        "totalActivities": 83,
-        "totalDistance": 108.36,
+        "totalActivities": 85,
+        "totalDistance": 112.29,
         "activityTypes": [
           "Running"
         ]
@@ -387,12 +387,22 @@
         },
         {
           "date": "07/15/25",
-          "distance": 1.21,
+          "distance": 1.27,
           "type": "Running"
         },
         {
-          "date": "07/15/25",
-          "distance": 1.27,
+          "date": "07/17/25",
+          "distance": 0.4,
+          "type": "Running"
+        },
+        {
+          "date": "07/17/25",
+          "distance": 0.86,
+          "type": "Running"
+        },
+        {
+          "date": "07/17/25",
+          "distance": 3.88,
           "type": "Running"
         },
         {
@@ -430,8 +440,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 72,
-        "totalDistance": 168.6,
+        "totalActivities": 73,
+        "totalDistance": 171.43,
         "activityTypes": [
           "Running"
         ]
@@ -778,6 +788,11 @@
           "type": "Running"
         },
         {
+          "date": "07/18/25",
+          "distance": 2.83,
+          "type": "Running"
+        },
+        {
           "date": "07/7/25",
           "distance": 1.51,
           "type": "Running"
@@ -1073,8 +1088,8 @@
         "totalDistance": 98.55,
         "activityTypes": [
           "Running",
-          "Walking",
-          "Hiking"
+          "Hiking",
+          "Walking"
         ]
       },
       "activities": [
@@ -1308,8 +1323,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 74,
-        "totalDistance": 286.05,
+        "totalActivities": 75,
+        "totalDistance": 293.64,
         "activityTypes": [
           "Running"
         ]
@@ -1676,6 +1691,11 @@
           "type": "Running"
         },
         {
+          "date": "07/17/25",
+          "distance": 7.59,
+          "type": "Running"
+        },
+        {
           "date": "07/6/25",
           "distance": 6.39,
           "type": "Running"
@@ -1844,8 +1864,8 @@
     "Tin": {
       "name": "Tin",
       "stats": {
-        "totalActivities": 45,
-        "totalDistance": 74.17,
+        "totalActivities": 47,
+        "totalDistance": 78.58,
         "activityTypes": [
           "Running",
           "Walking"
@@ -2068,6 +2088,16 @@
           "type": "Walking"
         },
         {
+          "date": "07/17/25",
+          "distance": 2.53,
+          "type": "Walking"
+        },
+        {
+          "date": "07/18/25",
+          "distance": 1.88,
+          "type": "Walking"
+        },
+        {
           "date": "07/2/25",
           "distance": 1.3,
           "type": "Walking"
@@ -2086,8 +2116,8 @@
         "totalDistance": 121.75,
         "activityTypes": [
           "Running",
-          "Walking",
-          "Hiking"
+          "Hiking",
+          "Walking"
         ]
       },
       "activities": [
@@ -2932,8 +2962,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-07-18T01:00:36.214021",
+    "lastUpdated": "2025-07-19T00:59:17.920340",
     "totalRunners": 11,
-    "totalActivities": 559
+    "totalActivities": 565
   }
 }
