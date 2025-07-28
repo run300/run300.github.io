@@ -3,8 +3,8 @@
     "Bruce": {
       "name": "Bruce",
       "stats": {
-        "totalActivities": 87,
-        "totalDistance": 114.83,
+        "totalActivities": 86,
+        "totalDistance": 113.6,
         "activityTypes": [
           "Running"
         ]
@@ -422,11 +422,6 @@
         },
         {
           "date": "07/23/25",
-          "distance": 1.23,
-          "type": "Running"
-        },
-        {
-          "date": "07/23/25",
           "distance": 1.26,
           "type": "Running"
         },
@@ -450,8 +445,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 75,
-        "totalDistance": 177.64,
+        "totalActivities": 76,
+        "totalDistance": 178.81,
         "activityTypes": [
           "Running"
         ]
@@ -810,6 +805,11 @@
         {
           "date": "07/22/25",
           "distance": 3.49,
+          "type": "Running"
+        },
+        {
+          "date": "07/27/25",
+          "distance": 1.17,
           "type": "Running"
         },
         {
@@ -1353,8 +1353,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 78,
-        "totalDistance": 300.99,
+        "totalActivities": 79,
+        "totalDistance": 310.67,
         "activityTypes": [
           "Running"
         ]
@@ -1741,6 +1741,11 @@
           "type": "Running"
         },
         {
+          "date": "07/27/25",
+          "distance": 9.68,
+          "type": "Running"
+        },
+        {
           "date": "07/6/25",
           "distance": 6.39,
           "type": "Running"
@@ -1755,8 +1760,8 @@
     "AutumnBreeze": {
       "name": "AutumnBreeze",
       "stats": {
-        "totalActivities": 19,
-        "totalDistance": 23.08,
+        "totalActivities": 20,
+        "totalDistance": 24.21,
         "activityTypes": [
           "Running"
         ]
@@ -1856,14 +1861,19 @@
           "date": "06/26/25",
           "distance": 1.17,
           "type": "Running"
+        },
+        {
+          "date": "07/27/25",
+          "distance": 1.13,
+          "type": "Running"
         }
       ]
     },
     "Jon": {
       "name": "Jon",
       "stats": {
-        "totalActivities": 8,
-        "totalDistance": 20.12,
+        "totalActivities": 9,
+        "totalDistance": 29.83,
         "activityTypes": [
           "Running"
         ]
@@ -1897,6 +1907,11 @@
         {
           "date": "07/21/25",
           "distance": 2.45,
+          "type": "Running"
+        },
+        {
+          "date": "07/27/25",
+          "distance": 9.71,
           "type": "Running"
         },
         {
@@ -2560,8 +2575,8 @@
     "Alfredo": {
       "name": "Alfredo",
       "stats": {
-        "totalActivities": 89,
-        "totalDistance": 244.96,
+        "totalActivities": 92,
+        "totalDistance": 256.16,
         "activityTypes": [
           "Walking",
           "Running"
@@ -2999,6 +3014,21 @@
           "type": "Running"
         },
         {
+          "date": "07/23/25",
+          "distance": 1.53,
+          "type": "Walking"
+        },
+        {
+          "date": "07/26/25",
+          "distance": 0.64,
+          "type": "Walking"
+        },
+        {
+          "date": "07/27/25",
+          "distance": 9.03,
+          "type": "Running"
+        },
+        {
           "date": "07/7/25",
           "distance": 5.83,
           "type": "Running"
@@ -3017,8 +3047,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-07-27T01:06:44.564863",
+    "lastUpdated": "2025-07-28T01:05:40.200374",
     "totalRunners": 11,
-    "totalActivities": 576
+    "totalActivities": 582
   }
 }
