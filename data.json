@@ -445,8 +445,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 77,
-        "totalDistance": 181.59,
+        "totalActivities": 78,
+        "totalDistance": 184.52,
         "activityTypes": [
           "Running"
         ]
@@ -818,6 +818,11 @@
           "type": "Running"
         },
         {
+          "date": "07/29/25",
+          "distance": 2.93,
+          "type": "Running"
+        },
+        {
           "date": "07/7/25",
           "distance": 1.51,
           "type": "Running"
@@ -1113,8 +1118,8 @@
         "totalDistance": 102.79,
         "activityTypes": [
           "Running",
-          "Hiking",
-          "Walking"
+          "Walking",
+          "Hiking"
         ]
       },
       "activities": [
@@ -2216,8 +2221,8 @@
         "totalDistance": 121.75,
         "activityTypes": [
           "Running",
-          "Hiking",
-          "Walking"
+          "Walking",
+          "Hiking"
         ]
       },
       "activities": [
@@ -3052,8 +3057,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-07-29T01:07:21.740089",
+    "lastUpdated": "2025-07-30T01:02:17.103456",
     "totalRunners": 11,
-    "totalActivities": 583
+    "totalActivities": 584
   }
 }
