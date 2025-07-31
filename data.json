@@ -445,8 +445,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 78,
-        "totalDistance": 184.52,
+        "totalActivities": 79,
+        "totalDistance": 186.65,
         "activityTypes": [
           "Running"
         ]
@@ -823,6 +823,11 @@
           "type": "Running"
         },
         {
+          "date": "07/30/25",
+          "distance": 2.13,
+          "type": "Running"
+        },
+        {
           "date": "07/7/25",
           "distance": 1.51,
           "type": "Running"
@@ -1117,9 +1122,9 @@
         "totalActivities": 47,
         "totalDistance": 102.79,
         "activityTypes": [
-          "Running",
+          "Hiking",
           "Walking",
-          "Hiking"
+          "Running"
         ]
       },
       "activities": [
@@ -1363,8 +1368,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 79,
-        "totalDistance": 310.67,
+        "totalActivities": 80,
+        "totalDistance": 314.36,
         "activityTypes": [
           "Running"
         ]
@@ -1756,6 +1761,11 @@
           "type": "Running"
         },
         {
+          "date": "07/30/25",
+          "distance": 3.69,
+          "type": "Running"
+        },
+        {
           "date": "07/6/25",
           "distance": 6.39,
           "type": "Running"
@@ -1942,8 +1952,8 @@
         "totalActivities": 53,
         "totalDistance": 86.73,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -2220,9 +2230,9 @@
         "totalActivities": 69,
         "totalDistance": 121.75,
         "activityTypes": [
-          "Running",
+          "Hiking",
           "Walking",
-          "Hiking"
+          "Running"
         ]
       },
       "activities": [
@@ -2588,8 +2598,8 @@
         "totalActivities": 92,
         "totalDistance": 256.16,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -3057,8 +3067,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-07-30T01:02:17.103456",
+    "lastUpdated": "2025-07-31T01:02:05.963625",
     "totalRunners": 11,
-    "totalActivities": 584
+    "totalActivities": 586
   }
 }
