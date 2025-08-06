@@ -3,8 +3,8 @@
     "Bruce": {
       "name": "Bruce",
       "stats": {
-        "totalActivities": 87,
-        "totalDistance": 115.28,
+        "totalActivities": 86,
+        "totalDistance": 113.6,
         "activityTypes": [
           "Running"
         ]
@@ -439,19 +439,14 @@
           "date": "07/8/25",
           "distance": 1.25,
           "type": "Running"
-        },
-        {
-          "date": "08/3/25",
-          "distance": 1.68,
-          "type": "Running"
         }
       ]
     },
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 81,
-        "totalDistance": 190.53,
+        "totalActivities": 82,
+        "totalDistance": 192.74,
         "activityTypes": [
           "Running"
         ]
@@ -861,14 +856,19 @@
           "date": "08/3/25",
           "distance": 2.21,
           "type": "Running"
+        },
+        {
+          "date": "08/5/25",
+          "distance": 2.21,
+          "type": "Running"
         }
       ]
     },
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 51,
-        "totalDistance": 157.34,
+        "totalActivities": 52,
+        "totalDistance": 160.25,
         "activityTypes": [
           "Running"
         ]
@@ -1127,6 +1127,11 @@
         {
           "date": "07/11/25",
           "distance": 1.22,
+          "type": "Running"
+        },
+        {
+          "date": "08/5/25",
+          "distance": 2.91,
           "type": "Running"
         }
       ]
@@ -1969,8 +1974,8 @@
     "Tin": {
       "name": "Tin",
       "stats": {
-        "totalActivities": 53,
-        "totalDistance": 86.73,
+        "totalActivities": 54,
+        "totalDistance": 88.95,
         "activityTypes": [
           "Walking",
           "Running"
@@ -2241,14 +2246,19 @@
           "date": "07/9/25",
           "distance": 2.32,
           "type": "Walking"
+        },
+        {
+          "date": "08/4/25",
+          "distance": 2.22,
+          "type": "Walking"
         }
       ]
     },
     "Muscles": {
       "name": "Muscles",
       "stats": {
-        "totalActivities": 73,
-        "totalDistance": 126.73,
+        "totalActivities": 74,
+        "totalDistance": 128.7,
         "activityTypes": [
           "Walking",
           "Running",
@@ -2619,6 +2629,11 @@
         {
           "date": "08/4/25",
           "distance": 1.0,
+          "type": "Running"
+        },
+        {
+          "date": "08/5/25",
+          "distance": 1.97,
           "type": "Running"
         }
       ]
@@ -3107,8 +3122,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-08-05T01:03:57.928811",
+    "lastUpdated": "2025-08-06T01:02:54.442389",
     "totalRunners": 11,
-    "totalActivities": 594
+    "totalActivities": 597
   }
 }
