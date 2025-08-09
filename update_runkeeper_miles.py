@@ -9,6 +9,7 @@ from gcp_secret import gcp_get_secret, gcp_update_secret
 
 ESSENTIAL_COOKIE_NAME = "checker"
 TARGET_URL = "runkeeper.com"
+TRACKED_ACTIVITIES = ["running", "hiking", "walking", "trail running"]
 
 
 def cookie_to_dict(cookie):
@@ -143,24 +144,32 @@ def scrape_activities(page, user_id, months):
                 'div[role="tabpanel"][aria-hidden="false"] ul', state="attached"
             )
 
-            activity_elements = page.query_selector_all(
+            monthly_activies = page.query_selector_all(
                 'div[role="tabpanel"][aria-hidden="false"] ul > li'
             )
 
-            if not activity_elements:
+            if not monthly_activies:
                 print(f"No activities found for {month}")
                 continue
 
-            for activity in activity_elements:
+            for activity in monthly_activies:
                 try:
                     # Extract data in a single pass
                     date_element = activity.query_selector("a span.startDate")
                     distance_element = activity.query_selector("a span.unitDistance")
 
                     if date_element and distance_element:
+                        date_element.click()
+                        page.wait_for_timeout(2000)  # Wait for content to load
+
                         date_text = date_element.text_content().strip()
                         distance_text = distance_element.text_content().strip()
-
+                        duration_text = page.query_selector(
+                            "#totalDuration > h1 > span"
+                        ).inner_text()
+                        average_pace_text = page.query_selector(
+                            "#averagePace > h1 > span"
+                        ).inner_text()
                         # Get activity type by getting all text and removing known parts
                         all_content = activity.text_content()
                         activity_type = (
@@ -176,8 +185,11 @@ def scrape_activities(page, user_id, months):
                                 "date": date_text + "/25",
                                 "distance": distance_float,
                                 "type": activity_type,
+                                "duration": duration_text,
+                                "pace": average_pace_text,
                             }
                         )
+                        print(f"Activities: {activities}")
                 except Exception as e:
                     print(f"Error processing activity: {e}")
                     continue
@@ -259,7 +271,7 @@ def main():
         page = context.new_page()
 
         # Handle cookie modal once at the start
-        page.goto(f"https://runkeeper.com")
+        page.goto("https://runkeeper.com")
         handle_cookie_modal(page)
 
         try:
@@ -279,16 +291,16 @@ def main():
 if __name__ == "__main__":
     spartans = {
         "3458344072": "Bruce",
-        "1703449362": "PT",
-        "499228564": "Scotch",
-        "1306204356": "Trinspiration",
-        "2522499234": "Moose",
-        "2920829518": "AutumnBreeze",
-        "2953059004": "Jon",
-        "2948464110": "Tin",
-        "2966454388": "Muscles",
-        "3338995094": "Gato",
-        "3486035198": "Alfredo",
+        # "1703449362": "PT",
+        # "499228564": "Scotch",
+        # "1306204356": "Trinspiration",
+        # "2522499234": "Moose",
+        # "2920829518": "AutumnBreeze",
+        # "2953059004": "Jon",
+        # "2948464110": "Tin",
+        # "2966454388": "Muscles",
+        # "3338995094": "Gato",
+        # "3486035198": "Alfredo",
         # KnockKnck
     }
     months = get_months_until_now()
