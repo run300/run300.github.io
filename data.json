@@ -470,8 +470,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 86,
-        "totalDistance": 202.86,
+        "totalActivities": 87,
+        "totalDistance": 205.08,
         "activityTypes": [
           "Running",
           "Other"
@@ -907,6 +907,11 @@
           "date": "08/7/25",
           "distance": 4.34,
           "type": "Other"
+        },
+        {
+          "date": "08/8/25",
+          "distance": 2.22,
+          "type": "Running"
         }
       ]
     },
@@ -1193,9 +1198,9 @@
         "totalActivities": 48,
         "totalDistance": 105.75,
         "activityTypes": [
-          "Hiking",
+          "Walking",
           "Running",
-          "Walking"
+          "Hiking"
         ]
       },
       "activities": [
@@ -2043,8 +2048,8 @@
         "totalActivities": 54,
         "totalDistance": 88.95,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -2326,9 +2331,9 @@
         "totalActivities": 76,
         "totalDistance": 133.21,
         "activityTypes": [
-          "Hiking",
+          "Walking",
           "Running",
-          "Walking"
+          "Hiking"
         ]
       },
       "activities": [
@@ -2729,8 +2734,8 @@
         "totalActivities": 96,
         "totalDistance": 261.34,
         "activityTypes": [
-          "Running",
-          "Walking"
+          "Walking",
+          "Running"
         ]
       },
       "activities": [
@@ -3218,8 +3223,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-08-08T01:03:08.308857",
+    "lastUpdated": "2025-08-09T00:57:47.538819",
     "totalRunners": 11,
-    "totalActivities": 616
+    "totalActivities": 617
   }
 }
