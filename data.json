@@ -2045,8 +2045,8 @@
     "Tin": {
       "name": "Tin",
       "stats": {
-        "totalActivities": 54,
-        "totalDistance": 88.95,
+        "totalActivities": 55,
+        "totalDistance": 90.3,
         "activityTypes": [
           "Walking",
           "Running"
@@ -2321,6 +2321,11 @@
         {
           "date": "08/4/25",
           "distance": 2.22,
+          "type": "Walking"
+        },
+        {
+          "date": "08/8/25",
+          "distance": 1.35,
           "type": "Walking"
         }
       ]
@@ -3223,8 +3228,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-08-09T00:57:47.538819",
+    "lastUpdated": "2025-08-10T01:06:09.074614",
     "totalRunners": 11,
-    "totalActivities": 617
+    "totalActivities": 618
   }
 }
