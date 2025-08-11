@@ -473,8 +473,8 @@
         "totalActivities": 87,
         "totalDistance": 205.08,
         "activityTypes": [
-          "Running",
-          "Other"
+          "Other",
+          "Running"
         ]
       },
       "activities": [
@@ -1198,9 +1198,9 @@
         "totalActivities": 48,
         "totalDistance": 105.75,
         "activityTypes": [
-          "Walking",
           "Running",
-          "Hiking"
+          "Hiking",
+          "Walking"
         ]
       },
       "activities": [
@@ -2048,8 +2048,8 @@
         "totalActivities": 55,
         "totalDistance": 90.3,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -2336,9 +2336,9 @@
         "totalActivities": 76,
         "totalDistance": 133.21,
         "activityTypes": [
-          "Walking",
           "Running",
-          "Hiking"
+          "Hiking",
+          "Walking"
         ]
       },
       "activities": [
@@ -2736,11 +2736,11 @@
     "Alfredo": {
       "name": "Alfredo",
       "stats": {
-        "totalActivities": 96,
-        "totalDistance": 261.34,
+        "totalActivities": 99,
+        "totalDistance": 268.73,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -3221,15 +3221,30 @@
         },
         {
           "date": "08/6/25",
+          "distance": 2.17,
+          "type": "Walking"
+        },
+        {
+          "date": "08/6/25",
           "distance": 0.42,
+          "type": "Walking"
+        },
+        {
+          "date": "08/9/25",
+          "distance": 1.6,
+          "type": "Walking"
+        },
+        {
+          "date": "08/9/25",
+          "distance": 3.62,
           "type": "Walking"
         }
       ]
     }
   },
   "metadata": {
-    "lastUpdated": "2025-08-10T01:06:09.074614",
+    "lastUpdated": "2025-08-11T01:03:58.858334",
     "totalRunners": 11,
-    "totalActivities": 618
+    "totalActivities": 621
   }
 }
