@@ -3,8 +3,8 @@
     "Bruce": {
       "name": "Bruce",
       "stats": {
-        "totalActivities": 91,
-        "totalDistance": 119.96,
+        "totalActivities": 89,
+        "totalDistance": 117.65,
         "activityTypes": [
           "Running"
         ]
@@ -447,17 +447,7 @@
         },
         {
           "date": "08/5/25",
-          "distance": 1.03,
-          "type": "Running"
-        },
-        {
-          "date": "08/5/25",
           "distance": 1.12,
-          "type": "Running"
-        },
-        {
-          "date": "08/6/25",
-          "distance": 1.28,
           "type": "Running"
         },
         {
@@ -470,8 +460,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 87,
-        "totalDistance": 205.08,
+        "totalActivities": 88,
+        "totalDistance": 207.47,
         "activityTypes": [
           "Other",
           "Running"
@@ -879,6 +869,11 @@
           "type": "Running"
         },
         {
+          "date": "08/11/25",
+          "distance": 2.39,
+          "type": "Running"
+        },
+        {
           "date": "08/3/25",
           "distance": 2.21,
           "type": "Running"
@@ -1198,8 +1193,8 @@
         "totalActivities": 48,
         "totalDistance": 105.75,
         "activityTypes": [
-          "Running",
           "Hiking",
+          "Running",
           "Walking"
         ]
       },
@@ -2336,8 +2331,8 @@
         "totalActivities": 76,
         "totalDistance": 133.21,
         "activityTypes": [
-          "Running",
           "Hiking",
+          "Running",
           "Walking"
         ]
       },
@@ -2736,8 +2731,8 @@
     "Alfredo": {
       "name": "Alfredo",
       "stats": {
-        "totalActivities": 99,
-        "totalDistance": 268.73,
+        "totalActivities": 79,
+        "totalDistance": 238.93,
         "activityTypes": [
           "Running",
           "Walking"
@@ -3000,18 +2995,8 @@
           "type": "Walking"
         },
         {
-          "date": "06/13/25",
-          "distance": 2.89,
-          "type": "Walking"
-        },
-        {
           "date": "06/14/25",
           "distance": 2.75,
-          "type": "Walking"
-        },
-        {
-          "date": "06/16/25",
-          "distance": 2.17,
           "type": "Walking"
         },
         {
@@ -3055,31 +3040,6 @@
           "type": "Walking"
         },
         {
-          "date": "06/21/25",
-          "distance": 1.17,
-          "type": "Walking"
-        },
-        {
-          "date": "06/21/25",
-          "distance": 1.37,
-          "type": "Walking"
-        },
-        {
-          "date": "06/22/25",
-          "distance": 1.13,
-          "type": "Walking"
-        },
-        {
-          "date": "06/22/25",
-          "distance": 1.23,
-          "type": "Walking"
-        },
-        {
-          "date": "06/22/25",
-          "distance": 1.19,
-          "type": "Walking"
-        },
-        {
           "date": "06/23/25",
           "distance": 2.66,
           "type": "Walking"
@@ -3105,23 +3065,8 @@
           "type": "Walking"
         },
         {
-          "date": "06/27/25",
-          "distance": 2.1,
-          "type": "Walking"
-        },
-        {
-          "date": "06/28/25",
-          "distance": 1.22,
-          "type": "Walking"
-        },
-        {
           "date": "06/29/25",
           "distance": 3.32,
-          "type": "Walking"
-        },
-        {
-          "date": "06/29/25",
-          "distance": 1.87,
           "type": "Walking"
         },
         {
@@ -3160,16 +3105,6 @@
           "type": "Running"
         },
         {
-          "date": "07/12/25",
-          "distance": 1.07,
-          "type": "Walking"
-        },
-        {
-          "date": "07/12/25",
-          "distance": 2.03,
-          "type": "Walking"
-        },
-        {
           "date": "07/14/25",
           "distance": 3.26,
           "type": "Running"
@@ -3177,16 +3112,6 @@
         {
           "date": "07/23/25",
           "distance": 1.53,
-          "type": "Walking"
-        },
-        {
-          "date": "07/26/25",
-          "distance": 0.64,
-          "type": "Walking"
-        },
-        {
-          "date": "07/27/25",
-          "distance": 1.66,
           "type": "Walking"
         },
         {
@@ -3200,21 +3125,6 @@
           "type": "Running"
         },
         {
-          "date": "07/8/25",
-          "distance": 1.36,
-          "type": "Walking"
-        },
-        {
-          "date": "07/9/25",
-          "distance": 0.56,
-          "type": "Walking"
-        },
-        {
-          "date": "08/2/25",
-          "distance": 0.5,
-          "type": "Walking"
-        },
-        {
           "date": "08/6/25",
           "distance": 2.6,
           "type": "Running"
@@ -3223,28 +3133,13 @@
           "date": "08/6/25",
           "distance": 2.17,
           "type": "Walking"
-        },
-        {
-          "date": "08/6/25",
-          "distance": 0.42,
-          "type": "Walking"
-        },
-        {
-          "date": "08/9/25",
-          "distance": 1.6,
-          "type": "Walking"
-        },
-        {
-          "date": "08/9/25",
-          "distance": 3.62,
-          "type": "Walking"
         }
       ]
     }
   },
   "metadata": {
-    "lastUpdated": "2025-08-11T01:03:58.858334",
+    "lastUpdated": "2025-08-12T00:57:59.843669",
     "totalRunners": 11,
-    "totalActivities": 621
+    "totalActivities": 600
   }
 }
