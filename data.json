@@ -2094,8 +2094,8 @@
         "totalActivities": 55,
         "totalDistance": 90.3,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -2797,8 +2797,8 @@
     "Alfredo": {
       "name": "Alfredo",
       "stats": {
-        "totalActivities": 67,
-        "totalDistance": 201.74,
+        "totalActivities": 79,
+        "totalDistance": 238.93,
         "activityTypes": [
           "Walking",
           "Running"
@@ -2898,6 +2898,66 @@
         {
           "date": "02/8/25",
           "distance": 5.05,
+          "type": "Running"
+        },
+        {
+          "date": "03/1/25",
+          "distance": 5.02,
+          "type": "Running"
+        },
+        {
+          "date": "03/16/25",
+          "distance": 6.0,
+          "type": "Running"
+        },
+        {
+          "date": "03/17/25",
+          "distance": 3.25,
+          "type": "Running"
+        },
+        {
+          "date": "03/19/25",
+          "distance": 2.6,
+          "type": "Running"
+        },
+        {
+          "date": "03/24/25",
+          "distance": 3.12,
+          "type": "Running"
+        },
+        {
+          "date": "03/27/25",
+          "distance": 1.75,
+          "type": "Running"
+        },
+        {
+          "date": "03/28/25",
+          "distance": 4.22,
+          "type": "Running"
+        },
+        {
+          "date": "03/29/25",
+          "distance": 0.57,
+          "type": "Walking"
+        },
+        {
+          "date": "03/29/25",
+          "distance": 1.59,
+          "type": "Running"
+        },
+        {
+          "date": "03/6/25",
+          "distance": 3.02,
+          "type": "Running"
+        },
+        {
+          "date": "03/7/25",
+          "distance": 2.51,
+          "type": "Running"
+        },
+        {
+          "date": "03/8/25",
+          "distance": 3.54,
           "type": "Running"
         },
         {
@@ -3144,8 +3204,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-08-15T01:00:20.151524",
+    "lastUpdated": "2025-08-16T00:57:08.141220",
     "totalRunners": 11,
-    "totalActivities": 601
+    "totalActivities": 613
   }
 }
