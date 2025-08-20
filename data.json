@@ -4,7 +4,7 @@
       "name": "Bruce",
       "stats": {
         "totalActivities": 92,
-        "totalDistance": 125.44,
+        "totalDistance": 126.64,
         "activityTypes": [
           "Running"
         ]
@@ -442,17 +442,17 @@
         },
         {
           "date": "08/12/25",
-          "distance": 1.15,
-          "type": "Running"
-        },
-        {
-          "date": "08/12/25",
           "distance": 1.14,
           "type": "Running"
         },
         {
           "date": "08/13/25",
           "distance": 5.5,
+          "type": "Running"
+        },
+        {
+          "date": "08/19/25",
+          "distance": 2.35,
           "type": "Running"
         },
         {
@@ -475,8 +475,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 91,
-        "totalDistance": 214.38,
+        "totalActivities": 92,
+        "totalDistance": 217.2,
         "activityTypes": [
           "Running"
         ]
@@ -908,6 +908,11 @@
           "type": "Running"
         },
         {
+          "date": "08/19/25",
+          "distance": 2.82,
+          "type": "Running"
+        },
+        {
           "date": "08/3/25",
           "distance": 2.21,
           "type": "Running"
@@ -1237,9 +1242,9 @@
         "totalActivities": 49,
         "totalDistance": 120.49,
         "activityTypes": [
-          "Walking",
+          "Hiking",
           "Running",
-          "Hiking"
+          "Walking"
         ]
       },
       "activities": [
@@ -1493,8 +1498,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 84,
-        "totalDistance": 327.23,
+        "totalActivities": 85,
+        "totalDistance": 329.31,
         "activityTypes": [
           "Running"
         ]
@@ -1916,6 +1921,11 @@
           "type": "Running"
         },
         {
+          "date": "08/19/25",
+          "distance": 2.08,
+          "type": "Running"
+        },
+        {
           "date": "08/6/25",
           "distance": 2.89,
           "type": "Running"
@@ -2045,8 +2055,8 @@
         "totalActivities": 10,
         "totalDistance": 30.4,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -2105,8 +2115,8 @@
     "Tin": {
       "name": "Tin",
       "stats": {
-        "totalActivities": 55,
-        "totalDistance": 90.3,
+        "totalActivities": 57,
+        "totalDistance": 95.18,
         "activityTypes": [
           "Running",
           "Walking"
@@ -2379,6 +2389,16 @@
           "type": "Walking"
         },
         {
+          "date": "08/18/25",
+          "distance": 2.26,
+          "type": "Walking"
+        },
+        {
+          "date": "08/19/25",
+          "distance": 2.62,
+          "type": "Walking"
+        },
+        {
           "date": "08/4/25",
           "distance": 2.22,
           "type": "Walking"
@@ -2396,9 +2416,9 @@
         "totalActivities": 80,
         "totalDistance": 139.58,
         "activityTypes": [
-          "Walking",
+          "Hiking",
           "Running",
-          "Hiking"
+          "Walking"
         ]
       },
       "activities": [
@@ -2816,11 +2836,11 @@
     "Alfredo": {
       "name": "Alfredo",
       "stats": {
-        "totalActivities": 79,
-        "totalDistance": 238.93,
+        "totalActivities": 78,
+        "totalDistance": 237.4,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -3195,11 +3215,6 @@
           "type": "Running"
         },
         {
-          "date": "07/23/25",
-          "distance": 1.53,
-          "type": "Walking"
-        },
-        {
           "date": "07/27/25",
           "distance": 9.03,
           "type": "Running"
@@ -3223,8 +3238,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-08-19T00:58:05.947283",
+    "lastUpdated": "2025-08-20T00:55:52.297269",
     "totalRunners": 11,
-    "totalActivities": 617
+    "totalActivities": 620
   }
 }
