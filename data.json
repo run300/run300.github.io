@@ -480,8 +480,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 92,
-        "totalDistance": 217.2,
+        "totalActivities": 93,
+        "totalDistance": 218.32,
         "activityTypes": [
           "Running"
         ]
@@ -918,6 +918,11 @@
           "type": "Running"
         },
         {
+          "date": "08/21/25",
+          "distance": 1.12,
+          "type": "Running"
+        },
+        {
           "date": "08/3/25",
           "distance": 2.21,
           "type": "Running"
@@ -1247,8 +1252,8 @@
         "totalActivities": 49,
         "totalDistance": 120.49,
         "activityTypes": [
-          "Hiking",
           "Walking",
+          "Hiking",
           "Running"
         ]
       },
@@ -1503,8 +1508,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 85,
-        "totalDistance": 329.31,
+        "totalActivities": 86,
+        "totalDistance": 333.07,
         "activityTypes": [
           "Running"
         ]
@@ -1928,6 +1933,11 @@
         {
           "date": "08/19/25",
           "distance": 2.08,
+          "type": "Running"
+        },
+        {
+          "date": "08/21/25",
+          "distance": 3.76,
           "type": "Running"
         },
         {
@@ -2421,8 +2431,8 @@
         "totalActivities": 80,
         "totalDistance": 139.58,
         "activityTypes": [
-          "Hiking",
           "Walking",
+          "Hiking",
           "Running"
         ]
       },
@@ -3243,8 +3253,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-08-21T00:55:09.764481",
+    "lastUpdated": "2025-08-22T00:56:10.951860",
     "totalRunners": 11,
-    "totalActivities": 621
+    "totalActivities": 623
   }
 }
