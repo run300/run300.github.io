@@ -1254,12 +1254,12 @@
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 49,
-        "totalDistance": 120.49,
+        "totalActivities": 50,
+        "totalDistance": 122.68,
         "activityTypes": [
-          "Walking",
           "Hiking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -1504,6 +1504,11 @@
           "type": "Walking"
         },
         {
+          "date": "08/24/25",
+          "distance": 2.19,
+          "type": "Walking"
+        },
+        {
           "date": "08/6/25",
           "distance": 2.96,
           "type": "Walking"
@@ -1513,8 +1518,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 86,
-        "totalDistance": 333.07,
+        "totalActivities": 87,
+        "totalDistance": 336.76,
         "activityTypes": [
           "Running"
         ]
@@ -1946,6 +1951,11 @@
           "type": "Running"
         },
         {
+          "date": "08/24/25",
+          "distance": 3.69,
+          "type": "Running"
+        },
+        {
           "date": "08/6/25",
           "distance": 2.89,
           "type": "Running"
@@ -2075,8 +2085,8 @@
         "totalActivities": 10,
         "totalDistance": 30.4,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -2138,8 +2148,8 @@
         "totalActivities": 58,
         "totalDistance": 97.15,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -2438,12 +2448,12 @@
     "Muscles": {
       "name": "Muscles",
       "stats": {
-        "totalActivities": 85,
-        "totalDistance": 148.6,
+        "totalActivities": 87,
+        "totalDistance": 151.16,
         "activityTypes": [
-          "Walking",
           "Hiking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -2834,12 +2844,22 @@
         },
         {
           "date": "08/23/25",
+          "distance": 1.12,
+          "type": "Running"
+        },
+        {
+          "date": "08/23/25",
           "distance": 0.43,
           "type": "Running"
         },
         {
           "date": "08/23/25",
           "distance": 0.89,
+          "type": "Running"
+        },
+        {
+          "date": "08/24/25",
+          "distance": 1.44,
           "type": "Running"
         },
         {
@@ -2889,8 +2909,8 @@
         "totalActivities": 78,
         "totalDistance": 237.4,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -3288,8 +3308,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-08-24T01:01:51.600400",
+    "lastUpdated": "2025-08-25T00:58:29.207829",
     "totalRunners": 11,
-    "totalActivities": 630
+    "totalActivities": 634
   }
 }
