@@ -490,8 +490,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 95,
-        "totalDistance": 223.66,
+        "totalActivities": 96,
+        "totalDistance": 225.19,
         "activityTypes": [
           "Running"
         ]
@@ -943,6 +943,11 @@
           "type": "Running"
         },
         {
+          "date": "08/27/25",
+          "distance": 1.53,
+          "type": "Running"
+        },
+        {
           "date": "08/3/25",
           "distance": 2.21,
           "type": "Running"
@@ -1278,8 +1283,8 @@
         "totalDistance": 122.68,
         "activityTypes": [
           "Hiking",
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -1538,8 +1543,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 87,
-        "totalDistance": 336.76,
+        "totalActivities": 88,
+        "totalDistance": 340.42,
         "activityTypes": [
           "Running"
         ]
@@ -1976,6 +1981,11 @@
           "type": "Running"
         },
         {
+          "date": "08/27/25",
+          "distance": 3.66,
+          "type": "Running"
+        },
+        {
           "date": "08/6/25",
           "distance": 2.89,
           "type": "Running"
@@ -2105,8 +2115,8 @@
         "totalActivities": 10,
         "totalDistance": 30.4,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -2472,8 +2482,8 @@
         "totalDistance": 151.16,
         "activityTypes": [
           "Hiking",
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -2929,8 +2939,8 @@
         "totalActivities": 78,
         "totalDistance": 237.4,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -3328,8 +3338,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-08-27T00:55:10.181901",
+    "lastUpdated": "2025-08-28T00:54:28.838210",
     "totalRunners": 11,
-    "totalActivities": 638
+    "totalActivities": 640
   }
 }
