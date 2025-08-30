@@ -510,8 +510,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 96,
-        "totalDistance": 225.19,
+        "totalActivities": 97,
+        "totalDistance": 227.42,
         "activityTypes": [
           "Running"
         ]
@@ -965,6 +965,11 @@
         {
           "date": "08/27/25",
           "distance": 1.53,
+          "type": "Running"
+        },
+        {
+          "date": "08/29/25",
+          "distance": 2.23,
           "type": "Running"
         },
         {
@@ -3358,8 +3363,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-08-29T00:54:31.389912",
+    "lastUpdated": "2025-08-30T00:51:25.126056",
     "totalRunners": 11,
-    "totalActivities": 644
+    "totalActivities": 645
   }
 }
