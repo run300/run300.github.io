@@ -1294,8 +1294,8 @@
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 51,
-        "totalDistance": 125.19,
+        "totalActivities": 52,
+        "totalDistance": 127.96,
         "activityTypes": [
           "Running",
           "Walking",
@@ -1551,6 +1551,11 @@
         {
           "date": "08/30/25",
           "distance": 2.51,
+          "type": "Walking"
+        },
+        {
+          "date": "08/31/25",
+          "distance": 2.77,
           "type": "Walking"
         },
         {
@@ -2503,8 +2508,8 @@
     "Muscles": {
       "name": "Muscles",
       "stats": {
-        "totalActivities": 88,
-        "totalDistance": 151.65,
+        "totalActivities": 89,
+        "totalDistance": 152.25,
         "activityTypes": [
           "Running",
           "Walking",
@@ -2925,6 +2930,11 @@
         {
           "date": "08/3/25",
           "distance": 1.4,
+          "type": "Running"
+        },
+        {
+          "date": "08/30/25",
+          "distance": 0.6,
           "type": "Running"
         },
         {
@@ -3368,8 +3378,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-08-31T00:58:30.460636",
+    "lastUpdated": "2025-09-01T01:04:38.488815",
     "totalRunners": 11,
-    "totalActivities": 646
+    "totalActivities": 648
   }
 }
