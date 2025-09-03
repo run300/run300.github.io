@@ -3,8 +3,8 @@
     "Bruce": {
       "name": "Bruce",
       "stats": {
-        "totalActivities": 97,
-        "totalDistance": 139.7,
+        "totalActivities": 101,
+        "totalDistance": 144.6,
         "activityTypes": [
           "Running"
         ]
@@ -494,14 +494,34 @@
           "date": "08/6/25",
           "distance": 1.25,
           "type": "Running"
+        },
+        {
+          "date": "09/1/25",
+          "distance": 1.35,
+          "type": "Running"
+        },
+        {
+          "date": "09/1/25",
+          "distance": 1.12,
+          "type": "Running"
+        },
+        {
+          "date": "09/2/25",
+          "distance": 1.19,
+          "type": "Running"
+        },
+        {
+          "date": "09/2/25",
+          "distance": 1.24,
+          "type": "Running"
         }
       ]
     },
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 97,
-        "totalDistance": 227.42,
+        "totalActivities": 98,
+        "totalDistance": 229.78,
         "activityTypes": [
           "Running"
         ]
@@ -991,6 +1011,11 @@
           "date": "08/8/25",
           "distance": 2.22,
           "type": "Running"
+        },
+        {
+          "date": "09/2/25",
+          "distance": 2.36,
+          "type": "Running"
         }
       ]
     },
@@ -1294,12 +1319,12 @@
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 52,
-        "totalDistance": 127.96,
+        "totalActivities": 53,
+        "totalDistance": 130.62,
         "activityTypes": [
           "Running",
-          "Walking",
-          "Hiking"
+          "Hiking",
+          "Walking"
         ]
       },
       "activities": [
@@ -1561,6 +1586,11 @@
         {
           "date": "08/6/25",
           "distance": 2.96,
+          "type": "Walking"
+        },
+        {
+          "date": "09/2/25",
+          "distance": 2.66,
           "type": "Walking"
         }
       ]
@@ -2512,8 +2542,8 @@
         "totalDistance": 152.25,
         "activityTypes": [
           "Running",
-          "Walking",
-          "Hiking"
+          "Hiking",
+          "Walking"
         ]
       },
       "activities": [
@@ -3378,8 +3408,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-09-02T00:55:27.252684",
+    "lastUpdated": "2025-09-03T00:51:23.663350",
     "totalRunners": 11,
-    "totalActivities": 648
+    "totalActivities": 654
   }
 }
