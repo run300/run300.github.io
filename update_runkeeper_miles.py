@@ -7,6 +7,7 @@ from pprint import pprint
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import threading
 import time
+from gcp_secret import gcp_get_secret, gcp_update_secret
 
 # ANSI color codes for terminal output
 class Colors:
@@ -540,16 +541,25 @@ def scrape_user_activities(user_id, name, months, cookie):
 
 def main():
     start_time = time.time()
-    
-    # Get cookies from local browser for testing
-    print("Getting cookie from local browser")
-    cookie = get_essential_cookie(TARGET_URL)
-    if not cookie:
-        print("Failed to get essential cookie. Exiting.")
-        return
+        # Try to get cookies from GCP first
+    cookie = gcp_get_secret()
 
-    formatted_cookie = format_cookie_for_playwright(cookie)
-    print("Using cookie from local browser")
+    # If no cookies from GCP, get from browser and update GCP
+    if not cookie:
+        print("Getting cookie from local browser")
+        cookie = get_essential_cookie(TARGET_URL)
+        if not cookie:
+            print("Failed to get essential cookie. Exiting.")
+            return
+
+        # Update GCP with new cookie
+        formatted_cookie = format_cookie_for_playwright(cookie)
+        # gcp_update_secret(formatted_cookie)
+        print("Exported cookie to GCP Secrets")
+    else:
+        print("Using cookie from GCP Secrets")
+        formatted_cookie = format_cookie_for_playwright(cookie)
+        # formatted_cookie = cookie
 
     all_activities = {}
     
