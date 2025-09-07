@@ -8,75 +8,144 @@
   <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3"></script>
   <script
     src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
   <style>
     /* Reset and base styles */
-    body {
-      background-color: #f9fafb;
-      min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-        Helvetica, Arial, sans-serif;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      color: #1f2937;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
     }
 
     .container {
       width: 100%;
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 2rem 1rem;
+      position: relative;
+      z-index: 1;
     }
 
     /* Typography */
     h1 {
-      font-size: 1.875rem;
-      font-weight: 700;
-      text-align: center;
-      color: #1f2937;
+      font-size: 3rem;
+      font-weight: 400;
+      background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin-bottom: 1rem;
+      text-align: center;
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      letter-spacing: -0.02em;
     }
 
     #daysInfo {
       text-align: center;
-      margin-bottom: 1rem;
-      color: #4b5563;
+      margin-bottom: 2rem;
+      color: #1e293b;
       font-weight: 600;
+      font-size: 1.25rem;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     }
 
     /* Chart container */
     .chart-container {
-      background-color: white;
-      padding: 1.5rem;
-      border-radius: 0.75rem;
-      margin-bottom: 1.5rem;
-      box-shadow:
-        0 10px 25px -5px rgba(0, 0, 0, 0.1),
-        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 2rem 2rem 2rem 2rem;
+      border-radius: 24px;
+      margin-bottom: 2rem;
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 8px 32px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       position: relative;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      min-height: fit-content;
     }
+
 
     .chart-wrapper {
       width: 100%;
-      max-width: 1152px;
+      max-width: 1400px;
       margin: 0 auto;
       position: relative;
+      height: 500px;
     }
 
     /* Button */
     button {
-      background-color: #2563eb;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
-      font-weight: 700;
-      padding: 0.5rem 1.5rem;
-      border-radius: 0.5rem;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
       border: none;
       display: block;
       margin: 0 auto;
       cursor: pointer;
-      transition: background-color 0.2s;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
     }
 
     button:hover {
-      background-color: #1d4ed8;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+    }
+
+    button:hover::before {
+      left: 100%;
+    }
+
+    button:active {
+      transform: translateY(0);
     }
 
     button:focus {
@@ -93,16 +162,22 @@
       color: #2563eb;
     }
 
+    .text-purple-600 {
+      color: #7c3aed;
+    }
+
     /* Custom legend styles */
     .legend-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 0 10px;
+      margin: 0 10px 10px 10px;
       padding: 5px 10px;
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.2s ease;
+      flex-shrink: 0;
+      max-width: calc(50% - 20px);
     }
 
     .legend-item:hover {
@@ -113,6 +188,12 @@
       background-color: rgba(0, 0, 0, 0.1);
     }
 
+    #customLegend {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
     .legend-name {
       font-weight: bold;
       margin-bottom: 2px;
@@ -121,6 +202,7 @@
     .legend-total {
       font-size: 0.85em;
       color: #666;
+      margin-bottom: 8px;
     }
 
     /* Gain label styles */
@@ -136,6 +218,320 @@
       text-align: center;
       white-space: nowrap;
     }
+
+    /* Golden 300 mile mark styles */
+    .golden-300-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        #FFD700 20%, 
+        #FFA500 50%, 
+        #FFD700 80%, 
+        transparent 100%);
+      z-index: 5;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+      animation: sparkle 2s ease-in-out infinite;
+    }
+
+    .golden-300-label {
+      position: absolute;
+      background: linear-gradient(45deg, #FFD700, #FFA500);
+      color: #8B4513;
+      font-weight: bold;
+      font-size: 14px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+      z-index: 6;
+      white-space: nowrap;
+      animation: sparkle 2s ease-in-out infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% {
+        opacity: 0.8;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+    }
+
+    /* Achievements Table Styles */
+    .achievements-container {
+      margin-top: 2rem;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 8px 32px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .achievements-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
+      border-radius: 24px 24px 0 0;
+    }
+
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    #achievementsTable {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+      background: transparent;
+    }
+
+    #achievementsTable th {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      color: #1e293b;
+      font-weight: 700;
+      padding: 1rem 0.75rem;
+      text-align: center;
+      border-bottom: 2px solid #cbd5e1;
+      position: sticky;
+      top: 0;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .sortable:hover {
+      background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+    }
+
+    .sortable::after {
+      content: '↕';
+      position: absolute;
+      right: 8px;
+      opacity: 0.5;
+      font-size: 0.75rem;
+    }
+
+    .sortable.asc::after {
+      content: '↑';
+      opacity: 1;
+      color: #3b82f6;
+    }
+
+    .sortable.desc::after {
+      content: '↓';
+      opacity: 1;
+      color: #3b82f6;
+    }
+
+    #achievementsTable td {
+      padding: 0.75rem 0.5rem;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: middle;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    #achievementsTable tr:hover {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      transform: scale(1.01);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    #achievementsTable tr:nth-child(even) {
+      background: rgba(248, 250, 252, 0.5);
+    }
+
+    #achievementsTable tr:nth-child(even):hover {
+      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    }
+
+    .runner-name {
+      font-weight: 700;
+      color: #1e293b;
+      font-size: 1rem;
+    }
+
+    .achievement-value {
+      font-weight: 500;
+      color: #64748b;
+      font-style: italic;
+    }
+
+    .achievement-unit {
+      color: #94a3b8;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .pace-display {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      padding: 0.375rem 0.75rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+      display: inline-block;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    .distance-display {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      color: white;
+      padding: 0.375rem 0.75rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+      display: inline-block;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    .time-display {
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+      color: white;
+      padding: 0.375rem 0.75rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+      display: inline-block;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    .activities-count {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      padding: 0.375rem 0.75rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+      display: inline-block;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .avg-distance-display {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+      padding: 0.375rem 0.75rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+      display: inline-block;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .total-distance-display {
+      background: linear-gradient(135deg, #06b6d4, #0891b2);
+      color: white;
+      padding: 0.375rem 0.75rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
+      display: inline-block;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem 0.5rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      #daysInfo {
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+      }
+
+      .chart-container {
+        padding: 1rem 1rem 1.25rem 1rem;
+        border-radius: 16px;
+        overflow: visible;
+      }
+
+      .achievements-container h2 {
+        font-size: 1.5rem;
+        padding: 1.5rem;
+      }
+
+      #achievementsTable th,
+      #achievementsTable td {
+        padding: 0.5rem 0.25rem;
+        font-size: 0.875rem;
+      }
+
+      .pace-display,
+      .distance-display,
+      .time-display,
+      .activities-count,
+      .avg-distance-display,
+      .total-distance-display {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+        min-width: 60px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      #daysInfo {
+        font-size: 0.875rem;
+        padding: 0.5rem 0.75rem;
+      }
+
+      .chart-container {
+        padding: 0.75rem 0.75rem 0.875rem 0.75rem;
+        overflow: visible;
+      }
+
+      #achievementsTable {
+        font-size: 0.75rem;
+      }
+
+      #achievementsTable th,
+      #achievementsTable td {
+        padding: 0.375rem 0.125rem;
+      }
+    }
+
   </style>
 </head>
 
@@ -147,6 +543,31 @@
       <div class="chart-wrapper">
         <canvas id="myChart"></canvas>
         <div id="gainLabelsContainer"></div>
+      </div>
+      <div style="text-align: center; margin-top: 10px;">
+        <button id="resetZoom" style="background-color: #6b7280; font-size: 12px; padding: 4px 8px;">Reset Zoom</button>
+      </div>
+    </div>
+    
+    <!-- Achievements Table -->
+    <div class="achievements-container">
+      <div class="table-wrapper">
+        <table id="achievementsTable">
+          <thead>
+            <tr>
+              <th class="sortable" data-column="runner">Runner</th>
+              <th class="sortable" data-column="longestRun">Longest Run</th>
+              <th class="sortable" data-column="farthestRun">Farthest Run</th>
+              <th class="sortable" data-column="totalActivities">Total Activities</th>
+              <th class="sortable" data-column="avgPace">Avg Pace</th>
+              <th class="sortable" data-column="avgDistance">Avg Distance</th>
+              <th class="sortable" data-column="totalDistance">Total Distance</th>
+            </tr>
+          </thead>
+          <tbody id="achievementsBody">
+            <!-- Will be populated by JavaScript -->
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -194,9 +615,15 @@
 
     // Process JSON data into chart format with daily points
     async function loadAndProcessData() {
-      const response = await fetch("data.json");
-      const data = await response.json();
-      const runners = data.runners;
+      try {
+        const response = await fetch("data.json");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log("Loaded data:", data);
+        const runners = data.runners;
+        console.log("Runners:", Object.keys(runners));
       const startDate = new Date("2025-01-01");
       const currentDate = new Date();
       const daysSoFar = Math.ceil(
@@ -205,13 +632,40 @@
       const datasets = [];
       let colorIndex = 0;
 
+      // Define allowed activity types - only these will be included in charts and stats
+      const TRACKED_ACTIVITIES = ["running", "hiking", "walking", "trail running"];
+      
       // Process all runners
       Object.values(runners).forEach((runner) => {
         if (runner.activities.length === 0) return;
 
+        // Filter activities to only include tracked types
+        const originalCount = runner.activities.length;
+        runner.activities = runner.activities.filter(activity => 
+          TRACKED_ACTIVITIES.includes(activity.type?.toLowerCase())
+        );
+        
+        console.log(`${runner.name}: ${originalCount} total activities, ${runner.activities.length} tracked activities`);
+        
+        if (runner.activities.length === 0) return; // Skip if no activities after filtering
+
         // Parse all dates once at the beginning
         runner.activities = runner.activities.map((activity) => {
-          const [month, day, year] = activity.date.split("/");
+          const dateParts = activity.date.split("/");
+          let month, day, year;
+          
+          if (dateParts.length === 2) {
+            // Format: mm/dd (assume 2025)
+            [month, day] = dateParts;
+            year = "25";
+          } else if (dateParts.length === 3) {
+            // Format: mm/dd/yy
+            [month, day, year] = dateParts;
+          } else {
+            console.error("Invalid date format:", activity.date);
+            return activity;
+          }
+          
           const parsedDate = new Date(
             `20${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}T12:00:00`,
           );
@@ -305,7 +759,15 @@
         colorIndex++;
       });
 
+      // Calculate and display achievements
+      const achievements = calculateAchievements(data);
+      displayAchievements(achievements);
+
       return {datasets, daysSoFar};
+      } catch (error) {
+        console.error("Error loading data:", error);
+        return {datasets: [], daysSoFar: 0};
+      }
     }
 
     // Format date helper function
@@ -399,13 +861,329 @@
       }
     }
 
+    // Function to calculate runner achievements
+    function calculateAchievements(data) {
+      console.log("calculateAchievements called with data:", data);
+      const achievements = [];
+      
+      // Define allowed activity types - only these will be included in charts and stats
+      const TRACKED_ACTIVITIES = ["running", "hiking", "walking", "trail running"];
+      
+      // Process the data structure: data.runners[runnerName].activities
+      if (!data.runners) {
+        console.error("No runners data found in:", data);
+        return achievements;
+      }
+      
+      Object.keys(data.runners).forEach(runnerName => {
+        const runner = data.runners[runnerName];
+        let activities = runner.activities || [];
+        
+        // Filter activities to only include tracked types
+        const originalCount = activities.length;
+        activities = activities.filter(activity => 
+          TRACKED_ACTIVITIES.includes(activity.type?.toLowerCase())
+        );
+        
+        console.log(`${runnerName}: ${originalCount} total activities, ${activities.length} tracked activities (after filtering)`);
+        
+        // Find longest run (by time)
+        const longestRun = activities.reduce((max, activity) => {
+          if (!activity.duration) return max;
+          const currentDuration = parseTimeToMinutes(activity.duration);
+          const maxDuration = max ? parseTimeToMinutes(max.duration) : 0;
+          return currentDuration > maxDuration ? activity : max;
+        }, null);
+
+        // Find farthest run (by distance)
+        const farthestRun = activities.reduce((max, activity) => {
+          if (!activity.distance) return max;
+          const currentDistance = parseFloat(activity.distance);
+          const maxDistance = max ? parseFloat(max.distance) : 0;
+          return currentDistance > maxDistance ? activity : max;
+        }, null);
+
+        // Calculate average pace
+        const runsWithPace = activities.filter(activity => activity.pace);
+        const totalPaceSeconds = runsWithPace.reduce((sum, activity) => {
+          return sum + parseTimeToSeconds(activity.pace);
+        }, 0);
+        const averagePaceSeconds = runsWithPace.length > 0 ? totalPaceSeconds / runsWithPace.length : 0;
+
+        // Calculate total distance
+        const totalDistance = activities.reduce((sum, activity) => {
+          return sum + (parseFloat(activity.distance) || 0);
+        }, 0);
+
+        // Calculate average distance
+        const averageDistance = activities.length > 0 ? totalDistance / activities.length : 0;
+
+        achievements.push({
+          runner: runnerName,
+          longestRun: longestRun,
+          farthestRun: farthestRun,
+          totalActivities: activities.length,
+          averagePace: averagePaceSeconds,
+          averageDistance: averageDistance,
+          totalDistance: totalDistance
+        });
+      });
+
+      return achievements;
+    }
+
+    // Helper function to parse time strings to minutes
+    function parseTimeToMinutes(timeStr) {
+      if (!timeStr) return 0;
+      
+      // Handle formats like "1:23:45" or "23:45" or "45"
+      const parts = timeStr.split(':').map(part => parseInt(part) || 0);
+      
+      if (parts.length === 3) {
+        // HH:MM:SS format
+        return parts[0] * 60 + parts[1] + parts[2] / 60;
+      } else if (parts.length === 2) {
+        // MM:SS format
+        return parts[0] + parts[1] / 60;
+      } else if (parts.length === 1) {
+        // Just minutes
+        return parts[0];
+      }
+      
+      return 0;
+    }
+
+    // Helper function to parse time strings to seconds
+    function parseTimeToSeconds(timeStr) {
+      if (!timeStr) return 0;
+      
+      // Handle formats like "1:23:45" or "23:45" or "45"
+      const parts = timeStr.split(':').map(part => parseInt(part) || 0);
+      
+      if (parts.length === 3) {
+        // HH:MM:SS format
+        return parts[0] * 3600 + parts[1] * 60 + parts[2];
+      } else if (parts.length === 2) {
+        // MM:SS format
+        return parts[0] * 60 + parts[1];
+      } else if (parts.length === 1) {
+        // Just minutes (assume seconds)
+        return parts[0];
+      }
+      
+      return 0;
+    }
+
+    // Helper function to format time from seconds (for pace display)
+    function formatPaceFromSeconds(seconds) {
+      if (seconds === 0) return "0:00";
+      
+      const minutes = Math.floor(seconds / 60);
+      const remainingSeconds = Math.round(seconds % 60);
+      
+      return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+    }
+
+    // Helper function to format time from minutes (for duration display)
+    function formatTimeFromMinutes(minutes) {
+      if (minutes < 60) {
+        return `${Math.round(minutes)}:00`;
+      } else {
+        const hours = Math.floor(minutes / 60);
+        const mins = Math.round(minutes % 60);
+        return `${hours}:${mins.toString().padStart(2, '0')}:00`;
+      }
+    }
+
+    // Global variables for sorting
+    let currentSortColumn = null;
+    let currentSortDirection = 'desc';
+    let allAchievements = [];
+
+    // Function to display achievements table
+    function displayAchievements(achievements) {
+      allAchievements = achievements;
+      const tbody = document.getElementById('achievementsBody');
+      tbody.innerHTML = '';
+
+      achievements.forEach(achievement => {
+        const row = document.createElement('tr');
+        
+        row.innerHTML = `
+          <td class="runner-name">${achievement.runner}</td>
+          <td>
+            ${achievement.longestRun ? 
+              `<span class="time-display">${achievement.longestRun.duration}</span>` : 
+              '<span class="achievement-value">No data</span>'
+            }
+          </td>
+          <td>
+            ${achievement.farthestRun ? 
+              `<span class="distance-display">${achievement.farthestRun.distance} mi</span>` : 
+              '<span class="achievement-value">No data</span>'
+            }
+          </td>
+          <td>
+            <span class="activities-count">${achievement.totalActivities}</span>
+          </td>
+          <td>
+            ${achievement.averagePace > 0 ? 
+              `<span class="pace-display">${formatPaceFromSeconds(achievement.averagePace)}/mi</span>` : 
+              '<span class="achievement-value">No data</span>'
+            }
+          </td>
+          <td>
+            <span class="avg-distance-display">${achievement.averageDistance.toFixed(1)} mi</span>
+          </td>
+          <td>
+            <span class="total-distance-display">${achievement.totalDistance.toFixed(1)} mi</span>
+          </td>
+        `;
+        
+        tbody.appendChild(row);
+      });
+
+      // Add click event listeners to sortable headers
+      document.querySelectorAll('.sortable').forEach(header => {
+        header.addEventListener('click', () => {
+          const column = header.dataset.column;
+          sortTable(column);
+        });
+      });
+    }
+
+    // Function to update table display without re-adding event listeners
+    function updateTableDisplay(achievements) {
+      const tbody = document.getElementById('achievementsBody');
+      tbody.innerHTML = '';
+
+      achievements.forEach(achievement => {
+        const row = document.createElement('tr');
+        
+        row.innerHTML = `
+          <td class="runner-name">${achievement.runner}</td>
+          <td>
+            ${achievement.longestRun ? 
+              `<span class="time-display">${achievement.longestRun.duration}</span>` : 
+              '<span class="achievement-value">No data</span>'
+            }
+          </td>
+          <td>
+            ${achievement.farthestRun ? 
+              `<span class="distance-display">${achievement.farthestRun.distance} mi</span>` : 
+              '<span class="achievement-value">No data</span>'
+            }
+          </td>
+          <td>
+            <span class="activities-count">${achievement.totalActivities}</span>
+          </td>
+          <td>
+            ${achievement.averagePace > 0 ? 
+              `<span class="pace-display">${formatPaceFromSeconds(achievement.averagePace)}/mi</span>` : 
+              '<span class="achievement-value">No data</span>'
+            }
+          </td>
+          <td>
+            <span class="avg-distance-display">${achievement.averageDistance.toFixed(1)} mi</span>
+          </td>
+          <td>
+            <span class="total-distance-display">${achievement.totalDistance.toFixed(1)} mi</span>
+          </td>
+        `;
+        
+        tbody.appendChild(row);
+      });
+    }
+
+    // Function to sort the table
+    function sortTable(column) {
+      // Toggle sort direction if clicking the same column
+      if (currentSortColumn === column) {
+        currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
+      } else {
+        currentSortColumn = column;
+        currentSortDirection = 'desc';
+      }
+
+      // Sort the achievements array
+      const sortedAchievements = [...allAchievements].sort((a, b) => {
+        let aValue, bValue;
+
+        switch (column) {
+          case 'runner':
+            aValue = a.runner.toLowerCase();
+            bValue = b.runner.toLowerCase();
+            break;
+          case 'longestRun':
+            aValue = a.longestRun ? parseTimeToMinutes(a.longestRun.duration) : 0;
+            bValue = b.longestRun ? parseTimeToMinutes(b.longestRun.duration) : 0;
+            break;
+          case 'farthestRun':
+            aValue = a.farthestRun ? parseFloat(a.farthestRun.distance) : 0;
+            bValue = b.farthestRun ? parseFloat(b.farthestRun.distance) : 0;
+            break;
+          case 'totalActivities':
+            aValue = a.totalActivities;
+            bValue = b.totalActivities;
+            break;
+          case 'avgPace':
+            aValue = a.averagePace;
+            bValue = b.averagePace;
+            break;
+          case 'avgDistance':
+            aValue = a.averageDistance;
+            bValue = b.averageDistance;
+            break;
+          case 'totalDistance':
+            aValue = a.totalDistance;
+            bValue = b.totalDistance;
+            break;
+          default:
+            return 0;
+        }
+
+        if (aValue < bValue) return currentSortDirection === 'asc' ? -1 : 1;
+        if (aValue > bValue) return currentSortDirection === 'asc' ? 1 : -1;
+        return 0;
+      });
+
+      // Update the display without re-adding event listeners
+      updateTableDisplay(sortedAchievements);
+
+      // Update header classes
+      document.querySelectorAll('.sortable').forEach(header => {
+        header.classList.remove('asc', 'desc');
+        if (header.dataset.column === column) {
+          header.classList.add(currentSortDirection);
+        }
+      });
+    }
+
+
     // Initial chart creation
     async function createChart() {
       const {datasets, daysSoFar} = await loadAndProcessData();
+      console.log("Datasets created:", datasets.length);
+      console.log("Sample dataset:", datasets[0]);
+      
+      if (datasets.length === 0) {
+        console.error("No datasets found! Check your data.json file.");
+        return;
+      }
+      
       const maxMiles = Math.max(
         ...datasets.flatMap((d) => d.data.map((point) => point.y)),
       );
-      const yMax = Math.ceil(maxMiles / 50) * 50;
+      console.log("Max miles:", maxMiles);
+      
+      // Calculate Y-axis max with dynamic expansion logic
+      let yMax = Math.max(Math.ceil(maxMiles / 50) * 50, 300);
+      
+      // If any runner is within 25 miles of the current upper limit, expand by 50 miles
+      if (maxMiles > (yMax - 25)) {
+        yMax += 50;
+        console.log(`Expanding Y-axis: runner at ${maxMiles} miles is within 25 miles of ${yMax - 50}, expanding to ${yMax}`);
+      }
       const currentDate = new Date();
       const daysInYear = 365;
       const daysRemaining = daysInYear - daysSoFar;
@@ -422,8 +1200,9 @@
         maxStepSize,
       );
 
+      const weeksRemaining = (daysRemaining / 7).toFixed(1);
       document.getElementById("daysInfo").innerHTML =
-        `<span class="text-green-600">${daysSoFar} Days Passed</span> | <span class="text-blue-600">${daysRemaining} Days Remaining</span>`;
+        `<span class="text-green-600">${daysSoFar} Days Passed</span> | <span class="text-blue-600">${daysRemaining} Days Remaining</span> <span class="text-purple-600">(${weeksRemaining} Weeks)</span>`;
 
       // Custom legend plugin
       const customLegendPlugin = {
@@ -440,6 +1219,9 @@
             container.style.flexWrap = "wrap";
             container.style.justifyContent = "center";
             container.style.marginTop = "15px";
+            container.style.marginBottom = "10px";
+            container.style.width = "100%";
+            container.style.maxWidth = "100%";
 
             // Create a single debounced update function to prevent multiple rapid updates
             const debouncedShowGains = debounce((index) => {
@@ -508,8 +1290,14 @@
               container.appendChild(item);
             });
 
-            const chartContainer = chart.canvas.parentNode;
+            const chartContainer = chart.canvas.parentNode.parentNode;
             chartContainer.appendChild(container);
+            
+            // Force the chart container to expand to accommodate the legend
+            const containerHeight = chartContainer.offsetHeight;
+            const legendHeight = container.offsetHeight;
+            const extraPadding = Math.max(5, Math.min(15, legendHeight * 0.05)); // Dynamic padding based on legend size
+            chartContainer.style.minHeight = (containerHeight + legendHeight + extraPadding) + 'px';
           }
         },
       };
@@ -520,6 +1308,14 @@
         options: {
           animation: false,
           interaction: {intersect: true, mode: "nearest"},
+          layout: {
+            padding: {
+              left: 10,
+              right: 10,
+              top: 10,
+              bottom: 10
+            }
+          },
           plugins: {
             tooltip: {
               backgroundColor: "rgba(50, 50, 50, 0.9)",
@@ -544,10 +1340,92 @@
             },
             legend: {display: false},
             customLegend: true,
+            zoom: {
+              pan: {
+                enabled: true,
+                mode: 'x',
+                modifierKey: 'ctrl',
+                limits: {
+                  x: {
+                    min: new Date("2025-01-01"),
+                    max: new Date(
+                      currentDate.getFullYear(),
+                      currentDate.getMonth(),
+                      currentDate.getDate(),
+                      23,
+                      59,
+                      59,
+                    ),
+                  }
+                }
+              },
+              zoom: {
+                wheel: {
+                  enabled: true,
+                  speed: 0.1,
+                },
+                pinch: {
+                  enabled: true,
+                },
+                mode: 'x',
+                limits: {
+                  x: {
+                    min: new Date("2025-01-01"),
+                    max: new Date(
+                      currentDate.getFullYear(),
+                      currentDate.getMonth(),
+                      currentDate.getDate(),
+                      23,
+                      59,
+                      59,
+                    ),
+                  }
+                },
+                onZoomComplete: function({chart}) {
+                  const xScale = chart.scales.x;
+                  const minDate = new Date("2025-01-01");
+                  const maxDate = new Date(
+                    currentDate.getFullYear(),
+                    currentDate.getMonth(),
+                    currentDate.getDate(),
+                    23,
+                    59,
+                    59,
+                  );
+                  
+                  // Enforce limits
+                  if (xScale.min < minDate) {
+                    xScale.options.min = minDate;
+                  }
+                  if (xScale.max > maxDate) {
+                    xScale.options.max = maxDate;
+                  }
+                  chart.update('none');
+                }
+              }
+            }
           },
           scales: {
             x: {
               type: "time",
+              min: new Date("2025-01-01"),
+              max: new Date(
+                currentDate.getFullYear(),
+                currentDate.getMonth(),
+                currentDate.getDate(),
+                23,
+                59,
+                59,
+              ),
+              suggestedMin: new Date("2025-01-01"),
+              suggestedMax: new Date(
+                currentDate.getFullYear(),
+                currentDate.getMonth(),
+                currentDate.getDate(),
+                23,
+                59,
+                59,
+              ),
               time: {
                 unit: "day",
                 stepSize: dynamicStepSize,
@@ -565,7 +1443,7 @@
               title: {
                 display: true,
                 text: `Date (2025)`,
-                padding: {top: 10, bottom: 10},
+                padding: {top: 5, bottom: 5},
                 font: {weight: "bold", size: 14},
               },
               grid: {color: "rgba(0, 0, 0, 0.05)"},
@@ -605,17 +1483,47 @@
               title: {
                 display: true,
                 text: "Miles",
-                padding: {top: 10, bottom: 10},
+                padding: {top: 5, bottom: 5},
                 font: {weight: "bold", size: 14},
               },
-              grid: {color: "rgba(0, 0, 0, 0.05)"},
-              ticks: {font: {weight: "bold", size: 12}},
+              grid: {
+                color: function(context) {
+                  // Highlight the 300 mile line with golden color
+                  if (context.tick.value === 300) {
+                    return "rgba(255, 215, 0, 0.8)";
+                  }
+                  return "rgba(0, 0, 0, 0.05)";
+                },
+                lineWidth: function(context) {
+                  // Make the 300 mile line thicker
+                  if (context.tick.value === 300) {
+                    return 3;
+                  }
+                  return 1;
+                }
+              },
+              ticks: {
+                font: {weight: "bold", size: 12},
+                color: function(context) {
+                  // Make the 300 mile tick golden and bold
+                  if (context.tick.value === 300) {
+                    return "#FFD700";
+                  }
+                  return "rgba(0, 0, 0, 0.8)";
+                },
+                callback: function(value) {
+                  if (value === 300) {
+                    return "🎯 300"; // Add target emoji for 300
+                  }
+                  return value;
+                }
+              },
             },
           },
           responsive: true,
-          maintainAspectRatio: true,
+          maintainAspectRatio: false,
         },
-        plugins: [customLegendPlugin],
+        plugins: [customLegendPlugin, 'zoom'],
       };
 
       const ctx = document.getElementById("myChart").getContext("2d");
@@ -624,6 +1532,11 @@
 
       if (myChart) myChart.destroy();
       myChart = new Chart(ctx, config);
+      
+      // Add reset zoom functionality
+      document.getElementById('resetZoom').addEventListener('click', () => {
+        myChart.resetZoom();
+      });
     }
 
     window.onload = createChart;
