@@ -10,6 +10,34 @@
     src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
   <style>
+    :root {
+      /* Color Palette */
+      --primary-green: #10b981;
+      --primary-blue: #3b82f6;
+      --primary-purple: #8b5cf6;
+      --primary-orange: #f59e0b;
+      --primary-red: #ef4444;
+      --primary-teal: #06b6d4;
+      
+      /* Spacing */
+      --spacing-xs: 0.125rem;
+      --spacing-sm: 0.25rem;
+      --spacing-md: 0.5rem;
+      --spacing-lg: 1rem;
+      --spacing-xl: 2rem;
+      
+      /* Border Radius */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 24px;
+      --radius-oval: 20px;
+      
+      /* Shadows */
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
     /* Reset and base styles */
     * {
       margin: 0;
@@ -380,82 +408,53 @@
       font-weight: 500;
     }
 
-    .pace-display {
-      background: linear-gradient(135deg, #10b981, #059669);
+    /* Achievement Display Base Styles */
+    .achievement-display {
       color: white;
-      padding: 0.375rem 0.5rem;
-      border-radius: 12px;
+      padding: 0.375rem var(--spacing-md);
+      border-radius: var(--radius-oval);
       font-weight: 700;
       font-size: 0.875rem;
+      display: inline-block;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Specific Achievement Types - Data Type Color Coding */
+    .total-distance-display {
+      background: linear-gradient(135deg, var(--primary-green), #059669);
       box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-      display: inline-block;
-      min-width: 80px;
-      text-align: center;
-    }
-
-    .distance-display {
-      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-      color: white;
-      padding: 0.375rem 0.5rem;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.875rem;
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-      display: inline-block;
-      min-width: 80px;
-      text-align: center;
-    }
-
-    .time-display {
-      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-      color: white;
-      padding: 0.375rem 0.5rem;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.875rem;
-      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
-      display: inline-block;
-      min-width: 80px;
-      text-align: center;
+      min-width: 60px;
     }
 
     .activities-count {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      color: white;
-      padding: 0.375rem 0.5rem;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.875rem;
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-      display: inline-block;
+      background: linear-gradient(135deg, var(--primary-blue), #1d4ed8);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
       min-width: 60px;
-      text-align: center;
     }
 
     .avg-distance-display {
-      background: linear-gradient(135deg, #ef4444, #dc2626);
-      color: white;
-      padding: 0.375rem 0.5rem;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.875rem;
-      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
-      display: inline-block;
+      background: linear-gradient(135deg, var(--primary-purple), #7c3aed);
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
       min-width: 60px;
-      text-align: center;
     }
 
-    .total-distance-display {
-      background: linear-gradient(135deg, #06b6d4, #0891b2);
-      color: white;
-      padding: 0.375rem 0.5rem;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.875rem;
+    .pace-display {
+      background: linear-gradient(135deg, var(--primary-orange), #d97706);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+      min-width: 80px;
+    }
+
+    .distance-display {
+      background: linear-gradient(135deg, var(--primary-red), #dc2626);
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+      min-width: 80px;
+    }
+
+    .time-display {
+      background: linear-gradient(135deg, var(--primary-teal), #0891b2);
       box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
-      display: inline-block;
-      min-width: 60px;
-      text-align: center;
+      min-width: 80px;
     }
 
     /* Responsive Design */
@@ -500,6 +499,7 @@
         padding: 0.25rem 0.375rem;
         font-size: 0.75rem;
         min-width: 60px;
+        border-radius: 16px;
       }
     }
 
@@ -553,12 +553,12 @@
           <thead>
             <tr>
               <th class="sortable" data-column="runner">Runner</th>
-              <th class="sortable" data-column="longestRun">Longest Run</th>
-              <th class="sortable" data-column="farthestRun">Farthest Run</th>
-              <th class="sortable" data-column="totalActivities">Total Activities</th>
-              <th class="sortable" data-column="avgPace">Avg Pace</th>
-              <th class="sortable" data-column="avgDistance">Avg Distance</th>
               <th class="sortable" data-column="totalDistance">Total Distance</th>
+              <th class="sortable" data-column="totalActivities">Total Activities</th>
+              <th class="sortable" data-column="avgDistance">Avg Distance</th>
+              <th class="sortable" data-column="avgPace">Avg Pace</th>
+              <th class="sortable" data-column="farthestRun">Farthest Run</th>
+              <th class="sortable" data-column="longestRun">Longest Run</th>
             </tr>
           </thead>
           <tbody id="achievementsBody">
@@ -998,6 +998,40 @@
     let currentSortDirection = 'desc';
     let allAchievements = [];
 
+    // Generate table row HTML for an achievement
+    function generateAchievementRow(achievement) {
+      return `
+        <td class="runner-name">${achievement.runner}</td>
+        <td>
+          <span class="achievement-display total-distance-display">${achievement.totalDistance.toFixed(1)} mi</span>
+        </td>
+        <td>
+          <span class="achievement-display activities-count">${achievement.totalActivities}</span>
+        </td>
+        <td>
+          <span class="achievement-display avg-distance-display">${achievement.averageDistance.toFixed(1)} mi</span>
+        </td>
+        <td>
+          ${achievement.averagePace > 0 ? 
+            `<span class="achievement-display pace-display">${formatPaceFromSeconds(achievement.averagePace)}/mi</span>` : 
+            '<span class="achievement-value">No data</span>'
+          }
+        </td>
+        <td>
+          ${achievement.farthestRun ? 
+            `<span class="achievement-display distance-display">${achievement.farthestRun.distance} mi</span>` : 
+            '<span class="achievement-value">No data</span>'
+          }
+        </td>
+        <td>
+          ${achievement.longestRun ? 
+            `<span class="achievement-display time-display">${achievement.longestRun.duration}</span>` : 
+            '<span class="achievement-value">No data</span>'
+          }
+        </td>
+      `;
+    }
+
     // Function to display achievements table
     function displayAchievements(achievements) {
       allAchievements = achievements;
@@ -1006,38 +1040,7 @@
 
       achievements.forEach(achievement => {
         const row = document.createElement('tr');
-        
-        row.innerHTML = `
-          <td class="runner-name">${achievement.runner}</td>
-          <td>
-            ${achievement.longestRun ? 
-              `<span class="time-display">${achievement.longestRun.duration}</span>` : 
-              '<span class="achievement-value">No data</span>'
-            }
-          </td>
-          <td>
-            ${achievement.farthestRun ? 
-              `<span class="distance-display">${achievement.farthestRun.distance} mi</span>` : 
-              '<span class="achievement-value">No data</span>'
-            }
-          </td>
-          <td>
-            <span class="activities-count">${achievement.totalActivities}</span>
-          </td>
-          <td>
-            ${achievement.averagePace > 0 ? 
-              `<span class="pace-display">${formatPaceFromSeconds(achievement.averagePace)}/mi</span>` : 
-              '<span class="achievement-value">No data</span>'
-            }
-          </td>
-          <td>
-            <span class="avg-distance-display">${achievement.averageDistance.toFixed(1)} mi</span>
-          </td>
-          <td>
-            <span class="total-distance-display">${achievement.totalDistance.toFixed(1)} mi</span>
-          </td>
-        `;
-        
+        row.innerHTML = generateAchievementRow(achievement);
         tbody.appendChild(row);
       });
 
@@ -1057,38 +1060,7 @@
 
       achievements.forEach(achievement => {
         const row = document.createElement('tr');
-        
-        row.innerHTML = `
-          <td class="runner-name">${achievement.runner}</td>
-          <td>
-            ${achievement.longestRun ? 
-              `<span class="time-display">${achievement.longestRun.duration}</span>` : 
-              '<span class="achievement-value">No data</span>'
-            }
-          </td>
-          <td>
-            ${achievement.farthestRun ? 
-              `<span class="distance-display">${achievement.farthestRun.distance} mi</span>` : 
-              '<span class="achievement-value">No data</span>'
-            }
-          </td>
-          <td>
-            <span class="activities-count">${achievement.totalActivities}</span>
-          </td>
-          <td>
-            ${achievement.averagePace > 0 ? 
-              `<span class="pace-display">${formatPaceFromSeconds(achievement.averagePace)}/mi</span>` : 
-              '<span class="achievement-value">No data</span>'
-            }
-          </td>
-          <td>
-            <span class="avg-distance-display">${achievement.averageDistance.toFixed(1)} mi</span>
-          </td>
-          <td>
-            <span class="total-distance-display">${achievement.totalDistance.toFixed(1)} mi</span>
-          </td>
-        `;
-        
+        row.innerHTML = generateAchievementRow(achievement);
         tbody.appendChild(row);
       });
     }
