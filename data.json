@@ -1430,8 +1430,8 @@
         "totalActivities": 55,
         "totalDistance": 135.62,
         "activityTypes": [
-          "Walking",
           "Running",
+          "Walking",
           "Hiking"
         ]
       },
@@ -2406,8 +2406,8 @@
         "totalActivities": 10,
         "totalDistance": 30.4,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -3138,8 +3138,8 @@
         "totalActivities": 58,
         "totalDistance": 97.15,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -3557,8 +3557,8 @@
         "totalActivities": 90,
         "totalDistance": 154.06,
         "activityTypes": [
-          "Walking",
           "Running",
+          "Walking",
           "Hiking"
         ]
       },
@@ -4201,8 +4201,8 @@
         "totalActivities": 78,
         "totalDistance": 237.4,
         "activityTypes": [
-          "Walking",
-          "Running"
+          "Running",
+          "Walking"
         ]
       },
       "activities": [
@@ -4756,7 +4756,7 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-09-07T20:23:53.982255",
+    "lastUpdated": "2025-09-08T01:22:21.419689",
     "totalRunners": 10,
     "totalActivities": 661
   }
