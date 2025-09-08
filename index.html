@@ -120,6 +120,28 @@
       min-height: fit-content;
     }
 
+    /* Group buttons positioning */
+    #groupButtons {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+    }
+
+    #groupButtons .group-btn {
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+    }
+
+    .group-btn.active {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    }
+
+    .group-btn:hover:not(.active) {
+      background: #4b5563 !important;
+    }
+
 
     .chart-wrapper {
       width: 100%;
@@ -478,6 +500,17 @@
         overflow: visible;
       }
 
+      /* Group buttons responsive */
+      #groupButtons {
+        top: 10px;
+        right: 10px;
+      }
+
+      #groupButtons .group-btn {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.6rem;
+      }
+
 
       .achievements-container h2 {
         font-size: 1.5rem;
@@ -518,6 +551,21 @@
         overflow: visible;
       }
 
+      /* Group buttons for very small screens */
+      #groupButtons {
+        top: 5px;
+        right: 5px;
+      }
+
+      #groupButtons .group-btn {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+      }
+
+      #groupButtons span {
+        font-size: 0.8rem;
+      }
+
 
       #achievementsTable {
         font-size: 0.75rem;
@@ -534,7 +582,17 @@
 
 <body>
   <div class="container">
-    <div class="chart-container">
+    <div class="chart-container" style="position: relative;">
+      <!-- Group Data By Buttons - positioned at top right -->
+      <div id="groupButtons" style="position: absolute; top: 20px; right: 20px; z-index: 10;">
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <span style="color: #1e293b; font-size: 1.1rem; font-weight: 600; margin-right: 0.5rem;">View:</span>
+          <button class="group-btn active" data-group="day" style="padding: 0.4rem 0.8rem; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-size: 0.9rem;">Daily</button>
+          <button class="group-btn" data-group="week" style="padding: 0.4rem 0.8rem; background: #6b7280; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-size: 0.9rem;">Weekly</button>
+          <button class="group-btn" data-group="month" style="padding: 0.4rem 0.8rem; background: #6b7280; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-size: 0.9rem;">Monthly</button>
+        </div>
+      </div>
+      
       <div class="chart-wrapper">
         <canvas id="myChart"></canvas>
         <div id="gainLabelsContainer"></div>
@@ -573,6 +631,8 @@
     let myChart;
     let activeRunnerIndex = -1; // Track which runner is active
     let isZoomed = false; // Track zoom state
+    let dataGrouping = 'day'; // Track current data grouping
+    let originalData = null; // Store original data for regrouping
     const colors = [
       "#4ECDC4",
       "#FF6B6B",
@@ -609,6 +669,46 @@
         date1.getMonth() === date2.getMonth() &&
         date1.getDate() === date2.getDate()
       );
+    }
+
+    // Group data by period (day, week, month)
+    function groupDataByPeriod(activities, grouping) {
+      if (grouping === 'day') {
+        return activities; // No grouping needed for daily
+      }
+
+      const grouped = {};
+      
+      activities.forEach(activity => {
+        const date = new Date(activity.date);
+        let key;
+        
+        if (grouping === 'week') {
+          // Get start of week (Monday)
+          const startOfWeek = new Date(date);
+          const day = date.getDay();
+          const diff = date.getDate() - day + (day === 0 ? -6 : 1);
+          startOfWeek.setDate(diff);
+          startOfWeek.setHours(0, 0, 0, 0);
+          key = startOfWeek.toISOString().split('T')[0];
+        } else if (grouping === 'month') {
+          // Group by year-month
+          key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+        }
+        
+        if (!grouped[key]) {
+          grouped[key] = {
+            date: key,
+            distance: 0,
+            activities: []
+          };
+        }
+        
+        grouped[key].distance += activity.distance;
+        grouped[key].activities.push(activity);
+      });
+      
+      return Object.values(grouped).sort((a, b) => new Date(a.date) - new Date(b.date));
     }
 
     // Process JSON data into chart format with daily points
@@ -678,51 +778,73 @@
           (a, b) => a.parsedDate - b.parsedDate,
         );
 
+        // Apply grouping if not daily
+        const groupedActivities = groupDataByPeriod(sortedActivities, dataGrouping);
+
         const runnerData = [];
         let cumulativeDistance = 0;
         let activityIndex = 0;
         let lastActivityDistance = 0;
         let lastActivityDate = null;
 
-        // Create points for every day up to current date
-        for (let i = 0; i <= daysSoFar; i++) {
-          const currentDay = new Date(
-            startDate.getTime() + i * 24 * 60 * 60 * 1000,
-          );
-          if (currentDay > currentDate) break;
+        // Process grouped activities
+        if (dataGrouping === 'day') {
+          // Create points for every day up to current date (original logic)
+          for (let i = 0; i <= daysSoFar; i++) {
+            const currentDay = new Date(
+              startDate.getTime() + i * 24 * 60 * 60 * 1000,
+            );
+            if (currentDay > currentDate) break;
 
-          let gainFromLastActivity = 0;
-          let hasNewActivity = false;
+            let gainFromLastActivity = 0;
+            let hasNewActivity = false;
 
-          // Check if there are activities up to this date
-          while (activityIndex < sortedActivities.length) {
-            if (sortedActivities[activityIndex].parsedDate <= currentDay) {
-              gainFromLastActivity +=
-                sortedActivities[activityIndex].distance;
-              hasNewActivity = true;
-              lastActivityDistance = sortedActivities[activityIndex].distance;
-              lastActivityDate = new Date(
-                sortedActivities[activityIndex].parsedDate,
-              );
-              cumulativeDistance += sortedActivities[activityIndex].distance;
-              activityIndex++;
-            } else {
-              break;
+            // Check if there are activities up to this date
+            while (activityIndex < sortedActivities.length) {
+              if (sortedActivities[activityIndex].parsedDate <= currentDay) {
+                gainFromLastActivity +=
+                  sortedActivities[activityIndex].distance;
+                hasNewActivity = true;
+                lastActivityDistance = sortedActivities[activityIndex].distance;
+                lastActivityDate = new Date(
+                  sortedActivities[activityIndex].parsedDate,
+                );
+                cumulativeDistance += sortedActivities[activityIndex].distance;
+                activityIndex++;
+              } else {
+                break;
+              }
             }
+
+            const isSameDayAsLastActivity =
+              lastActivityDate && isSameDay(lastActivityDate, currentDay);
+
+            runnerData.push({
+              x: currentDay,
+              y: cumulativeDistance,
+              hasActivity: hasNewActivity,
+              gainFromLastActivity:
+                gainFromLastActivity > 0 ? gainFromLastActivity : 0,
+              lastActivityDistance: lastActivityDistance || 0,
+              lastActivityDate: lastActivityDate,
+              isSameDayAsLastActivity: isSameDayAsLastActivity,
+            });
           }
-
-          const isSameDayAsLastActivity =
-            lastActivityDate && isSameDay(lastActivityDate, currentDay);
-
-          runnerData.push({
-            x: currentDay,
-            y: cumulativeDistance,
-            hasActivity: hasNewActivity,
-            gainFromLastActivity:
-              gainFromLastActivity > 0 ? gainFromLastActivity : 0,
-            lastActivityDistance: lastActivityDistance || 0,
-            lastActivityDate: lastActivityDate,
-            isSameDayAsLastActivity: isSameDayAsLastActivity,
+        } else {
+          // Process grouped data (week/month)
+          groupedActivities.forEach(group => {
+            const groupDate = new Date(group.date);
+            cumulativeDistance += group.distance;
+            
+            runnerData.push({
+              x: groupDate,
+              y: cumulativeDistance,
+              hasActivity: true,
+              gainFromLastActivity: group.distance,
+              lastActivityDistance: group.distance,
+              lastActivityDate: groupDate,
+              isSameDayAsLastActivity: false,
+            });
           });
         }
 
@@ -1419,9 +1541,13 @@
                 59,
               ),
               time: {
-                unit: "day",
-                stepSize: dynamicStepSize,
-                displayFormats: {day: "MMM d"},
+                unit: dataGrouping === 'day' ? 'day' : dataGrouping === 'week' ? 'week' : 'month',
+                stepSize: dataGrouping === 'day' ? dynamicStepSize : 1,
+                displayFormats: {
+                  day: "MMM d, yyyy",
+                  week: "MMM d, yyyy", 
+                  month: "MMM yyyy"
+                },
                 min: new Date("2025-01-01"),
                 max: new Date(
                   currentDate.getFullYear(),
@@ -1434,13 +1560,31 @@
               },
               title: {
                 display: true,
-                text: `Date (2025)`,
+                text: `Date (2025) - ${dataGrouping === 'day' ? 'Daily' : dataGrouping === 'week' ? 'Weekly' : 'Monthly'}`,
                 padding: {top: 5, bottom: 5},
                 font: {weight: "bold", size: 14},
               },
               grid: {color: "rgba(0, 0, 0, 0.05)"},
               ticks: {
                 font: {weight: "bold", size: 12},
+                callback: function(value, index, ticks) {
+                  const date = new Date(value);
+                  
+                  if (dataGrouping === 'day') {
+                    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                                     'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                    return monthNames[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
+                  } else if (dataGrouping === 'week') {
+                    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                                     'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                    return monthNames[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
+                  } else if (dataGrouping === 'month') {
+                    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                                     'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                    return monthNames[date.getMonth()] + ' ' + date.getFullYear();
+                  }
+                  return value;
+                },
                 color: function (context) {
                   // Alternating month colors
                   const date = new Date(context.tick.value);
@@ -1534,7 +1678,49 @@
       });
     }
 
-    window.onload = createChart;
+    // Initialize group buttons
+    function initializeGroupButtons() {
+      const groupButtons = document.querySelectorAll('.group-btn');
+      
+      groupButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Remove active class from all buttons
+          document.querySelectorAll('.group-btn').forEach(btn => {
+            btn.classList.remove('active');
+            btn.style.background = '#6b7280';
+          });
+          
+          // Add active class to clicked button
+          this.classList.add('active');
+          this.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+          
+          // Update data grouping
+          dataGrouping = this.dataset.group;
+          
+          // Recreate chart with new grouping
+          createChart();
+        });
+      });
+    }
+
+    // Update chart for grouping changes
+    async function updateChartForGrouping() {
+      const {datasets, daysSoFar} = await loadAndProcessData();
+      
+      if (datasets.length === 0) {
+        console.error("No datasets found after grouping!");
+        return;
+      }
+      
+      // Update chart data
+      myChart.data.datasets = datasets;
+      myChart.update();
+    }
+
+    window.onload = function() {
+      createChart();
+      initializeGroupButtons();
+    };
   </script>
 </body>
 

@@ -7,6 +7,8 @@ from pprint import pprint
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import threading
 import time
+import argparse
+import os
 from gcp_secret import gcp_get_secret, gcp_update_secret
 
 # ANSI color codes for terminal output
@@ -130,11 +132,43 @@ def normalize_date(date_text, month_part, year_part):
         return f"{date_text}/{year_part[-2:]}"
 
 
-def get_months_until_now():
-    """Returns a list of abbreviated month names from January until the current month."""
+def get_months_until_now(start_month=None, end_month=None):
+    """Returns a list of abbreviated month names from start_month to end_month.
+    
+    Args:
+        start_month (int, optional): Start month number (1-12). If None, starts from January.
+        end_month (int, optional): End month number (1-12). If None, goes until current month.
+    
+    Returns:
+        list: List of month abbreviations
+    """
     current = datetime.now()
+    
+    # If no start_month provided, start from January
+    if start_month is None:
+        start_month_num = 1
+    else:
+        start_month_num = start_month
+    
+    # If no end_month provided, go until current month
+    if end_month is None:
+        end_month_num = current.month
+    else:
+        end_month_num = end_month
+    
+    # Validate month numbers
+    if not (1 <= start_month_num <= 12):
+        raise ValueError(f"Start month ({start_month}) must be between 1 and 12")
+    if not (1 <= end_month_num <= 12):
+        raise ValueError(f"End month ({end_month}) must be between 1 and 12")
+    
+    # Ensure start_month is not after end_month
+    if start_month_num > end_month_num:
+        raise ValueError(f"Start month ({start_month}) cannot be after end month ({end_month})")
+    
     return [
-        datetime(2025, month, 1).strftime("%b") for month in range(1, current.month + 1)
+        datetime(2025, month, 1).strftime("%b") 
+        for month in range(start_month_num, end_month_num + 1)
     ]
 
 
@@ -474,8 +508,86 @@ def scrape_activities(page, user_id, months, user_name=None):
     return activities
 
 
-def export_to_json(activities_data, filename="data.json"):
-    """Export activities data to a JSON file"""
+def load_existing_data(filename="data.json"):
+    """Load existing data from JSON file if it exists"""
+    if os.path.exists(filename):
+        try:
+            with open(filename, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except (json.JSONDecodeError, FileNotFoundError) as e:
+            print(f"{WARNING} Could not load existing data from {filename}: {e}")
+            return None
+    return None
+
+
+def get_activity_month(activity):
+    """Extract month number from activity date"""
+    try:
+        # Parse the date and return month number
+        date_parts = activity['date'].split('/')
+        if len(date_parts) >= 2:
+            return int(date_parts[0])  # Month is first part
+        return None
+    except (ValueError, KeyError):
+        return None
+
+
+def merge_activities_by_month(existing_activities, new_activities, scanned_months):
+    """Merge activities by replacing entire months when scanned, keeping unscanned months intact"""
+    if not existing_activities:
+        return new_activities
+    
+    # Convert scanned month abbreviations to numbers
+    month_abbr_to_num = {
+        'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4, 'May': 5, 'Jun': 6,
+        'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec': 12
+    }
+    scanned_month_nums = {month_abbr_to_num[month] for month in scanned_months}
+    
+    # Keep activities from months that weren't scanned
+    kept_activities = []
+    for activity in existing_activities:
+        activity_month = get_activity_month(activity)
+        if activity_month and activity_month not in scanned_month_nums:
+            kept_activities.append(activity)
+    
+    # Add all new activities (from scanned months)
+    merged_activities = kept_activities + new_activities
+    
+    print(f"{CHART} Kept {len(kept_activities)} activities from unscanned months")
+    print(f"{CHART} Added {len(new_activities)} activities from scanned months")
+    return merged_activities
+
+
+def export_to_json(activities_data, filename="data.json", incremental=False, scanned_months=None):
+    """Export activities data to a JSON file
+    
+    Args:
+        activities_data (dict): New activities data to export
+        filename (str): Output filename
+        incremental (bool): If True, merge with existing data instead of overwriting
+        scanned_months (list): List of month abbreviations that were scanned
+    """
+    if incremental and scanned_months:
+        # Load existing data
+        existing_data = load_existing_data(filename)
+        
+        if existing_data:
+            print(f"{ARROW} Performing incremental update to {filename}")
+            print(f"{ARROW} Scanned months: {scanned_months}")
+            # Merge activities for each runner
+            for runner, new_activities in activities_data.items():
+                if runner in existing_data["runners"]:
+                    existing_activities = existing_data["runners"][runner]["activities"]
+                    merged_activities = merge_activities_by_month(existing_activities, new_activities, scanned_months)
+                    activities_data[runner] = merged_activities
+                else:
+                    print(f"{ARROW} Adding new runner: {runner}")
+        else:
+            print(f"{ARROW} No existing data found, performing full export")
+    elif incremental:
+        print(f"{WARNING} Incremental mode requested but no scanned months provided, performing full export")
+    
     # Calculate some useful statistics while formatting the data
     formatted_data = {
         "runners": {},
@@ -539,9 +651,15 @@ def scrape_user_activities(user_id, name, months, cookie):
         return name, []
 
 
-def main():
+def main(start_month=None, end_month=None, incremental=False):
     start_time = time.time()
-        # Try to get cookies from GCP first
+    
+    # Get months to scan
+    months = get_months_until_now(start_month, end_month)
+    print(f"{ARROW} Scraping months: {months}")
+    
+    # Try to get cookies from GCP first
+    # export GOOGLE_APPLICATION_CREDENTIALS="sixth-emissary-453222-e7-8f56d80eb955.json"
     cookie = gcp_get_secret()
 
     # If no cookies from GCP, get from browser and update GCP
@@ -567,6 +685,7 @@ def main():
     print(f"{RUNNER} Starting concurrent scraping with {MAX_WORKERS} workers")
     print(f"{WARNING} Headless mode: {HEADLESS_MODE}")
     print(f"{CHART} Users to process: {len(spartans)}")
+    print(f"{CHART} Incremental update: {incremental}")
     
     # Use ThreadPoolExecutor for concurrent scraping
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
@@ -597,10 +716,11 @@ def main():
     print(f"{CHART} Total activities collected: {sum(len(activities) for activities in all_activities.values())}")
     print(f"{WARNING} Average time per user: {total_time/len(spartans):.1f} seconds")
     
-    export_to_json(all_activities)
+    export_to_json(all_activities, incremental=incremental, scanned_months=months)
 
 
 if __name__ == "__main__":
+    # Define spartans data
     spartans = {
         "3458344072": "Bruce",
         "1703449362": "PT",
@@ -615,15 +735,72 @@ if __name__ == "__main__":
         "3486035198": "Alfredo",
         # KnockKnck
     }
-    months = get_months_until_now()
-    print(f"{ARROW} Scraping months: {months}")
+    
+    # Set up command line argument parsing
+    parser = argparse.ArgumentParser(
+        description="Scrape Runkeeper activities for multiple users",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  python update_runkeeper_miles.py                    # Scan entire year
+  python update_runkeeper_miles.py --start-month 1    # Scan from January to now
+  python update_runkeeper_miles.py --start-month 12 --end-month 12  # Scan only December
+  python update_runkeeper_miles.py --start-month 11 --incremental   # Scan Nov-Dec with incremental update
+  python update_runkeeper_miles.py --start-month 9 --end-month 10   # Scan September-October
+        """
+    )
+    
+    parser.add_argument(
+        "--start-month", 
+        type=int, 
+        help="Start month number (1-12). If not provided, starts from January."
+    )
+    
+    parser.add_argument(
+        "--end-month", 
+        type=int, 
+        help="End month number (1-12). If not provided, goes until current month."
+    )
+    
+    parser.add_argument(
+        "--incremental", 
+        action="store_true", 
+        help="Perform incremental update instead of full overwrite. Only used when scanning partial months."
+    )
+    
+    args = parser.parse_args()
+    
+    # Validate month arguments
+    if args.start_month and not (1 <= args.start_month <= 12):
+        print(f"{CROSS} Invalid start month: {args.start_month}. Must be between 1 and 12")
+        exit(1)
+    
+    if args.end_month and not (1 <= args.end_month <= 12):
+        print(f"{CROSS} Invalid end month: {args.end_month}. Must be between 1 and 12")
+        exit(1)
+    
+    # Determine if we should use incremental updates
+    # Use incremental if:
+    # 1. User explicitly requested it with --incremental flag
+    # 2. We're scanning only a few months (not the whole year)
+    use_incremental = args.incremental
+    
+    if not use_incremental and args.start_month:
+        # If scanning partial year, suggest incremental mode
+        months_to_scan = get_months_until_now(args.start_month, args.end_month)
+        if len(months_to_scan) < 12:  # Less than full year
+            print(f"{WARNING} Scanning only {len(months_to_scan)} months. Consider using --incremental for faster updates.")
     
     # Start timing the entire script execution
     script_start_time = time.time()
     print(f"{RUNNER} Script execution started at {time.strftime('%H:%M:%S')}")
     print("=" * 60)
     
-    main()
+    try:
+        main(args.start_month, args.end_month, use_incremental)
+    except ValueError as e:
+        print(f"{CROSS} Error: {e}")
+        exit(1)
     
     # Calculate and print total execution time
     script_total_time = time.time() - script_start_time
