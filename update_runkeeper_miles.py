@@ -3,13 +3,13 @@ import browser_cookie3
 import json
 from playwright.sync_api import sync_playwright
 from datetime import datetime
-from pprint import pprint
+# from pprint import pprint  # Commented out since we disabled pprint output
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import threading
 import time
 import argparse
 import os
-from gcp_secret import gcp_get_secret, gcp_update_secret
+from gcp_secret import gcp_get_secret
 
 # ANSI color codes for terminal output
 class Colors:
@@ -38,7 +38,7 @@ TARGET_URL = "runkeeper.com"
 TRACKED_ACTIVITIES = ["running", "hiking", "walking", "trail running"]
 
 # Configuration for concurrent scraping
-MAX_WORKERS = 2  # Number of concurrent browser sessions (2 users at a time)
+MAX_WORKERS = 4  # Number of concurrent browser sessions (2 users at a time)
 HEADLESS_MODE = True  # Set to False for debugging (shows browser windows)
 
 # Performance notes:
@@ -166,9 +166,21 @@ def get_months_until_now(start_month=None, end_month=None):
     if start_month_num > end_month_num:
         raise ValueError(f"Start month ({start_month}) cannot be after end month ({end_month})")
     
+    # Special case: if scanning only the current month, also include the previous month
+    # This helps with websites that might not have current month data ready
+    months_to_scan = []
+    for month in range(start_month_num, end_month_num + 1):
+        months_to_scan.append(month)
+    
+    # If we're only scanning the current month, also include the previous month
+    if (start_month_num == current.month and end_month_num == current.month and 
+        current.month > 1):
+        months_to_scan.insert(0, current.month - 1)
+        print(f"{WARNING} Including previous month ({current.month - 1}) to ensure data availability")
+    
     return [
-        datetime(2025, month, 1).strftime("%b") 
-        for month in range(start_month_num, end_month_num + 1)
+        datetime(current.year, month, 1).strftime("%b") 
+        for month in months_to_scan
     ]
 
 
@@ -258,7 +270,8 @@ def scrape_activities(page, user_id, months, user_name=None):
     for month in months:
         try:
             print(f"{name_prefix}Processing month: {month}")
-            cur_month = f'[data-date="{month}-01-2025"]'
+            current_year = datetime.now().year
+            cur_month = f'[data-date="{month}-01-{current_year}"]'
 
             try:
                 print(f"{name_prefix}  {ARROW} Looking for month selector: {cur_month}")
@@ -397,7 +410,7 @@ def scrape_activities(page, user_id, months, user_name=None):
                         # Get the month from the current month selector to normalize the date
                         month_year = cur_month.split('"')[1]  # Extract "Jan-01-2025" from '[data-date="Jan-01-2025"]'
                         month_part = month_year.split('-')[0]  # Extract "Jan"
-                        year_part = month_year.split('-')[2]  # Extract "2025"
+                        year_part = month_year.split('-')[2]  # Extract current year
                         
                         # Debug: Print what we found
                         print(f"{name_prefix}    {ARROW} Found: {date_text}, {distance_text}, {activity_type}")
@@ -526,7 +539,10 @@ def get_activity_month(activity):
         # Parse the date and return month number
         date_parts = activity['date'].split('/')
         if len(date_parts) >= 2:
-            return int(date_parts[0])  # Month is first part
+            month = int(date_parts[0])  # Month is first part
+            # Validate month is in reasonable range
+            if 1 <= month <= 12:
+                return month
         return None
     except (ValueError, KeyError):
         return None
@@ -544,18 +560,28 @@ def merge_activities_by_month(existing_activities, new_activities, scanned_month
     }
     scanned_month_nums = {month_abbr_to_num[month] for month in scanned_months}
     
+    print(f"{ARROW} Scanned months (numbers): {scanned_month_nums}")
+    print(f"{ARROW} Original activities: {len(existing_activities)}")
+    print(f"{ARROW} New activities: {len(new_activities)}")
+    
     # Keep activities from months that weren't scanned
     kept_activities = []
+    removed_activities = []
     for activity in existing_activities:
         activity_month = get_activity_month(activity)
         if activity_month and activity_month not in scanned_month_nums:
             kept_activities.append(activity)
+        else:
+            removed_activities.append(activity)
     
     # Add all new activities (from scanned months)
     merged_activities = kept_activities + new_activities
     
     print(f"{CHART} Kept {len(kept_activities)} activities from unscanned months")
+    print(f"{CHART} Removed {len(removed_activities)} activities from scanned months")
     print(f"{CHART} Added {len(new_activities)} activities from scanned months")
+    print(f"{CHART} Final merged activities: {len(merged_activities)}")
+    
     return merged_activities
 
 
@@ -583,6 +609,9 @@ def export_to_json(activities_data, filename="data.json", incremental=False, sca
                     activities_data[runner] = merged_activities
                 else:
                     print(f"{ARROW} Adding new runner: {runner}")
+            
+            # After merging, we need to recalculate ALL statistics since they may be inaccurate
+            print(f"{ARROW} Recalculating statistics after incremental merge...")
         else:
             print(f"{ARROW} No existing data found, performing full export")
     elif incremental:
@@ -601,16 +630,17 @@ def export_to_json(activities_data, filename="data.json", incremental=False, sca
     }
 
     for runner, activities in activities_data.items():
-        # Calculate runner statistics
+        # Calculate runner statistics from the merged data
         total_distance = sum(act["distance"] for act in activities if act["distance"])
-        activity_types = set(act["type"] for act in activities)
+        # Use sorted list to maintain consistent ordering
+        activity_types = sorted(set(act["type"] for act in activities))
 
         formatted_data["runners"][runner] = {
             "name": runner,
             "stats": {
                 "totalActivities": len(activities),
                 "totalDistance": round(total_distance, 2),
-                "activityTypes": list(activity_types),
+                "activityTypes": activity_types,
             },
             "activities": sorted(activities, key=lambda x: x["date"]),
         }
@@ -618,9 +648,12 @@ def export_to_json(activities_data, filename="data.json", incremental=False, sca
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(formatted_data, f, indent=2, ensure_ascii=False)
 
-    pprint(formatted_data)
+    # pprint(formatted_data)
     print(f"{CHART} Total runners: {formatted_data['metadata']['totalRunners']}")
     print(f"{CHART} Total activities: {formatted_data['metadata']['totalActivities']}")
+    
+    if incremental and scanned_months:
+        print(f"{ARROW} Statistics recalculated for all runners after incremental merge")
 
 
 def scrape_user_activities(user_id, name, months, cookie):
@@ -731,8 +764,8 @@ if __name__ == "__main__":
         "2953059004": "Jon",
         "2948464110": "Tin",
         "2966454388": "Muscles",
-        # "3338995094": "Gato",
         "3486035198": "Alfredo",
+        # "3338995094": "Gato",
         # KnockKnck
     }
     

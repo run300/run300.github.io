@@ -1,1438 +1,14 @@
 {
   "runners": {
-    "Bruce": {
-      "name": "Bruce",
-      "stats": {
-        "totalActivities": 100,
-        "totalDistance": 143.47,
-        "activityTypes": [
-          "Running"
-        ]
-      },
-      "activities": [
-        {
-          "date": "01/02/25",
-          "distance": 1.11,
-          "type": "Running",
-          "duration": "12:40",
-          "pace": "11:23"
-        },
-        {
-          "date": "01/07/25",
-          "distance": 1.11,
-          "type": "Running",
-          "duration": "10:50",
-          "pace": "9:44"
-        },
-        {
-          "date": "01/08/25",
-          "distance": 1.78,
-          "type": "Running",
-          "duration": "20:57",
-          "pace": "11:47"
-        },
-        {
-          "date": "01/11/25",
-          "distance": 1.12,
-          "type": "Running",
-          "duration": "10:16",
-          "pace": "9:11"
-        },
-        {
-          "date": "01/12/25",
-          "distance": 2.05,
-          "type": "Running",
-          "duration": "20:30",
-          "pace": "10:00"
-        },
-        {
-          "date": "01/14/25",
-          "distance": 2.04,
-          "type": "Running",
-          "duration": "19:39",
-          "pace": "9:38"
-        },
-        {
-          "date": "01/15/25",
-          "distance": 1.13,
-          "type": "Running",
-          "duration": "11:10",
-          "pace": "9:54"
-        },
-        {
-          "date": "01/16/25",
-          "distance": 1.0,
-          "type": "Running",
-          "duration": "16:03",
-          "pace": "16:03"
-        },
-        {
-          "date": "01/20/25",
-          "distance": 3.14,
-          "type": "Running",
-          "duration": "30:35",
-          "pace": "9:44"
-        },
-        {
-          "date": "01/21/25",
-          "distance": 1.04,
-          "type": "Running",
-          "duration": "20:13",
-          "pace": "19:31"
-        },
-        {
-          "date": "01/22/25",
-          "distance": 1.67,
-          "type": "Running",
-          "duration": "35:08",
-          "pace": "21:00"
-        },
-        {
-          "date": "01/23/25",
-          "distance": 1.13,
-          "type": "Running",
-          "duration": "10:36",
-          "pace": "9:23"
-        },
-        {
-          "date": "01/24/25",
-          "distance": 1.12,
-          "type": "Running",
-          "duration": "10:13",
-          "pace": "9:06"
-        },
-        {
-          "date": "01/27/25",
-          "distance": 1.12,
-          "type": "Running",
-          "duration": "10:13",
-          "pace": "9:09"
-        },
-        {
-          "date": "01/28/25",
-          "distance": 0.29,
-          "type": "Running",
-          "duration": "2:26",
-          "pace": "8:22"
-        },
-        {
-          "date": "01/29/25",
-          "distance": 2.19,
-          "type": "Running",
-          "duration": "20:38",
-          "pace": "9:24"
-        },
-        {
-          "date": "02/02/25",
-          "distance": 3.07,
-          "type": "Running",
-          "duration": "31:32",
-          "pace": "10:17"
-        },
-        {
-          "date": "02/02/25",
-          "distance": 1.95,
-          "type": "Running",
-          "duration": "25:09",
-          "pace": "12:54"
-        },
-        {
-          "date": "02/04/25",
-          "distance": 1.22,
-          "type": "Running",
-          "duration": "14:57",
-          "pace": "12:15"
-        },
-        {
-          "date": "02/05/25",
-          "distance": 0.5,
-          "type": "Running",
-          "duration": "8:51",
-          "pace": "17:42"
-        },
-        {
-          "date": "02/05/25",
-          "distance": 0.49,
-          "type": "Running",
-          "duration": "5:52",
-          "pace": "12:04"
-        },
-        {
-          "date": "02/05/25",
-          "distance": 0.58,
-          "type": "Running",
-          "duration": "5:55",
-          "pace": "10:14"
-        },
-        {
-          "date": "02/07/25",
-          "distance": 0.21,
-          "type": "Running",
-          "duration": "4:51",
-          "pace": "22:57"
-        },
-        {
-          "date": "02/07/25",
-          "distance": 1.11,
-          "type": "Running",
-          "duration": "10:06",
-          "pace": "9:06"
-        },
-        {
-          "date": "02/08/25",
-          "distance": 1.0,
-          "type": "Running",
-          "duration": "18:06",
-          "pace": "18:01"
-        },
-        {
-          "date": "02/10/25",
-          "distance": 0.4,
-          "type": "Running",
-          "duration": "8:36",
-          "pace": "21:31"
-        },
-        {
-          "date": "02/10/25",
-          "distance": 2.21,
-          "type": "Running",
-          "duration": "21:32",
-          "pace": "9:44"
-        },
-        {
-          "date": "02/13/25",
-          "distance": 1.1,
-          "type": "Running",
-          "duration": "9:58",
-          "pace": "9:04"
-        },
-        {
-          "date": "02/14/25",
-          "distance": 0.5,
-          "type": "Running",
-          "duration": "8:46",
-          "pace": "17:32"
-        },
-        {
-          "date": "02/14/25",
-          "distance": 0.56,
-          "type": "Running",
-          "duration": "5:01",
-          "pace": "8:57"
-        },
-        {
-          "date": "02/17/25",
-          "distance": 1.12,
-          "type": "Running",
-          "duration": "10:23",
-          "pace": "9:17"
-        },
-        {
-          "date": "02/18/25",
-          "distance": 0.39,
-          "type": "Running",
-          "duration": "4:02",
-          "pace": "10:27"
-        },
-        {
-          "date": "02/18/25",
-          "distance": 0.32,
-          "type": "Running",
-          "duration": "3:04",
-          "pace": "9:32"
-        },
-        {
-          "date": "02/18/25",
-          "distance": 0.31,
-          "type": "Running",
-          "duration": "3:00",
-          "pace": "9:34"
-        },
-        {
-          "date": "02/24/25",
-          "distance": 1.67,
-          "type": "Running",
-          "duration": "21:33",
-          "pace": "12:55"
-        },
-        {
-          "date": "02/25/25",
-          "distance": 1.01,
-          "type": "Running",
-          "duration": "13:20",
-          "pace": "13:15"
-        },
-        {
-          "date": "02/25/25",
-          "distance": 0.3,
-          "type": "Running",
-          "duration": "2:33",
-          "pace": "8:28"
-        },
-        {
-          "date": "02/26/25",
-          "distance": 0.28,
-          "type": "Running",
-          "duration": "7:14",
-          "pace": "26:01"
-        },
-        {
-          "date": "02/26/25",
-          "distance": 1.88,
-          "type": "Running",
-          "duration": "18:45",
-          "pace": "9:59"
-        },
-        {
-          "date": "03/03/25",
-          "distance": 0.3,
-          "type": "Running",
-          "duration": "5:50",
-          "pace": "19:27"
-        },
-        {
-          "date": "03/03/25",
-          "distance": 1.12,
-          "type": "Running",
-          "duration": "11:49",
-          "pace": "10:36"
-        },
-        {
-          "date": "03/04/25",
-          "distance": 2.22,
-          "type": "Running",
-          "duration": "25:06",
-          "pace": "11:19"
-        },
-        {
-          "date": "03/06/25",
-          "distance": 0.62,
-          "type": "Running",
-          "duration": "13:41",
-          "pace": "22:08"
-        },
-        {
-          "date": "03/06/25",
-          "distance": 2.13,
-          "type": "Running",
-          "duration": "23:54",
-          "pace": "11:12"
-        },
-        {
-          "date": "03/08/25",
-          "distance": 3.52,
-          "type": "Running",
-          "duration": "34:07",
-          "pace": "9:42"
-        },
-        {
-          "date": "03/11/25",
-          "distance": 1.77,
-          "type": "Running",
-          "duration": "19:57",
-          "pace": "11:17"
-        },
-        {
-          "date": "03/12/25",
-          "distance": 1.66,
-          "type": "Running",
-          "duration": "21:07",
-          "pace": "12:45"
-        },
-        {
-          "date": "03/15/25",
-          "distance": 0.37,
-          "type": "Running",
-          "duration": "5:30",
-          "pace": "14:51"
-        },
-        {
-          "date": "03/17/25",
-          "distance": 1.66,
-          "type": "Running",
-          "duration": "20:37",
-          "pace": "12:24"
-        },
-        {
-          "date": "03/18/25",
-          "distance": 1.76,
-          "type": "Running",
-          "duration": "17:40",
-          "pace": "10:01"
-        },
-        {
-          "date": "03/19/25",
-          "distance": 1.28,
-          "type": "Running",
-          "duration": "13:01",
-          "pace": "10:11"
-        },
-        {
-          "date": "03/24/25",
-          "distance": 2.33,
-          "type": "Running",
-          "duration": "24:04",
-          "pace": "10:20"
-        },
-        {
-          "date": "03/26/25",
-          "distance": 3.02,
-          "type": "Running",
-          "duration": "37:06",
-          "pace": "12:17"
-        },
-        {
-          "date": "03/28/25",
-          "distance": 0.21,
-          "type": "Running",
-          "duration": "4:30",
-          "pace": "21:21"
-        },
-        {
-          "date": "03/28/25",
-          "distance": 1.11,
-          "type": "Running",
-          "duration": "9:42",
-          "pace": "8:44"
-        },
-        {
-          "date": "03/31/25",
-          "distance": 0.2,
-          "type": "Running",
-          "duration": "4:25",
-          "pace": "22:27"
-        },
-        {
-          "date": "03/31/25",
-          "distance": 1.09,
-          "type": "Running",
-          "duration": "9:06",
-          "pace": "8:22"
-        },
-        {
-          "date": "04/09/25",
-          "distance": 3.74,
-          "type": "Running",
-          "duration": "45:10",
-          "pace": "12:04"
-        },
-        {
-          "date": "04/14/25",
-          "distance": 1.23,
-          "type": "Running",
-          "duration": "12:41",
-          "pace": "10:20"
-        },
-        {
-          "date": "04/19/25",
-          "distance": 4.15,
-          "type": "Running",
-          "duration": "41:13",
-          "pace": "9:55"
-        },
-        {
-          "date": "04/22/25",
-          "distance": 1.12,
-          "type": "Running",
-          "duration": "11:37",
-          "pace": "10:23"
-        },
-        {
-          "date": "04/30/25",
-          "distance": 1.11,
-          "type": "Running",
-          "duration": "9:49",
-          "pace": "8:49"
-        },
-        {
-          "date": "05/08/25",
-          "distance": 1.15,
-          "type": "Running",
-          "duration": "9:53",
-          "pace": "8:34"
-        },
-        {
-          "date": "05/20/25",
-          "distance": 1.11,
-          "type": "Running",
-          "duration": "9:15",
-          "pace": "8:19"
-        },
-        {
-          "date": "05/21/25",
-          "distance": 1.1,
-          "type": "Running",
-          "duration": "10:16",
-          "pace": "9:18"
-        },
-        {
-          "date": "05/28/25",
-          "distance": 1.11,
-          "type": "Running",
-          "duration": "10:48",
-          "pace": "9:44"
-        },
-        {
-          "date": "06/14/25",
-          "distance": 1.75,
-          "type": "Running",
-          "duration": "16:10",
-          "pace": "9:15"
-        },
-        {
-          "date": "06/16/25",
-          "distance": 0.31,
-          "type": "Running",
-          "duration": "3:38",
-          "pace": "11:32"
-        },
-        {
-          "date": "06/16/25",
-          "distance": 0.57,
-          "type": "Running",
-          "duration": "4:59",
-          "pace": "8:42"
-        },
-        {
-          "date": "06/23/25",
-          "distance": 1.12,
-          "type": "Running",
-          "duration": "10:23",
-          "pace": "9:18"
-        },
-        {
-          "date": "06/24/25",
-          "distance": 1.24,
-          "type": "Running",
-          "duration": "13:13",
-          "pace": "10:39"
-        },
-        {
-          "date": "06/28/25",
-          "distance": 1.13,
-          "type": "Running",
-          "duration": "10:10",
-          "pace": "9:00"
-        },
-        {
-          "date": "06/29/25",
-          "distance": 1.29,
-          "type": "Running",
-          "duration": "13:55",
-          "pace": "10:46"
-        },
-        {
-          "date": "06/30/25",
-          "distance": 0.3,
-          "type": "Running",
-          "duration": "2:27",
-          "pace": "8:10"
-        },
-        {
-          "date": "06/30/25",
-          "distance": 0.6,
-          "type": "Running",
-          "duration": "5:24",
-          "pace": "8:59"
-        },
-        {
-          "date": "07/02/25",
-          "distance": 1.55,
-          "type": "Running",
-          "duration": "18:21",
-          "pace": "11:50"
-        },
-        {
-          "date": "07/06/25",
-          "distance": 1.65,
-          "type": "Running",
-          "duration": "19:14",
-          "pace": "11:40"
-        },
-        {
-          "date": "07/07/25",
-          "distance": 1.25,
-          "type": "Running",
-          "duration": "14:20",
-          "pace": "11:29"
-        },
-        {
-          "date": "07/08/25",
-          "distance": 1.25,
-          "type": "Running",
-          "duration": "13:31",
-          "pace": "10:51"
-        },
-        {
-          "date": "07/15/25",
-          "distance": 1.27,
-          "type": "Running",
-          "duration": "12:36",
-          "pace": "9:57"
-        },
-        {
-          "date": "07/17/25",
-          "distance": 3.88,
-          "type": "Running",
-          "duration": "56:07",
-          "pace": "14:29"
-        },
-        {
-          "date": "07/17/25",
-          "distance": 2.2,
-          "type": "Running",
-          "duration": "21:59",
-          "pace": "9:59"
-        },
-        {
-          "date": "07/21/25",
-          "distance": 0.58,
-          "type": "Running",
-          "duration": "9:19",
-          "pace": "16:10"
-        },
-        {
-          "date": "07/21/25",
-          "distance": 1.76,
-          "type": "Running",
-          "duration": "19:26",
-          "pace": "11:02"
-        },
-        {
-          "date": "07/22/25",
-          "distance": 1.23,
-          "type": "Running",
-          "duration": "14:16",
-          "pace": "11:35"
-        },
-        {
-          "date": "07/23/25",
-          "distance": 1.26,
-          "type": "Running",
-          "duration": "13:07",
-          "pace": "10:26"
-        },
-        {
-          "date": "08/03/25",
-          "distance": 1.68,
-          "type": "Running",
-          "duration": "18:21",
-          "pace": "10:55"
-        },
-        {
-          "date": "08/05/25",
-          "distance": 1.12,
-          "type": "Running",
-          "duration": "9:12",
-          "pace": "8:12"
-        },
-        {
-          "date": "08/06/25",
-          "distance": 1.25,
-          "type": "Running",
-          "duration": "13:26",
-          "pace": "10:47"
-        },
-        {
-          "date": "08/12/25",
-          "distance": 1.14,
-          "type": "Running",
-          "duration": "15:51",
-          "pace": "13:55"
-        },
-        {
-          "date": "08/13/25",
-          "distance": 5.5,
-          "type": "Running",
-          "duration": "1:40:18",
-          "pace": "18:14"
-        },
-        {
-          "date": "08/19/25",
-          "distance": 2.35,
-          "type": "Running",
-          "duration": "26:24",
-          "pace": "11:15"
-        },
-        {
-          "date": "08/21/25",
-          "distance": 3.47,
-          "type": "Running",
-          "duration": "1:11:44",
-          "pace": "20:42"
-        },
-        {
-          "date": "08/26/25",
-          "distance": 1.05,
-          "type": "Running",
-          "duration": "9:20",
-          "pace": "8:55"
-        },
-        {
-          "date": "08/27/25",
-          "distance": 2.21,
-          "type": "Running",
-          "duration": "25:06",
-          "pace": "11:22"
-        },
-        {
-          "date": "08/28/25",
-          "distance": 2.13,
-          "type": "Running",
-          "duration": "22:19",
-          "pace": "10:28"
-        },
-        {
-          "date": "08/30/25",
-          "distance": 4.2,
-          "type": "Running",
-          "duration": "0:01",
-          "pace": "0:00"
-        },
-        {
-          "date": "09/01/25",
-          "distance": 1.12,
-          "type": "Running",
-          "duration": "9:50",
-          "pace": "8:47"
-        },
-        {
-          "date": "09/02/25",
-          "distance": 1.24,
-          "type": "Running",
-          "duration": "14:48",
-          "pace": "11:54"
-        },
-        {
-          "date": "09/03/25",
-          "distance": 1.41,
-          "type": "Running",
-          "duration": "34:12",
-          "pace": "24:12"
-        }
-      ]
-    },
-    "PT": {
-      "name": "PT",
-      "stats": {
-        "totalActivities": 100,
-        "totalDistance": 233.97,
-        "activityTypes": [
-          "Running"
-        ]
-      },
-      "activities": [
-        {
-          "date": "01/02/25",
-          "distance": 2.66,
-          "type": "Running",
-          "duration": "37:30",
-          "pace": "14:05"
-        },
-        {
-          "date": "01/03/25",
-          "distance": 2.06,
-          "type": "Running",
-          "duration": "24:18",
-          "pace": "11:49"
-        },
-        {
-          "date": "01/04/25",
-          "distance": 1.09,
-          "type": "Running",
-          "duration": "24:25",
-          "pace": "22:24"
-        },
-        {
-          "date": "01/05/25",
-          "distance": 1.13,
-          "type": "Running",
-          "duration": "22:57",
-          "pace": "20:14"
-        },
-        {
-          "date": "01/06/25",
-          "distance": 1.14,
-          "type": "Running",
-          "duration": "11:02",
-          "pace": "9:39"
-        },
-        {
-          "date": "01/07/25",
-          "distance": 1.14,
-          "type": "Running",
-          "duration": "12:14",
-          "pace": "10:43"
-        },
-        {
-          "date": "01/09/25",
-          "distance": 4.86,
-          "type": "Running",
-          "duration": "1:18:50",
-          "pace": "16:12"
-        },
-        {
-          "date": "01/12/25",
-          "distance": 2.31,
-          "type": "Running",
-          "duration": "37:10",
-          "pace": "16:05"
-        },
-        {
-          "date": "01/13/25",
-          "distance": 2.73,
-          "type": "Running",
-          "duration": "33:51",
-          "pace": "12:23"
-        },
-        {
-          "date": "01/14/25",
-          "distance": 3.45,
-          "type": "Running",
-          "duration": "46:17",
-          "pace": "13:25"
-        },
-        {
-          "date": "01/17/25",
-          "distance": 1.15,
-          "type": "Running",
-          "duration": "12:45",
-          "pace": "11:05"
-        },
-        {
-          "date": "01/18/25",
-          "distance": 1.15,
-          "type": "Running",
-          "duration": "17:01",
-          "pace": "14:46"
-        },
-        {
-          "date": "01/22/25",
-          "distance": 1.23,
-          "type": "Running",
-          "duration": "24:32",
-          "pace": "19:53"
-        },
-        {
-          "date": "01/23/25",
-          "distance": 1.23,
-          "type": "Running",
-          "duration": "23:19",
-          "pace": "19:00"
-        },
-        {
-          "date": "01/24/25",
-          "distance": 1.21,
-          "type": "Running",
-          "duration": "22:34",
-          "pace": "18:42"
-        },
-        {
-          "date": "01/25/25",
-          "distance": 1.18,
-          "type": "Running",
-          "duration": "23:26",
-          "pace": "19:48"
-        },
-        {
-          "date": "02/02/25",
-          "distance": 0.6,
-          "type": "Running",
-          "duration": "25:10",
-          "pace": "41:46"
-        },
-        {
-          "date": "02/03/25",
-          "distance": 4.9,
-          "type": "Running",
-          "duration": "1:12:50",
-          "pace": "14:51"
-        },
-        {
-          "date": "02/04/25",
-          "distance": 1.64,
-          "type": "Running",
-          "duration": "26:08",
-          "pace": "15:54"
-        },
-        {
-          "date": "02/06/25",
-          "distance": 1.17,
-          "type": "Running",
-          "duration": "12:36",
-          "pace": "10:47"
-        },
-        {
-          "date": "02/07/25",
-          "distance": 1.17,
-          "type": "Running",
-          "duration": "12:27",
-          "pace": "10:37"
-        },
-        {
-          "date": "02/08/25",
-          "distance": 1.16,
-          "type": "Running",
-          "duration": "24:48",
-          "pace": "21:27"
-        },
-        {
-          "date": "02/09/25",
-          "distance": 1.25,
-          "type": "Running",
-          "duration": "30:11",
-          "pace": "24:04"
-        },
-        {
-          "date": "02/10/25",
-          "distance": 4.91,
-          "type": "Running",
-          "duration": "1:07:28",
-          "pace": "13:45"
-        },
-        {
-          "date": "02/13/25",
-          "distance": 1.15,
-          "type": "Running",
-          "duration": "19:02",
-          "pace": "16:31"
-        },
-        {
-          "date": "02/18/25",
-          "distance": 4.92,
-          "type": "Running",
-          "duration": "1:05:03",
-          "pace": "13:14"
-        },
-        {
-          "date": "02/24/25",
-          "distance": 4.9,
-          "type": "Running",
-          "duration": "1:05:39",
-          "pace": "13:24"
-        },
-        {
-          "date": "03/04/25",
-          "distance": 4.91,
-          "type": "Running",
-          "duration": "1:02:50",
-          "pace": "12:48"
-        },
-        {
-          "date": "03/06/25",
-          "distance": 1.16,
-          "type": "Running",
-          "duration": "21:44",
-          "pace": "18:45"
-        },
-        {
-          "date": "03/07/25",
-          "distance": 1.15,
-          "type": "Running",
-          "duration": "23:47",
-          "pace": "20:44"
-        },
-        {
-          "date": "03/10/25",
-          "distance": 1.14,
-          "type": "Running",
-          "duration": "27:12",
-          "pace": "23:47"
-        },
-        {
-          "date": "03/10/25",
-          "distance": 1.13,
-          "type": "Running",
-          "duration": "19:06",
-          "pace": "16:51"
-        },
-        {
-          "date": "03/11/25",
-          "distance": 4.91,
-          "type": "Running",
-          "duration": "1:00:45",
-          "pace": "12:23"
-        },
-        {
-          "date": "03/14/25",
-          "distance": 1.16,
-          "type": "Running",
-          "duration": "23:07",
-          "pace": "19:58"
-        },
-        {
-          "date": "03/17/25",
-          "distance": 4.91,
-          "type": "Running",
-          "duration": "1:05:16",
-          "pace": "13:18"
-        },
-        {
-          "date": "03/19/25",
-          "distance": 1.17,
-          "type": "Running",
-          "duration": "18:09",
-          "pace": "15:31"
-        },
-        {
-          "date": "03/21/25",
-          "distance": 1.15,
-          "type": "Running",
-          "duration": "17:54",
-          "pace": "15:37"
-        },
-        {
-          "date": "03/23/25",
-          "distance": 1.19,
-          "type": "Running",
-          "duration": "40:37",
-          "pace": "34:14"
-        },
-        {
-          "date": "03/24/25",
-          "distance": 1.16,
-          "type": "Running",
-          "duration": "44:05",
-          "pace": "38:08"
-        },
-        {
-          "date": "03/24/25",
-          "distance": 4.91,
-          "type": "Running",
-          "duration": "1:05:27",
-          "pace": "13:20"
-        },
-        {
-          "date": "03/26/25",
-          "distance": 1.17,
-          "type": "Running",
-          "duration": "24:05",
-          "pace": "20:39"
-        },
-        {
-          "date": "03/31/25",
-          "distance": 4.9,
-          "type": "Running",
-          "duration": "1:09:25",
-          "pace": "14:11"
-        },
-        {
-          "date": "04/07/25",
-          "distance": 4.93,
-          "type": "Running",
-          "duration": "1:11:59",
-          "pace": "14:35"
-        },
-        {
-          "date": "04/09/25",
-          "distance": 1.17,
-          "type": "Running",
-          "duration": "30:18",
-          "pace": "25:54"
-        },
-        {
-          "date": "04/11/25",
-          "distance": 1.14,
-          "type": "Running",
-          "duration": "22:50",
-          "pace": "20:00"
-        },
-        {
-          "date": "04/14/25",
-          "distance": 2.73,
-          "type": "Running",
-          "duration": "44:00",
-          "pace": "16:07"
-        },
-        {
-          "date": "04/14/25",
-          "distance": 2.18,
-          "type": "Running",
-          "duration": "32:43",
-          "pace": "14:59"
-        },
-        {
-          "date": "04/15/25",
-          "distance": 1.15,
-          "type": "Running",
-          "duration": "24:31",
-          "pace": "21:16"
-        },
-        {
-          "date": "04/20/25",
-          "distance": 1.14,
-          "type": "Running",
-          "duration": "29:39",
-          "pace": "25:57"
-        },
-        {
-          "date": "04/21/25",
-          "distance": 4.91,
-          "type": "Running",
-          "duration": "1:09:03",
-          "pace": "14:04"
-        },
-        {
-          "date": "04/28/25",
-          "distance": 1.08,
-          "type": "Running",
-          "duration": "32:19",
-          "pace": "29:53"
-        },
-        {
-          "date": "04/28/25",
-          "distance": 5.02,
-          "type": "Running",
-          "duration": "1:13:04",
-          "pace": "14:34"
-        },
-        {
-          "date": "05/05/25",
-          "distance": 4.92,
-          "type": "Running",
-          "duration": "1:08:40",
-          "pace": "13:57"
-        },
-        {
-          "date": "05/10/25",
-          "distance": 3.06,
-          "type": "Running",
-          "duration": "1:17:49",
-          "pace": "25:28"
-        },
-        {
-          "date": "05/12/25",
-          "distance": 4.9,
-          "type": "Running",
-          "duration": "1:18:48",
-          "pace": "16:05"
-        },
-        {
-          "date": "05/20/25",
-          "distance": 2.39,
-          "type": "Running",
-          "duration": "47:56",
-          "pace": "20:04"
-        },
-        {
-          "date": "05/23/25",
-          "distance": 2.34,
-          "type": "Running",
-          "duration": "38:34",
-          "pace": "16:29"
-        },
-        {
-          "date": "06/01/25",
-          "distance": 2.19,
-          "type": "Running",
-          "duration": "55:53",
-          "pace": "25:30"
-        },
-        {
-          "date": "06/08/25",
-          "distance": 2.2,
-          "type": "Running",
-          "duration": "36:34",
-          "pace": "16:37"
-        },
-        {
-          "date": "06/10/25",
-          "distance": 1.12,
-          "type": "Running",
-          "duration": "32:19",
-          "pace": "28:56"
-        },
-        {
-          "date": "06/10/25",
-          "distance": 4.69,
-          "type": "Running",
-          "duration": "1:28:14",
-          "pace": "18:49"
-        },
-        {
-          "date": "06/18/25",
-          "distance": 1.07,
-          "type": "Running",
-          "duration": "21:59",
-          "pace": "20:27"
-        },
-        {
-          "date": "06/24/25",
-          "distance": 2.26,
-          "type": "Running",
-          "duration": "42:24",
-          "pace": "18:46"
-        },
-        {
-          "date": "06/26/25",
-          "distance": 1.16,
-          "type": "Running",
-          "duration": "43:12",
-          "pace": "37:08"
-        },
-        {
-          "date": "06/27/25",
-          "distance": 2.19,
-          "type": "Running",
-          "duration": "38:36",
-          "pace": "17:38"
-        },
-        {
-          "date": "06/30/25",
-          "distance": 2.49,
-          "type": "Running",
-          "duration": "47:00",
-          "pace": "18:52"
-        },
-        {
-          "date": "07/01/25",
-          "distance": 2.74,
-          "type": "Running",
-          "duration": "53:52",
-          "pace": "19:39"
-        },
-        {
-          "date": "07/07/25",
-          "distance": 1.51,
-          "type": "Running",
-          "duration": "40:00",
-          "pace": "26:29"
-        },
-        {
-          "date": "07/07/25",
-          "distance": 1.16,
-          "type": "Running",
-          "duration": "23:45",
-          "pace": "20:31"
-        },
-        {
-          "date": "07/08/25",
-          "distance": 2.55,
-          "type": "Running",
-          "duration": "45:42",
-          "pace": "17:54"
-        },
-        {
-          "date": "07/09/25",
-          "distance": 1.92,
-          "type": "Running",
-          "duration": "34:54",
-          "pace": "18:12"
-        },
-        {
-          "date": "07/16/25",
-          "distance": 2.68,
-          "type": "Running",
-          "duration": "45:24",
-          "pace": "16:57"
-        },
-        {
-          "date": "07/18/25",
-          "distance": 2.83,
-          "type": "Running",
-          "duration": "45:30",
-          "pace": "16:04"
-        },
-        {
-          "date": "07/21/25",
-          "distance": 2.72,
-          "type": "Running",
-          "duration": "53:15",
-          "pace": "19:33"
-        },
-        {
-          "date": "07/22/25",
-          "distance": 3.49,
-          "type": "Running",
-          "duration": "41:25",
-          "pace": "11:52"
-        },
-        {
-          "date": "07/27/25",
-          "distance": 1.17,
-          "type": "Running",
-          "duration": "36:13",
-          "pace": "30:58"
-        },
-        {
-          "date": "07/28/25",
-          "distance": 2.78,
-          "type": "Running",
-          "duration": "36:42",
-          "pace": "13:12"
-        },
-        {
-          "date": "07/29/25",
-          "distance": 2.93,
-          "type": "Running",
-          "duration": "50:33",
-          "pace": "17:14"
-        },
-        {
-          "date": "07/30/25",
-          "distance": 2.13,
-          "type": "Running",
-          "duration": "30:39",
-          "pace": "14:24"
-        },
-        {
-          "date": "07/31/25",
-          "distance": 1.67,
-          "type": "Running",
-          "duration": "23:20",
-          "pace": "14:01"
-        },
-        {
-          "date": "08/03/25",
-          "distance": 2.21,
-          "type": "Running",
-          "duration": "23:37",
-          "pace": "10:40"
-        },
-        {
-          "date": "08/05/25",
-          "distance": 2.21,
-          "type": "Running",
-          "duration": "23:22",
-          "pace": "10:34"
-        },
-        {
-          "date": "08/06/25",
-          "distance": 1.07,
-          "type": "Running",
-          "duration": "29:09",
-          "pace": "27:07"
-        },
-        {
-          "date": "08/06/25",
-          "distance": 2.21,
-          "type": "Running",
-          "duration": "31:56",
-          "pace": "14:28"
-        },
-        {
-          "date": "08/07/25",
-          "distance": 2.5,
-          "type": "Running",
-          "duration": "45:00",
-          "pace": "18:00"
-        },
-        {
-          "date": "08/08/25",
-          "distance": 2.22,
-          "type": "Running",
-          "duration": "43:43",
-          "pace": "19:40"
-        },
-        {
-          "date": "08/11/25",
-          "distance": 2.39,
-          "type": "Running",
-          "duration": "36:11",
-          "pace": "15:08"
-        },
-        {
-          "date": "08/12/25",
-          "distance": 2.35,
-          "type": "Running",
-          "duration": "36:25",
-          "pace": "15:30"
-        },
-        {
-          "date": "08/13/25",
-          "distance": 2.61,
-          "type": "Running",
-          "duration": "39:13",
-          "pace": "15:03"
-        },
-        {
-          "date": "08/14/25",
-          "distance": 1.4,
-          "type": "Running",
-          "duration": "33:36",
-          "pace": "24:05"
-        },
-        {
-          "date": "08/18/25",
-          "distance": 4.89,
-          "type": "Running",
-          "duration": "1:22:57",
-          "pace": "16:58"
-        },
-        {
-          "date": "08/19/25",
-          "distance": 2.82,
-          "type": "Running",
-          "duration": "43:32",
-          "pace": "15:25"
-        },
-        {
-          "date": "08/21/25",
-          "distance": 1.12,
-          "type": "Running",
-          "duration": "16:38",
-          "pace": "14:51"
-        },
-        {
-          "date": "08/25/25",
-          "distance": 2.83,
-          "type": "Running",
-          "duration": "41:34",
-          "pace": "14:42"
-        },
-        {
-          "date": "08/26/25",
-          "distance": 2.51,
-          "type": "Running",
-          "duration": "31:41",
-          "pace": "12:37"
-        },
-        {
-          "date": "08/27/25",
-          "distance": 1.53,
-          "type": "Running",
-          "duration": "35:09",
-          "pace": "22:58"
-        },
-        {
-          "date": "08/29/25",
-          "distance": 2.23,
-          "type": "Running",
-          "duration": "40:09",
-          "pace": "17:58"
-        },
-        {
-          "date": "09/02/25",
-          "distance": 2.36,
-          "type": "Running",
-          "duration": "30:40",
-          "pace": "13:01"
-        },
-        {
-          "date": "09/03/25",
-          "distance": 2.4,
-          "type": "Running",
-          "duration": "30:43",
-          "pace": "12:49"
-        },
-        {
-          "date": "09/04/25",
-          "distance": 1.79,
-          "type": "Running",
-          "duration": "35:18",
-          "pace": "19:40"
-        }
-      ]
-    },
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
         "totalActivities": 55,
         "totalDistance": 135.62,
         "activityTypes": [
+          "Hiking",
           "Running",
-          "Walking",
-          "Hiking"
+          "Walking"
         ]
       },
       "activities": [
@@ -2238,6 +814,1437 @@
           "type": "Running",
           "duration": "40:08",
           "pace": "14:29"
+        }
+      ]
+    },
+    "Bruce": {
+      "name": "Bruce",
+      "stats": {
+        "totalActivities": 100,
+        "totalDistance": 143.47,
+        "activityTypes": [
+          "Running"
+        ]
+      },
+      "activities": [
+        {
+          "date": "01/02/25",
+          "distance": 1.11,
+          "type": "Running",
+          "duration": "12:40",
+          "pace": "11:23"
+        },
+        {
+          "date": "01/07/25",
+          "distance": 1.11,
+          "type": "Running",
+          "duration": "10:50",
+          "pace": "9:44"
+        },
+        {
+          "date": "01/08/25",
+          "distance": 1.78,
+          "type": "Running",
+          "duration": "20:57",
+          "pace": "11:47"
+        },
+        {
+          "date": "01/11/25",
+          "distance": 1.12,
+          "type": "Running",
+          "duration": "10:16",
+          "pace": "9:11"
+        },
+        {
+          "date": "01/12/25",
+          "distance": 2.05,
+          "type": "Running",
+          "duration": "20:30",
+          "pace": "10:00"
+        },
+        {
+          "date": "01/14/25",
+          "distance": 2.04,
+          "type": "Running",
+          "duration": "19:39",
+          "pace": "9:38"
+        },
+        {
+          "date": "01/15/25",
+          "distance": 1.13,
+          "type": "Running",
+          "duration": "11:10",
+          "pace": "9:54"
+        },
+        {
+          "date": "01/16/25",
+          "distance": 1.0,
+          "type": "Running",
+          "duration": "16:03",
+          "pace": "16:03"
+        },
+        {
+          "date": "01/20/25",
+          "distance": 3.14,
+          "type": "Running",
+          "duration": "30:35",
+          "pace": "9:44"
+        },
+        {
+          "date": "01/21/25",
+          "distance": 1.04,
+          "type": "Running",
+          "duration": "20:13",
+          "pace": "19:31"
+        },
+        {
+          "date": "01/22/25",
+          "distance": 1.67,
+          "type": "Running",
+          "duration": "35:08",
+          "pace": "21:00"
+        },
+        {
+          "date": "01/23/25",
+          "distance": 1.13,
+          "type": "Running",
+          "duration": "10:36",
+          "pace": "9:23"
+        },
+        {
+          "date": "01/24/25",
+          "distance": 1.12,
+          "type": "Running",
+          "duration": "10:13",
+          "pace": "9:06"
+        },
+        {
+          "date": "01/27/25",
+          "distance": 1.12,
+          "type": "Running",
+          "duration": "10:13",
+          "pace": "9:09"
+        },
+        {
+          "date": "01/28/25",
+          "distance": 0.29,
+          "type": "Running",
+          "duration": "2:26",
+          "pace": "8:22"
+        },
+        {
+          "date": "01/29/25",
+          "distance": 2.19,
+          "type": "Running",
+          "duration": "20:38",
+          "pace": "9:24"
+        },
+        {
+          "date": "02/02/25",
+          "distance": 3.07,
+          "type": "Running",
+          "duration": "31:32",
+          "pace": "10:17"
+        },
+        {
+          "date": "02/02/25",
+          "distance": 1.95,
+          "type": "Running",
+          "duration": "25:09",
+          "pace": "12:54"
+        },
+        {
+          "date": "02/04/25",
+          "distance": 1.22,
+          "type": "Running",
+          "duration": "14:57",
+          "pace": "12:15"
+        },
+        {
+          "date": "02/05/25",
+          "distance": 0.5,
+          "type": "Running",
+          "duration": "8:51",
+          "pace": "17:42"
+        },
+        {
+          "date": "02/05/25",
+          "distance": 0.49,
+          "type": "Running",
+          "duration": "5:52",
+          "pace": "12:04"
+        },
+        {
+          "date": "02/05/25",
+          "distance": 0.58,
+          "type": "Running",
+          "duration": "5:55",
+          "pace": "10:14"
+        },
+        {
+          "date": "02/07/25",
+          "distance": 0.21,
+          "type": "Running",
+          "duration": "4:51",
+          "pace": "22:57"
+        },
+        {
+          "date": "02/07/25",
+          "distance": 1.11,
+          "type": "Running",
+          "duration": "10:06",
+          "pace": "9:06"
+        },
+        {
+          "date": "02/08/25",
+          "distance": 1.0,
+          "type": "Running",
+          "duration": "18:06",
+          "pace": "18:01"
+        },
+        {
+          "date": "02/10/25",
+          "distance": 0.4,
+          "type": "Running",
+          "duration": "8:36",
+          "pace": "21:31"
+        },
+        {
+          "date": "02/10/25",
+          "distance": 2.21,
+          "type": "Running",
+          "duration": "21:32",
+          "pace": "9:44"
+        },
+        {
+          "date": "02/13/25",
+          "distance": 1.1,
+          "type": "Running",
+          "duration": "9:58",
+          "pace": "9:04"
+        },
+        {
+          "date": "02/14/25",
+          "distance": 0.5,
+          "type": "Running",
+          "duration": "8:46",
+          "pace": "17:32"
+        },
+        {
+          "date": "02/14/25",
+          "distance": 0.56,
+          "type": "Running",
+          "duration": "5:01",
+          "pace": "8:57"
+        },
+        {
+          "date": "02/17/25",
+          "distance": 1.12,
+          "type": "Running",
+          "duration": "10:23",
+          "pace": "9:17"
+        },
+        {
+          "date": "02/18/25",
+          "distance": 0.39,
+          "type": "Running",
+          "duration": "4:02",
+          "pace": "10:27"
+        },
+        {
+          "date": "02/18/25",
+          "distance": 0.32,
+          "type": "Running",
+          "duration": "3:04",
+          "pace": "9:32"
+        },
+        {
+          "date": "02/18/25",
+          "distance": 0.31,
+          "type": "Running",
+          "duration": "3:00",
+          "pace": "9:34"
+        },
+        {
+          "date": "02/24/25",
+          "distance": 1.67,
+          "type": "Running",
+          "duration": "21:33",
+          "pace": "12:55"
+        },
+        {
+          "date": "02/25/25",
+          "distance": 1.01,
+          "type": "Running",
+          "duration": "13:20",
+          "pace": "13:15"
+        },
+        {
+          "date": "02/25/25",
+          "distance": 0.3,
+          "type": "Running",
+          "duration": "2:33",
+          "pace": "8:28"
+        },
+        {
+          "date": "02/26/25",
+          "distance": 0.28,
+          "type": "Running",
+          "duration": "7:14",
+          "pace": "26:01"
+        },
+        {
+          "date": "02/26/25",
+          "distance": 1.88,
+          "type": "Running",
+          "duration": "18:45",
+          "pace": "9:59"
+        },
+        {
+          "date": "03/03/25",
+          "distance": 0.3,
+          "type": "Running",
+          "duration": "5:50",
+          "pace": "19:27"
+        },
+        {
+          "date": "03/03/25",
+          "distance": 1.12,
+          "type": "Running",
+          "duration": "11:49",
+          "pace": "10:36"
+        },
+        {
+          "date": "03/04/25",
+          "distance": 2.22,
+          "type": "Running",
+          "duration": "25:06",
+          "pace": "11:19"
+        },
+        {
+          "date": "03/06/25",
+          "distance": 0.62,
+          "type": "Running",
+          "duration": "13:41",
+          "pace": "22:08"
+        },
+        {
+          "date": "03/06/25",
+          "distance": 2.13,
+          "type": "Running",
+          "duration": "23:54",
+          "pace": "11:12"
+        },
+        {
+          "date": "03/08/25",
+          "distance": 3.52,
+          "type": "Running",
+          "duration": "34:07",
+          "pace": "9:42"
+        },
+        {
+          "date": "03/11/25",
+          "distance": 1.77,
+          "type": "Running",
+          "duration": "19:57",
+          "pace": "11:17"
+        },
+        {
+          "date": "03/12/25",
+          "distance": 1.66,
+          "type": "Running",
+          "duration": "21:07",
+          "pace": "12:45"
+        },
+        {
+          "date": "03/15/25",
+          "distance": 0.37,
+          "type": "Running",
+          "duration": "5:30",
+          "pace": "14:51"
+        },
+        {
+          "date": "03/17/25",
+          "distance": 1.66,
+          "type": "Running",
+          "duration": "20:37",
+          "pace": "12:24"
+        },
+        {
+          "date": "03/18/25",
+          "distance": 1.76,
+          "type": "Running",
+          "duration": "17:40",
+          "pace": "10:01"
+        },
+        {
+          "date": "03/19/25",
+          "distance": 1.28,
+          "type": "Running",
+          "duration": "13:01",
+          "pace": "10:11"
+        },
+        {
+          "date": "03/24/25",
+          "distance": 2.33,
+          "type": "Running",
+          "duration": "24:04",
+          "pace": "10:20"
+        },
+        {
+          "date": "03/26/25",
+          "distance": 3.02,
+          "type": "Running",
+          "duration": "37:06",
+          "pace": "12:17"
+        },
+        {
+          "date": "03/28/25",
+          "distance": 0.21,
+          "type": "Running",
+          "duration": "4:30",
+          "pace": "21:21"
+        },
+        {
+          "date": "03/28/25",
+          "distance": 1.11,
+          "type": "Running",
+          "duration": "9:42",
+          "pace": "8:44"
+        },
+        {
+          "date": "03/31/25",
+          "distance": 0.2,
+          "type": "Running",
+          "duration": "4:25",
+          "pace": "22:27"
+        },
+        {
+          "date": "03/31/25",
+          "distance": 1.09,
+          "type": "Running",
+          "duration": "9:06",
+          "pace": "8:22"
+        },
+        {
+          "date": "04/09/25",
+          "distance": 3.74,
+          "type": "Running",
+          "duration": "45:10",
+          "pace": "12:04"
+        },
+        {
+          "date": "04/14/25",
+          "distance": 1.23,
+          "type": "Running",
+          "duration": "12:41",
+          "pace": "10:20"
+        },
+        {
+          "date": "04/19/25",
+          "distance": 4.15,
+          "type": "Running",
+          "duration": "41:13",
+          "pace": "9:55"
+        },
+        {
+          "date": "04/22/25",
+          "distance": 1.12,
+          "type": "Running",
+          "duration": "11:37",
+          "pace": "10:23"
+        },
+        {
+          "date": "04/30/25",
+          "distance": 1.11,
+          "type": "Running",
+          "duration": "9:49",
+          "pace": "8:49"
+        },
+        {
+          "date": "05/08/25",
+          "distance": 1.15,
+          "type": "Running",
+          "duration": "9:53",
+          "pace": "8:34"
+        },
+        {
+          "date": "05/20/25",
+          "distance": 1.11,
+          "type": "Running",
+          "duration": "9:15",
+          "pace": "8:19"
+        },
+        {
+          "date": "05/21/25",
+          "distance": 1.1,
+          "type": "Running",
+          "duration": "10:16",
+          "pace": "9:18"
+        },
+        {
+          "date": "05/28/25",
+          "distance": 1.11,
+          "type": "Running",
+          "duration": "10:48",
+          "pace": "9:44"
+        },
+        {
+          "date": "06/14/25",
+          "distance": 1.75,
+          "type": "Running",
+          "duration": "16:10",
+          "pace": "9:15"
+        },
+        {
+          "date": "06/16/25",
+          "distance": 0.31,
+          "type": "Running",
+          "duration": "3:38",
+          "pace": "11:32"
+        },
+        {
+          "date": "06/16/25",
+          "distance": 0.57,
+          "type": "Running",
+          "duration": "4:59",
+          "pace": "8:42"
+        },
+        {
+          "date": "06/23/25",
+          "distance": 1.12,
+          "type": "Running",
+          "duration": "10:23",
+          "pace": "9:18"
+        },
+        {
+          "date": "06/24/25",
+          "distance": 1.24,
+          "type": "Running",
+          "duration": "13:13",
+          "pace": "10:39"
+        },
+        {
+          "date": "06/28/25",
+          "distance": 1.13,
+          "type": "Running",
+          "duration": "10:10",
+          "pace": "9:00"
+        },
+        {
+          "date": "06/29/25",
+          "distance": 1.29,
+          "type": "Running",
+          "duration": "13:55",
+          "pace": "10:46"
+        },
+        {
+          "date": "06/30/25",
+          "distance": 0.3,
+          "type": "Running",
+          "duration": "2:27",
+          "pace": "8:10"
+        },
+        {
+          "date": "06/30/25",
+          "distance": 0.6,
+          "type": "Running",
+          "duration": "5:24",
+          "pace": "8:59"
+        },
+        {
+          "date": "07/02/25",
+          "distance": 1.55,
+          "type": "Running",
+          "duration": "18:21",
+          "pace": "11:50"
+        },
+        {
+          "date": "07/06/25",
+          "distance": 1.65,
+          "type": "Running",
+          "duration": "19:14",
+          "pace": "11:40"
+        },
+        {
+          "date": "07/07/25",
+          "distance": 1.25,
+          "type": "Running",
+          "duration": "14:20",
+          "pace": "11:29"
+        },
+        {
+          "date": "07/08/25",
+          "distance": 1.25,
+          "type": "Running",
+          "duration": "13:31",
+          "pace": "10:51"
+        },
+        {
+          "date": "07/15/25",
+          "distance": 1.27,
+          "type": "Running",
+          "duration": "12:36",
+          "pace": "9:57"
+        },
+        {
+          "date": "07/17/25",
+          "distance": 3.88,
+          "type": "Running",
+          "duration": "56:07",
+          "pace": "14:29"
+        },
+        {
+          "date": "07/17/25",
+          "distance": 2.2,
+          "type": "Running",
+          "duration": "21:59",
+          "pace": "9:59"
+        },
+        {
+          "date": "07/21/25",
+          "distance": 0.58,
+          "type": "Running",
+          "duration": "9:19",
+          "pace": "16:10"
+        },
+        {
+          "date": "07/21/25",
+          "distance": 1.76,
+          "type": "Running",
+          "duration": "19:26",
+          "pace": "11:02"
+        },
+        {
+          "date": "07/22/25",
+          "distance": 1.23,
+          "type": "Running",
+          "duration": "14:16",
+          "pace": "11:35"
+        },
+        {
+          "date": "07/23/25",
+          "distance": 1.26,
+          "type": "Running",
+          "duration": "13:07",
+          "pace": "10:26"
+        },
+        {
+          "date": "08/03/25",
+          "distance": 1.68,
+          "type": "Running",
+          "duration": "18:21",
+          "pace": "10:55"
+        },
+        {
+          "date": "08/05/25",
+          "distance": 1.12,
+          "type": "Running",
+          "duration": "9:12",
+          "pace": "8:12"
+        },
+        {
+          "date": "08/06/25",
+          "distance": 1.25,
+          "type": "Running",
+          "duration": "13:26",
+          "pace": "10:47"
+        },
+        {
+          "date": "08/12/25",
+          "distance": 1.14,
+          "type": "Running",
+          "duration": "15:51",
+          "pace": "13:55"
+        },
+        {
+          "date": "08/13/25",
+          "distance": 5.5,
+          "type": "Running",
+          "duration": "1:40:18",
+          "pace": "18:14"
+        },
+        {
+          "date": "08/19/25",
+          "distance": 2.35,
+          "type": "Running",
+          "duration": "26:24",
+          "pace": "11:15"
+        },
+        {
+          "date": "08/21/25",
+          "distance": 3.47,
+          "type": "Running",
+          "duration": "1:11:44",
+          "pace": "20:42"
+        },
+        {
+          "date": "08/26/25",
+          "distance": 1.05,
+          "type": "Running",
+          "duration": "9:20",
+          "pace": "8:55"
+        },
+        {
+          "date": "08/27/25",
+          "distance": 2.21,
+          "type": "Running",
+          "duration": "25:06",
+          "pace": "11:22"
+        },
+        {
+          "date": "08/28/25",
+          "distance": 2.13,
+          "type": "Running",
+          "duration": "22:19",
+          "pace": "10:28"
+        },
+        {
+          "date": "08/30/25",
+          "distance": 4.2,
+          "type": "Running",
+          "duration": "0:01",
+          "pace": "0:00"
+        },
+        {
+          "date": "09/01/25",
+          "distance": 1.12,
+          "type": "Running",
+          "duration": "9:50",
+          "pace": "8:47"
+        },
+        {
+          "date": "09/02/25",
+          "distance": 1.24,
+          "type": "Running",
+          "duration": "14:48",
+          "pace": "11:54"
+        },
+        {
+          "date": "09/03/25",
+          "distance": 1.41,
+          "type": "Running",
+          "duration": "34:12",
+          "pace": "24:12"
+        }
+      ]
+    },
+    "PT": {
+      "name": "PT",
+      "stats": {
+        "totalActivities": 101,
+        "totalDistance": 236.57,
+        "activityTypes": [
+          "Running"
+        ]
+      },
+      "activities": [
+        {
+          "date": "01/02/25",
+          "distance": 2.66,
+          "type": "Running",
+          "duration": "37:30",
+          "pace": "14:05"
+        },
+        {
+          "date": "01/03/25",
+          "distance": 2.06,
+          "type": "Running",
+          "duration": "24:18",
+          "pace": "11:49"
+        },
+        {
+          "date": "01/04/25",
+          "distance": 1.09,
+          "type": "Running",
+          "duration": "24:25",
+          "pace": "22:24"
+        },
+        {
+          "date": "01/05/25",
+          "distance": 1.13,
+          "type": "Running",
+          "duration": "22:57",
+          "pace": "20:14"
+        },
+        {
+          "date": "01/06/25",
+          "distance": 1.14,
+          "type": "Running",
+          "duration": "11:02",
+          "pace": "9:39"
+        },
+        {
+          "date": "01/07/25",
+          "distance": 1.14,
+          "type": "Running",
+          "duration": "12:14",
+          "pace": "10:43"
+        },
+        {
+          "date": "01/09/25",
+          "distance": 4.86,
+          "type": "Running",
+          "duration": "1:18:50",
+          "pace": "16:12"
+        },
+        {
+          "date": "01/12/25",
+          "distance": 2.31,
+          "type": "Running",
+          "duration": "37:10",
+          "pace": "16:05"
+        },
+        {
+          "date": "01/13/25",
+          "distance": 2.73,
+          "type": "Running",
+          "duration": "33:51",
+          "pace": "12:23"
+        },
+        {
+          "date": "01/14/25",
+          "distance": 3.45,
+          "type": "Running",
+          "duration": "46:17",
+          "pace": "13:25"
+        },
+        {
+          "date": "01/17/25",
+          "distance": 1.15,
+          "type": "Running",
+          "duration": "12:45",
+          "pace": "11:05"
+        },
+        {
+          "date": "01/18/25",
+          "distance": 1.15,
+          "type": "Running",
+          "duration": "17:01",
+          "pace": "14:46"
+        },
+        {
+          "date": "01/22/25",
+          "distance": 1.23,
+          "type": "Running",
+          "duration": "24:32",
+          "pace": "19:53"
+        },
+        {
+          "date": "01/23/25",
+          "distance": 1.23,
+          "type": "Running",
+          "duration": "23:19",
+          "pace": "19:00"
+        },
+        {
+          "date": "01/24/25",
+          "distance": 1.21,
+          "type": "Running",
+          "duration": "22:34",
+          "pace": "18:42"
+        },
+        {
+          "date": "01/25/25",
+          "distance": 1.18,
+          "type": "Running",
+          "duration": "23:26",
+          "pace": "19:48"
+        },
+        {
+          "date": "02/02/25",
+          "distance": 0.6,
+          "type": "Running",
+          "duration": "25:10",
+          "pace": "41:46"
+        },
+        {
+          "date": "02/03/25",
+          "distance": 4.9,
+          "type": "Running",
+          "duration": "1:12:50",
+          "pace": "14:51"
+        },
+        {
+          "date": "02/04/25",
+          "distance": 1.64,
+          "type": "Running",
+          "duration": "26:08",
+          "pace": "15:54"
+        },
+        {
+          "date": "02/06/25",
+          "distance": 1.17,
+          "type": "Running",
+          "duration": "12:36",
+          "pace": "10:47"
+        },
+        {
+          "date": "02/07/25",
+          "distance": 1.17,
+          "type": "Running",
+          "duration": "12:27",
+          "pace": "10:37"
+        },
+        {
+          "date": "02/08/25",
+          "distance": 1.16,
+          "type": "Running",
+          "duration": "24:48",
+          "pace": "21:27"
+        },
+        {
+          "date": "02/09/25",
+          "distance": 1.25,
+          "type": "Running",
+          "duration": "30:11",
+          "pace": "24:04"
+        },
+        {
+          "date": "02/10/25",
+          "distance": 4.91,
+          "type": "Running",
+          "duration": "1:07:28",
+          "pace": "13:45"
+        },
+        {
+          "date": "02/13/25",
+          "distance": 1.15,
+          "type": "Running",
+          "duration": "19:02",
+          "pace": "16:31"
+        },
+        {
+          "date": "02/18/25",
+          "distance": 4.92,
+          "type": "Running",
+          "duration": "1:05:03",
+          "pace": "13:14"
+        },
+        {
+          "date": "02/24/25",
+          "distance": 4.9,
+          "type": "Running",
+          "duration": "1:05:39",
+          "pace": "13:24"
+        },
+        {
+          "date": "03/04/25",
+          "distance": 4.91,
+          "type": "Running",
+          "duration": "1:02:50",
+          "pace": "12:48"
+        },
+        {
+          "date": "03/06/25",
+          "distance": 1.16,
+          "type": "Running",
+          "duration": "21:44",
+          "pace": "18:45"
+        },
+        {
+          "date": "03/07/25",
+          "distance": 1.15,
+          "type": "Running",
+          "duration": "23:47",
+          "pace": "20:44"
+        },
+        {
+          "date": "03/10/25",
+          "distance": 1.14,
+          "type": "Running",
+          "duration": "27:12",
+          "pace": "23:47"
+        },
+        {
+          "date": "03/10/25",
+          "distance": 1.13,
+          "type": "Running",
+          "duration": "19:06",
+          "pace": "16:51"
+        },
+        {
+          "date": "03/11/25",
+          "distance": 4.91,
+          "type": "Running",
+          "duration": "1:00:45",
+          "pace": "12:23"
+        },
+        {
+          "date": "03/14/25",
+          "distance": 1.16,
+          "type": "Running",
+          "duration": "23:07",
+          "pace": "19:58"
+        },
+        {
+          "date": "03/17/25",
+          "distance": 4.91,
+          "type": "Running",
+          "duration": "1:05:16",
+          "pace": "13:18"
+        },
+        {
+          "date": "03/19/25",
+          "distance": 1.17,
+          "type": "Running",
+          "duration": "18:09",
+          "pace": "15:31"
+        },
+        {
+          "date": "03/21/25",
+          "distance": 1.15,
+          "type": "Running",
+          "duration": "17:54",
+          "pace": "15:37"
+        },
+        {
+          "date": "03/23/25",
+          "distance": 1.19,
+          "type": "Running",
+          "duration": "40:37",
+          "pace": "34:14"
+        },
+        {
+          "date": "03/24/25",
+          "distance": 1.16,
+          "type": "Running",
+          "duration": "44:05",
+          "pace": "38:08"
+        },
+        {
+          "date": "03/24/25",
+          "distance": 4.91,
+          "type": "Running",
+          "duration": "1:05:27",
+          "pace": "13:20"
+        },
+        {
+          "date": "03/26/25",
+          "distance": 1.17,
+          "type": "Running",
+          "duration": "24:05",
+          "pace": "20:39"
+        },
+        {
+          "date": "03/31/25",
+          "distance": 4.9,
+          "type": "Running",
+          "duration": "1:09:25",
+          "pace": "14:11"
+        },
+        {
+          "date": "04/07/25",
+          "distance": 4.93,
+          "type": "Running",
+          "duration": "1:11:59",
+          "pace": "14:35"
+        },
+        {
+          "date": "04/09/25",
+          "distance": 1.17,
+          "type": "Running",
+          "duration": "30:18",
+          "pace": "25:54"
+        },
+        {
+          "date": "04/11/25",
+          "distance": 1.14,
+          "type": "Running",
+          "duration": "22:50",
+          "pace": "20:00"
+        },
+        {
+          "date": "04/14/25",
+          "distance": 2.73,
+          "type": "Running",
+          "duration": "44:00",
+          "pace": "16:07"
+        },
+        {
+          "date": "04/14/25",
+          "distance": 2.18,
+          "type": "Running",
+          "duration": "32:43",
+          "pace": "14:59"
+        },
+        {
+          "date": "04/15/25",
+          "distance": 1.15,
+          "type": "Running",
+          "duration": "24:31",
+          "pace": "21:16"
+        },
+        {
+          "date": "04/20/25",
+          "distance": 1.14,
+          "type": "Running",
+          "duration": "29:39",
+          "pace": "25:57"
+        },
+        {
+          "date": "04/21/25",
+          "distance": 4.91,
+          "type": "Running",
+          "duration": "1:09:03",
+          "pace": "14:04"
+        },
+        {
+          "date": "04/28/25",
+          "distance": 1.08,
+          "type": "Running",
+          "duration": "32:19",
+          "pace": "29:53"
+        },
+        {
+          "date": "04/28/25",
+          "distance": 5.02,
+          "type": "Running",
+          "duration": "1:13:04",
+          "pace": "14:34"
+        },
+        {
+          "date": "05/05/25",
+          "distance": 4.92,
+          "type": "Running",
+          "duration": "1:08:40",
+          "pace": "13:57"
+        },
+        {
+          "date": "05/10/25",
+          "distance": 3.06,
+          "type": "Running",
+          "duration": "1:17:49",
+          "pace": "25:28"
+        },
+        {
+          "date": "05/12/25",
+          "distance": 4.9,
+          "type": "Running",
+          "duration": "1:18:48",
+          "pace": "16:05"
+        },
+        {
+          "date": "05/20/25",
+          "distance": 2.39,
+          "type": "Running",
+          "duration": "47:56",
+          "pace": "20:04"
+        },
+        {
+          "date": "05/23/25",
+          "distance": 2.34,
+          "type": "Running",
+          "duration": "38:34",
+          "pace": "16:29"
+        },
+        {
+          "date": "06/01/25",
+          "distance": 2.19,
+          "type": "Running",
+          "duration": "55:53",
+          "pace": "25:30"
+        },
+        {
+          "date": "06/08/25",
+          "distance": 2.2,
+          "type": "Running",
+          "duration": "36:34",
+          "pace": "16:37"
+        },
+        {
+          "date": "06/10/25",
+          "distance": 1.12,
+          "type": "Running",
+          "duration": "32:19",
+          "pace": "28:56"
+        },
+        {
+          "date": "06/10/25",
+          "distance": 4.69,
+          "type": "Running",
+          "duration": "1:28:14",
+          "pace": "18:49"
+        },
+        {
+          "date": "06/18/25",
+          "distance": 1.07,
+          "type": "Running",
+          "duration": "21:59",
+          "pace": "20:27"
+        },
+        {
+          "date": "06/24/25",
+          "distance": 2.26,
+          "type": "Running",
+          "duration": "42:24",
+          "pace": "18:46"
+        },
+        {
+          "date": "06/26/25",
+          "distance": 1.16,
+          "type": "Running",
+          "duration": "43:12",
+          "pace": "37:08"
+        },
+        {
+          "date": "06/27/25",
+          "distance": 2.19,
+          "type": "Running",
+          "duration": "38:36",
+          "pace": "17:38"
+        },
+        {
+          "date": "06/30/25",
+          "distance": 2.49,
+          "type": "Running",
+          "duration": "47:00",
+          "pace": "18:52"
+        },
+        {
+          "date": "07/01/25",
+          "distance": 2.74,
+          "type": "Running",
+          "duration": "53:52",
+          "pace": "19:39"
+        },
+        {
+          "date": "07/07/25",
+          "distance": 1.51,
+          "type": "Running",
+          "duration": "40:00",
+          "pace": "26:29"
+        },
+        {
+          "date": "07/07/25",
+          "distance": 1.16,
+          "type": "Running",
+          "duration": "23:45",
+          "pace": "20:31"
+        },
+        {
+          "date": "07/08/25",
+          "distance": 2.55,
+          "type": "Running",
+          "duration": "45:42",
+          "pace": "17:54"
+        },
+        {
+          "date": "07/09/25",
+          "distance": 1.92,
+          "type": "Running",
+          "duration": "34:54",
+          "pace": "18:12"
+        },
+        {
+          "date": "07/16/25",
+          "distance": 2.68,
+          "type": "Running",
+          "duration": "45:24",
+          "pace": "16:57"
+        },
+        {
+          "date": "07/18/25",
+          "distance": 2.83,
+          "type": "Running",
+          "duration": "45:30",
+          "pace": "16:04"
+        },
+        {
+          "date": "07/21/25",
+          "distance": 2.72,
+          "type": "Running",
+          "duration": "53:15",
+          "pace": "19:33"
+        },
+        {
+          "date": "07/22/25",
+          "distance": 3.49,
+          "type": "Running",
+          "duration": "41:25",
+          "pace": "11:52"
+        },
+        {
+          "date": "07/27/25",
+          "distance": 1.17,
+          "type": "Running",
+          "duration": "36:13",
+          "pace": "30:58"
+        },
+        {
+          "date": "07/28/25",
+          "distance": 2.78,
+          "type": "Running",
+          "duration": "36:42",
+          "pace": "13:12"
+        },
+        {
+          "date": "07/29/25",
+          "distance": 2.93,
+          "type": "Running",
+          "duration": "50:33",
+          "pace": "17:14"
+        },
+        {
+          "date": "07/30/25",
+          "distance": 2.13,
+          "type": "Running",
+          "duration": "30:39",
+          "pace": "14:24"
+        },
+        {
+          "date": "07/31/25",
+          "distance": 1.67,
+          "type": "Running",
+          "duration": "23:20",
+          "pace": "14:01"
+        },
+        {
+          "date": "08/03/25",
+          "distance": 2.21,
+          "type": "Running",
+          "duration": "23:37",
+          "pace": "10:40"
+        },
+        {
+          "date": "08/05/25",
+          "distance": 2.21,
+          "type": "Running",
+          "duration": "23:22",
+          "pace": "10:34"
+        },
+        {
+          "date": "08/06/25",
+          "distance": 1.07,
+          "type": "Running",
+          "duration": "29:09",
+          "pace": "27:07"
+        },
+        {
+          "date": "08/06/25",
+          "distance": 2.21,
+          "type": "Running",
+          "duration": "31:56",
+          "pace": "14:28"
+        },
+        {
+          "date": "08/07/25",
+          "distance": 2.5,
+          "type": "Running",
+          "duration": "45:00",
+          "pace": "18:00"
+        },
+        {
+          "date": "08/08/25",
+          "distance": 2.22,
+          "type": "Running",
+          "duration": "43:43",
+          "pace": "19:40"
+        },
+        {
+          "date": "08/11/25",
+          "distance": 2.39,
+          "type": "Running",
+          "duration": "36:11",
+          "pace": "15:08"
+        },
+        {
+          "date": "08/12/25",
+          "distance": 2.35,
+          "type": "Running",
+          "duration": "36:25",
+          "pace": "15:30"
+        },
+        {
+          "date": "08/13/25",
+          "distance": 2.61,
+          "type": "Running",
+          "duration": "39:13",
+          "pace": "15:03"
+        },
+        {
+          "date": "08/14/25",
+          "distance": 1.4,
+          "type": "Running",
+          "duration": "33:36",
+          "pace": "24:05"
+        },
+        {
+          "date": "08/18/25",
+          "distance": 4.89,
+          "type": "Running",
+          "duration": "1:22:57",
+          "pace": "16:58"
+        },
+        {
+          "date": "08/19/25",
+          "distance": 2.82,
+          "type": "Running",
+          "duration": "43:32",
+          "pace": "15:25"
+        },
+        {
+          "date": "08/21/25",
+          "distance": 1.12,
+          "type": "Running",
+          "duration": "16:38",
+          "pace": "14:51"
+        },
+        {
+          "date": "08/25/25",
+          "distance": 2.83,
+          "type": "Running",
+          "duration": "41:34",
+          "pace": "14:42"
+        },
+        {
+          "date": "08/26/25",
+          "distance": 2.51,
+          "type": "Running",
+          "duration": "31:41",
+          "pace": "12:37"
+        },
+        {
+          "date": "08/27/25",
+          "distance": 1.53,
+          "type": "Running",
+          "duration": "35:09",
+          "pace": "22:58"
+        },
+        {
+          "date": "08/29/25",
+          "distance": 2.23,
+          "type": "Running",
+          "duration": "40:09",
+          "pace": "17:58"
+        },
+        {
+          "date": "09/02/25",
+          "distance": 2.36,
+          "type": "Running",
+          "duration": "30:40",
+          "pace": "13:01"
+        },
+        {
+          "date": "09/03/25",
+          "distance": 2.4,
+          "type": "Running",
+          "duration": "30:43",
+          "pace": "12:49"
+        },
+        {
+          "date": "09/04/25",
+          "distance": 1.79,
+          "type": "Running",
+          "duration": "35:18",
+          "pace": "19:40"
+        },
+        {
+          "date": "09/08/25",
+          "distance": 2.6,
+          "type": "Running",
+          "duration": "32:28",
+          "pace": "12:31"
         }
       ]
     },
@@ -3557,9 +3564,9 @@
         "totalActivities": 90,
         "totalDistance": 154.06,
         "activityTypes": [
+          "Hiking",
           "Running",
-          "Walking",
-          "Hiking"
+          "Walking"
         ]
       },
       "activities": [
@@ -4756,8 +4763,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-09-08T01:22:21.419689",
+    "lastUpdated": "2025-09-08T16:55:25.166596",
     "totalRunners": 10,
-    "totalActivities": 661
+    "totalActivities": 662
   }
 }
