@@ -794,7 +794,10 @@
             const currentDay = new Date(
               startDate.getTime() + i * 24 * 60 * 60 * 1000,
             );
-            if (currentDay > currentDate) break;
+            // Compare dates at midnight to include today's activities
+            const currentDayMidnight = new Date(currentDay.getFullYear(), currentDay.getMonth(), currentDay.getDate());
+            const todayMidnight = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+            if (currentDayMidnight > todayMidnight) break;
 
             let gainFromLastActivity = 0;
             let hasNewActivity = false;
