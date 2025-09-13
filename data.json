@@ -3,8 +3,8 @@
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 56,
-        "totalDistance": 138.43,
+        "totalActivities": 57,
+        "totalDistance": 140.84,
         "activityTypes": [
           "Hiking",
           "Running",
@@ -403,6 +403,13 @@
           "type": "Walking",
           "duration": "50:42",
           "pace": "18:01"
+        },
+        {
+          "date": "09/12/25",
+          "distance": 2.41,
+          "type": "Walking",
+          "duration": "48:32",
+          "pace": "20:09"
         }
       ]
     },
@@ -1719,8 +1726,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 103,
-        "totalDistance": 240.35,
+        "totalActivities": 104,
+        "totalDistance": 242.66,
         "activityTypes": [
           "Running"
         ]
@@ -2446,6 +2453,13 @@
           "type": "Running",
           "duration": "11:06",
           "pace": "10:10"
+        },
+        {
+          "date": "09/12/25",
+          "distance": 2.31,
+          "type": "Running",
+          "duration": "31:05",
+          "pace": "13:26"
         }
       ]
     },
@@ -2535,8 +2549,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 92,
-        "totalDistance": 355.19,
+        "totalActivities": 93,
+        "totalDistance": 358.76,
         "activityTypes": [
           "Running"
         ]
@@ -3185,14 +3199,21 @@
           "type": "Running",
           "duration": "39:18",
           "pace": "14:30"
+        },
+        {
+          "date": "09/12/25",
+          "distance": 3.57,
+          "type": "Running",
+          "duration": "50:01",
+          "pace": "14:01"
         }
       ]
     },
     "Tin": {
       "name": "Tin",
       "stats": {
-        "totalActivities": 58,
-        "totalDistance": 97.15,
+        "totalActivities": 57,
+        "totalDistance": 94.85,
         "activityTypes": [
           "Running",
           "Walking"
@@ -3499,13 +3520,6 @@
           "type": "Walking",
           "duration": "21:44",
           "pace": "21:09"
-        },
-        {
-          "date": "07/15/25",
-          "distance": 2.3,
-          "type": "Walking",
-          "duration": "42:02",
-          "pace": "18:17"
         },
         {
           "date": "07/16/25",
@@ -4819,8 +4833,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-09-12T00:55:26.629983",
+    "lastUpdated": "2025-09-13T00:52:55.453441",
     "totalRunners": 10,
-    "totalActivities": 670
+    "totalActivities": 672
   }
 }
