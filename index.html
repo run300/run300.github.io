@@ -882,9 +882,12 @@
         colorIndex++;
       });
 
-      // Calculate and display achievements
-      const achievements = calculateAchievements(data);
-      displayAchievements(achievements);
+      // Calculate achievements only on initial load
+      if (!achievementsInitialized) {
+        const achievements = calculateAchievements(data);
+        displayAchievements(achievements);
+        achievementsInitialized = true;
+      }
 
       return {datasets, daysSoFar};
       } catch (error) {
@@ -1122,6 +1125,7 @@
     let currentSortColumn = null;
     let currentSortDirection = 'desc';
     let allAchievements = [];
+    let achievementsInitialized = false;
 
     // Generate table row HTML for an achievement
     function generateAchievementRow(achievement) {
@@ -1190,6 +1194,14 @@
       });
     }
 
+    // Function to reset achievements (call this if data changes)
+    function resetAchievements() {
+      achievementsInitialized = false;
+      allAchievements = [];
+      currentSortColumn = null;
+      currentSortDirection = 'desc';
+    }
+
     // Function to sort the table
     function sortTable(column) {
       // Toggle sort direction if clicking the same column
@@ -1255,6 +1267,50 @@
     }
 
 
+    // Check if device is mobile (more comprehensive detection)
+    function isMobile() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const userAgent = navigator.userAgent.toLowerCase();
+      
+      // Check for mobile user agents
+      const isMobileUA = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+      
+      // Check screen size (more generous for mobile detection)
+      const isMobileSize = width <= 1024 || (width <= 1024 && height <= 768);
+      
+      // Force mobile mode for testing (remove this line after testing)
+      // const forceMobile = true;
+      
+      // Debug logging
+      console.log('Mobile Detection:', {
+        width: width,
+        height: height,
+        userAgent: userAgent,
+        isMobileUA: isMobileUA,
+        isMobileSize: isMobileSize,
+        finalResult: isMobileUA || isMobileSize
+      });
+      
+      return isMobileUA || isMobileSize;
+    }
+
+    // Get font sizes based on device type
+    function getFontSizes() {
+      const isMobileDevice = isMobile();
+      const multiplier = isMobileDevice ? 2 : 1;
+      
+      console.log('Font size multiplier:', multiplier, 'Mobile device:', isMobileDevice);
+      
+      return {
+        chartTitle: 18 * multiplier,
+        axisTitle: 14 * multiplier,
+        axisTicks: 12 * multiplier,
+        tooltipTitle: 14 * multiplier,
+        tooltipBody: 13 * multiplier
+      };
+    }
+
     // Initial chart creation
     async function createChart() {
       const {datasets, daysSoFar} = await loadAndProcessData();
@@ -1296,8 +1352,10 @@
       );
 
       const weeksRemaining = (daysRemaining / 7).toFixed(1);
+      const fontSizes = getFontSizes();
+      const isMobileDevice = isMobile();
       document.getElementById("daysInfo").innerHTML =
-        `<span class="text-green-600">${daysSoFar} Days Passed</span> | <span class="text-blue-600">${daysRemaining} Days Remaining</span> <span class="text-purple-600">(${weeksRemaining} Weeks)</span>`;
+        `<span class="text-green-600">${daysSoFar} Days Passed</span> | <span class="text-blue-600">${daysRemaining} Days Remaining</span> <span class="text-purple-600">(${weeksRemaining} Weeks)</span><br><small style="color: #666;">Mobile: ${isMobileDevice ? 'YES' : 'NO'} | Font Multiplier: ${isMobileDevice ? '2x' : '1x'} | Chart Title: ${fontSizes.chartTitle}px</small>`;
 
       // Custom legend plugin
       const customLegendPlugin = {
@@ -1412,7 +1470,7 @@
               position: 'top',
               align: 'center',
               font: {
-                size: 18,
+                size: getFontSizes().chartTitle,
                 weight: 'bold',
                 family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
               },
@@ -1424,8 +1482,8 @@
             },
             tooltip: {
               backgroundColor: "rgba(50, 50, 50, 0.9)",
-              titleFont: {weight: "bold", size: 14},
-              bodyFont: {size: 13},
+              titleFont: {weight: "bold", size: getFontSizes().tooltipTitle},
+              bodyFont: {size: getFontSizes().tooltipBody},
               padding: 12,
               cornerRadius: 6,
               callbacks: {
@@ -1565,11 +1623,11 @@
                 display: true,
                 text: `Date (2025) - ${dataGrouping === 'day' ? 'Daily' : dataGrouping === 'week' ? 'Weekly' : 'Monthly'}`,
                 padding: {top: 5, bottom: 5},
-                font: {weight: "bold", size: 14},
+                font: {weight: "bold", size: getFontSizes().axisTitle},
               },
               grid: {color: "rgba(0, 0, 0, 0.05)"},
               ticks: {
-                font: {weight: "bold", size: 12},
+                font: {weight: "bold", size: getFontSizes().axisTicks},
                 callback: function(value, index, ticks) {
                   const date = new Date(value);
                   
@@ -1623,7 +1681,7 @@
                 display: true,
                 text: "Miles",
                 padding: {top: 5, bottom: 5, left: 0, right: 0},
-                font: {weight: "bold", size: 14},
+                font: {weight: "bold", size: getFontSizes().axisTitle},
               },
               grid: {
                 color: function(context) {
@@ -1642,7 +1700,7 @@
                 }
               },
               ticks: {
-                font: {weight: "bold", size: 12},
+                font: {weight: "bold", size: getFontSizes().axisTicks},
                 color: function(context) {
                   // Make the 300 mile tick golden and bold
                   if (context.tick.value === 300) {
@@ -1719,6 +1777,18 @@
       myChart.data.datasets = datasets;
       myChart.update();
     }
+
+    // Handle window resize to update chart font sizes
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(function() {
+        if (myChart) {
+          // Update font sizes and recreate chart
+          createChart();
+        }
+      }, 250); // Debounce resize events
+    });
 
     window.onload = function() {
       createChart();
