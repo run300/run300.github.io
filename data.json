@@ -3,8 +3,8 @@
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 57,
-        "totalDistance": 140.84,
+        "totalActivities": 56,
+        "totalDistance": 126.1,
         "activityTypes": [
           "Hiking",
           "Running",
@@ -347,13 +347,6 @@
           "type": "Walking",
           "duration": "1:01:41",
           "pace": "20:51"
-        },
-        {
-          "date": "08/13/25",
-          "distance": 14.74,
-          "type": "Walking",
-          "duration": "24:52:18",
-          "pace": "101:16"
         },
         {
           "date": "08/24/25",
@@ -3212,8 +3205,8 @@
     "Tin": {
       "name": "Tin",
       "stats": {
-        "totalActivities": 57,
-        "totalDistance": 94.85,
+        "totalActivities": 58,
+        "totalDistance": 97.15,
         "activityTypes": [
           "Running",
           "Walking"
@@ -3520,6 +3513,13 @@
           "type": "Walking",
           "duration": "21:44",
           "pace": "21:09"
+        },
+        {
+          "date": "07/15/25",
+          "distance": 2.3,
+          "type": "Walking",
+          "duration": "42:02",
+          "pace": "18:17"
         },
         {
           "date": "07/16/25",
@@ -4833,7 +4833,7 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-09-13T00:52:55.453441",
+    "lastUpdated": "2025-09-14T01:00:52.212802",
     "totalRunners": 10,
     "totalActivities": 672
   }
