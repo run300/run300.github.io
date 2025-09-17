@@ -901,13 +901,36 @@
           }
         } else {
           // Process grouped data (week/month)
+          // Add starting point at beginning of time range for weekly/monthly views
+          runnerData.push({
+            x: startDate, // Jan 1st, 2025
+            y: 0,
+            hasActivity: false,
+            gainFromLastActivity: 0,
+            lastActivityDistance: 0,
+            lastActivityDate: null,
+            isSameDayAsLastActivity: false,
+            isLongestRun: false,
+          });
+          
           // Find the group with the best total distance for weekly/monthly views
           const bestDistanceGroup = groupedActivities.reduce((max, group) => {
             return (!max || group.distance > max.distance) ? group : max;
           }, null);
           
           groupedActivities.forEach(group => {
-            const groupDate = new Date(group.date);
+            let groupDate;
+            if (dataGrouping === 'month') {
+              // For monthly data, show the point at the end of the month
+              const [year, month] = group.date.split('-');
+              groupDate = new Date(year, month, 0); // Last day of the previous month = last day of target month
+            } else if (dataGrouping === 'week') {
+              // For weekly data, show the point at the end of the week (Sunday)
+              const startOfWeek = new Date(group.date);
+              groupDate = new Date(startOfWeek.getTime() + 6 * 24 * 60 * 60 * 1000); // Add 6 days to get Sunday
+            } else {
+              groupDate = new Date(group.date);
+            }
             cumulativeDistance += group.distance;
             
             // For weekly/monthly views, star represents the period with most miles
@@ -1931,7 +1954,7 @@
                     } else if (dataGrouping === 'month') {
                       starLabel = "⭐ Best Month";
                     }
-                    result += `\n${starLabel}: ${point.gainFromLastActivity.toFixed(1)} miles`;
+                    result += `\n${starLabel}`;
                   }
                   return result;
                 },
@@ -1947,14 +1970,28 @@
                 limits: {
                   x: {
                     min: new Date("2025-01-01"),
-                    max: new Date(
-                      currentDate.getFullYear(),
-                      currentDate.getMonth(),
-                      currentDate.getDate(),
-                      23,
-                      59,
-                      59,
-                    ),
+                    max: dataGrouping === 'month' ? 
+                      // For monthly view, extend to end of current month
+                      new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0, 23, 59, 59) :
+                      dataGrouping === 'week' ?
+                      // For weekly view, extend to end of current week (Sunday)
+                      (() => {
+                        const endOfWeek = new Date(currentDate);
+                        const day = currentDate.getDay();
+                        const diff = 6 - day; // Days until Sunday
+                        endOfWeek.setDate(currentDate.getDate() + diff);
+                        endOfWeek.setHours(23, 59, 59, 0);
+                        return endOfWeek;
+                      })() :
+                      // For daily view, use current date
+                      new Date(
+                        currentDate.getFullYear(),
+                        currentDate.getMonth(),
+                        currentDate.getDate(),
+                        23,
+                        59,
+                        59,
+                      ),
                   }
                 }
               },
@@ -1970,27 +2007,55 @@
                 limits: {
                   x: {
                     min: new Date("2025-01-01"),
-                    max: new Date(
+                    max: dataGrouping === 'month' ? 
+                      // For monthly view, extend to end of current month
+                      new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0, 23, 59, 59) :
+                      dataGrouping === 'week' ?
+                      // For weekly view, extend to end of current week (Sunday)
+                      (() => {
+                        const endOfWeek = new Date(currentDate);
+                        const day = currentDate.getDay();
+                        const diff = 6 - day; // Days until Sunday
+                        endOfWeek.setDate(currentDate.getDate() + diff);
+                        endOfWeek.setHours(23, 59, 59, 0);
+                        return endOfWeek;
+                      })() :
+                      // For daily view, use current date
+                      new Date(
+                        currentDate.getFullYear(),
+                        currentDate.getMonth(),
+                        currentDate.getDate(),
+                        23,
+                        59,
+                        59,
+                      ),
+                  }
+                },
+                onZoomComplete: function({chart}) {
+                  const xScale = chart.scales.x;
+                  const minDate = new Date("2025-01-01");
+                  const maxDate = dataGrouping === 'month' ? 
+                    // For monthly view, extend to end of current month
+                    new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0, 23, 59, 59) :
+                    dataGrouping === 'week' ?
+                    // For weekly view, extend to end of current week (Sunday)
+                    (() => {
+                      const endOfWeek = new Date(currentDate);
+                      const day = currentDate.getDay();
+                      const diff = 6 - day; // Days until Sunday
+                      endOfWeek.setDate(currentDate.getDate() + diff);
+                      endOfWeek.setHours(23, 59, 59, 0);
+                      return endOfWeek;
+                    })() :
+                    // For daily view, use current date
+                    new Date(
                       currentDate.getFullYear(),
                       currentDate.getMonth(),
                       currentDate.getDate(),
                       23,
                       59,
                       59,
-                    ),
-                  }
-                },
-                onZoomComplete: function({chart}) {
-                  const xScale = chart.scales.x;
-                  const minDate = new Date("2025-01-01");
-                  const maxDate = new Date(
-                    currentDate.getFullYear(),
-                    currentDate.getMonth(),
-                    currentDate.getDate(),
-                    23,
-                    59,
-                    59,
-                  );
+                    );
                   
                   // Enforce limits
                   if (xScale.min < minDate) {
@@ -2020,23 +2085,51 @@
             x: {
               type: "time",
               min: new Date("2025-01-01"),
-              max: new Date(
-                currentDate.getFullYear(),
-                currentDate.getMonth(),
-                currentDate.getDate(),
-                23,
-                59,
-                59,
-              ),
+              max: dataGrouping === 'month' ? 
+                // For monthly view, extend to end of current month
+                new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0, 23, 59, 59) :
+                dataGrouping === 'week' ?
+                // For weekly view, extend to end of current week (Sunday)
+                (() => {
+                  const endOfWeek = new Date(currentDate);
+                  const day = currentDate.getDay();
+                  const diff = 6 - day; // Days until Sunday
+                  endOfWeek.setDate(currentDate.getDate() + diff);
+                  endOfWeek.setHours(23, 59, 59, 0);
+                  return endOfWeek;
+                })() :
+                // For daily view, use current date
+                new Date(
+                  currentDate.getFullYear(),
+                  currentDate.getMonth(),
+                  currentDate.getDate(),
+                  23,
+                  59,
+                  59,
+                ),
               suggestedMin: new Date("2025-01-01"),
-              suggestedMax: new Date(
-                currentDate.getFullYear(),
-                currentDate.getMonth(),
-                currentDate.getDate(),
-                23,
-                59,
-                59,
-              ),
+              suggestedMax: dataGrouping === 'month' ? 
+                // For monthly view, extend to end of current month
+                new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0, 23, 59, 59) :
+                dataGrouping === 'week' ?
+                // For weekly view, extend to end of current week (Sunday)
+                (() => {
+                  const endOfWeek = new Date(currentDate);
+                  const day = currentDate.getDay();
+                  const diff = 6 - day; // Days until Sunday
+                  endOfWeek.setDate(currentDate.getDate() + diff);
+                  endOfWeek.setHours(23, 59, 59, 0);
+                  return endOfWeek;
+                })() :
+                // For daily view, use current date
+                new Date(
+                  currentDate.getFullYear(),
+                  currentDate.getMonth(),
+                  currentDate.getDate(),
+                  23,
+                  59,
+                  59,
+                ),
               time: {
                 unit: dataGrouping === 'day' ? 'day' : dataGrouping === 'week' ? 'week' : 'month',
                 stepSize: dataGrouping === 'day' ? dynamicStepSize : 1,
