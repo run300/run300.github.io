@@ -409,7 +409,7 @@
           "distance": 3.03,
           "type": "Walking",
           "duration": "1:04:36",
-          "pace": "21:17"
+          "pace": "21:18"
         }
       ]
     },
@@ -1733,8 +1733,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 105,
-        "totalDistance": 245.41,
+        "totalActivities": 106,
+        "totalDistance": 247.82,
         "activityTypes": [
           "Running"
         ]
@@ -2474,6 +2474,13 @@
           "type": "Running",
           "duration": "37:03",
           "pace": "13:30"
+        },
+        {
+          "date": "09/16/25",
+          "distance": 2.41,
+          "type": "Running",
+          "duration": "36:42",
+          "pace": "15:13"
         }
       ]
     },
@@ -3233,8 +3240,8 @@
     "Tin": {
       "name": "Tin",
       "stats": {
-        "totalActivities": 59,
-        "totalDistance": 98.66,
+        "totalActivities": 60,
+        "totalDistance": 100.93,
         "activityTypes": [
           "Running",
           "Walking"
@@ -3653,6 +3660,13 @@
           "type": "Walking",
           "duration": "26:41",
           "pace": "17:37"
+        },
+        {
+          "date": "09/16/25",
+          "distance": 2.27,
+          "type": "Walking",
+          "duration": "41:12",
+          "pace": "18:08"
         }
       ]
     },
@@ -4868,8 +4882,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-09-16T00:55:07.340592",
+    "lastUpdated": "2025-09-17T00:56:14.051005",
     "totalRunners": 10,
-    "totalActivities": 677
+    "totalActivities": 679
   }
 }
