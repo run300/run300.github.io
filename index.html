@@ -322,6 +322,53 @@
       position: relative;
     }
 
+    /* Achievement Tooltip Styles */
+    .achievement-tooltip {
+      position: relative;
+      cursor: help;
+    }
+
+    .chart-highlight {
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .chart-highlight:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+      filter: brightness(1.1);
+    }
+
+    .achievement-tooltip:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 6px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      white-space: nowrap;
+      z-index: 1000;
+      pointer-events: none;
+      margin-bottom: 5px;
+    }
+
+    .achievement-tooltip:hover::before {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid transparent;
+      border-top-color: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      pointer-events: none;
+      margin-bottom: 1px;
+    }
+
     .achievements-container::before {
       content: '';
       position: absolute;
@@ -609,7 +656,7 @@
       <div class="table-wrapper">
         <table id="achievementsTable">
           <thead>
-            <tr>
+            <tr id="achievementsTableHeaders">
               <th class="sortable" data-column="runner">Runner</th>
               <th class="sortable" data-column="totalDistance">Total Distance</th>
               <th class="sortable" data-column="totalActivities">Total Activities</th>
@@ -747,6 +794,16 @@
         
         if (runner.activities.length === 0) return; // Skip if no activities after filtering
 
+        // Find the longest run (by distance) for this runner
+        const longestRun = runner.activities.reduce((max, activity) => {
+          if (!activity.distance) return max;
+          const currentDistance = parseFloat(activity.distance);
+          const maxDistance = max ? parseFloat(max.distance) : 0;
+          return currentDistance > maxDistance ? activity : max;
+        }, null);
+        
+        console.log(`${runner.name}: Longest run is ${longestRun?.distance || 'N/A'} miles on ${longestRun?.date || 'N/A'}`);
+
         // Parse all dates once at the beginning
         runner.activities = runner.activities.map((activity) => {
           const dateParts = activity.date.split("/");
@@ -803,6 +860,7 @@
             let hasNewActivity = false;
 
             // Check if there are activities up to this date
+            let isLongestRunDay = false;
             while (activityIndex < sortedActivities.length) {
               if (sortedActivities[activityIndex].parsedDate <= currentDay) {
                 gainFromLastActivity +=
@@ -813,6 +871,13 @@
                   sortedActivities[activityIndex].parsedDate,
                 );
                 cumulativeDistance += sortedActivities[activityIndex].distance;
+                
+                // Check if this activity is the longest run
+                if (longestRun && sortedActivities[activityIndex].date === longestRun.date && 
+                    sortedActivities[activityIndex].distance === longestRun.distance) {
+                  isLongestRunDay = true;
+                }
+                
                 activityIndex++;
               } else {
                 break;
@@ -831,13 +896,22 @@
               lastActivityDistance: lastActivityDistance || 0,
               lastActivityDate: lastActivityDate,
               isSameDayAsLastActivity: isSameDayAsLastActivity,
+              isLongestRun: isLongestRunDay,
             });
           }
         } else {
           // Process grouped data (week/month)
+          // Find the group with the best total distance for weekly/monthly views
+          const bestDistanceGroup = groupedActivities.reduce((max, group) => {
+            return (!max || group.distance > max.distance) ? group : max;
+          }, null);
+          
           groupedActivities.forEach(group => {
             const groupDate = new Date(group.date);
             cumulativeDistance += group.distance;
+            
+            // For weekly/monthly views, star represents the period with most miles
+            const isBestPeriod = bestDistanceGroup && group.date === bestDistanceGroup.date;
             
             runnerData.push({
               x: groupDate,
@@ -847,6 +921,7 @@
               lastActivityDistance: group.distance,
               lastActivityDate: groupDate,
               isSameDayAsLastActivity: false,
+              isLongestRun: isBestPeriod,
             });
           });
         }
@@ -860,7 +935,10 @@
           borderColor: colors[colorIndex % colors.length],
           borderWidth: 3,
           pointRadius: (context) => {
-            if (
+            if (context.raw && context.raw.isLongestRun) {
+              // Make longest run markers bigger
+              return activeRunnerIndex === context.datasetIndex ? 12 : 10;
+            } else if (
               activeRunnerIndex === context.datasetIndex &&
               context.raw &&
               context.raw.hasActivity
@@ -871,7 +949,21 @@
             }
             return 0;
           },
+          pointStyle: (context) => {
+            // Show star for longest run days
+            if (context.raw && context.raw.isLongestRun) {
+              return 'star';
+            }
+            return 'circle';
+          },
           pointBackgroundColor: colors[colorIndex % colors.length],
+          pointBorderColor: colors[colorIndex % colors.length],
+          pointBorderWidth: (context) => {
+            if (context.raw && context.raw.isLongestRun) {
+              return 2;
+            }
+            return 1;
+          },
           data: runnerData,
           fill: false,
           showLine: true,
@@ -884,8 +976,8 @@
 
       // Calculate achievements only on initial load
       if (!achievementsInitialized) {
-        const achievements = calculateAchievements(data);
-        displayAchievements(achievements);
+        const achievements = calculateAchievements(data, dataGrouping);
+        displayAchievements(achievements, dataGrouping);
         achievementsInitialized = true;
       }
 
@@ -988,8 +1080,8 @@
     }
 
     // Function to calculate runner achievements
-    function calculateAchievements(data) {
-      console.log("calculateAchievements called with data:", data);
+    function calculateAchievements(data, grouping = 'day') {
+      console.log("calculateAchievements called with data and grouping:", data, grouping);
       const achievements = [];
       
       // Define allowed activity types - only these will be included in charts and stats
@@ -1013,46 +1105,125 @@
         
         console.log(`${runnerName}: ${originalCount} total activities, ${activities.length} tracked activities (after filtering)`);
         
-        // Find longest run (by time)
-        const longestRun = activities.reduce((max, activity) => {
-          if (!activity.duration) return max;
-          const currentDuration = parseTimeToMinutes(activity.duration);
-          const maxDuration = max ? parseTimeToMinutes(max.duration) : 0;
-          return currentDuration > maxDuration ? activity : max;
-        }, null);
+        if (grouping === 'day') {
+          // Original daily logic
+          // Find longest run (by time)
+          const longestRun = activities.reduce((max, activity) => {
+            if (!activity.duration) return max;
+            const currentDuration = parseTimeToMinutes(activity.duration);
+            const maxDuration = max ? parseTimeToMinutes(max.duration) : 0;
+            return currentDuration > maxDuration ? activity : max;
+          }, null);
 
-        // Find farthest run (by distance)
-        const farthestRun = activities.reduce((max, activity) => {
-          if (!activity.distance) return max;
-          const currentDistance = parseFloat(activity.distance);
-          const maxDistance = max ? parseFloat(max.distance) : 0;
-          return currentDistance > maxDistance ? activity : max;
-        }, null);
+          // Find farthest run (by distance)
+          const farthestRun = activities.reduce((max, activity) => {
+            if (!activity.distance) return max;
+            const currentDistance = parseFloat(activity.distance);
+            const maxDistance = max ? parseFloat(max.distance) : 0;
+            return currentDistance > maxDistance ? activity : max;
+          }, null);
 
-        // Calculate average pace
-        const runsWithPace = activities.filter(activity => activity.pace);
-        const totalPaceSeconds = runsWithPace.reduce((sum, activity) => {
-          return sum + parseTimeToSeconds(activity.pace);
-        }, 0);
-        const averagePaceSeconds = runsWithPace.length > 0 ? totalPaceSeconds / runsWithPace.length : 0;
+          // Calculate average pace
+          const runsWithPace = activities.filter(activity => activity.pace);
+          const totalPaceSeconds = runsWithPace.reduce((sum, activity) => {
+            return sum + parseTimeToSeconds(activity.pace);
+          }, 0);
+          const averagePaceSeconds = runsWithPace.length > 0 ? totalPaceSeconds / runsWithPace.length : 0;
 
-        // Calculate total distance
-        const totalDistance = activities.reduce((sum, activity) => {
-          return sum + (parseFloat(activity.distance) || 0);
-        }, 0);
+          // Calculate total distance
+          const totalDistance = activities.reduce((sum, activity) => {
+            return sum + (parseFloat(activity.distance) || 0);
+          }, 0);
 
-        // Calculate average distance
-        const averageDistance = activities.length > 0 ? totalDistance / activities.length : 0;
+          // Calculate average distance
+          const averageDistance = activities.length > 0 ? totalDistance / activities.length : 0;
 
-        achievements.push({
-          runner: runnerName,
-          longestRun: longestRun,
-          farthestRun: farthestRun,
-          totalActivities: activities.length,
-          averagePace: averagePaceSeconds,
-          averageDistance: averageDistance,
-          totalDistance: totalDistance
-        });
+          achievements.push({
+            runner: runnerName,
+            longestRun: longestRun,
+            farthestRun: farthestRun,
+            totalActivities: activities.length,
+            averagePace: averagePaceSeconds,
+            averageDistance: averageDistance,
+            totalDistance: totalDistance
+          });
+        } else {
+          // Group activities for weekly/monthly analysis
+          const groupedActivities = groupDataByPeriod(activities.map(activity => {
+            const dateParts = activity.date.split("/");
+            let month, day, year;
+            
+            if (dateParts.length === 2) {
+              [month, day] = dateParts;
+              year = "25";
+            } else if (dateParts.length === 3) {
+              [month, day, year] = dateParts;
+            }
+            
+            const parsedDate = new Date(
+              `20${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}T12:00:00`,
+            );
+            return {
+              ...activity,
+              parsedDate,
+            };
+          }), grouping);
+
+          if (groupedActivities.length === 0) {
+            achievements.push({
+              runner: runnerName,
+              longestRun: null,
+              farthestRun: null,
+              totalActivities: 0,
+              averagePace: 0,
+              averageDistance: 0,
+              totalDistance: 0
+            });
+            return;
+          }
+
+          // Find period with best total distance (most miles period)
+          const farthestPeriod = groupedActivities.reduce((max, period) => {
+            return (!max || period.distance > max.distance) ? period : max;
+          }, null);
+
+          // Find period with best total duration (most time period)
+          const longestPeriod = groupedActivities.reduce((max, period) => {
+            const periodDuration = period.activities.reduce((sum, activity) => {
+              return sum + parseTimeToMinutes(activity.duration || "0");
+            }, 0);
+            const maxDuration = max ? max.activities.reduce((sum, activity) => {
+              return sum + parseTimeToMinutes(activity.duration || "0");
+            }, 0) : 0;
+            return periodDuration > maxDuration ? period : max;
+          }, null);
+
+          // Calculate average distance per period
+          const totalDistance = groupedActivities.reduce((sum, period) => sum + period.distance, 0);
+          const averageDistance = totalDistance / groupedActivities.length;
+
+          // Calculate average pace across all activities in all periods
+          const allActivitiesWithPace = groupedActivities.flatMap(period => 
+            period.activities.filter(activity => activity.pace)
+          );
+          const totalPaceSeconds = allActivitiesWithPace.reduce((sum, activity) => {
+            return sum + parseTimeToSeconds(activity.pace);
+          }, 0);
+          const averagePaceSeconds = allActivitiesWithPace.length > 0 ? totalPaceSeconds / allActivitiesWithPace.length : 0;
+
+          // Total activities count
+          const totalActivities = groupedActivities.reduce((sum, period) => sum + period.activities.length, 0);
+
+          achievements.push({
+            runner: runnerName,
+            longestRun: longestPeriod,
+            farthestRun: farthestPeriod,
+            totalActivities: totalActivities,
+            averagePace: averagePaceSeconds,
+            averageDistance: averageDistance,
+            totalDistance: totalDistance
+          });
+        }
       });
 
       return achievements;
@@ -1127,8 +1298,81 @@
     let allAchievements = [];
     let achievementsInitialized = false;
 
+    // Helper function to format date for tooltip
+    function formatDateForTooltip(dateStr, grouping) {
+      if (!dateStr) return '';
+      
+      if (grouping === 'day') {
+        // Parse the MM/DD/YY format
+        const dateParts = dateStr.split('/');
+        let month, day, year;
+        
+        if (dateParts.length === 2) {
+          [month, day] = dateParts;
+          year = '2025';
+        } else if (dateParts.length === 3) {
+          [month, day, year] = dateParts;
+          year = '20' + year;
+        }
+        
+        const date = new Date(year, month - 1, day);
+        return date.toLocaleDateString('en-US', { 
+          weekday: 'short', 
+          month: 'short', 
+          day: 'numeric', 
+          year: 'numeric' 
+        });
+      } else if (grouping === 'week') {
+        const date = new Date(dateStr);
+        return `Week of ${date.toLocaleDateString('en-US', { 
+          month: 'short', 
+          day: 'numeric', 
+          year: 'numeric' 
+        })}`;
+      } else if (grouping === 'month') {
+        const [year, month] = dateStr.split('-');
+        const date = new Date(year, month - 1, 1);
+        return date.toLocaleDateString('en-US', { 
+          month: 'long', 
+          year: 'numeric' 
+        });
+      }
+      
+      return dateStr;
+    }
+
     // Generate table row HTML for an achievement
-    function generateAchievementRow(achievement) {
+    function generateAchievementRow(achievement, grouping = 'day') {
+      let farthestDisplay = '<span class="achievement-value">No data</span>';
+      let longestDisplay = '<span class="achievement-value">No data</span>';
+      
+      if (grouping === 'day') {
+        // Original daily logic
+        if (achievement.farthestRun) {
+          const tooltipDate = formatDateForTooltip(achievement.farthestRun.date, grouping);
+          farthestDisplay = `<span class="achievement-display distance-display achievement-tooltip chart-highlight" data-tooltip="${tooltipDate}" data-runner="${achievement.runner}" data-date="${achievement.farthestRun.date}" data-type="farthest">${achievement.farthestRun.distance} mi</span>`;
+        }
+          
+        if (achievement.longestRun) {
+          const tooltipDate = formatDateForTooltip(achievement.longestRun.date, grouping);
+          longestDisplay = `<span class="achievement-display time-display achievement-tooltip chart-highlight" data-tooltip="${tooltipDate}" data-runner="${achievement.runner}" data-date="${achievement.longestRun.date}" data-type="longest">${achievement.longestRun.duration}</span>`;
+        }
+      } else {
+        // Weekly/Monthly logic
+        if (achievement.farthestRun) {
+          const tooltipDate = formatDateForTooltip(achievement.farthestRun.date, grouping);
+          farthestDisplay = `<span class="achievement-display distance-display achievement-tooltip chart-highlight" data-tooltip="${tooltipDate}" data-runner="${achievement.runner}" data-date="${achievement.farthestRun.date}" data-type="farthest">${achievement.farthestRun.distance.toFixed(1)} mi</span>`;
+        }
+        
+        if (achievement.longestRun) {
+          const totalDuration = achievement.longestRun.activities.reduce((sum, activity) => {
+            return sum + parseTimeToMinutes(activity.duration || "0");
+          }, 0);
+          const tooltipDate = formatDateForTooltip(achievement.longestRun.date, grouping);
+          longestDisplay = `<span class="achievement-display time-display achievement-tooltip chart-highlight" data-tooltip="${tooltipDate}" data-runner="${achievement.runner}" data-date="${achievement.longestRun.date}" data-type="longest">${formatTimeFromMinutes(totalDuration)}</span>`;
+        }
+      }
+      
       return `
         <td class="runner-name">${achievement.runner}</td>
         <td>
@@ -1147,33 +1391,45 @@
           }
         </td>
         <td>
-          ${achievement.farthestRun ? 
-            `<span class="achievement-display distance-display">${achievement.farthestRun.distance} mi</span>` : 
-            '<span class="achievement-value">No data</span>'
-          }
+          ${farthestDisplay}
         </td>
         <td>
-          ${achievement.longestRun ? 
-            `<span class="achievement-display time-display">${achievement.longestRun.duration}</span>` : 
-            '<span class="achievement-value">No data</span>'
-          }
+          ${longestDisplay}
         </td>
       `;
     }
 
-    // Function to display achievements table
-    function displayAchievements(achievements) {
-      allAchievements = achievements;
-      const tbody = document.getElementById('achievementsBody');
-      tbody.innerHTML = '';
-
-      achievements.forEach(achievement => {
-        const row = document.createElement('tr');
-        row.innerHTML = generateAchievementRow(achievement);
-        tbody.appendChild(row);
-      });
-
-      // Add click event listeners to sortable headers
+    // Function to update table headers based on current grouping
+    function updateTableHeaders(grouping) {
+      const headers = document.getElementById('achievementsTableHeaders');
+      let avgDistanceText = "Avg Distance";
+      let avgPaceText = "Avg Pace";
+      let farthestText = "Farthest Run";
+      let longestText = "Longest Run";
+      
+      if (grouping === 'week') {
+        avgDistanceText = "Avg Weekly Distance";
+        avgPaceText = "Avg Weekly Pace";
+        farthestText = "Most Miles Week";
+        longestText = "Most Time Week";
+      } else if (grouping === 'month') {
+        avgDistanceText = "Avg Monthly Distance";
+        avgPaceText = "Avg Monthly Pace";
+        farthestText = "Most Miles Month";
+        longestText = "Most Time Month";
+      }
+      
+      headers.innerHTML = `
+        <th class="sortable" data-column="runner">Runner</th>
+        <th class="sortable" data-column="totalDistance">Total Distance</th>
+        <th class="sortable" data-column="totalActivities">Total Activities</th>
+        <th class="sortable" data-column="avgDistance">${avgDistanceText}</th>
+        <th class="sortable" data-column="avgPace">${avgPaceText}</th>
+        <th class="sortable" data-column="farthestRun">${farthestText}</th>
+        <th class="sortable" data-column="longestRun">${longestText}</th>
+      `;
+      
+      // Re-add click event listeners to sortable headers
       document.querySelectorAll('.sortable').forEach(header => {
         header.addEventListener('click', () => {
           const column = header.dataset.column;
@@ -1182,15 +1438,146 @@
       });
     }
 
-    // Function to update table display without re-adding event listeners
-    function updateTableDisplay(achievements) {
+    // Function to highlight chart point
+    function highlightChartPoint(runnerName, date, type) {
+      if (!myChart) return;
+      
+      // Find the dataset index for this runner
+      const datasetIndex = myChart.data.datasets.findIndex(dataset => dataset.label === runnerName);
+      if (datasetIndex === -1) return;
+      
+      const dataset = myChart.data.datasets[datasetIndex];
+      
+      // Find the data point that matches this date/period
+      let pointIndex = -1;
+      
+      if (dataGrouping === 'day') {
+        // For daily view, find exact date match
+        pointIndex = dataset.data.findIndex(point => {
+          if (!point.lastActivityDate) return false;
+          const pointDate = point.lastActivityDate.toLocaleDateString('en-US', {
+            month: '2-digit',
+            day: '2-digit',
+            year: '2-digit'
+          }).replace(/(\d{2})\/(\d{2})\/(\d{2})/, '$1/$2/$3');
+          const targetDate = date.length === 5 ? date + '/25' : date;
+          return pointDate === targetDate;
+        });
+      } else {
+        // For weekly/monthly view, find matching period
+        pointIndex = dataset.data.findIndex(point => {
+          const pointDate = new Date(point.x);
+          const targetDate = new Date(date);
+          
+          if (dataGrouping === 'week') {
+            // Compare week start dates
+            return Math.abs(pointDate.getTime() - targetDate.getTime()) < 7 * 24 * 60 * 60 * 1000;
+          } else if (dataGrouping === 'month') {
+            // Compare year-month
+            return pointDate.getFullYear() === targetDate.getFullYear() &&
+                   pointDate.getMonth() === targetDate.getMonth();
+          }
+          return false;
+        });
+      }
+      
+      if (pointIndex !== -1) {
+        // Store original values
+        const originalRadius = dataset.pointRadius;
+        const originalBorderWidth = dataset.pointBorderWidth;
+        
+        // Create temporary highlight
+        if (typeof dataset.pointRadius === 'function') {
+          const originalRadiusFunction = dataset.pointRadius;
+          dataset.pointRadius = (context) => {
+            if (context.dataIndex === pointIndex) {
+              return 15; // Larger size when highlighted
+            }
+            return originalRadiusFunction(context);
+          };
+        }
+        
+        if (typeof dataset.pointBorderWidth === 'function') {
+          const originalBorderFunction = dataset.pointBorderWidth;
+          dataset.pointBorderWidth = (context) => {
+            if (context.dataIndex === pointIndex) {
+              return 3; // Thicker border when highlighted
+            }
+            return originalBorderFunction(context);
+          };
+        }
+        
+        myChart.update('none');
+        
+        // Store cleanup function
+        window.currentHighlightCleanup = () => {
+          dataset.pointRadius = originalRadius;
+          dataset.pointBorderWidth = originalBorderWidth;
+          myChart.update('none');
+        };
+      }
+    }
+    
+    // Function to clear chart highlighting
+    function clearChartHighlight() {
+      if (window.currentHighlightCleanup) {
+        window.currentHighlightCleanup();
+        window.currentHighlightCleanup = null;
+      }
+    }
+
+    // Function to display achievements table
+    function displayAchievements(achievements, grouping = 'day') {
+      allAchievements = achievements;
+      updateTableHeaders(grouping);
+      
       const tbody = document.getElementById('achievementsBody');
       tbody.innerHTML = '';
 
       achievements.forEach(achievement => {
         const row = document.createElement('tr');
-        row.innerHTML = generateAchievementRow(achievement);
+        row.innerHTML = generateAchievementRow(achievement, grouping);
         tbody.appendChild(row);
+      });
+      
+      // Add event listeners for chart highlighting
+      document.querySelectorAll('.chart-highlight').forEach(element => {
+        element.addEventListener('mouseenter', (e) => {
+          const runnerName = e.target.dataset.runner;
+          const date = e.target.dataset.date;
+          const type = e.target.dataset.type;
+          highlightChartPoint(runnerName, date, type);
+        });
+        
+        element.addEventListener('mouseleave', () => {
+          clearChartHighlight();
+        });
+      });
+    }
+
+    // Function to update table display and re-add event listeners
+    function updateTableDisplay(achievements, grouping = 'day') {
+      const tbody = document.getElementById('achievementsBody');
+      tbody.innerHTML = '';
+
+      achievements.forEach(achievement => {
+        const row = document.createElement('tr');
+        row.innerHTML = generateAchievementRow(achievement, grouping);
+        tbody.appendChild(row);
+      });
+      
+      // Re-add event listeners for chart highlighting
+      document.querySelectorAll('.chart-highlight').forEach(element => {
+        element.addEventListener('mouseenter', (e) => {
+          const runnerName = e.target.dataset.runner;
+          const date = e.target.dataset.date;
+          const type = e.target.dataset.type;
+          highlightChartPoint(runnerName, date, type);
+        });
+        
+        element.addEventListener('mouseleave', () => {
+          clearChartHighlight();
+        });
       });
     }
 
@@ -1222,12 +1609,28 @@
             bValue = b.runner.toLowerCase();
             break;
           case 'longestRun':
-            aValue = a.longestRun ? parseTimeToMinutes(a.longestRun.duration) : 0;
-            bValue = b.longestRun ? parseTimeToMinutes(b.longestRun.duration) : 0;
+            if (dataGrouping === 'day') {
+              aValue = a.longestRun ? parseTimeToMinutes(a.longestRun.duration) : 0;
+              bValue = b.longestRun ? parseTimeToMinutes(b.longestRun.duration) : 0;
+            } else {
+              // For weekly/monthly, sum up total duration in the period
+              aValue = a.longestRun ? a.longestRun.activities.reduce((sum, activity) => {
+                return sum + parseTimeToMinutes(activity.duration || "0");
+              }, 0) : 0;
+              bValue = b.longestRun ? b.longestRun.activities.reduce((sum, activity) => {
+                return sum + parseTimeToMinutes(activity.duration || "0");
+              }, 0) : 0;
+            }
             break;
           case 'farthestRun':
-            aValue = a.farthestRun ? parseFloat(a.farthestRun.distance) : 0;
-            bValue = b.farthestRun ? parseFloat(b.farthestRun.distance) : 0;
+            if (dataGrouping === 'day') {
+              aValue = a.farthestRun ? parseFloat(a.farthestRun.distance) : 0;
+              bValue = b.farthestRun ? parseFloat(b.farthestRun.distance) : 0;
+            } else {
+              // For weekly/monthly, use period total distance
+              aValue = a.farthestRun ? a.farthestRun.distance : 0;
+              bValue = b.farthestRun ? b.farthestRun.distance : 0;
+            }
             break;
           case 'totalActivities':
             aValue = a.totalActivities;
@@ -1255,7 +1658,7 @@
       });
 
       // Update the display without re-adding event listeners
-      updateTableDisplay(sortedAchievements);
+      updateTableDisplay(sortedAchievements, dataGrouping);
 
       // Update header classes
       document.querySelectorAll('.sortable').forEach(header => {
@@ -1355,7 +1758,7 @@
       const fontSizes = getFontSizes();
       const isMobileDevice = isMobile();
       document.getElementById("daysInfo").innerHTML =
-        `<span class="text-green-600">${daysSoFar} Days Passed</span> | <span class="text-blue-600">${daysRemaining} Days Remaining</span> <span class="text-purple-600">(${weeksRemaining} Weeks)</span><br><small style="color: #666;">Mobile: ${isMobileDevice ? 'YES' : 'NO'} | Font Multiplier: ${isMobileDevice ? '2x' : '1x'} | Chart Title: ${fontSizes.chartTitle}px</small>`;
+        `<span class="text-green-600">${daysSoFar} Days Passed</span> | <span class="text-blue-600">${daysRemaining} Days Remaining</span> <span class="text-purple-600">(${weeksRemaining} Weeks)</span>`;
 
       // Custom legend plugin
       const customLegendPlugin = {
@@ -1496,6 +1899,17 @@
                   let result = `${label}: ${total}`;
                   if (point.hasActivity && point.gainFromLastActivity > 0) {
                     result += `\n(+${point.gainFromLastActivity.toFixed(1)})`;
+                  }
+                  if (point.isLongestRun) {
+                    let starLabel = "";
+                    if (dataGrouping === 'day') {
+                      starLabel = "⭐ Longest Run";
+                    } else if (dataGrouping === 'week') {
+                      starLabel = "⭐ Best Week";
+                    } else if (dataGrouping === 'month') {
+                      starLabel = "⭐ Best Month";
+                    }
+                    result += `\n${starLabel}: ${point.gainFromLastActivity.toFixed(1)} miles`;
                   }
                   return result;
                 },
@@ -1744,7 +2158,7 @@
       const groupButtons = document.querySelectorAll('.group-btn');
       
       groupButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', async function() {
           // Remove active class from all buttons
           document.querySelectorAll('.group-btn').forEach(btn => {
             btn.classList.remove('active');
@@ -1760,6 +2174,18 @@
           
           // Recreate chart with new grouping
           createChart();
+          
+          // Recalculate and display achievements for the new grouping
+          try {
+            const response = await fetch("data.json");
+            if (response.ok) {
+              const data = await response.json();
+              const achievements = calculateAchievements(data, dataGrouping);
+              displayAchievements(achievements, dataGrouping);
+            }
+          } catch (error) {
+            console.error("Error updating achievements:", error);
+          }
         });
       });
     }
