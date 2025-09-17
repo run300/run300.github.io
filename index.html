@@ -1200,7 +1200,29 @@
 
           // Calculate average distance per period
           const totalDistance = groupedActivities.reduce((sum, period) => sum + period.distance, 0);
-          const averageDistance = totalDistance / groupedActivities.length;
+          
+          // Calculate total number of periods in the time range (not just periods with activity)
+          let totalPeriods = 0;
+          if (groupedActivities.length > 0) {
+            const firstActivityDate = new Date(Math.min(...groupedActivities.map(period => new Date(period.date))));
+            const lastActivityDate = new Date(Math.max(...groupedActivities.map(period => new Date(period.date))));
+            const currentDate = new Date();
+            const endDate = lastActivityDate > currentDate ? lastActivityDate : currentDate;
+            
+            if (grouping === 'month') {
+              // Calculate months between first activity and end date
+              const yearDiff = endDate.getFullYear() - firstActivityDate.getFullYear();
+              const monthDiff = endDate.getMonth() - firstActivityDate.getMonth();
+              totalPeriods = yearDiff * 12 + monthDiff + 1; // +1 to include both start and end months
+            } else if (grouping === 'week') {
+              // Calculate weeks between first activity and end date
+              const timeDiff = endDate.getTime() - firstActivityDate.getTime();
+              const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+              totalPeriods = Math.ceil(daysDiff / 7);
+            }
+          }
+          
+          const averageDistance = totalPeriods > 0 ? totalDistance / totalPeriods : 0;
 
           // Calculate average pace across all activities in all periods
           const allActivitiesWithPace = groupedActivities.flatMap(period => 
