@@ -1768,8 +1768,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 108,
-        "totalDistance": 252.88,
+        "totalActivities": 109,
+        "totalDistance": 255.19,
         "activityTypes": [
           "Running"
         ]
@@ -2530,6 +2530,13 @@
           "type": "Running",
           "duration": "51:32",
           "pace": "18:57"
+        },
+        {
+          "date": "09/25/25",
+          "distance": 2.31,
+          "type": "Running",
+          "duration": "37:00",
+          "pace": "16:00"
         }
       ]
     },
@@ -2620,7 +2627,7 @@
       "name": "Moose",
       "stats": {
         "totalActivities": 96,
-        "totalDistance": 369.83,
+        "totalDistance": 369.15,
         "activityTypes": [
           "Running"
         ]
@@ -3040,13 +3047,6 @@
           "pace": "10:28"
         },
         {
-          "date": "06/01/25",
-          "distance": 3.68,
-          "type": "Running",
-          "duration": "46:56",
-          "pace": "12:45"
-        },
-        {
           "date": "06/05/25",
           "distance": 6.11,
           "type": "Running",
@@ -3297,6 +3297,13 @@
           "type": "Running",
           "duration": "37:09",
           "pace": "10:03"
+        },
+        {
+          "date": "09/25/25",
+          "distance": 3.0,
+          "type": "Running",
+          "duration": "37:58",
+          "pace": "12:40"
         }
       ]
     },
@@ -4309,8 +4316,8 @@
     "Muscles": {
       "name": "Muscles",
       "stats": {
-        "totalActivities": 100,
-        "totalDistance": 162.92,
+        "totalActivities": 101,
+        "totalDistance": 163.22,
         "activityTypes": [
           "Hiking",
           "Running",
@@ -5017,13 +5024,20 @@
           "type": "Running",
           "duration": "20:26",
           "pace": "46:01"
+        },
+        {
+          "date": "09/25/25",
+          "distance": 0.3,
+          "type": "Running",
+          "duration": "12:22",
+          "pace": "41:30"
         }
       ]
     }
   },
   "metadata": {
-    "lastUpdated": "2025-09-25T00:57:36.898888",
+    "lastUpdated": "2025-09-26T00:57:12.928130",
     "totalRunners": 10,
-    "totalActivities": 699
+    "totalActivities": 701
   }
 }
