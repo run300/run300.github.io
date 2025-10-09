@@ -3,8 +3,8 @@
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 62,
-        "totalDistance": 140.9,
+        "totalActivities": 63,
+        "totalDistance": 144.1,
         "activityTypes": [
           "Hiking",
           "Running",
@@ -445,14 +445,21 @@
           "type": "Walking",
           "duration": "41:02",
           "pace": "18:59"
+        },
+        {
+          "date": "10/08/25",
+          "distance": 3.2,
+          "type": "Walking",
+          "duration": "1:06:42",
+          "pace": "20:51"
         }
       ]
     },
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 65,
-        "totalDistance": 203.06,
+        "totalActivities": 66,
+        "totalDistance": 206.08,
         "activityTypes": [
           "Running"
         ]
@@ -912,6 +919,13 @@
           "type": "Running",
           "duration": "40:13",
           "pace": "13:14"
+        },
+        {
+          "date": "10/08/25",
+          "distance": 3.02,
+          "type": "Running",
+          "duration": "40:11",
+          "pace": "13:20"
         }
       ]
     },
@@ -2766,8 +2780,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 101,
-        "totalDistance": 388.01,
+        "totalActivities": 102,
+        "totalDistance": 390.5,
         "activityTypes": [
           "Running"
         ]
@@ -3479,6 +3493,13 @@
           "type": "Running",
           "duration": "39:15",
           "pace": "10:38"
+        },
+        {
+          "date": "10/08/25",
+          "distance": 2.49,
+          "type": "Running",
+          "duration": "34:41",
+          "pace": "13:57"
         }
       ]
     },
@@ -5232,8 +5253,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-10-08T00:57:55.831879",
+    "lastUpdated": "2025-10-09T00:59:24.938539",
     "totalRunners": 10,
-    "totalActivities": 729
+    "totalActivities": 732
   }
 }
