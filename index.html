@@ -846,59 +846,40 @@
 
         // Process grouped activities
         if (dataGrouping === 'day') {
-          // Create points for every day up to current date (original logic)
-          for (let i = 0; i <= daysSoFar; i++) {
-            const currentDay = new Date(
-              startDate.getTime() + i * 24 * 60 * 60 * 1000,
-            );
-            // Compare dates at midnight to include today's activities
-            const currentDayMidnight = new Date(currentDay.getFullYear(), currentDay.getMonth(), currentDay.getDate());
-            const todayMidnight = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
-            if (currentDayMidnight > todayMidnight) break;
-
-            let gainFromLastActivity = 0;
-            let hasNewActivity = false;
-
-            // Check if there are activities up to this date
-            let isLongestRunDay = false;
-            while (activityIndex < sortedActivities.length) {
-              if (sortedActivities[activityIndex].parsedDate <= currentDay) {
-                gainFromLastActivity +=
-                  sortedActivities[activityIndex].distance;
-                hasNewActivity = true;
-                lastActivityDistance = sortedActivities[activityIndex].distance;
-                lastActivityDate = new Date(
-                  sortedActivities[activityIndex].parsedDate,
-                );
-                cumulativeDistance += sortedActivities[activityIndex].distance;
-                
-                // Check if this activity is the longest run
-                if (longestRun && sortedActivities[activityIndex].date === longestRun.date && 
-                    sortedActivities[activityIndex].distance === longestRun.distance) {
-                  isLongestRunDay = true;
-                }
-                
-                activityIndex++;
-              } else {
-                break;
-              }
-            }
-
-            const isSameDayAsLastActivity =
-              lastActivityDate && isSameDay(lastActivityDate, currentDay);
-
+          // Add starting point at beginning of time range for daily view
+          if (sortedActivities.length > 0) {
             runnerData.push({
-              x: currentDay,
-              y: cumulativeDistance,
-              hasActivity: hasNewActivity,
-              gainFromLastActivity:
-                gainFromLastActivity > 0 ? gainFromLastActivity : 0,
-              lastActivityDistance: lastActivityDistance || 0,
-              lastActivityDate: lastActivityDate,
-              isSameDayAsLastActivity: isSameDayAsLastActivity,
-              isLongestRun: isLongestRunDay,
+              x: startDate, // Jan 1st, 2025
+              y: 0,
+              hasActivity: false,
+              gainFromLastActivity: 0,
+              lastActivityDistance: 0,
+              lastActivityDate: null,
+              isSameDayAsLastActivity: false,
+              isLongestRun: false,
             });
           }
+          
+          // Process each activity and create a data point
+          sortedActivities.forEach(activity => {
+            cumulativeDistance += activity.distance;
+            
+            // Check if this activity is the longest run
+            const isLongestRunDay = longestRun && activity.date === longestRun.date && 
+                                   activity.distance === longestRun.distance;
+            
+            runnerData.push({
+              x: activity.parsedDate,
+              y: cumulativeDistance,
+              hasActivity: true,
+              gainFromLastActivity: activity.distance,
+              lastActivityDistance: activity.distance,
+              lastActivityDate: activity.parsedDate,
+              isSameDayAsLastActivity: false,
+              isLongestRun: isLongestRunDay,
+              periodKey: activity.date, // Store the date for matching in daily view
+            });
+          });
         } else {
           // Process grouped data (week/month)
           // Add starting point at beginning of time range for weekly/monthly views
@@ -945,6 +926,7 @@
               lastActivityDate: groupDate,
               isSameDayAsLastActivity: false,
               isLongestRun: isBestPeriod,
+              periodKey: group.date, // Store the period key for exact matching
             });
           });
         }
@@ -1258,12 +1240,15 @@
 
           // Total activities count
           const totalActivities = groupedActivities.reduce((sum, period) => sum + period.activities.length, 0);
+          
+          // Calculate average activities per period
+          const averageActivities = totalPeriods > 0 ? totalActivities / totalPeriods : 0;
 
           achievements.push({
             runner: runnerName,
             longestRun: longestPeriod,
             farthestRun: farthestPeriod,
-            totalActivities: totalActivities,
+            totalActivities: averageActivities,
             averagePace: averagePaceSeconds,
             averageDistance: averageDistance,
             totalDistance: totalDistance
@@ -1418,13 +1403,21 @@
         }
       }
       
+      // Format activities count based on grouping
+      let activitiesDisplay;
+      if (grouping === 'day') {
+        activitiesDisplay = `${Math.round(achievement.totalActivities)}`;
+      } else {
+        activitiesDisplay = `${achievement.totalActivities.toFixed(1)}`;
+      }
+      
       return `
         <td class="runner-name">${achievement.runner}</td>
         <td>
           <span class="achievement-display total-distance-display">${achievement.totalDistance.toFixed(1)} mi</span>
         </td>
         <td>
-          <span class="achievement-display activities-count">${achievement.totalActivities}</span>
+          <span class="achievement-display activities-count">${activitiesDisplay}</span>
         </td>
         <td>
           <span class="achievement-display avg-distance-display">${achievement.averageDistance.toFixed(1)} mi</span>
@@ -1451,23 +1444,26 @@
       let avgPaceText = "Avg Pace";
       let farthestText = "Farthest Run";
       let longestText = "Longest Run";
+      let activitiesText = "Total Activities";
       
       if (grouping === 'week') {
-        avgDistanceText = "Avg Weekly Distance";
-        avgPaceText = "Avg Weekly Pace";
+        avgDistanceText = "Weekly Distance";
+        avgPaceText = "Weekly Pace";
         farthestText = "Most Miles Week";
         longestText = "Most Time Week";
+        activitiesText = "Weekly Activities";
       } else if (grouping === 'month') {
-        avgDistanceText = "Avg Monthly Distance";
-        avgPaceText = "Avg Monthly Pace";
+        avgDistanceText = "Monthly Distance";
+        avgPaceText = "Monthly Pace";
         farthestText = "Most Miles Month";
         longestText = "Most Time Month";
+        activitiesText = "Monthly Activities";
       }
       
       headers.innerHTML = `
         <th class="sortable" data-column="runner">Runner</th>
         <th class="sortable" data-column="totalDistance">Total Distance</th>
-        <th class="sortable" data-column="totalActivities">Total Activities</th>
+        <th class="sortable" data-column="totalActivities">${activitiesText}</th>
         <th class="sortable" data-column="avgDistance">${avgDistanceText}</th>
         <th class="sortable" data-column="avgPace">${avgPaceText}</th>
         <th class="sortable" data-column="farthestRun">${farthestText}</th>
@@ -1481,6 +1477,15 @@
           sortTable(column);
         });
       });
+      
+      // Restore the sort indicator on the current sorted column
+      if (currentSortColumn) {
+        document.querySelectorAll('.sortable').forEach(header => {
+          if (header.dataset.column === currentSortColumn) {
+            header.classList.add(currentSortDirection);
+          }
+        });
+      }
     }
 
     // Function to highlight chart point
@@ -1494,37 +1499,10 @@
       const dataset = myChart.data.datasets[datasetIndex];
       
       // Find the data point that matches this date/period
-      let pointIndex = -1;
-      
-      if (dataGrouping === 'day') {
-        // For daily view, find exact date match
-        pointIndex = dataset.data.findIndex(point => {
-          if (!point.lastActivityDate) return false;
-          const pointDate = point.lastActivityDate.toLocaleDateString('en-US', {
-            month: '2-digit',
-            day: '2-digit',
-            year: '2-digit'
-          }).replace(/(\d{2})\/(\d{2})\/(\d{2})/, '$1/$2/$3');
-          const targetDate = date.length === 5 ? date + '/25' : date;
-          return pointDate === targetDate;
-        });
-      } else {
-        // For weekly/monthly view, find matching period
-        pointIndex = dataset.data.findIndex(point => {
-          const pointDate = new Date(point.x);
-          const targetDate = new Date(date);
-          
-          if (dataGrouping === 'week') {
-            // Compare week start dates
-            return Math.abs(pointDate.getTime() - targetDate.getTime()) < 7 * 24 * 60 * 60 * 1000;
-          } else if (dataGrouping === 'month') {
-            // Compare year-month
-            return pointDate.getFullYear() === targetDate.getFullYear() &&
-                   pointDate.getMonth() === targetDate.getMonth();
-          }
-          return false;
-        });
-      }
+      // Use the periodKey stored in the data point for exact matching across all views
+      let pointIndex = dataset.data.findIndex(point => {
+        return point.periodKey === date;
+      });
       
       if (pointIndex !== -1) {
         // Store original values
@@ -1576,10 +1554,16 @@
       allAchievements = achievements;
       updateTableHeaders(grouping);
       
+      // Sort achievements if there's a current sort column
+      let sortedAchievements = achievements;
+      if (currentSortColumn) {
+        sortedAchievements = sortAchievementsArray([...achievements], currentSortColumn, currentSortDirection);
+      }
+      
       const tbody = document.getElementById('achievementsBody');
       tbody.innerHTML = '';
 
-      achievements.forEach(achievement => {
+      sortedAchievements.forEach(achievement => {
         const row = document.createElement('tr');
         row.innerHTML = generateAchievementRow(achievement, grouping);
         tbody.appendChild(row);
@@ -1634,18 +1618,9 @@
       currentSortDirection = 'desc';
     }
 
-    // Function to sort the table
-    function sortTable(column) {
-      // Toggle sort direction if clicking the same column
-      if (currentSortColumn === column) {
-        currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
-      } else {
-        currentSortColumn = column;
-        currentSortDirection = 'desc';
-      }
-
-      // Sort the achievements array
-      const sortedAchievements = [...allAchievements].sort((a, b) => {
+    // Helper function to sort achievements array
+    function sortAchievementsArray(achievements, column, direction) {
+      return achievements.sort((a, b) => {
         let aValue, bValue;
 
         switch (column) {
@@ -1697,10 +1672,24 @@
             return 0;
         }
 
-        if (aValue < bValue) return currentSortDirection === 'asc' ? -1 : 1;
-        if (aValue > bValue) return currentSortDirection === 'asc' ? 1 : -1;
+        if (aValue < bValue) return direction === 'asc' ? -1 : 1;
+        if (aValue > bValue) return direction === 'asc' ? 1 : -1;
         return 0;
       });
+    }
+
+    // Function to sort the table
+    function sortTable(column) {
+      // Toggle sort direction if clicking the same column
+      if (currentSortColumn === column) {
+        currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
+      } else {
+        currentSortColumn = column;
+        currentSortDirection = 'desc';
+      }
+
+      // Sort the achievements array
+      const sortedAchievements = sortAchievementsArray([...allAchievements], column, currentSortDirection);
 
       // Update the display without re-adding event listeners
       updateTableDisplay(sortedAchievements, dataGrouping);
