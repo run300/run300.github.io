@@ -933,7 +933,7 @@
       "name": "Bruce",
       "stats": {
         "totalActivities": 110,
-        "totalDistance": 155.57,
+        "totalDistance": 158.35,
         "activityTypes": [
           "Running"
         ]
@@ -1676,24 +1676,10 @@
         },
         {
           "date": "10/02/25",
-          "distance": 1.31,
-          "type": "Running",
-          "duration": "15:16",
-          "pace": "11:41"
-        },
-        {
-          "date": "10/02/25",
           "distance": 1.25,
           "type": "Running",
           "duration": "14:19",
           "pace": "11:26"
-        },
-        {
-          "date": "10/06/25",
-          "distance": 0.56,
-          "type": "Running",
-          "duration": "6:04",
-          "pace": "10:49"
         },
         {
           "date": "10/06/25",
@@ -1708,6 +1694,20 @@
           "type": "Running",
           "duration": "24:04",
           "pace": "10:12"
+        },
+        {
+          "date": "10/09/25",
+          "distance": 2.28,
+          "type": "Running",
+          "duration": "25:13",
+          "pace": "11:04"
+        },
+        {
+          "date": "10/09/25",
+          "distance": 2.37,
+          "type": "Running",
+          "duration": "26:22",
+          "pace": "11:07"
         }
       ]
     },
@@ -1873,8 +1873,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 115,
-        "totalDistance": 268.48,
+        "totalActivities": 116,
+        "totalDistance": 270.62,
         "activityTypes": [
           "Running"
         ]
@@ -2684,6 +2684,13 @@
           "type": "Running",
           "duration": "43:09",
           "pace": "16:04"
+        },
+        {
+          "date": "10/09/25",
+          "distance": 2.14,
+          "type": "Running",
+          "duration": "29:42",
+          "pace": "13:52"
         }
       ]
     },
@@ -5253,8 +5260,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-10-09T00:59:24.938539",
+    "lastUpdated": "2025-10-10T00:58:55.690206",
     "totalRunners": 10,
-    "totalActivities": 732
+    "totalActivities": 733
   }
 }
