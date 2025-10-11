@@ -458,8 +458,8 @@
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 66,
-        "totalDistance": 206.08,
+        "totalActivities": 67,
+        "totalDistance": 209.11,
         "activityTypes": [
           "Running"
         ]
@@ -926,6 +926,13 @@
           "type": "Running",
           "duration": "40:11",
           "pace": "13:20"
+        },
+        {
+          "date": "10/10/25",
+          "distance": 3.03,
+          "type": "Running",
+          "duration": "40:15",
+          "pace": "13:17"
         }
       ]
     },
@@ -1873,8 +1880,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 116,
-        "totalDistance": 270.62,
+        "totalActivities": 117,
+        "totalDistance": 271.67,
         "activityTypes": [
           "Running"
         ]
@@ -2691,6 +2698,13 @@
           "type": "Running",
           "duration": "29:42",
           "pace": "13:52"
+        },
+        {
+          "date": "10/10/25",
+          "distance": 1.05,
+          "type": "Running",
+          "duration": "10:34",
+          "pace": "10:04"
         }
       ]
     },
@@ -5260,8 +5274,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-10-10T00:58:55.690206",
+    "lastUpdated": "2025-10-11T00:55:39.655425",
     "totalRunners": 10,
-    "totalActivities": 733
+    "totalActivities": 735
   }
 }
