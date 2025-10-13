@@ -2801,8 +2801,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 102,
-        "totalDistance": 390.5,
+        "totalActivities": 103,
+        "totalDistance": 394.21,
         "activityTypes": [
           "Running"
         ]
@@ -3521,6 +3521,13 @@
           "type": "Running",
           "duration": "34:41",
           "pace": "13:57"
+        },
+        {
+          "date": "10/12/25",
+          "distance": 3.71,
+          "type": "Running",
+          "duration": "35:54",
+          "pace": "9:41"
         }
       ]
     },
@@ -5274,8 +5281,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-10-12T01:01:28.889108",
+    "lastUpdated": "2025-10-13T01:02:41.507462",
     "totalRunners": 10,
-    "totalActivities": 735
+    "totalActivities": 736
   }
 }
