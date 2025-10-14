@@ -601,12 +601,21 @@ def export_to_json(activities_data, filename="data.json", incremental=False, sca
         if existing_data:
             print(f"{ARROW} Performing incremental update to {filename}")
             print(f"{ARROW} Scanned months: {scanned_months}")
-            # Merge activities for each runner
-            for runner, new_activities in activities_data.items():
+            
+            # First, preserve all runners from existing data that weren't in the new scan
+            for runner, runner_data in existing_data["runners"].items():
+                if runner not in activities_data:
+                    # Runner wasn't in the new scan, so preserve their existing data
+                    print(f"{ARROW} Preserving existing data for {runner} (no activities in scanned months)")
+                    activities_data[runner] = runner_data["activities"]
+            
+            # Then, merge activities for runners that were in the new scan
+            for runner, new_activities in list(activities_data.items()):
                 if runner in existing_data["runners"]:
                     existing_activities = existing_data["runners"][runner]["activities"]
                     merged_activities = merge_activities_by_month(existing_activities, new_activities, scanned_months)
                     activities_data[runner] = merged_activities
+                    print(f"{ARROW} Merged activities for {runner}")
                 else:
                     print(f"{ARROW} Adding new runner: {runner}")
             
