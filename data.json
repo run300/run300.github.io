@@ -3,8 +3,8 @@
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 63,
-        "totalDistance": 144.1,
+        "totalActivities": 64,
+        "totalDistance": 146.54,
         "activityTypes": [
           "Hiking",
           "Running",
@@ -452,6 +452,13 @@
           "type": "Walking",
           "duration": "1:06:42",
           "pace": "20:51"
+        },
+        {
+          "date": "10/14/25",
+          "distance": 2.44,
+          "type": "Walking",
+          "duration": "47:28",
+          "pace": "19:27"
         }
       ]
     },
@@ -939,8 +946,8 @@
     "Bruce": {
       "name": "Bruce",
       "stats": {
-        "totalActivities": 112,
-        "totalDistance": 162.43,
+        "totalActivities": 114,
+        "totalDistance": 166.95,
         "activityTypes": [
           "Running"
         ]
@@ -1729,14 +1736,28 @@
           "type": "Running",
           "duration": "25:51",
           "pace": "11:38"
+        },
+        {
+          "date": "10/14/25",
+          "distance": 2.23,
+          "type": "Running",
+          "duration": "27:28",
+          "pace": "12:19"
+        },
+        {
+          "date": "10/14/25",
+          "distance": 2.29,
+          "type": "Running",
+          "duration": "26:59",
+          "pace": "11:47"
         }
       ]
     },
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 118,
-        "totalDistance": 274.4,
+        "totalActivities": 119,
+        "totalDistance": 276.73,
         "activityTypes": [
           "Running"
         ]
@@ -2567,6 +2588,13 @@
           "type": "Running",
           "duration": "42:36",
           "pace": "15:37"
+        },
+        {
+          "date": "10/14/25",
+          "distance": 2.33,
+          "type": "Running",
+          "duration": "36:20",
+          "pace": "15:36"
         }
       ]
     },
@@ -5302,8 +5330,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-10-14T15:38:51.369829",
+    "lastUpdated": "2025-10-15T01:10:57.446259",
     "totalRunners": 10,
-    "totalActivities": 739
+    "totalActivities": 743
   }
 }
