@@ -46,12 +46,12 @@
     }
 
     body {
-      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       min-height: 100vh;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
         "Helvetica Neue", Arial, sans-serif;
       line-height: 1.6;
-      color: #1f2937;
+      color: #e2e8f0;
       position: relative;
     }
 
@@ -63,9 +63,9 @@
       right: 0;
       bottom: 0;
       background: 
-        radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
       pointer-events: none;
       z-index: -1;
     }
@@ -83,36 +83,36 @@
     h1 {
       font-size: 3rem;
       font-weight: 400;
-      background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+      background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       margin-bottom: 1rem;
       text-align: center;
-      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
       letter-spacing: -0.02em;
     }
 
     #daysInfo {
       text-align: center;
       margin-bottom: 1rem;
-      color: #64748b;
+      color: #94a3b8;
       font-weight: 500;
       font-size: 1rem;
     }
 
     /* Chart container */
     .chart-container {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(30, 41, 59, 0.8);
       backdrop-filter: blur(20px);
       padding: 0.5rem 2rem 0.5rem 2rem;
       border-radius: 24px;
       margin-bottom: 0.5rem;
       box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.1),
-        0 8px 32px rgba(0, 0, 0, 0.05),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+        0 20px 40px rgba(0, 0, 0, 0.5),
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       position: relative;
       overflow: visible;
       display: flex;
@@ -226,11 +226,11 @@
     }
 
     .legend-item:hover {
-      background-color: rgba(0, 0, 0, 0.05);
+      background-color: rgba(255, 255, 255, 0.1);
     }
 
     .legend-item.active {
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: rgba(255, 255, 255, 0.15);
     }
 
     #customLegend {
@@ -246,14 +246,14 @@
 
     .legend-total {
       font-size: 0.85em;
-      color: #666;
+      color: #cbd5e1;
       margin-bottom: 4px;
     }
 
     /* Gain label styles */
     .gain-label {
       position: absolute;
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: rgba(15, 23, 42, 0.9);
       color: white;
       padding: 3px 6px;
       border-radius: 3px;
@@ -360,14 +360,14 @@
     /* Achievements Table Styles */
     .achievements-container {
       margin-top: 2rem;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(30, 41, 59, 0.8);
       backdrop-filter: blur(20px);
       border-radius: 24px;
       box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.1),
-        0 8px 32px rgba(0, 0, 0, 0.05),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+        0 20px 40px rgba(0, 0, 0, 0.5),
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       overflow: hidden;
       position: relative;
     }
@@ -443,12 +443,12 @@
     }
 
     #achievementsTable th {
-      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-      color: #1e293b;
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      color: #e2e8f0;
       font-weight: 700;
       padding: 0.75rem 0.125rem;
       text-align: center;
-      border-bottom: 2px solid #cbd5e1;
+      border-bottom: 2px solid #475569;
       position: sticky;
       top: 0;
       font-size: 0.875rem;
@@ -464,7 +464,7 @@
     }
 
     .sortable:hover {
-      background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+      background: linear-gradient(135deg, #334155 0%, #475569 100%);
     }
 
     .sortable::after {
@@ -489,40 +489,40 @@
 
     #achievementsTable td {
       padding: 0.5rem 0.125rem;
-      border-bottom: 1px solid #e2e8f0;
+      border-bottom: 1px solid #334155;
       vertical-align: middle;
       text-align: center;
       transition: all 0.2s ease;
     }
 
     #achievementsTable tr:hover {
-      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
       transform: scale(1.01);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
     #achievementsTable tr:nth-child(even) {
-      background: rgba(248, 250, 252, 0.5);
+      background: rgba(15, 23, 42, 0.3);
     }
 
     #achievementsTable tr:nth-child(even):hover {
-      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
     }
 
     .runner-name {
       font-weight: 500;
-      color: #1e293b;
+      color: #e2e8f0;
       font-size: 1rem;
     }
 
     .achievement-value {
       font-weight: 500;
-      color: #64748b;
+      color: #94a3b8;
       font-style: italic;
     }
 
     .achievement-unit {
-      color: #94a3b8;
+      color: #64748b;
       font-size: 0.75rem;
       font-weight: 500;
     }
@@ -683,7 +683,7 @@
       <!-- Group Data By Buttons - positioned at top right -->
       <div id="groupButtons" style="position: absolute; top: 20px; right: 20px; z-index: 10;">
         <div style="display: flex; gap: 0.5rem; align-items: center;">
-          <span style="color: #1e293b; font-size: 1.1rem; font-weight: 600; margin-right: 0.5rem;">View:</span>
+          <span style="color: #e2e8f0; font-size: 1.1rem; font-weight: 600; margin-right: 0.5rem;">View:</span>
           <button class="group-btn active" data-group="day" style="padding: 0.4rem 0.8rem; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-size: 0.9rem;">Daily</button>
           <button class="group-btn" data-group="week" style="padding: 0.4rem 0.8rem; background: #6b7280; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-size: 0.9rem;">Weekly</button>
           <button class="group-btn" data-group="month" style="padding: 0.4rem 0.8rem; background: #6b7280; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-size: 0.9rem;">Monthly</button>
@@ -1994,7 +1994,7 @@
                 weight: 'bold',
                 family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
               },
-              color: '#1e293b',
+              color: '#e2e8f0',
               padding: {
                 top: 10,
                 bottom: 20
@@ -2225,8 +2225,9 @@
                 text: `Date (2025) - ${dataGrouping === 'day' ? 'Daily' : dataGrouping === 'week' ? 'Weekly' : 'Monthly'}`,
                 padding: {top: 5, bottom: 5},
                 font: {weight: "bold", size: getFontSizes().axisTitle},
+                color: '#cbd5e1'
               },
-              grid: {color: "rgba(0, 0, 0, 0.05)"},
+              grid: {color: "rgba(255, 255, 255, 0.1)"},
               ticks: {
                 font: {weight: "bold", size: getFontSizes().axisTicks},
                 callback: function(value, index, ticks) {
@@ -2253,18 +2254,18 @@
                   const month = date.getMonth();
 
                   const monthColors = [
-                    "rgba(0,0,0,0.7)", // Jan
-                    "rgba(0,0,0,0.5)", // Feb
-                    "rgba(0,0,0,0.7)", // Mar
-                    "rgba(0,0,0,0.5)", // Apr
-                    "rgba(0,0,0,0.7)", // May
-                    "rgba(0,0,0,0.5)", // Jun
-                    "rgba(0,0,0,0.7)", // Jul
-                    "rgba(0,0,0,0.5)", // Aug
-                    "rgba(0,0,0,0.7)", // Sep
-                    "rgba(0,0,0,0.5)", // Oct
-                    "rgba(0,0,0,0.7)", // Nov
-                    "rgba(0,0,0,0.5)", // Dec
+                    "rgba(226, 232, 240, 0.9)", // Jan
+                    "rgba(226, 232, 240, 0.7)", // Feb
+                    "rgba(226, 232, 240, 0.9)", // Mar
+                    "rgba(226, 232, 240, 0.7)", // Apr
+                    "rgba(226, 232, 240, 0.9)", // May
+                    "rgba(226, 232, 240, 0.7)", // Jun
+                    "rgba(226, 232, 240, 0.9)", // Jul
+                    "rgba(226, 232, 240, 0.7)", // Aug
+                    "rgba(226, 232, 240, 0.9)", // Sep
+                    "rgba(226, 232, 240, 0.7)", // Oct
+                    "rgba(226, 232, 240, 0.9)", // Nov
+                    "rgba(226, 232, 240, 0.7)", // Dec
                   ];
 
                   return monthColors[month];
@@ -2283,6 +2284,7 @@
                 text: "Miles",
                 padding: {top: 5, bottom: 5, left: 0, right: 0},
                 font: {weight: "bold", size: getFontSizes().axisTitle},
+                color: '#cbd5e1'
               },
               grid: {
                 color: function(context) {
@@ -2290,7 +2292,7 @@
                   if (context.tick.value === 300) {
                     return "rgba(255, 215, 0, 0.8)";
                   }
-                  return "rgba(0, 0, 0, 0.05)";
+                  return "rgba(255, 255, 255, 0.1)";
                 },
                 lineWidth: function(context) {
                   // Make the 300 mile line thicker
@@ -2307,7 +2309,7 @@
                   if (context.tick.value === 300) {
                     return "#FFD700";
                   }
-                  return "rgba(0, 0, 0, 0.8)";
+                  return "#cbd5e1";
                 },
                 callback: function(value) {
                   if (value === 300) {
