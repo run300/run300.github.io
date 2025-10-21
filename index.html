@@ -307,6 +307,56 @@
       }
     }
 
+    /* 300 Mile Achievement - Modern Glitter Effect */
+    @keyframes shimmer {
+      0% {
+        background-position: -200% center;
+      }
+      100% {
+        background-position: 200% center;
+      }
+    }
+
+    @keyframes subtle-glow {
+      0%, 100% {
+        text-shadow: 
+          0 0 2px rgba(255, 215, 0, 0.6),
+          0 0 4px rgba(255, 215, 0, 0.3);
+      }
+      50% {
+        text-shadow: 
+          0 0 3px rgba(255, 215, 0, 0.8),
+          0 0 6px rgba(255, 215, 0, 0.4);
+      }
+    }
+
+    .champion-300 {
+      position: relative;
+      font-weight: 700 !important;
+    }
+
+    .champion-300-text {
+      font-weight: 700;
+      background: linear-gradient(
+        90deg,
+        #1e293b 0%,
+        #FFD700 25%,
+        #FFF9E6 50%,
+        #FFD700 75%,
+        #1e293b 100%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s linear infinite, subtle-glow 3s ease-in-out infinite;
+      position: relative;
+    }
+
+    .legend-item.champion-300-legend {
+      /* No special styling - just the shimmer text effect */
+    }
+
     /* Achievements Table Styles */
     .achievements-container {
       margin-top: 2rem;
@@ -1376,6 +1426,10 @@
       let farthestDisplay = '<span class="achievement-value">No data</span>';
       let longestDisplay = '<span class="achievement-value">No data</span>';
       
+      // Check if runner has reached 300 miles
+      const has300Miles = achievement.totalDistance >= 300;
+      const runnerNameClass = has300Miles ? 'runner-name champion-300-text' : 'runner-name';
+      
       if (grouping === 'day') {
         // Original daily logic
         if (achievement.farthestRun) {
@@ -1411,10 +1465,13 @@
         activitiesDisplay = `${achievement.totalActivities.toFixed(1)}`;
       }
       
+      // Apply champion class to total distance display if 300+ miles
+      const totalDistanceClass = has300Miles ? 'achievement-display total-distance-display champion-300' : 'achievement-display total-distance-display';
+      
       return `
-        <td class="runner-name">${achievement.runner}</td>
+        <td class="${runnerNameClass}">${achievement.runner}</td>
         <td>
-          <span class="achievement-display total-distance-display">${achievement.totalDistance.toFixed(1)} mi</span>
+          <span class="${totalDistanceClass}">${achievement.totalDistance.toFixed(1)} mi</span>
         </td>
         <td>
           <span class="achievement-display activities-count">${activitiesDisplay}</span>
@@ -1824,6 +1881,12 @@
               const item = document.createElement("div");
               item.className = "legend-item";
               item.dataset.index = i;
+              
+              // Check if runner has reached 300 miles
+              const has300Miles = dataset.totalMiles >= 300;
+              if (has300Miles) {
+                item.classList.add("champion-300-legend");
+              }
 
               const colorBox = document.createElement("div");
               colorBox.style.width = "12px";
@@ -1835,10 +1898,17 @@
 
               const nameSpan = document.createElement("div");
               nameSpan.className = "legend-name";
-              nameSpan.innerHTML = `<span style="display:inline-block;vertical-align:middle;">${colorBox.outerHTML}</span> ${dataset.label}`;
+              if (has300Miles) {
+                nameSpan.innerHTML = `<span style="display:inline-block;vertical-align:middle;">${colorBox.outerHTML}</span> <span class="champion-300-text">${dataset.label}</span>`;
+              } else {
+                nameSpan.innerHTML = `<span style="display:inline-block;vertical-align:middle;">${colorBox.outerHTML}</span> ${dataset.label}`;
+              }
 
               const totalSpan = document.createElement("div");
               totalSpan.className = "legend-total";
+              if (has300Miles) {
+                totalSpan.classList.add("champion-300");
+              }
               totalSpan.textContent = `${dataset.totalMiles.toFixed(1)}`;
 
               item.appendChild(nameSpan);
