@@ -1888,13 +1888,26 @@
                 item.classList.add("champion-300-legend");
               }
 
-              const colorBox = document.createElement("div");
-              colorBox.style.width = "12px";
-              colorBox.style.height = "12px";
-              colorBox.style.borderRadius = "50%";
-              colorBox.style.backgroundColor = dataset.borderColor;
-              colorBox.style.display = "inline-block";
-              colorBox.style.marginRight = "5px";
+              let colorBox;
+              if (has300Miles) {
+                // Use star for 300+ mile runners
+                colorBox = document.createElement("span");
+                colorBox.textContent = "★";
+                colorBox.style.color = dataset.borderColor;
+                colorBox.style.fontSize = "16px";
+                colorBox.style.display = "inline-block";
+                colorBox.style.marginRight = "5px";
+                colorBox.style.verticalAlign = "middle";
+              } else {
+                // Use circle for runners under 300 miles
+                colorBox = document.createElement("div");
+                colorBox.style.width = "12px";
+                colorBox.style.height = "12px";
+                colorBox.style.borderRadius = "50%";
+                colorBox.style.backgroundColor = dataset.borderColor;
+                colorBox.style.display = "inline-block";
+                colorBox.style.marginRight = "5px";
+              }
 
               const nameSpan = document.createElement("div");
               nameSpan.className = "legend-name";
