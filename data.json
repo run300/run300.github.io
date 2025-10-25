@@ -1795,170 +1795,11 @@
         }
       ]
     },
-    "AutumnBreeze": {
-      "name": "AutumnBreeze",
-      "stats": {
-        "totalActivities": 21,
-        "totalDistance": 25.27,
-        "activityTypes": [
-          "Running"
-        ]
-      },
-      "activities": [
-        {
-          "date": "01/04/25",
-          "distance": 1.09,
-          "type": "Running",
-          "duration": "24:12",
-          "pace": "22:14"
-        },
-        {
-          "date": "01/05/25",
-          "distance": 1.14,
-          "type": "Running",
-          "duration": "22:28",
-          "pace": "19:48"
-        },
-        {
-          "date": "01/12/25",
-          "distance": 1.15,
-          "type": "Running",
-          "duration": "22:39",
-          "pace": "19:38"
-        },
-        {
-          "date": "01/25/25",
-          "distance": 1.14,
-          "type": "Running",
-          "duration": "22:14",
-          "pace": "19:25"
-        },
-        {
-          "date": "02/02/25",
-          "distance": 0.61,
-          "type": "Running",
-          "duration": "23:49",
-          "pace": "39:01"
-        },
-        {
-          "date": "02/08/25",
-          "distance": 1.17,
-          "type": "Running",
-          "duration": "24:02",
-          "pace": "20:31"
-        },
-        {
-          "date": "02/09/25",
-          "distance": 1.14,
-          "type": "Running",
-          "duration": "27:47",
-          "pace": "24:19"
-        },
-        {
-          "date": "02/22/25",
-          "distance": 1.16,
-          "type": "Running",
-          "duration": "24:41",
-          "pace": "21:15"
-        },
-        {
-          "date": "03/10/25",
-          "distance": 1.16,
-          "type": "Running",
-          "duration": "26:01",
-          "pace": "22:25"
-        },
-        {
-          "date": "03/23/25",
-          "distance": 1.17,
-          "type": "Running",
-          "duration": "39:30",
-          "pace": "33:47"
-        },
-        {
-          "date": "03/24/25",
-          "distance": 1.13,
-          "type": "Running",
-          "duration": "42:33",
-          "pace": "37:44"
-        },
-        {
-          "date": "03/26/25",
-          "distance": 1.16,
-          "type": "Running",
-          "duration": "22:35",
-          "pace": "19:31"
-        },
-        {
-          "date": "04/09/25",
-          "distance": 1.15,
-          "type": "Running",
-          "duration": "29:05",
-          "pace": "25:22"
-        },
-        {
-          "date": "04/15/25",
-          "distance": 1.14,
-          "type": "Running",
-          "duration": "23:44",
-          "pace": "20:55"
-        },
-        {
-          "date": "04/20/25",
-          "distance": 1.14,
-          "type": "Running",
-          "duration": "29:09",
-          "pace": "25:38"
-        },
-        {
-          "date": "04/28/25",
-          "distance": 1.06,
-          "type": "Running",
-          "duration": "31:20",
-          "pace": "29:35"
-        },
-        {
-          "date": "05/10/25",
-          "distance": 3.09,
-          "type": "Running",
-          "duration": "1:12:48",
-          "pace": "23:32"
-        },
-        {
-          "date": "06/10/25",
-          "distance": 1.11,
-          "type": "Running",
-          "duration": "29:48",
-          "pace": "26:55"
-        },
-        {
-          "date": "06/26/25",
-          "distance": 1.17,
-          "type": "Running",
-          "duration": "45:52",
-          "pace": "39:23"
-        },
-        {
-          "date": "07/27/25",
-          "distance": 1.13,
-          "type": "Running",
-          "duration": "33:18",
-          "pace": "29:22"
-        },
-        {
-          "date": "08/06/25",
-          "distance": 1.06,
-          "type": "Running",
-          "duration": "28:30",
-          "pace": "26:52"
-        }
-      ]
-    },
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 123,
-        "totalDistance": 285.28,
+        "totalActivities": 124,
+        "totalDistance": 287.61,
         "activityTypes": [
           "Running"
         ]
@@ -2824,6 +2665,172 @@
           "type": "Running",
           "duration": "22:14",
           "pace": "20:51"
+        },
+        {
+          "date": "10/24/25",
+          "distance": 2.33,
+          "type": "Running",
+          "duration": "31:14",
+          "pace": "13:25"
+        }
+      ]
+    },
+    "AutumnBreeze": {
+      "name": "AutumnBreeze",
+      "stats": {
+        "totalActivities": 21,
+        "totalDistance": 25.27,
+        "activityTypes": [
+          "Running"
+        ]
+      },
+      "activities": [
+        {
+          "date": "01/04/25",
+          "distance": 1.09,
+          "type": "Running",
+          "duration": "24:12",
+          "pace": "22:14"
+        },
+        {
+          "date": "01/05/25",
+          "distance": 1.14,
+          "type": "Running",
+          "duration": "22:28",
+          "pace": "19:48"
+        },
+        {
+          "date": "01/12/25",
+          "distance": 1.15,
+          "type": "Running",
+          "duration": "22:39",
+          "pace": "19:38"
+        },
+        {
+          "date": "01/25/25",
+          "distance": 1.14,
+          "type": "Running",
+          "duration": "22:14",
+          "pace": "19:25"
+        },
+        {
+          "date": "02/02/25",
+          "distance": 0.61,
+          "type": "Running",
+          "duration": "23:49",
+          "pace": "39:01"
+        },
+        {
+          "date": "02/08/25",
+          "distance": 1.17,
+          "type": "Running",
+          "duration": "24:02",
+          "pace": "20:31"
+        },
+        {
+          "date": "02/09/25",
+          "distance": 1.14,
+          "type": "Running",
+          "duration": "27:47",
+          "pace": "24:19"
+        },
+        {
+          "date": "02/22/25",
+          "distance": 1.16,
+          "type": "Running",
+          "duration": "24:41",
+          "pace": "21:15"
+        },
+        {
+          "date": "03/10/25",
+          "distance": 1.16,
+          "type": "Running",
+          "duration": "26:01",
+          "pace": "22:25"
+        },
+        {
+          "date": "03/23/25",
+          "distance": 1.17,
+          "type": "Running",
+          "duration": "39:30",
+          "pace": "33:47"
+        },
+        {
+          "date": "03/24/25",
+          "distance": 1.13,
+          "type": "Running",
+          "duration": "42:33",
+          "pace": "37:44"
+        },
+        {
+          "date": "03/26/25",
+          "distance": 1.16,
+          "type": "Running",
+          "duration": "22:35",
+          "pace": "19:31"
+        },
+        {
+          "date": "04/09/25",
+          "distance": 1.15,
+          "type": "Running",
+          "duration": "29:05",
+          "pace": "25:22"
+        },
+        {
+          "date": "04/15/25",
+          "distance": 1.14,
+          "type": "Running",
+          "duration": "23:44",
+          "pace": "20:55"
+        },
+        {
+          "date": "04/20/25",
+          "distance": 1.14,
+          "type": "Running",
+          "duration": "29:09",
+          "pace": "25:38"
+        },
+        {
+          "date": "04/28/25",
+          "distance": 1.06,
+          "type": "Running",
+          "duration": "31:20",
+          "pace": "29:35"
+        },
+        {
+          "date": "05/10/25",
+          "distance": 3.09,
+          "type": "Running",
+          "duration": "1:12:48",
+          "pace": "23:32"
+        },
+        {
+          "date": "06/10/25",
+          "distance": 1.11,
+          "type": "Running",
+          "duration": "29:48",
+          "pace": "26:55"
+        },
+        {
+          "date": "06/26/25",
+          "distance": 1.17,
+          "type": "Running",
+          "duration": "45:52",
+          "pace": "39:23"
+        },
+        {
+          "date": "07/27/25",
+          "distance": 1.13,
+          "type": "Running",
+          "duration": "33:18",
+          "pace": "29:22"
+        },
+        {
+          "date": "08/06/25",
+          "distance": 1.06,
+          "type": "Running",
+          "duration": "28:30",
+          "pace": "26:52"
         }
       ]
     },
@@ -5428,8 +5435,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-10-24T01:08:21.334139",
+    "lastUpdated": "2025-10-25T01:09:48.854213",
     "totalRunners": 10,
-    "totalActivities": 757
+    "totalActivities": 758
   }
 }
