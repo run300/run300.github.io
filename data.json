@@ -3,8 +3,8 @@
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 67,
-        "totalDistance": 152.85,
+        "totalActivities": 68,
+        "totalDistance": 155.62,
         "activityTypes": [
           "Hiking",
           "Running",
@@ -361,6 +361,13 @@
           "type": "Walking",
           "duration": "48:29",
           "pace": "19:17"
+        },
+        {
+          "date": "08/31/25",
+          "distance": 2.77,
+          "type": "Walking",
+          "duration": "1:18:01",
+          "pace": "28:10"
         },
         {
           "date": "09/02/25",
@@ -1791,8 +1798,8 @@
     "PT": {
       "name": "PT",
       "stats": {
-        "totalActivities": 123,
-        "totalDistance": 285.12,
+        "totalActivities": 124,
+        "totalDistance": 287.61,
         "activityTypes": [
           "Running"
         ]
@@ -2252,6 +2259,13 @@
           "type": "Running",
           "duration": "38:36",
           "pace": "17:38"
+        },
+        {
+          "date": "06/30/25",
+          "distance": 2.49,
+          "type": "Running",
+          "duration": "47:00",
+          "pace": "18:52"
         },
         {
           "date": "07/01/25",
@@ -2920,13 +2934,27 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 101,
-        "totalDistance": 383.37,
+        "totalActivities": 105,
+        "totalDistance": 401.88,
         "activityTypes": [
           "Running"
         ]
       },
       "activities": [
+        {
+          "date": "01/02/25",
+          "distance": 4.02,
+          "type": "Running",
+          "duration": "39:15",
+          "pace": "9:46"
+        },
+        {
+          "date": "01/03/25",
+          "distance": 4.05,
+          "type": "Running",
+          "duration": "39:54",
+          "pace": "9:51"
+        },
         {
           "date": "01/05/25",
           "distance": 3.69,
@@ -3038,6 +3066,13 @@
           "type": "Running",
           "duration": "46:34",
           "pace": "15:29"
+        },
+        {
+          "date": "02/16/25",
+          "distance": 4.97,
+          "type": "Running",
+          "duration": "51:16",
+          "pace": "10:19"
         },
         {
           "date": "02/22/25",
@@ -3262,6 +3297,13 @@
           "type": "Running",
           "duration": "36:52",
           "pace": "10:00"
+        },
+        {
+          "date": "05/14/25",
+          "distance": 5.47,
+          "type": "Running",
+          "duration": "57:19",
+          "pace": "10:29"
         },
         {
           "date": "05/17/25",
@@ -3639,8 +3681,8 @@
     "Tin": {
       "name": "Tin",
       "stats": {
-        "totalActivities": 60,
-        "totalDistance": 100.95,
+        "totalActivities": 62,
+        "totalDistance": 102.63,
         "activityTypes": [
           "Running",
           "Walking"
@@ -3677,6 +3719,13 @@
         },
         {
           "date": "01/21/25",
+          "distance": 0.94,
+          "type": "Walking",
+          "duration": "23:57",
+          "pace": "25:30"
+        },
+        {
+          "date": "01/21/25",
           "distance": 1.71,
           "type": "Walking",
           "duration": "38:30",
@@ -3702,6 +3751,13 @@
           "type": "Running",
           "duration": "15:26",
           "pace": "14:25"
+        },
+        {
+          "date": "02/25/25",
+          "distance": 0.74,
+          "type": "Walking",
+          "duration": "16:43",
+          "pace": "22:32"
         },
         {
           "date": "03/01/25",
@@ -4631,8 +4687,8 @@
     "Muscles": {
       "name": "Muscles",
       "stats": {
-        "totalActivities": 104,
-        "totalDistance": 168.24,
+        "totalActivities": 105,
+        "totalDistance": 169.2,
         "activityTypes": [
           "Hiking",
           "Running",
@@ -4723,6 +4779,13 @@
           "type": "Running",
           "duration": "6:44",
           "pace": "29:25"
+        },
+        {
+          "date": "01/21/25",
+          "distance": 0.96,
+          "type": "Running",
+          "duration": "24:18",
+          "pace": "25:27"
         },
         {
           "date": "01/21/25",
@@ -5372,8 +5435,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-10-26T01:14:50.189599",
+    "lastUpdated": "2025-10-27T01:16:15.030746",
     "totalRunners": 10,
-    "totalActivities": 749
+    "totalActivities": 758
   }
 }
