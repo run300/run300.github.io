@@ -585,7 +585,7 @@ def merge_activities_by_month(existing_activities, new_activities, scanned_month
     return merged_activities
 
 
-def export_to_json(activities_data, filename="data.json", incremental=False, scanned_months=None):
+def export_to_json(activities_data, filename="data.json", incremental=False, scanned_months=None, failed_runners=None):
     """Export activities data to a JSON file
     
     Args:
@@ -593,7 +593,11 @@ def export_to_json(activities_data, filename="data.json", incremental=False, sca
         filename (str): Output filename
         incremental (bool): If True, merge with existing data instead of overwriting
         scanned_months (list): List of month abbreviations that were scanned
+        failed_runners (set|list|None): Runners whose scrape failed; preserve their existing data
     """
+    if failed_runners is None:
+        failed_runners = set()
+
     if incremental and scanned_months:
         # Load existing data
         existing_data = load_existing_data(filename)
@@ -611,7 +615,11 @@ def export_to_json(activities_data, filename="data.json", incremental=False, sca
             
             # Then, merge activities for runners that were in the new scan
             for runner, new_activities in list(activities_data.items()):
-                if runner in existing_data["runners"]:
+                if runner in failed_runners and runner in existing_data["runners"]:
+                    # Preserve entire existing runner data on failure
+                    activities_data[runner] = existing_data["runners"][runner]["activities"]
+                    print(f"{WARNING} Preserved existing data for {runner} due to scrape failure")
+                elif runner in existing_data["runners"]:
                     existing_activities = existing_data["runners"][runner]["activities"]
                     merged_activities = merge_activities_by_month(existing_activities, new_activities, scanned_months)
                     activities_data[runner] = merged_activities
@@ -625,6 +633,14 @@ def export_to_json(activities_data, filename="data.json", incremental=False, sca
             print(f"{ARROW} No existing data found, performing full export")
     elif incremental:
         print(f"{WARNING} Incremental mode requested but no scanned months provided, performing full export")
+    elif failed_runners:
+        # Full export but some runners failed; try to preserve their existing data
+        existing_data = load_existing_data(filename)
+        if existing_data:
+            for runner in failed_runners:
+                if runner in existing_data.get("runners", {}):
+                    activities_data[runner] = existing_data["runners"][runner]["activities"]
+                    print(f"{WARNING} Full export: preserved existing data for failed runner {runner}")
     
     # Calculate some useful statistics while formatting the data
     formatted_data = {
@@ -654,8 +670,11 @@ def export_to_json(activities_data, filename="data.json", incremental=False, sca
             "activities": sorted(activities, key=lambda x: x["date"]),
         }
 
-    with open(filename, "w", encoding="utf-8") as f:
+    # Atomic write: write to a temporary file then replace
+    tmp_filename = f"{filename}.tmp"
+    with open(tmp_filename, "w", encoding="utf-8") as f:
         json.dump(formatted_data, f, indent=2, ensure_ascii=False)
+    os.replace(tmp_filename, filename)
 
     # pprint(formatted_data)
     print(f"{CHART} Total runners: {formatted_data['metadata']['totalRunners']}")
@@ -686,11 +705,11 @@ def scrape_user_activities(user_id, name, months, cookie):
             print(f"{CHECK} [Thread-{thread_id}] Completed {name}: {len(user_activities)} activities found")
             
             browser.close()
-            return name, user_activities
+            return name, user_activities, True
             
     except Exception as e:
         print(f"{CROSS} [Thread-{thread_id}] Error scraping {name}: {e}")
-        return name, []
+        return name, [], False
 
 
 def main(start_month=None, end_month=None, incremental=False):
@@ -739,17 +758,21 @@ def main(start_month=None, end_month=None, incremental=False):
         
         # Collect results as they complete
         completed_count = 0
+        failed_runners = set()
         for future in as_completed(future_to_user):
             user_id, name = future_to_user[future]
             try:
-                name, user_activities = future.result()
+                name, user_activities, success = future.result()
                 all_activities[name] = user_activities
                 completed_count += 1
                 elapsed = time.time() - start_time
                 print(f"{CHART} [{completed_count}/{len(spartans)}] Collected data for {name}: {len(user_activities)} activities (Elapsed: {elapsed:.1f}s)")
+                if not success:
+                    failed_runners.add(name)
             except Exception as e:
                 print(f"{CROSS} Error processing {name}: {e}")
                 all_activities[name] = []
+                failed_runners.add(name)
 
     total_time = time.time() - start_time
     print(f"\n{CHECK} Concurrent scraping completed!")
@@ -758,7 +781,7 @@ def main(start_month=None, end_month=None, incremental=False):
     print(f"{CHART} Total activities collected: {sum(len(activities) for activities in all_activities.values())}")
     print(f"{WARNING} Average time per user: {total_time/len(spartans):.1f} seconds")
     
-    export_to_json(all_activities, incremental=incremental, scanned_months=months)
+    export_to_json(all_activities, incremental=incremental, scanned_months=months, failed_runners=failed_runners)
 
 
 if __name__ == "__main__":

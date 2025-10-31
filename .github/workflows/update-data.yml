@@ -38,11 +38,8 @@ jobs:
           
       - name: Run update script
         run: |
-          # Run your script
-          # python update_runkeeper_miles.py
-          # Scan only from June to current month with incremental update
-          # python update_runkeeper_miles.py --start-month 6 --incremental
-          python update_runkeeper_miles.py
+          # Prefer incremental updates to preserve data on partial failures
+          python update_runkeeper_miles.py --incremental
           
       - name: Configure Git
         run: |
