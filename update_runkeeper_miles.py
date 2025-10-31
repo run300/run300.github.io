@@ -38,7 +38,7 @@ TARGET_URL = "runkeeper.com"
 TRACKED_ACTIVITIES = ["running", "hiking", "walking", "trail running"]
 
 # Configuration for concurrent scraping
-MAX_WORKERS = 4  # Number of concurrent browser sessions (2 users at a time)
+MAX_WORKERS = int(os.getenv("MAX_WORKERS", "4"))  # Number of concurrent browser sessions (2 users at a time)
 HEADLESS_MODE = True  # Set to False for debugging (shows browser windows)
 
 # Performance notes:

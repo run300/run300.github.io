@@ -37,6 +37,8 @@ jobs:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
           
       - name: Run update script
+        env:
+          MAX_WORKERS: '2'
         run: |
           # Prefer incremental updates to preserve data on partial failures
           python update_runkeeper_miles.py --incremental
