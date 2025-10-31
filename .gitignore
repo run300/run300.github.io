@@ -5,6 +5,8 @@
 !index.html
 !data.json
 !.gitignore
+!.github/
+!.github/workflows/
 !.github/workflows/update-data.yml
 !update_runkeeper_miles.py
 !gcp_secret.py

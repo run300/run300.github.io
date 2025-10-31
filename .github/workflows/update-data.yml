@@ -12,7 +12,10 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
         
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -51,8 +54,14 @@ jobs:
           git add data.json
           git commit -m "Auto-update data.json" || echo "No changes to commit"
 
+      - name: Rebase onto latest main
+        run: |
+          git fetch origin main
+          git pull --rebase origin main
+
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          branch: main
+          force_with_lease: true
