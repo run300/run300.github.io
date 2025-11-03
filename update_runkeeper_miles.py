@@ -620,6 +620,11 @@ def export_to_json(activities_data, filename="data.json", incremental=False, sca
                     activities_data[runner] = existing_data["runners"][runner]["activities"]
                     print(f"{WARNING} Preserved existing data for {runner} due to scrape failure")
                 elif runner in existing_data["runners"]:
+                    # If scrape returned no activities for this runner, keep existing data unchanged
+                    if not new_activities:
+                        activities_data[runner] = existing_data["runners"][runner]["activities"]
+                        print(f"{WARNING} No new activities found for {runner}; preserved existing data")
+                        continue
                     existing_activities = existing_data["runners"][runner]["activities"]
                     merged_activities = merge_activities_by_month(existing_activities, new_activities, scanned_months)
                     activities_data[runner] = merged_activities
@@ -641,6 +646,16 @@ def export_to_json(activities_data, filename="data.json", incremental=False, sca
                 if runner in existing_data.get("runners", {}):
                     activities_data[runner] = existing_data["runners"][runner]["activities"]
                     print(f"{WARNING} Full export: preserved existing data for failed runner {runner}")
+
+    # In full export mode, if a runner has no activities from the scrape but exists in
+    # existing data, preserve their existing activities to avoid overwriting with nothing.
+    if not incremental:
+        existing_data_for_preserve = load_existing_data(filename)
+        if existing_data_for_preserve and "runners" in existing_data_for_preserve:
+            for runner, runner_payload in list(activities_data.items()):
+                if not runner_payload and runner in existing_data_for_preserve["runners"]:
+                    activities_data[runner] = existing_data_for_preserve["runners"][runner]["activities"]
+                    print(f"{WARNING} No activities scraped for {runner} in full export; preserved existing data")
     
     # Calculate some useful statistics while formatting the data
     formatted_data = {
@@ -669,6 +684,17 @@ def export_to_json(activities_data, filename="data.json", incremental=False, sca
             },
             "activities": sorted(activities, key=lambda x: x["date"]),
         }
+
+    # If there are no meaningful changes, skip writing to preserve existing file
+    existing_data_for_compare = load_existing_data(filename)
+    if existing_data_for_compare and "runners" in existing_data_for_compare:
+        try:
+            if formatted_data.get("runners") == existing_data_for_compare.get("runners"):
+                print(f"{ARROW} No changes detected in runner data. Skipping write to {filename}.")
+                return
+        except Exception:
+            # If comparison fails for any reason, proceed with write
+            pass
 
     # Atomic write: write to a temporary file then replace
     tmp_filename = f"{filename}.tmp"
