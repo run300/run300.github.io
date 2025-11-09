@@ -1791,8 +1791,8 @@
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 74,
-        "totalDistance": 232.89,
+        "totalActivities": 75,
+        "totalDistance": 237.14,
         "activityTypes": [
           "Running"
         ]
@@ -2315,14 +2315,21 @@
           "type": "Running",
           "duration": "50:43",
           "pace": "13:50"
+        },
+        {
+          "date": "11/08/25",
+          "distance": 4.25,
+          "type": "Running",
+          "duration": "56:18",
+          "pace": "13:14"
         }
       ]
     },
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 71,
-        "totalDistance": 163.02,
+        "totalActivities": 72,
+        "totalDistance": 168.51,
         "activityTypes": [
           "Hiking",
           "Running",
@@ -2826,6 +2833,13 @@
           "type": "Walking",
           "duration": "53:37",
           "pace": "22:09"
+        },
+        {
+          "date": "11/08/25",
+          "distance": 5.49,
+          "type": "Hiking",
+          "duration": "2:47:00",
+          "pace": "30:25"
         }
       ]
     },
@@ -5715,8 +5729,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-11-08T01:52:34.614833",
+    "lastUpdated": "2025-11-09T01:58:53.615661",
     "totalRunners": 10,
-    "totalActivities": 798
+    "totalActivities": 800
   }
 }
