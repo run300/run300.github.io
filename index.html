@@ -706,9 +706,9 @@
             <tr id="achievementsTableHeaders">
               <th class="sortable" data-column="runner">Runner</th>
               <th class="sortable" data-column="totalDistance">Total Distance</th>
+              <th class="sortable" data-column="avgPace">Avg Pace</th>
               <th class="sortable" data-column="totalActivities">Total Activities</th>
               <th class="sortable" data-column="avgDistance">Avg Distance</th>
-              <th class="sortable" data-column="avgPace">Avg Pace</th>
               <th class="sortable" data-column="farthestRun">Farthest Run</th>
               <th class="sortable" data-column="longestRun">Longest Run</th>
             </tr>
@@ -1175,17 +1175,24 @@
             return currentDistance > maxDistance ? activity : max;
           }, null);
 
-          // Calculate average pace
-          const runsWithPace = activities.filter(activity => activity.pace);
-          const totalPaceSeconds = runsWithPace.reduce((sum, activity) => {
-            return sum + parseTimeToSeconds(activity.pace);
-          }, 0);
-          const averagePaceSeconds = runsWithPace.length > 0 ? totalPaceSeconds / runsWithPace.length : 0;
-
           // Calculate total distance
           const totalDistance = activities.reduce((sum, activity) => {
             return sum + (parseFloat(activity.distance) || 0);
           }, 0);
+
+          // Calculate average pace using Runkeeper's method: total time / total distance
+          // Filter activities that have both duration and distance
+          const runsWithTimeAndDistance = activities.filter(activity => 
+            activity.duration && activity.distance && parseFloat(activity.distance) > 0
+          );
+          const totalTimeSeconds = runsWithTimeAndDistance.reduce((sum, activity) => {
+            return sum + parseTimeToSeconds(activity.duration);
+          }, 0);
+          // Use distance from the same filtered set for accurate pace calculation
+          const totalDistanceForPace = runsWithTimeAndDistance.reduce((sum, activity) => {
+            return sum + (parseFloat(activity.distance) || 0);
+          }, 0);
+          const averagePaceSeconds = totalDistanceForPace > 0 ? totalTimeSeconds / totalDistanceForPace : 0;
 
           // Calculate average distance
           const averageDistance = activities.length > 0 ? totalDistance / activities.length : 0;
@@ -1276,14 +1283,21 @@
           
           const averageDistance = totalPeriods > 0 ? totalDistance / totalPeriods : 0;
 
-          // Calculate average pace across all activities in all periods
-          const allActivitiesWithPace = groupedActivities.flatMap(period => 
-            period.activities.filter(activity => activity.pace)
+          // Calculate average pace using Runkeeper's method: total time / total distance
+          // Get all activities with both duration and distance across all periods
+          const allActivitiesWithTimeAndDistance = groupedActivities.flatMap(period => 
+            period.activities.filter(activity => 
+              activity.duration && activity.distance && parseFloat(activity.distance) > 0
+            )
           );
-          const totalPaceSeconds = allActivitiesWithPace.reduce((sum, activity) => {
-            return sum + parseTimeToSeconds(activity.pace);
+          const totalTimeSeconds = allActivitiesWithTimeAndDistance.reduce((sum, activity) => {
+            return sum + parseTimeToSeconds(activity.duration);
           }, 0);
-          const averagePaceSeconds = allActivitiesWithPace.length > 0 ? totalPaceSeconds / allActivitiesWithPace.length : 0;
+          // Use distance from the same filtered set for accurate pace calculation
+          const totalDistanceForPace = allActivitiesWithTimeAndDistance.reduce((sum, activity) => {
+            return sum + (parseFloat(activity.distance) || 0);
+          }, 0);
+          const averagePaceSeconds = totalDistanceForPace > 0 ? totalTimeSeconds / totalDistanceForPace : 0;
 
           // Total activities count
           const totalActivities = groupedActivities.reduce((sum, period) => sum + period.activities.length, 0);
@@ -1471,16 +1485,16 @@
           <span class="${totalDistanceClass}">${achievement.totalDistance.toFixed(1)} mi</span>
         </td>
         <td>
-          <span class="achievement-display activities-count">${activitiesDisplay}</span>
-        </td>
-        <td>
-          <span class="achievement-display avg-distance-display">${achievement.averageDistance.toFixed(1)} mi</span>
-        </td>
-        <td>
           ${achievement.averagePace > 0 ? 
             `<span class="achievement-display pace-display">${formatPaceFromSeconds(achievement.averagePace)}/mi</span>` : 
             '<span class="achievement-value">No data</span>'
           }
+        </td>
+        <td>
+          <span class="achievement-display activities-count">${activitiesDisplay}</span>
+        </td>
+        <td>
+          <span class="achievement-display avg-distance-display">${achievement.averageDistance.toFixed(1)} mi</span>
         </td>
         <td>
           ${farthestDisplay}
@@ -1502,13 +1516,13 @@
       
       if (grouping === 'week') {
         avgDistanceText = "Weekly Distance";
-        avgPaceText = "Weekly Pace";
+        // avgPaceText stays "Avg Pace" - same calculation regardless of grouping
         farthestText = "Most Miles Week";
         longestText = "Most Time Week";
         activitiesText = "Weekly Activities";
       } else if (grouping === 'month') {
         avgDistanceText = "Monthly Distance";
-        avgPaceText = "Monthly Pace";
+        // avgPaceText stays "Avg Pace" - same calculation regardless of grouping
         farthestText = "Most Miles Month";
         longestText = "Most Time Month";
         activitiesText = "Monthly Activities";
@@ -1517,9 +1531,9 @@
       headers.innerHTML = `
         <th class="sortable" data-column="runner">Runner</th>
         <th class="sortable" data-column="totalDistance">Total Distance</th>
+        <th class="sortable" data-column="avgPace">${avgPaceText}</th>
         <th class="sortable" data-column="totalActivities">${activitiesText}</th>
         <th class="sortable" data-column="avgDistance">${avgDistanceText}</th>
-        <th class="sortable" data-column="avgPace">${avgPaceText}</th>
         <th class="sortable" data-column="farthestRun">${farthestText}</th>
         <th class="sortable" data-column="longestRun">${longestText}</th>
       `;
