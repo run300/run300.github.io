@@ -3,8 +3,8 @@
     "Bruce": {
       "name": "Bruce",
       "stats": {
-        "totalActivities": 125,
-        "totalDistance": 193.68,
+        "totalActivities": 126,
+        "totalDistance": 193.98,
         "activityTypes": [
           "Running"
         ]
@@ -261,6 +261,13 @@
           "type": "Running",
           "duration": "13:20",
           "pace": "13:15"
+        },
+        {
+          "date": "02/25/25",
+          "distance": 0.3,
+          "type": "Running",
+          "duration": "2:33",
+          "pace": "8:28"
         },
         {
           "date": "02/26/25",
@@ -5771,8 +5778,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-11-12T01:58:23.530927",
+    "lastUpdated": "2025-11-13T01:56:46.508113",
     "totalRunners": 10,
-    "totalActivities": 806
+    "totalActivities": 807
   }
 }
