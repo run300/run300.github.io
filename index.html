@@ -528,7 +528,7 @@
       border-bottom: 1px solid #334155;
       vertical-align: middle;
       text-align: center;
-      transition: all 0.2s ease;
+      transition: border-color 0.2s ease;
     }
 
     #achievementsTable tr:hover {
@@ -545,10 +545,61 @@
       background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
     }
 
+    /* Quarter row hover uses lighter version of row's color */
+    #achievementsTable tr.quarter-row:hover {
+      background: var(--quarter-row-hover-color, rgba(30, 41, 59, 0.8)) !important;
+      transform: scale(1.01);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Hover effect for runner rows with expanded quarter rows - outer border only */
+    #achievementsTable tr.runner-row-with-expanded:hover {
+      border-top: 2px solid var(--runner-border-color, #3b82f6);
+    }
+
+    #achievementsTable tr.runner-row-with-expanded:hover td:first-child {
+      border-left: 2px solid var(--runner-border-color, #3b82f6);
+    }
+
+    #achievementsTable tr.runner-row-with-expanded:hover td:last-child {
+      border-right: 2px solid var(--runner-border-color, #3b82f6);
+    }
+
+    #achievementsTable tr.runner-row-with-expanded:hover ~ tr.quarter-row.hover-border td:first-child {
+      border-left: 2px solid var(--runner-border-color, #3b82f6);
+    }
+
+    #achievementsTable tr.runner-row-with-expanded:hover ~ tr.quarter-row.hover-border td:last-child {
+      border-right: 2px solid var(--runner-border-color, #3b82f6);
+    }
+
+    #achievementsTable tr.runner-row-with-expanded:hover ~ tr.quarter-row.hover-border:last-of-type {
+      border-bottom: 2px solid var(--runner-border-color, #3b82f6);
+    }
+
     .runner-name {
       font-weight: 500;
       color: #e2e8f0;
       font-size: 1rem;
+      cursor: pointer;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .runner-name::before {
+      content: '▼';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      font-size: 0.75rem;
+      color: var(--runner-arrow-color, #94a3b8);
+      transition: transform 0.2s ease, color 0.2s ease;
+      opacity: 1;
+    }
+
+    .runner-name.expanded::before {
+      transform: translateY(-50%) rotate(0deg);
     }
 
     .achievement-value {
@@ -610,6 +661,12 @@
       background: linear-gradient(135deg, var(--primary-teal), #0891b2);
       box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
       min-width: 80px;
+    }
+
+    /* Lighter achievement displays for quarter rows */
+    .quarter-row .achievement-display {
+      opacity: 0.90;
+      filter: brightness(1.1);
     }
 
     /* Responsive Design */
@@ -1045,6 +1102,7 @@
       );
       const datasets = [];
       let colorIndex = 0;
+      runnerColorMap = {}; // Reset color map
 
       // Define allowed activity types - only these will be included in charts and stats
       const TRACKED_ACTIVITIES = ["running", "hiking", "walking", "trail running"];
@@ -1204,9 +1262,12 @@
         const totalMiles =
           runnerData.length > 0 ? runnerData[runnerData.length - 1].y : 0;
 
+        const runnerColor = colors[colorIndex % colors.length];
+        runnerColorMap[runner.name] = runnerColor;
+        
         datasets.push({
           label: runner.name,
-          borderColor: colors[colorIndex % colors.length],
+          borderColor: runnerColor,
           borderWidth: 3,
           pointRadius: (context) => {
             if (context.raw && context.raw.isLongestRun) {
@@ -1230,8 +1291,8 @@
             }
             return 'circle';
           },
-          pointBackgroundColor: colors[colorIndex % colors.length],
-          pointBorderColor: colors[colorIndex % colors.length],
+          pointBackgroundColor: runnerColor,
+          pointBorderColor: runnerColor,
           pointBorderWidth: (context) => {
             if (context.raw && context.raw.isLongestRun) {
               return 2;
@@ -1248,6 +1309,9 @@
         colorIndex++;
       });
 
+      // Store data globally for quarter calculations
+      globalData = data;
+      
       // Calculate achievements with current quarter filter
       try {
         const achievements = calculateAchievements(data, dataGrouping, selectedQuarters);
@@ -1619,6 +1683,9 @@
     let currentSortDirection = 'desc';
     let allAchievements = [];
     let achievementsInitialized = false;
+    let globalData = null; // Store full data for quarter calculations
+    let expandedRunners = new Set(); // Track which runners have expanded quarter rows
+    let runnerColorMap = {}; // Map runner names to their colors
 
     // Helper function to format date for tooltip
     function formatDateForTooltip(dateStr, grouping) {
@@ -1711,7 +1778,7 @@
       const totalDistanceClass = has300Miles ? 'achievement-display total-distance-display champion-300' : 'achievement-display total-distance-display';
       
       return `
-        <td class="${runnerNameClass}">${achievement.runner}</td>
+        <td class="${runnerNameClass}" data-runner="${achievement.runner}">${achievement.runner}</td>
         <td>
           <span class="${totalDistanceClass}">${achievement.totalDistance.toFixed(1)} mi</span>
         </td>
@@ -1734,6 +1801,342 @@
           ${longestDisplay}
         </td>
       `;
+    }
+
+    // Function to calculate quarter achievements for a runner
+    function calculateQuarterAchievements(runnerName, quarter) {
+      if (!globalData || !globalData.runners || !globalData.runners[runnerName]) {
+        return null;
+      }
+
+      const runner = globalData.runners[runnerName];
+      const TRACKED_ACTIVITIES = ["running", "hiking", "walking", "trail running"];
+      let activities = runner.activities || [];
+      
+      // Filter activities to only include tracked types
+      activities = activities.filter(activity => 
+        TRACKED_ACTIVITIES.includes(activity.type?.toLowerCase())
+      );
+
+      // Filter activities by quarter
+      activities = activities.filter(activity => {
+        const dateParts = activity.date.split("/");
+        let month, day, year;
+        
+        if (dateParts.length === 2) {
+          [month, day] = dateParts;
+          year = "2025";
+        } else if (dateParts.length === 3) {
+          [month, day, year] = dateParts;
+          year = '20' + year;
+        } else {
+          return false;
+        }
+        
+        const activityDateObj = new Date(year, parseInt(month) - 1, parseInt(day));
+        const activityMonth = activityDateObj.getMonth(); // 0-11
+        
+        let activityQuarter;
+        if (activityMonth >= 0 && activityMonth <= 2) activityQuarter = 1;
+        else if (activityMonth >= 3 && activityMonth <= 5) activityQuarter = 2;
+        else if (activityMonth >= 6 && activityMonth <= 8) activityQuarter = 3;
+        else if (activityMonth >= 9 && activityMonth <= 11) activityQuarter = 4;
+        else return false;
+        
+        return activityQuarter === quarter;
+      });
+
+      if (activities.length === 0) {
+        return {
+          runner: runnerName,
+          quarter: quarter,
+          longestRun: null,
+          farthestRun: null,
+          totalActivities: 0,
+          averagePace: 0,
+          averageDistance: 0,
+          totalDistance: 0
+        };
+      }
+
+      // Find longest run (by time)
+      const longestRun = activities.reduce((max, activity) => {
+        if (!activity.duration) return max;
+        const currentDuration = parseTimeToMinutes(activity.duration);
+        const maxDuration = max ? parseTimeToMinutes(max.duration) : 0;
+        return currentDuration > maxDuration ? activity : max;
+      }, null);
+
+      // Find farthest run (by distance)
+      const farthestRun = activities.reduce((max, activity) => {
+        if (!activity.distance) return max;
+        const currentDistance = parseFloat(activity.distance);
+        const maxDistance = max ? parseFloat(max.distance) : 0;
+        return currentDistance > maxDistance ? activity : max;
+      }, null);
+
+      // Calculate total distance
+      const totalDistance = activities.reduce((sum, activity) => {
+        return sum + (parseFloat(activity.distance) || 0);
+      }, 0);
+
+      // Calculate average pace
+      const runsWithTimeAndDistance = activities.filter(activity => 
+        activity.duration && activity.distance && parseFloat(activity.distance) > 0
+      );
+      const totalTimeSeconds = runsWithTimeAndDistance.reduce((sum, activity) => {
+        return sum + parseTimeToSeconds(activity.duration);
+      }, 0);
+      const totalDistanceForPace = runsWithTimeAndDistance.reduce((sum, activity) => {
+        return sum + (parseFloat(activity.distance) || 0);
+      }, 0);
+      const averagePaceSeconds = totalDistanceForPace > 0 ? totalTimeSeconds / totalDistanceForPace : 0;
+
+      // Calculate average distance
+      const averageDistance = activities.length > 0 ? totalDistance / activities.length : 0;
+
+      return {
+        runner: runnerName,
+        quarter: quarter,
+        longestRun: longestRun,
+        farthestRun: farthestRun,
+        totalActivities: activities.length,
+        averagePace: averagePaceSeconds,
+        averageDistance: averageDistance,
+        totalDistance: totalDistance
+      };
+    }
+
+    // Function to generate quarter row HTML
+    function generateQuarterRow(quarterAchievement, grouping = 'day') {
+      let farthestDisplay = '<span class="achievement-value">No data</span>';
+      let longestDisplay = '<span class="achievement-value">No data</span>';
+      
+      if (grouping === 'day') {
+        if (quarterAchievement.farthestRun) {
+          const tooltipDate = formatDateForTooltip(quarterAchievement.farthestRun.date, grouping);
+          farthestDisplay = `<span class="achievement-display distance-display achievement-tooltip chart-highlight" data-tooltip="${tooltipDate}" data-runner="${quarterAchievement.runner}" data-date="${quarterAchievement.farthestRun.date}" data-type="farthest">${quarterAchievement.farthestRun.distance} mi</span>`;
+        }
+          
+        if (quarterAchievement.longestRun) {
+          const tooltipDate = formatDateForTooltip(quarterAchievement.longestRun.date, grouping);
+          longestDisplay = `<span class="achievement-display time-display achievement-tooltip chart-highlight" data-tooltip="${tooltipDate}" data-runner="${quarterAchievement.runner}" data-date="${quarterAchievement.longestRun.date}" data-type="longest">${quarterAchievement.longestRun.duration}</span>`;
+        }
+      } else {
+        // For weekly/monthly grouping, use same logic as main rows
+        if (quarterAchievement.farthestRun) {
+          const tooltipDate = formatDateForTooltip(quarterAchievement.farthestRun.date, grouping);
+          farthestDisplay = `<span class="achievement-display distance-display achievement-tooltip chart-highlight" data-tooltip="${tooltipDate}" data-runner="${quarterAchievement.runner}" data-date="${quarterAchievement.farthestRun.date}" data-type="farthest">${quarterAchievement.farthestRun.distance.toFixed(1)} mi</span>`;
+        }
+        
+        if (quarterAchievement.longestRun) {
+          const totalDuration = parseTimeToMinutes(quarterAchievement.longestRun.duration || "0");
+          const tooltipDate = formatDateForTooltip(quarterAchievement.longestRun.date, grouping);
+          longestDisplay = `<span class="achievement-display time-display achievement-tooltip chart-highlight" data-tooltip="${tooltipDate}" data-runner="${quarterAchievement.runner}" data-date="${quarterAchievement.longestRun.date}" data-type="longest">${formatTimeFromMinutes(totalDuration)}</span>`;
+        }
+      }
+      
+      // Format activities count
+      let activitiesDisplay;
+      if (grouping === 'day') {
+        activitiesDisplay = `${Math.round(quarterAchievement.totalActivities)}`;
+      } else {
+        activitiesDisplay = `${quarterAchievement.totalActivities.toFixed(1)}`;
+      }
+      
+      return `
+        <td>Q${quarterAchievement.quarter}</td>
+        <td>
+          <span class="achievement-display total-distance-display">${quarterAchievement.totalDistance.toFixed(1)} mi</span>
+        </td>
+        <td>
+          ${quarterAchievement.averagePace > 0 ? 
+            `<span class="achievement-display pace-display">${formatPaceFromSeconds(quarterAchievement.averagePace)}/mi</span>` : 
+            '<span class="achievement-value">No data</span>'
+          }
+        </td>
+        <td>
+          <span class="achievement-display activities-count">${activitiesDisplay}</span>
+        </td>
+        <td>
+          <span class="achievement-display avg-distance-display">${quarterAchievement.averageDistance.toFixed(1)} mi</span>
+        </td>
+        <td>
+          ${farthestDisplay}
+        </td>
+        <td>
+          ${longestDisplay}
+        </td>
+      `;
+    }
+
+    // Helper function to convert hex color to rgba with opacity
+    function hexToRgba(hex, opacity) {
+      // Remove # if present
+      hex = hex.replace('#', '');
+      
+      // Parse hex color
+      const r = parseInt(hex.substring(0, 2), 16);
+      const g = parseInt(hex.substring(2, 4), 16);
+      const b = parseInt(hex.substring(4, 6), 16);
+      
+      return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+    }
+
+    // Function to toggle quarter rows for a runner
+    function toggleQuarterRows(runnerName, grouping = 'day') {
+      const runnerNameCell = document.querySelector(`td.runner-name[data-runner="${runnerName}"]`);
+      if (!runnerNameCell) return;
+      
+      const isExpanded = expandedRunners.has(runnerName);
+      const tbody = document.getElementById('achievementsBody');
+      
+      if (isExpanded) {
+        // Collapse: Remove quarter rows
+        const runnerRow = runnerNameCell.closest('tr');
+        const quarterRows = tbody.querySelectorAll(`tr.quarter-row[data-runner="${runnerName}"]`);
+        
+        // Remove hover event listeners if they exist
+        if (runnerRow && runnerRow._hoverHandlers) {
+          runnerRow.removeEventListener('mouseenter', runnerRow._hoverHandlers.enter);
+          runnerRow.removeEventListener('mouseleave', runnerRow._hoverHandlers.leave);
+          delete runnerRow._hoverHandlers;
+        }
+        quarterRows.forEach(row => {
+          if (row._hoverHandlers) {
+            row.removeEventListener('mouseenter', row._hoverHandlers.enter);
+            row.removeEventListener('mouseleave', row._hoverHandlers.leave);
+            delete row._hoverHandlers;
+          }
+          row.remove();
+        });
+        
+        expandedRunners.delete(runnerName);
+        runnerNameCell.classList.remove('expanded');
+        runnerNameCell.style.removeProperty('--runner-arrow-color');
+        
+        // Remove hover border class and color
+        if (runnerRow) {
+          runnerRow.classList.remove('runner-row-with-expanded');
+          runnerRow.style.removeProperty('--runner-border-color');
+          // Clear any remaining border styles
+          runnerRow.style.borderTop = '';
+          runnerRow.querySelectorAll('td').forEach(cell => {
+            cell.style.borderLeft = '';
+            cell.style.borderRight = '';
+          });
+        }
+      } else {
+        // Expand: Add quarter rows
+        const runnerRow = runnerNameCell.closest('tr');
+        if (!runnerRow) return;
+        
+        // Calculate quarter achievements
+        const quarterAchievements = [];
+        for (let q = 1; q <= 4; q++) {
+          const quarterAchievement = calculateQuarterAchievements(runnerName, q);
+          if (quarterAchievement) {
+            quarterAchievements.push(quarterAchievement);
+          }
+        }
+        
+        // Insert quarter rows after the runner row
+        let insertAfterRow = runnerRow;
+        const runnerColor = runnerColorMap[runnerName] || '#3b82f6'; // Default color if not found
+        const fadedColor = hexToRgba(runnerColor, 0.15); // Faded version with 15% opacity
+        const hoverColor = hexToRgba(runnerColor, 0.25); // Lighter version with 25% opacity for hover
+        
+        quarterAchievements.forEach((quarterAchievement) => {
+          const quarterRow = document.createElement('tr');
+          quarterRow.className = 'quarter-row hover-border';
+          quarterRow.setAttribute('data-runner', runnerName);
+          quarterRow.style.backgroundColor = fadedColor;
+          quarterRow.style.setProperty('--quarter-row-hover-color', hoverColor);
+          quarterRow.style.setProperty('--runner-border-color', runnerColor);
+          quarterRow.innerHTML = generateQuarterRow(quarterAchievement, grouping);
+          insertAfterRow.insertAdjacentElement('afterend', quarterRow);
+          insertAfterRow = quarterRow; // Update for next insertion
+        });
+        
+        expandedRunners.add(runnerName);
+        runnerNameCell.classList.add('expanded');
+        
+        // Set arrow color to match runner's legend color
+        runnerNameCell.style.setProperty('--runner-arrow-color', runnerColor);
+        
+        // Add class and border color for hover effect
+        runnerRow.classList.add('runner-row-with-expanded');
+        runnerRow.style.setProperty('--runner-border-color', runnerColor);
+        
+        // Add hover handlers for outer border effect
+        const quarterRowsForRunner = Array.from(tbody.querySelectorAll(`tr.quarter-row[data-runner="${runnerName}"]`));
+        const allRows = [runnerRow, ...quarterRowsForRunner];
+        
+        const handleMouseEnter = () => {
+          // Top border on runner row
+          runnerRow.style.borderTop = `2px solid ${runnerColor}`;
+          
+          // Left border on first cell of each row
+          allRows.forEach(row => {
+            const firstCell = row.querySelector('td:first-child');
+            if (firstCell) {
+              firstCell.style.borderLeft = `2px solid ${runnerColor}`;
+            }
+          });
+          
+          // Right border on last cell of each row
+          allRows.forEach(row => {
+            const lastCell = row.querySelector('td:last-child');
+            if (lastCell) {
+              lastCell.style.borderRight = `2px solid ${runnerColor}`;
+            }
+          });
+          
+          // Bottom border on last quarter row
+          if (quarterRowsForRunner.length > 0) {
+            const lastQuarterRow = quarterRowsForRunner[quarterRowsForRunner.length - 1];
+            lastQuarterRow.style.borderBottom = `2px solid ${runnerColor}`;
+          }
+        };
+        
+        const handleMouseLeave = () => {
+          // Remove all border styles
+          runnerRow.style.borderTop = '';
+          allRows.forEach(row => {
+            const firstCell = row.querySelector('td:first-child');
+            const lastCell = row.querySelector('td:last-child');
+            if (firstCell) firstCell.style.borderLeft = '';
+            if (lastCell) lastCell.style.borderRight = '';
+            row.style.borderBottom = '';
+          });
+        };
+        
+        runnerRow.addEventListener('mouseenter', handleMouseEnter);
+        runnerRow.addEventListener('mouseleave', handleMouseLeave);
+        // Store handlers for cleanup
+        runnerRow._hoverHandlers = { enter: handleMouseEnter, leave: handleMouseLeave };
+        
+        quarterRowsForRunner.forEach(row => {
+          row.addEventListener('mouseenter', handleMouseEnter);
+          row.addEventListener('mouseleave', handleMouseLeave);
+          // Store handlers for cleanup
+          row._hoverHandlers = { enter: handleMouseEnter, leave: handleMouseLeave };
+        });
+        
+        // Add event listeners for chart highlighting on new quarter rows
+        document.querySelectorAll('.chart-highlight').forEach(element => {
+          element.addEventListener('mouseenter', (e) => {
+            const runnerName = e.target.dataset.runner;
+            const date = e.target.dataset.date;
+            const type = e.target.dataset.type;
+            highlightChartPoint(runnerName, date, type);
+          });
+          
+          element.addEventListener('mouseleave', () => {
+            clearChartHighlight();
+          });
+        });
+      }
     }
 
     // Function to update table headers based on current grouping
@@ -1853,6 +2256,9 @@
       allAchievements = achievements;
       updateTableHeaders(grouping);
       
+      // Clear expanded runners when table is refreshed
+      expandedRunners.clear();
+      
       // Sort achievements if there's a current sort column
       let sortedAchievements = achievements;
       if (currentSortColumn) {
@@ -1866,6 +2272,18 @@
         const row = document.createElement('tr');
         row.innerHTML = generateAchievementRow(achievement, grouping);
         tbody.appendChild(row);
+      });
+      
+      // Add click handlers to runner names and set arrow colors
+      document.querySelectorAll('td.runner-name[data-runner]').forEach(cell => {
+        const runnerName = cell.dataset.runner;
+        const runnerColor = runnerColorMap[runnerName] || '#94a3b8';
+        cell.style.setProperty('--runner-arrow-color', runnerColor);
+        
+        cell.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleQuarterRows(runnerName, grouping);
+        });
       });
       
       // Add event listeners for chart highlighting
@@ -1885,6 +2303,10 @@
 
     // Function to update table display and re-add event listeners
     function updateTableDisplay(achievements, grouping = 'day') {
+      // Store currently expanded runners before clearing
+      const currentlyExpanded = Array.from(expandedRunners);
+      expandedRunners.clear();
+      
       const tbody = document.getElementById('achievementsBody');
       tbody.innerHTML = '';
 
@@ -1892,6 +2314,34 @@
         const row = document.createElement('tr');
         row.innerHTML = generateAchievementRow(achievement, grouping);
         tbody.appendChild(row);
+      });
+      
+      // Add click handlers to runner names and set arrow colors
+      document.querySelectorAll('td.runner-name[data-runner]').forEach(cell => {
+        const runnerName = cell.dataset.runner;
+        const runnerColor = runnerColorMap[runnerName] || '#94a3b8';
+        cell.style.setProperty('--runner-arrow-color', runnerColor);
+        
+        cell.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleQuarterRows(runnerName, grouping);
+        });
+      });
+      
+      // Restore expanded state
+      currentlyExpanded.forEach(runnerName => {
+        const cell = document.querySelector(`td.runner-name[data-runner="${runnerName}"]`);
+        if (cell) {
+          toggleQuarterRows(runnerName, grouping);
+          // Restore arrow color and border color
+          const runnerColor = runnerColorMap[runnerName] || '#3b82f6';
+          cell.style.setProperty('--runner-arrow-color', runnerColor);
+          const runnerRow = cell.closest('tr');
+          if (runnerRow) {
+            runnerRow.classList.add('runner-row-with-expanded');
+            runnerRow.style.setProperty('--runner-border-color', runnerColor);
+          }
+        }
       });
       
       // Re-add event listeners for chart highlighting
@@ -2067,12 +2517,24 @@
       console.log("Max miles:", maxMiles);
       
       // Calculate Y-axis max with dynamic expansion logic
-      let yMax = Math.max(Math.ceil(maxMiles / 50) * 50, 300);
+      let yMax;
       
-      // If any runner is within 25 miles of the current upper limit, expand by 50 miles
-      if (maxMiles > (yMax - 25)) {
-        yMax += 50;
-        console.log(`Expanding Y-axis: runner at ${maxMiles} miles is within 25 miles of ${yMax - 50}, expanding to ${yMax}`);
+      // Check if quarterly view is selected (not 'all')
+      const isQuarterlyView = !selectedQuarters.includes('all') && selectedQuarters.length > 0;
+      
+      if (isQuarterlyView) {
+        // For quarterly view: max is highest runner's mileage rounded up to next multiple of 50
+        yMax = Math.ceil(maxMiles / 50) * 50;
+        console.log(`Quarterly view: Setting Y-axis max to ${yMax} (max miles: ${maxMiles}, rounded up to nearest 50)`);
+      } else {
+        // Default logic for full year view
+        yMax = Math.max(Math.ceil(maxMiles / 50) * 50, 300);
+        
+        // If any runner is within 25 miles of the current upper limit, expand by 50 miles
+        if (maxMiles > (yMax - 25)) {
+          yMax += 50;
+          console.log(`Expanding Y-axis: runner at ${maxMiles} miles is within 25 miles of ${yMax - 50}, expanding to ${yMax}`);
+        }
       }
       const currentDate = new Date();
       const daysInYear = 365;
@@ -2526,6 +2988,7 @@
             const response = await fetch("data.json");
             if (response.ok) {
               const data = await response.json();
+              globalData = data; // Store data globally for quarter calculations
               const achievements = calculateAchievements(data, dataGrouping, selectedQuarters);
               displayAchievements(achievements, dataGrouping);
             }
