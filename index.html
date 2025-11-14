@@ -96,10 +96,11 @@
 
     #daysInfo {
       text-align: center;
-      margin-bottom: 1rem;
       color: #94a3b8;
       font-weight: 500;
       font-size: 1rem;
+      flex: 1;
+      min-width: 200px;
     }
 
     /* Chart container */
@@ -121,12 +122,22 @@
       min-height: fit-content;
     }
 
+    /* Controls container - holds daysInfo and buttons */
+    #controlsContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1rem 0;
+      padding: 0 1rem;
+    }
+
     /* Group buttons positioning */
     #groupButtons {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      z-index: 10;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
     }
 
     #groupButtons .group-btn {
@@ -140,6 +151,34 @@
     }
 
     .group-btn:hover:not(.active) {
+      background: #4b5563 !important;
+    }
+
+    /* Quarter buttons positioning */
+    #quarterButtons {
+      display: flex;
+      gap: 0.25rem;
+      align-items: center;
+    }
+
+    #quarterButtons .quarter-btn {
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      background: #6b7280;
+      color: white;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-right: 0.25rem;
+    }
+
+    .quarter-btn.active {
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+    }
+
+    .quarter-btn:hover:not(.active) {
       background: #4b5563 !important;
     }
 
@@ -594,15 +633,43 @@
         overflow: visible;
       }
 
-      /* Group buttons responsive */
+      /* Controls container responsive */
+      #controlsContainer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+      }
+
+      #daysInfo {
+        order: 1;
+        width: 100%;
+      }
+
+      #quarterButtons {
+        order: 2;
+        justify-content: center;
+        width: 100%;
+      }
+
       #groupButtons {
-        top: 10px;
-        right: 10px;
+        order: 3;
+        justify-content: center;
+        width: 100%;
       }
 
       #groupButtons .group-btn {
         font-size: 0.8rem;
         padding: 0.3rem 0.6rem;
+      }
+
+      #quarterButtons .quarter-btn {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.6rem;
+      }
+
+      #quarterButtons span,
+      #groupButtons span {
+        font-size: 0.9rem;
       }
 
 
@@ -645,10 +712,14 @@
         overflow: visible;
       }
 
-      /* Group buttons for very small screens */
-      #groupButtons {
-        top: 5px;
-        right: 5px;
+      /* Controls container for very small screens */
+      #controlsContainer {
+        padding: 0 0.5rem;
+        gap: 0.5rem;
+      }
+
+      #daysInfo {
+        font-size: 0.8rem;
       }
 
       #groupButtons .group-btn {
@@ -658,6 +729,15 @@
 
       #groupButtons span {
         font-size: 0.8rem;
+      }
+
+      #quarterButtons .quarter-btn {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+      }
+
+      #quarterButtons span {
+        font-size: 0.75rem;
       }
 
 
@@ -677,16 +757,6 @@
 <body>
   <div class="container">
     <div class="chart-container" style="position: relative;">
-      <!-- Group Data By Buttons - positioned at top right -->
-      <div id="groupButtons" style="position: absolute; top: 20px; right: 20px; z-index: 10;">
-        <div style="display: flex; gap: 0.5rem; align-items: center;">
-          <span style="color: #e2e8f0; font-size: 1.1rem; font-weight: 600; margin-right: 0.5rem;">View:</span>
-          <button class="group-btn active" data-group="day" style="padding: 0.4rem 0.8rem; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-size: 0.9rem;">Daily</button>
-          <button class="group-btn" data-group="week" style="padding: 0.4rem 0.8rem; background: #6b7280; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-size: 0.9rem;">Weekly</button>
-          <button class="group-btn" data-group="month" style="padding: 0.4rem 0.8rem; background: #6b7280; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-size: 0.9rem;">Monthly</button>
-        </div>
-      </div>
-      
       <div class="chart-wrapper">
         <canvas id="myChart"></canvas>
         <div id="gainLabelsContainer"></div>
@@ -696,7 +766,29 @@
       </div>
     </div>
     
-    <div id="daysInfo"></div>
+    <!-- Controls Container - holds daysInfo and filter buttons -->
+    <div id="controlsContainer">
+      <!-- Quarter Filter Buttons -->
+      <div id="quarterButtons">
+        <span style="color: #e2e8f0; font-size: 1.1rem; font-weight: 600; margin-right: 0.5rem;">Quarter:</span>
+        <button class="quarter-btn active" data-quarter="all">All</button>
+        <button class="quarter-btn" data-quarter="1">Q1</button>
+        <button class="quarter-btn" data-quarter="2">Q2</button>
+        <button class="quarter-btn" data-quarter="3">Q3</button>
+        <button class="quarter-btn" data-quarter="4">Q4</button>
+      </div>
+      
+      <!-- Days Info -->
+      <div id="daysInfo"></div>
+      
+      <!-- Group Data By Buttons -->
+      <div id="groupButtons">
+        <span style="color: #e2e8f0; font-size: 1.1rem; font-weight: 600; margin-right: 0.5rem;">View:</span>
+        <button class="group-btn active" data-group="day" style="padding: 0.4rem 0.8rem; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-size: 0.9rem;">Daily</button>
+        <button class="group-btn" data-group="week" style="padding: 0.4rem 0.8rem; background: #6b7280; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-size: 0.9rem;">Weekly</button>
+        <button class="group-btn" data-group="month" style="padding: 0.4rem 0.8rem; background: #6b7280; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-size: 0.9rem;">Monthly</button>
+      </div>
+    </div>
     
     <!-- Achievements Table -->
     <div class="achievements-container">
@@ -727,6 +819,7 @@
     let isZoomed = false; // Track zoom state
     let dataGrouping = 'day'; // Track current data grouping
     let originalData = null; // Store original data for regrouping
+    let selectedQuarters = ['all']; // Track selected quarters: ['all'] or ['1'], ['1','2'], ['2','3','4'], etc.
     const colors = [
       "#4ECDC4",
       "#FF6B6B",
@@ -763,6 +856,135 @@
         date1.getMonth() === date2.getMonth() &&
         date1.getDate() === date2.getDate()
       );
+    }
+
+    // Helper function to get quarter date range for a single quarter
+    function getSingleQuarterDateRange(quarter, year = 2025) {
+      const quarterNum = parseInt(quarter);
+      let startMonth, endMonth, endDay;
+      
+      switch (quarterNum) {
+        case 1:
+          startMonth = 0; // January
+          endMonth = 2; // March
+          endDay = 31;
+          break;
+        case 2:
+          startMonth = 3; // April
+          endMonth = 5; // June
+          endDay = 30;
+          break;
+        case 3:
+          startMonth = 6; // July
+          endMonth = 8; // September
+          endDay = 30;
+          break;
+        case 4:
+          startMonth = 9; // October
+          endMonth = 11; // December
+          endDay = 31;
+          break;
+        default:
+          return null;
+      }
+      
+      return {
+        min: new Date(year, startMonth, 1, 0, 0, 0),
+        max: new Date(year, endMonth, endDay, 23, 59, 59)
+      };
+    }
+
+    // Helper function to get combined date range for multiple quarters
+    function getQuarterDateRange(quarters, year = 2025) {
+      if (quarters.includes('all') || quarters.length === 0) {
+        return { min: null, max: null };
+      }
+      
+      // Sort quarters to ensure they're in order
+      const sortedQuarters = quarters.map(q => parseInt(q)).sort((a, b) => a - b);
+      
+      // Get the first and last quarter ranges
+      const firstQuarter = getSingleQuarterDateRange(sortedQuarters[0].toString(), year);
+      const lastQuarter = getSingleQuarterDateRange(sortedQuarters[sortedQuarters.length - 1].toString(), year);
+      
+      if (!firstQuarter || !lastQuarter) {
+        return { min: null, max: null };
+      }
+      
+      return {
+        min: firstQuarter.min,
+        max: lastQuarter.max
+      };
+    }
+
+    // Helper function to check if quarters are consecutive
+    function areQuartersConsecutive(quarters) {
+      if (quarters.length <= 1) return true;
+      
+      const sorted = quarters.map(q => parseInt(q)).sort((a, b) => a - b);
+      for (let i = 1; i < sorted.length; i++) {
+        if (sorted[i] !== sorted[i-1] + 1) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    // Helper function to filter datasets by quarters
+    function filterDatasetsByQuarter(datasets, quarters) {
+      if (quarters.includes('all') || quarters.length === 0) {
+        return datasets;
+      }
+      
+      const quarterRange = getQuarterDateRange(quarters);
+      if (!quarterRange.min || !quarterRange.max) {
+        return datasets;
+      }
+      
+      const minTime = quarterRange.min.getTime();
+      const maxTime = quarterRange.max.getTime();
+      
+      return datasets.map(dataset => ({
+        ...dataset,
+        data: dataset.data.filter(point => {
+          const pointTime = point.x.getTime ? point.x.getTime() : new Date(point.x).getTime();
+          return pointTime >= minTime && pointTime <= maxTime;
+        })
+      }));
+    }
+
+    // Helper function to check if an activity date falls within selected quarters
+    function isActivityInQuarters(activityDate, quarters) {
+      if (quarters.includes('all') || quarters.length === 0) {
+        return true;
+      }
+      
+      // Parse activity date (format: mm/dd/yy)
+      const dateParts = activityDate.split("/");
+      let month, day, year;
+      
+      if (dateParts.length === 2) {
+        [month, day] = dateParts;
+        year = "2025";
+      } else if (dateParts.length === 3) {
+        [month, day, year] = dateParts;
+        year = '20' + year;
+      } else {
+        return false;
+      }
+      
+      const activityDateObj = new Date(year, parseInt(month) - 1, parseInt(day));
+      const activityMonth = activityDateObj.getMonth(); // 0-11
+      
+      // Determine which quarter this month belongs to
+      let activityQuarter;
+      if (activityMonth >= 0 && activityMonth <= 2) activityQuarter = 1;
+      else if (activityMonth >= 3 && activityMonth <= 5) activityQuarter = 2;
+      else if (activityMonth >= 6 && activityMonth <= 8) activityQuarter = 3;
+      else if (activityMonth >= 9 && activityMonth <= 11) activityQuarter = 4;
+      else return false;
+      
+      return quarters.includes(activityQuarter.toString());
     }
 
     // Group data by period (day, week, month)
@@ -1026,11 +1248,13 @@
         colorIndex++;
       });
 
-      // Calculate achievements only on initial load
-      if (!achievementsInitialized) {
-        const achievements = calculateAchievements(data, dataGrouping);
+      // Calculate achievements with current quarter filter
+      try {
+        const achievements = calculateAchievements(data, dataGrouping, selectedQuarters);
         displayAchievements(achievements, dataGrouping);
         achievementsInitialized = true;
+      } catch (error) {
+        console.error("Error calculating achievements:", error);
       }
 
       return {datasets, daysSoFar};
@@ -1132,8 +1356,8 @@
     }
 
     // Function to calculate runner achievements
-    function calculateAchievements(data, grouping = 'day') {
-      console.log("calculateAchievements called with data and grouping:", data, grouping);
+    function calculateAchievements(data, grouping = 'day', quarters = ['all']) {
+      console.log("calculateAchievements called with data, grouping, and quarters:", data, grouping, quarters);
       const achievements = [];
       
       // Define allowed activity types - only these will be included in charts and stats
@@ -1154,6 +1378,13 @@
         activities = activities.filter(activity => 
           TRACKED_ACTIVITIES.includes(activity.type?.toLowerCase())
         );
+        
+        // Filter activities by selected quarters
+        if (!quarters.includes('all') && quarters.length > 0) {
+          activities = activities.filter(activity => 
+            isActivityInQuarters(activity.date, quarters)
+          );
+        }
         
         console.log(`${runnerName}: ${originalCount} total activities, ${activities.length} tracked activities (after filtering)`);
         
@@ -1827,8 +2058,11 @@
         return;
       }
       
+      // Filter datasets by selected quarters
+      const filteredDatasets = filterDatasetsByQuarter(datasets, selectedQuarters);
+      
       const maxMiles = Math.max(
-        ...datasets.flatMap((d) => d.data.map((point) => point.y)),
+        ...filteredDatasets.flatMap((d) => d.data.map((point) => point.y)),
       );
       console.log("Max miles:", maxMiles);
       
@@ -1980,9 +2214,35 @@
         },
       };
 
+      // Get quarter date range for x-axis limits
+      const quarterRange = getQuarterDateRange(selectedQuarters);
+      const xAxisMin = quarterRange.min || new Date("2025-01-01");
+      const xAxisMax = quarterRange.max || (dataGrouping === 'month' ? 
+        // For monthly view, extend to end of current month
+        new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0, 23, 59, 59) :
+        dataGrouping === 'week' ?
+        // For weekly view, extend to end of current week (Sunday)
+        (() => {
+          const endOfWeek = new Date(currentDate);
+          const day = currentDate.getDay();
+          const diff = 6 - day; // Days until Sunday
+          endOfWeek.setDate(currentDate.getDate() + diff);
+          endOfWeek.setHours(23, 59, 59, 0);
+          return endOfWeek;
+        })() :
+        // For daily view, use current date
+        new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate(),
+          23,
+          59,
+          59,
+        ));
+
       const config = {
         type: "line",
-        data: {datasets},
+        data: {datasets: filteredDatasets},
         options: {
           animation: false,
           interaction: {intersect: true, mode: "nearest"},
@@ -2052,29 +2312,8 @@
                 modifierKey: 'ctrl',
                 limits: {
                   x: {
-                    min: new Date("2025-01-01"),
-                    max: dataGrouping === 'month' ? 
-                      // For monthly view, extend to end of current month
-                      new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0, 23, 59, 59) :
-                      dataGrouping === 'week' ?
-                      // For weekly view, extend to end of current week (Sunday)
-                      (() => {
-                        const endOfWeek = new Date(currentDate);
-                        const day = currentDate.getDay();
-                        const diff = 6 - day; // Days until Sunday
-                        endOfWeek.setDate(currentDate.getDate() + diff);
-                        endOfWeek.setHours(23, 59, 59, 0);
-                        return endOfWeek;
-                      })() :
-                      // For daily view, use current date
-                      new Date(
-                        currentDate.getFullYear(),
-                        currentDate.getMonth(),
-                        currentDate.getDate(),
-                        23,
-                        59,
-                        59,
-                      ),
+                    min: xAxisMin,
+                    max: xAxisMax,
                   }
                 }
               },
@@ -2089,68 +2328,24 @@
                 mode: 'x',
                 limits: {
                   x: {
-                    min: new Date("2025-01-01"),
-                    max: dataGrouping === 'month' ? 
-                      // For monthly view, extend to end of current month
-                      new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0, 23, 59, 59) :
-                      dataGrouping === 'week' ?
-                      // For weekly view, extend to end of current week (Sunday)
-                      (() => {
-                        const endOfWeek = new Date(currentDate);
-                        const day = currentDate.getDay();
-                        const diff = 6 - day; // Days until Sunday
-                        endOfWeek.setDate(currentDate.getDate() + diff);
-                        endOfWeek.setHours(23, 59, 59, 0);
-                        return endOfWeek;
-                      })() :
-                      // For daily view, use current date
-                      new Date(
-                        currentDate.getFullYear(),
-                        currentDate.getMonth(),
-                        currentDate.getDate(),
-                        23,
-                        59,
-                        59,
-                      ),
+                    min: xAxisMin,
+                    max: xAxisMax,
                   }
                 },
                 onZoomComplete: function({chart}) {
                   const xScale = chart.scales.x;
-                  const minDate = new Date("2025-01-01");
-                  const maxDate = dataGrouping === 'month' ? 
-                    // For monthly view, extend to end of current month
-                    new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0, 23, 59, 59) :
-                    dataGrouping === 'week' ?
-                    // For weekly view, extend to end of current week (Sunday)
-                    (() => {
-                      const endOfWeek = new Date(currentDate);
-                      const day = currentDate.getDay();
-                      const diff = 6 - day; // Days until Sunday
-                      endOfWeek.setDate(currentDate.getDate() + diff);
-                      endOfWeek.setHours(23, 59, 59, 0);
-                      return endOfWeek;
-                    })() :
-                    // For daily view, use current date
-                    new Date(
-                      currentDate.getFullYear(),
-                      currentDate.getMonth(),
-                      currentDate.getDate(),
-                      23,
-                      59,
-                      59,
-                    );
                   
-                  // Enforce limits
-                  if (xScale.min < minDate) {
-                    xScale.options.min = minDate;
+                  // Enforce limits based on quarter selection
+                  if (xScale.min < xAxisMin.getTime()) {
+                    xScale.options.min = xAxisMin;
                   }
-                  if (xScale.max > maxDate) {
-                    xScale.options.max = maxDate;
+                  if (xScale.max > xAxisMax.getTime()) {
+                    xScale.options.max = xAxisMax;
                   }
                   
                   // Check if chart is zoomed (not at full extent)
-                  const isAtMinExtent = xScale.min <= minDate.getTime();
-                  const isAtMaxExtent = xScale.max >= maxDate.getTime();
+                  const isAtMinExtent = xScale.min <= xAxisMin.getTime();
+                  const isAtMaxExtent = xScale.max >= xAxisMax.getTime();
                   isZoomed = !(isAtMinExtent && isAtMaxExtent);
                   
                   // Show/hide reset button based on zoom state
@@ -2167,52 +2362,10 @@
           scales: {
             x: {
               type: "time",
-              min: new Date("2025-01-01"),
-              max: dataGrouping === 'month' ? 
-                // For monthly view, extend to end of current month
-                new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0, 23, 59, 59) :
-                dataGrouping === 'week' ?
-                // For weekly view, extend to end of current week (Sunday)
-                (() => {
-                  const endOfWeek = new Date(currentDate);
-                  const day = currentDate.getDay();
-                  const diff = 6 - day; // Days until Sunday
-                  endOfWeek.setDate(currentDate.getDate() + diff);
-                  endOfWeek.setHours(23, 59, 59, 0);
-                  return endOfWeek;
-                })() :
-                // For daily view, use current date
-                new Date(
-                  currentDate.getFullYear(),
-                  currentDate.getMonth(),
-                  currentDate.getDate(),
-                  23,
-                  59,
-                  59,
-                ),
-              suggestedMin: new Date("2025-01-01"),
-              suggestedMax: dataGrouping === 'month' ? 
-                // For monthly view, extend to end of current month
-                new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0, 23, 59, 59) :
-                dataGrouping === 'week' ?
-                // For weekly view, extend to end of current week (Sunday)
-                (() => {
-                  const endOfWeek = new Date(currentDate);
-                  const day = currentDate.getDay();
-                  const diff = 6 - day; // Days until Sunday
-                  endOfWeek.setDate(currentDate.getDate() + diff);
-                  endOfWeek.setHours(23, 59, 59, 0);
-                  return endOfWeek;
-                })() :
-                // For daily view, use current date
-                new Date(
-                  currentDate.getFullYear(),
-                  currentDate.getMonth(),
-                  currentDate.getDate(),
-                  23,
-                  59,
-                  59,
-                ),
+              min: xAxisMin,
+              max: xAxisMax,
+              suggestedMin: xAxisMin,
+              suggestedMax: xAxisMax,
               time: {
                 unit: dataGrouping === 'day' ? 'day' : dataGrouping === 'week' ? 'week' : 'month',
                 stepSize: dataGrouping === 'day' ? dynamicStepSize : 1,
@@ -2221,15 +2374,8 @@
                   week: "MMM d, yyyy", 
                   month: "MMM yyyy"
                 },
-                min: new Date("2025-01-01"),
-                max: new Date(
-                  currentDate.getFullYear(),
-                  currentDate.getMonth(),
-                  currentDate.getDate(),
-                  23,
-                  59,
-                  59,
-                ),
+                min: xAxisMin,
+                max: xAxisMax,
               },
               title: {
                 display: true,
@@ -2380,11 +2526,112 @@
             const response = await fetch("data.json");
             if (response.ok) {
               const data = await response.json();
-              const achievements = calculateAchievements(data, dataGrouping);
+              const achievements = calculateAchievements(data, dataGrouping, selectedQuarters);
               displayAchievements(achievements, dataGrouping);
             }
           } catch (error) {
             console.error("Error updating achievements:", error);
+          }
+        });
+      });
+    }
+
+    // Initialize quarter buttons
+    function initializeQuarterButtons() {
+      const quarterButtons = document.querySelectorAll('.quarter-btn');
+      
+      quarterButtons.forEach(button => {
+        button.addEventListener('click', async function() {
+          const clickedQuarter = this.dataset.quarter;
+          
+          // Handle "All" button - clears all selections
+          if (clickedQuarter === 'all') {
+            // Remove active class from all quarter buttons
+            document.querySelectorAll('.quarter-btn').forEach(btn => {
+              btn.classList.remove('active');
+              btn.style.background = '#6b7280';
+            });
+            // Activate "All" button
+            this.classList.add('active');
+            this.style.background = 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)';
+            selectedQuarters = ['all'];
+          } else {
+            // Remove "All" from selection if it was selected
+            if (selectedQuarters.includes('all')) {
+              document.querySelectorAll('.quarter-btn[data-quarter="all"]').forEach(btn => {
+                btn.classList.remove('active');
+                btn.style.background = '#6b7280';
+              });
+              selectedQuarters = [];
+            }
+            
+            // Toggle the clicked quarter
+            const quarterIndex = selectedQuarters.indexOf(clickedQuarter);
+            if (quarterIndex > -1) {
+              // Deselect if already selected
+              this.classList.remove('active');
+              this.style.background = '#6b7280';
+              selectedQuarters.splice(quarterIndex, 1);
+            } else {
+              // Add to selection
+              this.classList.add('active');
+              this.style.background = 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)';
+              selectedQuarters.push(clickedQuarter);
+            }
+            
+            // Sort quarters to maintain order
+            selectedQuarters.sort((a, b) => parseInt(a) - parseInt(b));
+            
+            // Check if quarters are consecutive
+            if (!areQuartersConsecutive(selectedQuarters)) {
+              // If not consecutive, keep only the clicked quarter and adjacent ones
+              const clickedNum = parseInt(clickedQuarter);
+              const newSelection = [clickedQuarter];
+              
+              // Check if previous quarter is selected
+              if (selectedQuarters.includes((clickedNum - 1).toString())) {
+                newSelection.unshift((clickedNum - 1).toString());
+              }
+              // Check if next quarter is selected
+              if (selectedQuarters.includes((clickedNum + 1).toString())) {
+                newSelection.push((clickedNum + 1).toString());
+              }
+              
+              // Update UI to reflect only consecutive quarters
+              document.querySelectorAll('.quarter-btn').forEach(btn => {
+                const btnQuarter = btn.dataset.quarter;
+                if (btnQuarter === 'all') return;
+                
+                if (newSelection.includes(btnQuarter)) {
+                  btn.classList.add('active');
+                  btn.style.background = 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)';
+                } else {
+                  btn.classList.remove('active');
+                  btn.style.background = '#6b7280';
+                }
+              });
+              
+              selectedQuarters = newSelection;
+            }
+            
+            // If no quarters selected, default to "all"
+            if (selectedQuarters.length === 0) {
+              selectedQuarters = ['all'];
+              document.querySelectorAll('.quarter-btn[data-quarter="all"]').forEach(btn => {
+                btn.classList.add('active');
+                btn.style.background = 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)';
+              });
+            }
+          }
+          
+          // Recreate chart with new quarter filter
+          createChart();
+          
+          // Reset zoom state when changing quarters
+          isZoomed = false;
+          const resetButton = document.getElementById('resetZoom');
+          if (resetButton) {
+            resetButton.style.display = 'none';
           }
         });
       });
@@ -2419,6 +2666,7 @@
     window.onload = function() {
       createChart();
       initializeGroupButtons();
+      initializeQuarterButtons();
     };
   </script>
 </body>
