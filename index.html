@@ -553,29 +553,7 @@
     }
 
     /* Hover effect for runner rows with expanded quarter rows - outer border only */
-    #achievementsTable tr.runner-row-with-expanded:hover {
-      border-top: 2px solid var(--runner-border-color, #3b82f6);
-    }
-
-    #achievementsTable tr.runner-row-with-expanded:hover td:first-child {
-      border-left: 2px solid var(--runner-border-color, #3b82f6);
-    }
-
-    #achievementsTable tr.runner-row-with-expanded:hover td:last-child {
-      border-right: 2px solid var(--runner-border-color, #3b82f6);
-    }
-
-    #achievementsTable tr.runner-row-with-expanded:hover ~ tr.quarter-row.hover-border td:first-child {
-      border-left: 2px solid var(--runner-border-color, #3b82f6);
-    }
-
-    #achievementsTable tr.runner-row-with-expanded:hover ~ tr.quarter-row.hover-border td:last-child {
-      border-right: 2px solid var(--runner-border-color, #3b82f6);
-    }
-
-    #achievementsTable tr.runner-row-with-expanded:hover ~ tr.quarter-row.hover-border:last-of-type {
-      border-bottom: 2px solid var(--runner-border-color, #3b82f6);
-    }
+    /* Note: CSS hover rules removed - using JavaScript handlers only for more precise control */
 
     .runner-name {
       font-weight: 500;
@@ -1001,13 +979,67 @@
       const minTime = quarterRange.min.getTime();
       const maxTime = quarterRange.max.getTime();
       
-      return datasets.map(dataset => ({
-        ...dataset,
-        data: dataset.data.filter(point => {
+      return datasets.map(dataset => {
+        // Filter data points within the quarter range
+        const filteredData = dataset.data.filter(point => {
           const pointTime = point.x.getTime ? point.x.getTime() : new Date(point.x).getTime();
           return pointTime >= minTime && pointTime <= maxTime;
-        })
-      }));
+        });
+        
+        // Find the last data point before the quarter start to get the starting cumulative distance
+        let startingY = 0;
+        const lastPointBeforeQuarter = dataset.data
+          .filter(point => {
+            const pointTime = point.x.getTime ? point.x.getTime() : new Date(point.x).getTime();
+            return pointTime < minTime;
+          })
+          .sort((a, b) => {
+            const timeA = a.x.getTime ? a.x.getTime() : new Date(a.x).getTime();
+            const timeB = b.x.getTime ? b.x.getTime() : new Date(b.x).getTime();
+            return timeB - timeA; // Sort descending to get the last one
+          })[0];
+        
+        if (lastPointBeforeQuarter) {
+          startingY = lastPointBeforeQuarter.y;
+        }
+        
+        // If the first filtered point is not at the quarter start, add a starting point
+        if (filteredData.length > 0) {
+          const firstPointTime = filteredData[0].x.getTime ? filteredData[0].x.getTime() : new Date(filteredData[0].x).getTime();
+          if (firstPointTime > minTime) {
+            // Add a starting point at the beginning of the quarter
+            const startingPoint = {
+              x: quarterRange.min,
+              y: startingY,
+              hasActivity: false,
+              gainFromLastActivity: 0,
+              lastActivityDistance: 0,
+              lastActivityDate: null,
+              isSameDayAsLastActivity: false,
+              isLongestRun: false,
+            };
+            filteredData.unshift(startingPoint);
+          }
+        } else if (dataset.data.length > 0) {
+          // If no points in quarter but dataset has data, add a starting point anyway
+          const startingPoint = {
+            x: quarterRange.min,
+            y: startingY,
+            hasActivity: false,
+            gainFromLastActivity: 0,
+            lastActivityDistance: 0,
+            lastActivityDate: null,
+            isSameDayAsLastActivity: false,
+            isLongestRun: false,
+          };
+          filteredData.push(startingPoint);
+        }
+        
+        return {
+          ...dataset,
+          data: filteredData
+        };
+      });
     }
 
     // Helper function to check if an activity date falls within selected quarters
@@ -2073,29 +2105,29 @@
         const allRows = [runnerRow, ...quarterRowsForRunner];
         
         const handleMouseEnter = () => {
-          // Top border on runner row
-          runnerRow.style.borderTop = `2px solid ${runnerColor}`;
+          // Top border on runner row - use thinner border
+          runnerRow.style.borderTop = `1px solid ${runnerColor}`;
           
-          // Left border on first cell of each row
+          // Left border on first cell of each row - use thinner border
           allRows.forEach(row => {
             const firstCell = row.querySelector('td:first-child');
             if (firstCell) {
-              firstCell.style.borderLeft = `2px solid ${runnerColor}`;
+              firstCell.style.borderLeft = `1px solid ${runnerColor}`;
             }
           });
           
-          // Right border on last cell of each row
+          // Right border on last cell of each row - use thinner border
           allRows.forEach(row => {
             const lastCell = row.querySelector('td:last-child');
             if (lastCell) {
-              lastCell.style.borderRight = `2px solid ${runnerColor}`;
+              lastCell.style.borderRight = `1px solid ${runnerColor}`;
             }
           });
           
-          // Bottom border on last quarter row
+          // Bottom border on last quarter row - use thinner border
           if (quarterRowsForRunner.length > 0) {
             const lastQuarterRow = quarterRowsForRunner[quarterRowsForRunner.length - 1];
-            lastQuarterRow.style.borderBottom = `2px solid ${runnerColor}`;
+            lastQuarterRow.style.borderBottom = `1px solid ${runnerColor}`;
           }
         };
         
@@ -2194,11 +2226,22 @@
     function highlightChartPoint(runnerName, date, type) {
       if (!myChart) return;
       
+      // Clear any existing highlight first
+      clearChartHighlight();
+      
       // Find the dataset index for this runner
       const datasetIndex = myChart.data.datasets.findIndex(dataset => dataset.label === runnerName);
       if (datasetIndex === -1) return;
       
       const dataset = myChart.data.datasets[datasetIndex];
+      
+      // Store original functions on dataset if not already stored (for persistence)
+      if (!dataset._originalPointRadius) {
+        dataset._originalPointRadius = dataset.pointRadius;
+      }
+      if (!dataset._originalPointBorderWidth) {
+        dataset._originalPointBorderWidth = dataset.pointBorderWidth;
+      }
       
       // Find the data point that matches this date/period
       // Use the periodKey stored in the data point for exact matching across all views
@@ -2207,25 +2250,23 @@
       });
       
       if (pointIndex !== -1) {
-        // Store original values
-        const originalRadius = dataset.pointRadius;
-        const originalBorderWidth = dataset.pointBorderWidth;
+        // Use the stored original functions (or current if not stored)
+        const originalRadiusFunction = dataset._originalPointRadius || dataset.pointRadius;
+        const originalBorderFunction = dataset._originalPointBorderWidth || dataset.pointBorderWidth;
         
         // Create temporary highlight
-        if (typeof dataset.pointRadius === 'function') {
-          const originalRadiusFunction = dataset.pointRadius;
+        if (typeof originalRadiusFunction === 'function') {
           dataset.pointRadius = (context) => {
-            if (context.dataIndex === pointIndex) {
+            if (context.dataIndex === pointIndex && context.datasetIndex === datasetIndex) {
               return 15; // Larger size when highlighted
             }
             return originalRadiusFunction(context);
           };
         }
         
-        if (typeof dataset.pointBorderWidth === 'function') {
-          const originalBorderFunction = dataset.pointBorderWidth;
+        if (typeof originalBorderFunction === 'function') {
           dataset.pointBorderWidth = (context) => {
-            if (context.dataIndex === pointIndex) {
+            if (context.dataIndex === pointIndex && context.datasetIndex === datasetIndex) {
               return 3; // Thicker border when highlighted
             }
             return originalBorderFunction(context);
@@ -2236,9 +2277,11 @@
         
         // Store cleanup function
         window.currentHighlightCleanup = () => {
-          dataset.pointRadius = originalRadius;
-          dataset.pointBorderWidth = originalBorderWidth;
-          myChart.update('none');
+          if (dataset && myChart && dataset._originalPointRadius && dataset._originalPointBorderWidth) {
+            dataset.pointRadius = dataset._originalPointRadius;
+            dataset.pointBorderWidth = dataset._originalPointBorderWidth;
+            myChart.update('none');
+          }
         };
       }
     }
@@ -2846,52 +2889,44 @@
                 font: {weight: "bold", size: getFontSizes().axisTitle},
                 color: '#cbd5e1'
               },
-              grid: {color: "rgba(255, 255, 255, 0.1)"},
+              grid: {
+                color: "rgba(255, 255, 255, 0.1)",
+              },
               ticks: {
-                font: {weight: "bold", size: getFontSizes().axisTicks},
+                font: function() {
+                  return {weight: "normal", size: getFontSizes().axisTicks};
+                },
                 callback: function(value, index, ticks) {
                   const date = new Date(value);
                   
-                  if (dataGrouping === 'day') {
+                  // Format label (without year)
+                  if (dataGrouping === 'day' || dataGrouping === 'week') {
                     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
                                      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                    return monthNames[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
-                  } else if (dataGrouping === 'week') {
-                    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                                     'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                    return monthNames[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
+                    return monthNames[date.getMonth()] + ' ' + date.getDate();
                   } else if (dataGrouping === 'month') {
                     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
                                      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                    return monthNames[date.getMonth()] + ' ' + date.getFullYear();
+                    return monthNames[date.getMonth()];
                   }
                   return value;
                 },
                 color: function (context) {
-                  // Alternating month colors
+                  if (!context || !context.tick) {
+                    return "#FFFFFF";
+                  }
+                  
                   const date = new Date(context.tick.value);
                   const month = date.getMonth();
-
-                  const monthColors = [
-                    "rgba(226, 232, 240, 0.9)", // Jan
-                    "rgba(226, 232, 240, 0.7)", // Feb
-                    "rgba(226, 232, 240, 0.9)", // Mar
-                    "rgba(226, 232, 240, 0.7)", // Apr
-                    "rgba(226, 232, 240, 0.9)", // May
-                    "rgba(226, 232, 240, 0.7)", // Jun
-                    "rgba(226, 232, 240, 0.9)", // Jul
-                    "rgba(226, 232, 240, 0.7)", // Aug
-                    "rgba(226, 232, 240, 0.9)", // Sep
-                    "rgba(226, 232, 240, 0.7)", // Oct
-                    "rgba(226, 232, 240, 0.9)", // Nov
-                    "rgba(226, 232, 240, 0.7)", // Dec
-                  ];
-
-                  return monthColors[month];
-                },
-                callback: function (value) {
-                  const date = new Date(value);
-                  return `${date.toLocaleString("default", {month: "short"})} ${date.getDate()}`;
+                  
+                  // Use alternating colors between months
+                  if (month % 2 === 0) {
+                    // Even months (Jan, Mar, May, Jul, Sep, Nov)
+                    return "#FFFFFF"; // White
+                  } else {
+                    // Odd months (Feb, Apr, Jun, Aug, Oct, Dec)
+                    return "#A0A0A0"; // Gray
+                  }
                 },
               },
             },
@@ -2922,7 +2957,13 @@
                 }
               },
               ticks: {
-                font: {weight: "bold", size: getFontSizes().axisTicks},
+                font: function() {
+                  const baseSize = getFontSizes().axisTicks;
+                  // Make y-axis labels larger on large screens (width > 1200px)
+                  const isLargeScreen = window.innerWidth > 1200;
+                  const yAxisSize = isLargeScreen ? baseSize * 1.25 : baseSize;
+                  return {weight: "bold", size: yAxisSize};
+                },
                 color: function(context) {
                   // Make the 300 mile tick golden and bold
                   if (context.tick.value === 300) {
