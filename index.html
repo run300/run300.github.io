@@ -1364,6 +1364,46 @@
     }
 
     // Show gain labels function (unchanged from previous version)
+    // Global function to highlight a runner by name (for hover effects)
+    const debouncedHighlightRunner = debounce((runnerName) => {
+      if (!myChart) return;
+      
+      // If runnerName is null/undefined, clear highlights
+      if (!runnerName) {
+        activeRunnerIndex = -1;
+        document.querySelectorAll(".legend-item").forEach((el) => el.classList.remove("active"));
+        showGainLabels(myChart, -1);
+        myChart.update("none");
+        return;
+      }
+      
+      // Find the dataset index for this runner
+      const datasetIndex = myChart.data.datasets.findIndex(dataset => dataset.label === runnerName);
+      
+      if (datasetIndex === -1) {
+        // Runner not found, clear highlights
+        activeRunnerIndex = -1;
+        document.querySelectorAll(".legend-item").forEach((el) => el.classList.remove("active"));
+        showGainLabels(myChart, -1);
+        myChart.update("none");
+        return;
+      }
+      
+      // Remove active class from all legend items
+      document.querySelectorAll(".legend-item").forEach((el) => el.classList.remove("active"));
+      
+      // Add active class to corresponding legend item
+      const legendItem = document.querySelector(`.legend-item[data-index="${datasetIndex}"]`);
+      if (legendItem) {
+        legendItem.classList.add("active");
+      }
+      
+      // Show gain labels for this runner
+      activeRunnerIndex = datasetIndex;
+      showGainLabels(myChart, datasetIndex);
+      myChart.update("none");
+    }, 50);
+
     function showGainLabels(chart, runnerIndex) {
       hideGainLabels(); // Clear previous labels
 
@@ -2078,6 +2118,15 @@
           quarterRow.innerHTML = generateQuarterRow(quarterAchievement, grouping);
           insertAfterRow.insertAdjacentElement('afterend', quarterRow);
           insertAfterRow = quarterRow; // Update for next insertion
+          
+          // Add hover handlers to highlight runner in chart
+          quarterRow.addEventListener('mouseenter', () => {
+            debouncedHighlightRunner(runnerName);
+          });
+          
+          quarterRow.addEventListener('mouseleave', () => {
+            debouncedHighlightRunner(null);
+          });
         });
         
         expandedRunners.add(runnerName);
@@ -2303,6 +2352,7 @@
 
       sortedAchievements.forEach(achievement => {
         const row = document.createElement('tr');
+        row.setAttribute('data-runner', achievement.runner); // Add data-runner to row
         row.innerHTML = generateAchievementRow(achievement, grouping);
         tbody.appendChild(row);
       });
@@ -2316,6 +2366,19 @@
         cell.addEventListener('click', (e) => {
           e.stopPropagation();
           toggleQuarterRows(runnerName, grouping);
+        });
+      });
+      
+      // Add hover handlers to entire rows (main rows and quarter rows) to highlight runner in chart
+      document.querySelectorAll('tr[data-runner]').forEach(row => {
+        const runnerName = row.dataset.runner;
+        
+        row.addEventListener('mouseenter', () => {
+          debouncedHighlightRunner(runnerName);
+        });
+        
+        row.addEventListener('mouseleave', () => {
+          debouncedHighlightRunner(null);
         });
       });
       
@@ -2345,6 +2408,7 @@
 
       achievements.forEach(achievement => {
         const row = document.createElement('tr');
+        row.setAttribute('data-runner', achievement.runner); // Add data-runner to row
         row.innerHTML = generateAchievementRow(achievement, grouping);
         tbody.appendChild(row);
       });
@@ -2358,6 +2422,19 @@
         cell.addEventListener('click', (e) => {
           e.stopPropagation();
           toggleQuarterRows(runnerName, grouping);
+        });
+      });
+      
+      // Add hover handlers to entire rows (main rows and quarter rows) to highlight runner in chart
+      document.querySelectorAll('tr[data-runner]').forEach(row => {
+        const runnerName = row.dataset.runner;
+        
+        row.addEventListener('mouseenter', () => {
+          debouncedHighlightRunner(runnerName);
+        });
+        
+        row.addEventListener('mouseleave', () => {
+          debouncedHighlightRunner(null);
         });
       });
       
