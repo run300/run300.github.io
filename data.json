@@ -3,8 +3,8 @@
     "Bruce": {
       "name": "Bruce",
       "stats": {
-        "totalActivities": 131,
-        "totalDistance": 211.59,
+        "totalActivities": 130,
+        "totalDistance": 210.25,
         "activityTypes": [
           "Running"
         ]
@@ -898,13 +898,6 @@
           "type": "Running",
           "duration": "1:05:23",
           "pace": "10:28"
-        },
-        {
-          "date": "11/17/25",
-          "distance": 1.34,
-          "type": "Running",
-          "duration": "14:55",
-          "pace": "11:09"
         },
         {
           "date": "11/17/25",
@@ -1854,8 +1847,8 @@
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 80,
-        "totalDistance": 256.15,
+        "totalActivities": 81,
+        "totalDistance": 260.15,
         "activityTypes": [
           "Running"
         ]
@@ -2420,14 +2413,21 @@
           "type": "Running",
           "duration": "50:31",
           "pace": "12:25"
+        },
+        {
+          "date": "11/19/25",
+          "distance": 4.0,
+          "type": "Running",
+          "duration": "50:39",
+          "pace": "12:40"
         }
       ]
     },
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 74,
-        "totalDistance": 173.32,
+        "totalActivities": 75,
+        "totalDistance": 175.98,
         "activityTypes": [
           "Hiking",
           "Running",
@@ -2952,14 +2952,21 @@
           "type": "Running",
           "duration": "44:17",
           "pace": "16:08"
+        },
+        {
+          "date": "11/19/25",
+          "distance": 2.66,
+          "type": "Running",
+          "duration": "48:29",
+          "pace": "18:16"
         }
       ]
     },
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 111,
-        "totalDistance": 418.67,
+        "totalActivities": 112,
+        "totalDistance": 421.96,
         "activityTypes": [
           "Running"
         ]
@@ -3741,6 +3748,13 @@
           "type": "Running",
           "duration": "35:24",
           "pace": "9:35"
+        },
+        {
+          "date": "11/19/25",
+          "distance": 3.29,
+          "type": "Running",
+          "duration": "35:09",
+          "pace": "10:40"
         }
       ]
     },
@@ -4485,8 +4499,8 @@
     "Muscles": {
       "name": "Muscles",
       "stats": {
-        "totalActivities": 115,
-        "totalDistance": 197.61,
+        "totalActivities": 116,
+        "totalDistance": 198.74,
         "activityTypes": [
           "Hiking",
           "Running",
@@ -5298,6 +5312,13 @@
           "type": "Running",
           "duration": "58:34",
           "pace": "14:32"
+        },
+        {
+          "date": "11/19/25",
+          "distance": 1.13,
+          "type": "Running",
+          "duration": "13:30",
+          "pace": "11:58"
         }
       ]
     },
@@ -5932,8 +5953,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-11-19T02:01:43.721393",
+    "lastUpdated": "2025-11-20T02:00:07.658627",
     "totalRunners": 10,
-    "totalActivities": 829
+    "totalActivities": 832
   }
 }
