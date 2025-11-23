@@ -3775,20 +3775,13 @@
     "AutumnBreeze": {
       "name": "AutumnBreeze",
       "stats": {
-        "totalActivities": 21,
-        "totalDistance": 25.27,
+        "totalActivities": 20,
+        "totalDistance": 24.18,
         "activityTypes": [
           "Running"
         ]
       },
       "activities": [
-        {
-          "date": "01/04/25",
-          "distance": 1.09,
-          "type": "Running",
-          "duration": "24:12",
-          "pace": "22:14"
-        },
         {
           "date": "01/05/25",
           "distance": 1.14,
@@ -5967,8 +5960,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-11-21T02:05:03.893155",
+    "lastUpdated": "2025-11-23T02:05:11.851207",
     "totalRunners": 10,
-    "totalActivities": 834
+    "totalActivities": 833
   }
 }
