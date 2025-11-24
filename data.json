@@ -3,8 +3,8 @@
     "Bruce": {
       "name": "Bruce",
       "stats": {
-        "totalActivities": 132,
-        "totalDistance": 215.35,
+        "totalActivities": 134,
+        "totalDistance": 217.88,
         "activityTypes": [
           "Running"
         ]
@@ -933,6 +933,20 @@
           "type": "Running",
           "duration": "37:12",
           "pace": "12:30"
+        },
+        {
+          "date": "11/23/25",
+          "distance": 1.22,
+          "type": "Running",
+          "duration": "20:56",
+          "pace": "17:14"
+        },
+        {
+          "date": "11/23/25",
+          "distance": 1.31,
+          "type": "Running",
+          "duration": "25:16",
+          "pace": "19:16"
         }
       ]
     },
@@ -3775,13 +3789,20 @@
     "AutumnBreeze": {
       "name": "AutumnBreeze",
       "stats": {
-        "totalActivities": 20,
-        "totalDistance": 24.18,
+        "totalActivities": 21,
+        "totalDistance": 25.27,
         "activityTypes": [
           "Running"
         ]
       },
       "activities": [
+        {
+          "date": "01/04/25",
+          "distance": 1.09,
+          "type": "Running",
+          "duration": "24:12",
+          "pace": "22:14"
+        },
         {
           "date": "01/05/25",
           "distance": 1.14,
@@ -4506,8 +4527,8 @@
     "Muscles": {
       "name": "Muscles",
       "stats": {
-        "totalActivities": 116,
-        "totalDistance": 198.74,
+        "totalActivities": 118,
+        "totalDistance": 202.78,
         "activityTypes": [
           "Hiking",
           "Running",
@@ -5326,6 +5347,20 @@
           "type": "Running",
           "duration": "13:30",
           "pace": "11:58"
+        },
+        {
+          "date": "11/22/25",
+          "distance": 2.54,
+          "type": "Running",
+          "duration": "42:00",
+          "pace": "16:33"
+        },
+        {
+          "date": "11/22/25",
+          "distance": 1.5,
+          "type": "Running",
+          "duration": "26:44",
+          "pace": "17:50"
         }
       ]
     },
@@ -5960,8 +5995,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-11-23T02:05:11.851207",
+    "lastUpdated": "2025-11-24T02:06:48.424900",
     "totalRunners": 10,
-    "totalActivities": 833
+    "totalActivities": 838
   }
 }
