@@ -2461,8 +2461,8 @@
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 76,
-        "totalDistance": 178.83,
+        "totalActivities": 77,
+        "totalDistance": 180.89,
         "activityTypes": [
           "Hiking",
           "Running",
@@ -3001,6 +3001,13 @@
           "type": "Running",
           "duration": "47:00",
           "pace": "16:30"
+        },
+        {
+          "date": "11/27/25",
+          "distance": 2.06,
+          "type": "Running",
+          "duration": "27:49",
+          "pace": "13:32"
         }
       ]
     },
@@ -6023,8 +6030,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-11-27T02:00:19.975985",
+    "lastUpdated": "2025-11-28T01:59:33.176515",
     "totalRunners": 10,
-    "totalActivities": 842
+    "totalActivities": 843
   }
 }
