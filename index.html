@@ -1554,6 +1554,11 @@
           // Calculate average distance
           const averageDistance = activities.length > 0 ? totalDistance / activities.length : 0;
 
+          // Calculate total time ran (in minutes)
+          const totalTimeRan = activities.reduce((sum, activity) => {
+            return sum + parseTimeToMinutes(activity.duration || "0");
+          }, 0);
+
           achievements.push({
             runner: runnerName,
             longestRun: longestRun,
@@ -1561,7 +1566,8 @@
             totalActivities: activities.length,
             averagePace: averagePaceSeconds,
             averageDistance: averageDistance,
-            totalDistance: totalDistance
+            totalDistance: totalDistance,
+            totalTimeRan: totalTimeRan
           });
         } else {
           // Group activities for weekly/monthly analysis
@@ -1593,7 +1599,8 @@
               totalActivities: 0,
               averagePace: 0,
               averageDistance: 0,
-              totalDistance: 0
+              totalDistance: 0,
+              totalTimeRan: 0
             });
             return;
           }
@@ -1662,6 +1669,13 @@
           // Calculate average activities per period
           const averageActivities = totalPeriods > 0 ? totalActivities / totalPeriods : 0;
 
+          // Calculate total time ran (in minutes) across all activities
+          const totalTimeRan = groupedActivities.reduce((sum, period) => {
+            return sum + period.activities.reduce((periodSum, activity) => {
+              return periodSum + parseTimeToMinutes(activity.duration || "0");
+            }, 0);
+          }, 0);
+
           achievements.push({
             runner: runnerName,
             longestRun: longestPeriod,
@@ -1669,7 +1683,8 @@
             totalActivities: averageActivities,
             averagePace: averagePaceSeconds,
             averageDistance: averageDistance,
-            totalDistance: totalDistance
+            totalDistance: totalDistance,
+            totalTimeRan: totalTimeRan
           });
         }
       });
@@ -1845,6 +1860,12 @@
           <span class="${totalDistanceClass}">${achievement.totalDistance.toFixed(1)} mi</span>
         </td>
         <td>
+          ${achievement.totalTimeRan > 0 ? 
+            `<span class="achievement-display time-display">${formatTimeFromMinutes(achievement.totalTimeRan)}</span>` : 
+            '<span class="achievement-value">No data</span>'
+          }
+        </td>
+        <td>
           ${achievement.averagePace > 0 ? 
             `<span class="achievement-display pace-display">${formatPaceFromSeconds(achievement.averagePace)}/mi</span>` : 
             '<span class="achievement-value">No data</span>'
@@ -1917,7 +1938,8 @@
           totalActivities: 0,
           averagePace: 0,
           averageDistance: 0,
-          totalDistance: 0
+          totalDistance: 0,
+          totalTimeRan: 0
         };
       }
 
@@ -1954,6 +1976,11 @@
 
         const averageDistance = activities.length > 0 ? totalDistance / activities.length : 0;
 
+        // Calculate total time ran (in minutes)
+        const totalTimeRan = activities.reduce((sum, activity) => {
+          return sum + parseTimeToMinutes(activity.duration || "0");
+        }, 0);
+
         return {
           runner: runnerName,
           quarter: quarter,
@@ -1962,7 +1989,8 @@
           totalActivities: activities.length,
           averagePace: averagePaceSeconds,
           averageDistance: averageDistance,
-          totalDistance: totalDistance
+          totalDistance: totalDistance,
+          totalTimeRan: totalTimeRan
         };
       } else {
         // Weekly/monthly grouping: group activities by period first
@@ -1995,7 +2023,8 @@
             totalActivities: 0,
             averagePace: 0,
             averageDistance: 0,
-            totalDistance: 0
+            totalDistance: 0,
+            totalTimeRan: 0
           };
         }
 
@@ -2066,6 +2095,13 @@
         // Calculate average activities per period
         const averageActivities = totalPeriods > 0 ? totalActivities / totalPeriods : 0;
 
+        // Calculate total time ran (in minutes) across all activities
+        const totalTimeRan = groupedActivities.reduce((sum, period) => {
+          return sum + period.activities.reduce((periodSum, activity) => {
+            return periodSum + parseTimeToMinutes(activity.duration || "0");
+          }, 0);
+        }, 0);
+
         return {
           runner: runnerName,
           quarter: quarter,
@@ -2074,7 +2110,8 @@
           totalActivities: averageActivities,
           averagePace: averagePaceSeconds,
           averageDistance: averageDistance,
-          totalDistance: totalDistance
+          totalDistance: totalDistance,
+          totalTimeRan: totalTimeRan
         };
       }
     }
@@ -2122,6 +2159,12 @@
         <td>Q${quarterAchievement.quarter}</td>
         <td>
           <span class="achievement-display total-distance-display">${quarterAchievement.totalDistance.toFixed(1)} mi</span>
+        </td>
+        <td>
+          ${quarterAchievement.totalTimeRan > 0 ? 
+            `<span class="achievement-display time-display">${formatTimeFromMinutes(quarterAchievement.totalTimeRan)}</span>` : 
+            '<span class="achievement-value">No data</span>'
+          }
         </td>
         <td>
           ${quarterAchievement.averagePace > 0 ? 
@@ -2348,6 +2391,7 @@
       headers.innerHTML = `
         <th class="sortable" data-column="runner">Runner</th>
         <th class="sortable" data-column="totalDistance">Total Distance</th>
+        <th class="sortable" data-column="totalTimeRan">Time Ran</th>
         <th class="sortable" data-column="avgPace">${avgPaceText}</th>
         <th class="sortable" data-column="totalActivities">${activitiesText}</th>
         <th class="sortable" data-column="avgDistance">${avgDistanceText}</th>
@@ -2638,6 +2682,10 @@
           case 'totalDistance':
             aValue = a.totalDistance;
             bValue = b.totalDistance;
+            break;
+          case 'totalTimeRan':
+            aValue = a.totalTimeRan || 0;
+            bValue = b.totalTimeRan || 0;
             break;
           default:
             return 0;
