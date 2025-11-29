@@ -3,8 +3,8 @@
     "Bruce": {
       "name": "Bruce",
       "stats": {
-        "totalActivities": 134,
-        "totalDistance": 216.4,
+        "totalActivities": 135,
+        "totalDistance": 218.95,
         "activityTypes": [
           "Running"
         ]
@@ -936,17 +936,24 @@
         },
         {
           "date": "11/26/25",
-          "distance": 1.03,
-          "type": "Running",
-          "duration": "9:28",
-          "pace": "9:10"
-        },
-        {
-          "date": "11/26/25",
           "distance": 1.11,
           "type": "Running",
           "duration": "9:22",
           "pace": "8:27"
+        },
+        {
+          "date": "11/28/25",
+          "distance": 2.1,
+          "type": "Running",
+          "duration": "21:53",
+          "pace": "10:25"
+        },
+        {
+          "date": "11/28/25",
+          "distance": 1.48,
+          "type": "Running",
+          "duration": "18:16",
+          "pace": "12:19"
         }
       ]
     },
@@ -1875,8 +1882,8 @@
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 82,
-        "totalDistance": 264.24,
+        "totalActivities": 81,
+        "totalDistance": 258.02,
         "activityTypes": [
           "Running"
         ]
@@ -2308,13 +2315,6 @@
           "type": "Running",
           "duration": "40:11",
           "pace": "14:03"
-        },
-        {
-          "date": "09/27/25",
-          "distance": 6.22,
-          "type": "Running",
-          "duration": "1:20:56",
-          "pace": "13:00"
         },
         {
           "date": "09/29/25",
@@ -3014,8 +3014,8 @@
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 113,
-        "totalDistance": 424.96,
+        "totalActivities": 114,
+        "totalDistance": 426.06,
         "activityTypes": [
           "Running"
         ]
@@ -3811,6 +3811,13 @@
           "type": "Running",
           "duration": "29:03",
           "pace": "9:40"
+        },
+        {
+          "date": "11/28/25",
+          "distance": 1.1,
+          "type": "Running",
+          "duration": "10:13",
+          "pace": "9:16"
         }
       ]
     },
@@ -6030,8 +6037,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-11-28T01:59:33.176515",
+    "lastUpdated": "2025-11-29T02:03:57.976683",
     "totalRunners": 10,
-    "totalActivities": 843
+    "totalActivities": 844
   }
 }
