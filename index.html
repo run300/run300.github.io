@@ -640,6 +640,12 @@
       min-width: 80px;
     }
 
+    .total-time-display {
+      background: linear-gradient(135deg, #ec4899, #db2777);
+      box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+      min-width: 80px;
+    }
+
     /* Lighter achievement displays for quarter rows */
     .quarter-row .achievement-display {
       opacity: 0.90;
@@ -1861,7 +1867,7 @@
         </td>
         <td>
           ${achievement.totalTimeRan > 0 ? 
-            `<span class="achievement-display time-display">${formatTimeFromMinutes(achievement.totalTimeRan)}</span>` : 
+            `<span class="achievement-display total-time-display">${formatTimeFromMinutes(achievement.totalTimeRan)}</span>` : 
             '<span class="achievement-value">No data</span>'
           }
         </td>
@@ -2162,7 +2168,7 @@
         </td>
         <td>
           ${quarterAchievement.totalTimeRan > 0 ? 
-            `<span class="achievement-display time-display">${formatTimeFromMinutes(quarterAchievement.totalTimeRan)}</span>` : 
+            `<span class="achievement-display total-time-display">${formatTimeFromMinutes(quarterAchievement.totalTimeRan)}</span>` : 
             '<span class="achievement-value">No data</span>'
           }
         </td>
@@ -2391,7 +2397,7 @@
       headers.innerHTML = `
         <th class="sortable" data-column="runner">Runner</th>
         <th class="sortable" data-column="totalDistance">Total Distance</th>
-        <th class="sortable" data-column="totalTimeRan">Time Ran</th>
+        <th class="sortable" data-column="totalTimeRan">Total Time</th>
         <th class="sortable" data-column="avgPace">${avgPaceText}</th>
         <th class="sortable" data-column="totalActivities">${activitiesText}</th>
         <th class="sortable" data-column="avgDistance">${avgDistanceText}</th>
