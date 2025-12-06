@@ -3,8 +3,8 @@
     "Bruce": {
       "name": "Bruce",
       "stats": {
-        "totalActivities": 141,
-        "totalDistance": 236.12,
+        "totalActivities": 142,
+        "totalDistance": 237.24,
         "activityTypes": [
           "Running"
         ]
@@ -618,6 +618,13 @@
           "type": "Running",
           "duration": "18:21",
           "pace": "10:55"
+        },
+        {
+          "date": "08/05/25",
+          "distance": 1.12,
+          "type": "Running",
+          "duration": "9:12",
+          "pace": "8:12"
         },
         {
           "date": "08/06/25",
@@ -1924,8 +1931,8 @@
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 89,
-        "totalDistance": 276.47,
+        "totalActivities": 90,
+        "totalDistance": 277.64,
         "activityTypes": [
           "Running"
         ]
@@ -2553,6 +2560,13 @@
           "type": "Running",
           "duration": "10:37",
           "pace": "9:14"
+        },
+        {
+          "date": "12/05/25",
+          "distance": 1.17,
+          "type": "Running",
+          "duration": "10:40",
+          "pace": "9:07"
         }
       ]
     },
@@ -4667,8 +4681,8 @@
     "Muscles": {
       "name": "Muscles",
       "stats": {
-        "totalActivities": 126,
-        "totalDistance": 221.91,
+        "totalActivities": 127,
+        "totalDistance": 223.42,
         "activityTypes": [
           "Hiking",
           "Running",
@@ -5553,6 +5567,13 @@
         },
         {
           "date": "12/04/25",
+          "distance": 1.51,
+          "type": "Running",
+          "duration": "25:42",
+          "pace": "17:02"
+        },
+        {
+          "date": "12/04/25",
           "distance": 2.5,
           "type": "Running",
           "duration": "41:29",
@@ -6212,8 +6233,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-12-05T02:05:47.003432",
+    "lastUpdated": "2025-12-06T02:01:41.644220",
     "totalRunners": 10,
-    "totalActivities": 869
+    "totalActivities": 872
   }
 }
