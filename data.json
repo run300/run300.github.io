@@ -2629,8 +2629,8 @@
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 81,
-        "totalDistance": 193.7,
+        "totalActivities": 82,
+        "totalDistance": 196.23,
         "activityTypes": [
           "Hiking",
           "Running",
@@ -3204,14 +3204,21 @@
           "type": "Hiking",
           "duration": "1:52:00",
           "pace": "27:03"
+        },
+        {
+          "date": "12/14/25",
+          "distance": 2.53,
+          "type": "Running",
+          "duration": "31:20",
+          "pace": "12:23"
         }
       ]
     },
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 115,
-        "totalDistance": 429.28,
+        "totalActivities": 116,
+        "totalDistance": 433.17,
         "activityTypes": [
           "Running"
         ]
@@ -4021,6 +4028,13 @@
           "type": "Running",
           "duration": "33:04",
           "pace": "10:16"
+        },
+        {
+          "date": "12/14/25",
+          "distance": 3.89,
+          "type": "Running",
+          "duration": "44:15",
+          "pace": "11:22"
         }
       ]
     },
@@ -6380,8 +6394,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-12-14T02:16:02.260573",
+    "lastUpdated": "2025-12-15T02:11:56.687606",
     "totalRunners": 10,
-    "totalActivities": 893
+    "totalActivities": 895
   }
 }
