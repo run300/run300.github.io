@@ -4,7 +4,7 @@
       "name": "Bruce",
       "stats": {
         "totalActivities": 150,
-        "totalDistance": 264.87,
+        "totalDistance": 266.45,
         "activityTypes": [
           "Running"
         ]
@@ -1034,13 +1034,6 @@
         },
         {
           "date": "12/17/25",
-          "distance": 3.26,
-          "type": "Running",
-          "duration": "40:16",
-          "pace": "12:21"
-        },
-        {
-          "date": "12/17/25",
           "distance": 3.62,
           "type": "Running",
           "duration": "45:52",
@@ -1048,17 +1041,24 @@
         },
         {
           "date": "12/18/25",
-          "distance": 3.41,
-          "type": "Running",
-          "duration": "41:14",
-          "pace": "12:05"
-        },
-        {
-          "date": "12/18/25",
           "distance": 3.68,
           "type": "Running",
           "duration": "46:07",
           "pace": "12:32"
+        },
+        {
+          "date": "12/19/25",
+          "distance": 4.08,
+          "type": "Running",
+          "duration": "46:07",
+          "pace": "11:18"
+        },
+        {
+          "date": "12/19/25",
+          "distance": 4.17,
+          "type": "Running",
+          "duration": "46:44",
+          "pace": "11:12"
         }
       ]
     },
@@ -4814,8 +4814,8 @@
     "Muscles": {
       "name": "Muscles",
       "stats": {
-        "totalActivities": 142,
-        "totalDistance": 265.64,
+        "totalActivities": 143,
+        "totalDistance": 268.59,
         "activityTypes": [
           "Hiking",
           "Running",
@@ -5812,6 +5812,13 @@
         },
         {
           "date": "12/18/25",
+          "distance": 2.95,
+          "type": "Running",
+          "duration": "46:50",
+          "pace": "15:53"
+        },
+        {
+          "date": "12/18/25",
           "distance": 2.59,
           "type": "Running",
           "duration": "41:12",
@@ -6485,8 +6492,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2025-12-19T02:11:49.149777",
+    "lastUpdated": "2025-12-20T02:09:22.825690",
     "totalRunners": 10,
-    "totalActivities": 908
+    "totalActivities": 909
   }
 }
