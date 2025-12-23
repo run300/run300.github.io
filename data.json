@@ -3,8 +3,8 @@
     "Bruce": {
       "name": "Bruce",
       "stats": {
-        "totalActivities": 149,
-        "totalDistance": 262.37,
+        "totalActivities": 150,
+        "totalDistance": 267.37,
         "activityTypes": [
           "Running"
         ]
@@ -1052,6 +1052,13 @@
           "type": "Running",
           "duration": "46:44",
           "pace": "11:12"
+        },
+        {
+          "date": "12/22/25",
+          "distance": 5.0,
+          "type": "Running",
+          "duration": "56:48",
+          "pace": "11:21"
         }
       ]
     },
@@ -1980,8 +1987,8 @@
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 95,
-        "totalDistance": 287.95,
+        "totalActivities": 96,
+        "totalDistance": 289.27,
         "activityTypes": [
           "Running"
         ]
@@ -2651,6 +2658,13 @@
           "type": "Running",
           "duration": "11:15",
           "pace": "8:43"
+        },
+        {
+          "date": "12/22/25",
+          "distance": 1.32,
+          "type": "Running",
+          "duration": "11:20",
+          "pace": "8:35"
         }
       ]
     },
@@ -5871,8 +5885,8 @@
     "Alfredo": {
       "name": "Alfredo",
       "stats": {
-        "totalActivities": 94,
-        "totalDistance": 277.29,
+        "totalActivities": 95,
+        "totalDistance": 280.56,
         "activityTypes": [
           "Running",
           "Walking"
@@ -6536,13 +6550,20 @@
           "type": "Running",
           "duration": "1:15:55",
           "pace": "11:39"
+        },
+        {
+          "date": "12/21/25",
+          "distance": 3.27,
+          "type": "Running",
+          "duration": "42:16",
+          "pace": "12:56"
         }
       ]
     }
   },
   "metadata": {
-    "lastUpdated": "2025-12-22T02:14:31.275346",
+    "lastUpdated": "2025-12-23T02:08:26.193089",
     "totalRunners": 10,
-    "totalActivities": 916
+    "totalActivities": 919
   }
 }
