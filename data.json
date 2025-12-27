@@ -3,8 +3,8 @@
     "Bruce": {
       "name": "Bruce",
       "stats": {
-        "totalActivities": 152,
-        "totalDistance": 275.83,
+        "totalActivities": 153,
+        "totalDistance": 282.38,
         "activityTypes": [
           "Running"
         ]
@@ -1073,6 +1073,13 @@
           "type": "Running",
           "duration": "1:00:18",
           "pace": "11:47"
+        },
+        {
+          "date": "12/26/25",
+          "distance": 6.55,
+          "type": "Running",
+          "duration": "1:20:40",
+          "pace": "12:19"
         }
       ]
     },
@@ -4877,8 +4884,8 @@
     "Muscles": {
       "name": "Muscles",
       "stats": {
-        "totalActivities": 151,
-        "totalDistance": 284.98,
+        "totalActivities": 152,
+        "totalDistance": 285.17,
         "activityTypes": [
           "Hiking",
           "Running",
@@ -5942,14 +5949,21 @@
           "type": "Running",
           "duration": "1:10:24",
           "pace": "17:25"
+        },
+        {
+          "date": "12/26/25",
+          "distance": 0.19,
+          "type": "Running",
+          "duration": "9:51",
+          "pace": "52:04"
         }
       ]
     },
     "Alfredo": {
       "name": "Alfredo",
       "stats": {
-        "totalActivities": 96,
-        "totalDistance": 285.08,
+        "totalActivities": 97,
+        "totalDistance": 290.52,
         "activityTypes": [
           "Running",
           "Walking"
@@ -6627,13 +6641,20 @@
           "type": "Running",
           "duration": "53:43",
           "pace": "11:53"
+        },
+        {
+          "date": "12/26/25",
+          "distance": 5.44,
+          "type": "Running",
+          "duration": "1:06:35",
+          "pace": "12:14"
         }
       ]
     }
   },
   "metadata": {
-    "lastUpdated": "2025-12-26T02:13:27.877992",
+    "lastUpdated": "2025-12-27T02:09:18.552771",
     "totalRunners": 10,
-    "totalActivities": 929
+    "totalActivities": 932
   }
 }
