@@ -2,7 +2,8 @@ name: Update RunKeeper Data
 
 on:
   schedule:
-    # Runs at 10 PM EST 
+    # Runs at 10 PM EST until Dec 31, 2025
+    # After Dec 31, 2025, this workflow will stop running automatically
     - cron: '0 0 * * *'
   workflow_dispatch:  # Allow manual triggering
 
@@ -11,6 +12,17 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - name: Check if should run (stop after Dec 31, 2025)
+        run: |
+          CURRENT_DATE=$(date +%Y-%m-%d)
+          END_DATE="2025-12-31"
+          if [ "$CURRENT_DATE" \> "$END_DATE" ]; then
+            echo "Current date ($CURRENT_DATE) is after Dec 31, 2025. Stopping workflow."
+            echo "This project only tracks events for 2025. Workflow will no longer run automatically."
+            exit 1
+          fi
+          echo "Current date ($CURRENT_DATE) is before or on Dec 31, 2025. Continuing..."
+      
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
