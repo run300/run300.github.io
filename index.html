@@ -1059,7 +1059,7 @@
       
       if (dateParts.length === 2) {
         [month, day] = dateParts;
-        year = "2025";
+        year = new Date().getFullYear().toString();
       } else if (dateParts.length === 3) {
         [month, day, year] = dateParts;
         year = '20' + year;
@@ -1131,9 +1131,12 @@
         const data = await response.json();
         const runners = data.runners;
       const startDate = new Date("2025-01-01");
+      const endDate2025 = new Date("2025-12-31T23:59:59");
       const currentDate = new Date();
+      // Cap currentDate at Dec 31, 2025
+      const maxDate = currentDate > endDate2025 ? endDate2025 : currentDate;
       const daysSoFar = Math.ceil(
-        (currentDate - startDate) / (24 * 60 * 60 * 1000),
+        (maxDate - startDate) / (24 * 60 * 60 * 1000),
       );
       const datasets = [];
       let colorIndex = 0;
@@ -1242,7 +1245,7 @@
           // Process grouped data (week/month)
           // Add starting point at beginning of time range for weekly/monthly views
           runnerData.push({
-            x: startDate, // Jan 1st, 2025
+            x: startDate, // Jan 1st of data year
             y: 0,
             hasActivity: false,
             gainFromLastActivity: 0,
@@ -1557,7 +1560,7 @@
           }, 0);
           const averagePaceSeconds = totalDistanceForPace > 0 ? totalTimeSeconds / totalDistanceForPace : 0;
 
-          // Calculate average distance
+          // Calculate average distance per run
           const averageDistance = activities.length > 0 ? totalDistance / activities.length : 0;
 
           // Calculate total time ran (in minutes)
@@ -1912,15 +1915,15 @@
         const dateParts = activity.date.split("/");
         let month, day, year;
         
-        if (dateParts.length === 2) {
-          [month, day] = dateParts;
-          year = "2025";
-        } else if (dateParts.length === 3) {
-          [month, day, year] = dateParts;
-          year = '20' + year;
-        } else {
-          return false;
-        }
+      if (dateParts.length === 2) {
+        [month, day] = dateParts;
+        year = "2025";
+      } else if (dateParts.length === 3) {
+        [month, day, year] = dateParts;
+        year = '20' + year;
+      } else {
+        return false;
+      }
         
         const activityDateObj = new Date(year, parseInt(month) - 1, parseInt(day));
         const activityMonth = activityDateObj.getMonth(); // 0-11
@@ -1980,6 +1983,7 @@
         }, 0);
         const averagePaceSeconds = totalDistanceForPace > 0 ? totalTimeSeconds / totalDistanceForPace : 0;
 
+        // Calculate average distance per run
         const averageDistance = activities.length > 0 ? totalDistance / activities.length : 0;
 
         // Calculate total time ran (in minutes)
@@ -2795,7 +2799,6 @@
           yMax += 50;
         }
       }
-      const currentDate = new Date();
       const daysInYear = 365;
       const daysRemaining = daysInYear - daysSoFar;
 
@@ -2937,25 +2940,32 @@
 
       // Get quarter date range for x-axis limits
       const quarterRange = getQuarterDateRange(selectedQuarters);
+      const chartEndDate2025 = new Date("2025-12-31T23:59:59");
+      const chartCurrentDate = new Date();
+      // Cap chartCurrentDate at Dec 31, 2025
+      const chartMaxDate = chartCurrentDate > chartEndDate2025 ? chartEndDate2025 : chartCurrentDate;
       const xAxisMin = quarterRange.min || new Date("2025-01-01");
       const xAxisMax = quarterRange.max || (dataGrouping === 'month' ? 
-        // For monthly view, extend to end of current month
-        new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0, 23, 59, 59) :
-        dataGrouping === 'week' ?
-        // For weekly view, extend to end of current week (Sunday)
+        // For monthly view, extend to end of current month (capped at Dec 31, 2025)
         (() => {
-          const endOfWeek = new Date(currentDate);
-          const day = currentDate.getDay();
-          const diff = 6 - day; // Days until Sunday
-          endOfWeek.setDate(currentDate.getDate() + diff);
-          endOfWeek.setHours(23, 59, 59, 0);
-          return endOfWeek;
+          const endOfMonth = new Date(chartMaxDate.getFullYear(), chartMaxDate.getMonth() + 1, 0, 23, 59, 59);
+          return endOfMonth > chartEndDate2025 ? chartEndDate2025 : endOfMonth;
         })() :
-        // For daily view, use current date
+        dataGrouping === 'week' ?
+        // For weekly view, extend to end of current week (Sunday, capped at Dec 31, 2025)
+        (() => {
+          const endOfWeek = new Date(chartMaxDate);
+          const day = chartMaxDate.getDay();
+          const diff = 6 - day; // Days until Sunday
+          endOfWeek.setDate(chartMaxDate.getDate() + diff);
+          endOfWeek.setHours(23, 59, 59, 0);
+          return endOfWeek > chartEndDate2025 ? chartEndDate2025 : endOfWeek;
+        })() :
+        // For daily view, use current date (capped at Dec 31, 2025)
         new Date(
-          currentDate.getFullYear(),
-          currentDate.getMonth(),
-          currentDate.getDate(),
+          chartMaxDate.getFullYear(),
+          chartMaxDate.getMonth(),
+          chartMaxDate.getDate(),
           23,
           59,
           59,
