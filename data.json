@@ -2022,8 +2022,8 @@
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 97,
-        "totalDistance": 290.62,
+        "totalActivities": 100,
+        "totalDistance": 295.32,
         "activityTypes": [
           "Running"
         ]
@@ -2707,14 +2707,35 @@
           "type": "Running",
           "duration": "11:24",
           "pace": "8:27"
+        },
+        {
+          "date": "12/28/25",
+          "distance": 1.21,
+          "type": "Running",
+          "duration": "10:05",
+          "pace": "8:20"
+        },
+        {
+          "date": "12/29/25",
+          "distance": 2.26,
+          "type": "Running",
+          "duration": "25:31",
+          "pace": "11:17"
+        },
+        {
+          "date": "12/29/25",
+          "distance": 1.23,
+          "type": "Running",
+          "duration": "10:06",
+          "pace": "8:13"
         }
       ]
     },
     "Trinspiration": {
       "name": "Trinspiration",
       "stats": {
-        "totalActivities": 86,
-        "totalDistance": 208.1,
+        "totalActivities": 87,
+        "totalDistance": 210.41,
         "activityTypes": [
           "Hiking",
           "Running",
@@ -3323,14 +3344,21 @@
           "type": "Running",
           "duration": "34:38",
           "pace": "11:26"
+        },
+        {
+          "date": "12/29/25",
+          "distance": 2.31,
+          "type": "Running",
+          "duration": "27:07",
+          "pace": "11:43"
         }
       ]
     },
     "Moose": {
       "name": "Moose",
       "stats": {
-        "totalActivities": 121,
-        "totalDistance": 452.47,
+        "totalActivities": 122,
+        "totalDistance": 454.77,
         "activityTypes": [
           "Running"
         ]
@@ -4182,6 +4210,13 @@
           "type": "Running",
           "duration": "34:41",
           "pace": "11:09"
+        },
+        {
+          "date": "12/29/25",
+          "distance": 2.3,
+          "type": "Running",
+          "duration": "26:21",
+          "pace": "11:28"
         }
       ]
     },
@@ -4347,8 +4382,8 @@
     "Jon": {
       "name": "Jon",
       "stats": {
-        "totalActivities": 14,
-        "totalDistance": 43.3,
+        "totalActivities": 15,
+        "totalDistance": 45.63,
         "activityTypes": [
           "Running",
           "Walking"
@@ -4452,6 +4487,13 @@
           "type": "Running",
           "duration": "29:05",
           "pace": "14:11"
+        },
+        {
+          "date": "12/29/25",
+          "distance": 2.33,
+          "type": "Running",
+          "duration": "27:31",
+          "pace": "11:49"
         }
       ]
     },
@@ -4926,8 +4968,8 @@
     "Muscles": {
       "name": "Muscles",
       "stats": {
-        "totalActivities": 153,
-        "totalDistance": 287.44,
+        "totalActivities": 156,
+        "totalDistance": 295.6,
         "activityTypes": [
           "Hiking",
           "Running",
@@ -6005,14 +6047,35 @@
           "type": "Running",
           "duration": "41:29",
           "pace": "18:15"
+        },
+        {
+          "date": "12/28/25",
+          "distance": 3.82,
+          "type": "Running",
+          "duration": "1:00:23",
+          "pace": "15:48"
+        },
+        {
+          "date": "12/28/25",
+          "distance": 1.32,
+          "type": "Running",
+          "duration": "20:50",
+          "pace": "15:47"
+        },
+        {
+          "date": "12/29/25",
+          "distance": 3.02,
+          "type": "Running",
+          "duration": "47:40",
+          "pace": "15:47"
         }
       ]
     },
     "Alfredo": {
       "name": "Alfredo",
       "stats": {
-        "totalActivities": 97,
-        "totalDistance": 290.52,
+        "totalActivities": 98,
+        "totalDistance": 298.47,
         "activityTypes": [
           "Running",
           "Walking"
@@ -6697,13 +6760,20 @@
           "type": "Running",
           "duration": "1:06:35",
           "pace": "12:14"
+        },
+        {
+          "date": "12/28/25",
+          "distance": 7.95,
+          "type": "Running",
+          "duration": "1:37:21",
+          "pace": "12:15"
         }
       ]
     }
   },
   "metadata": {
-    "lastUpdated": "2025-12-29T02:18:21.719469",
+    "lastUpdated": "2025-12-30T02:12:07.339699",
     "totalRunners": 10,
-    "totalActivities": 939
+    "totalActivities": 949
   }
 }
