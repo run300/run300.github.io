@@ -2036,8 +2036,8 @@
     "Scotch": {
       "name": "Scotch",
       "stats": {
-        "totalActivities": 100,
-        "totalDistance": 295.32,
+        "totalActivities": 101,
+        "totalDistance": 300.16,
         "activityTypes": [
           "Running"
         ]
@@ -2742,6 +2742,13 @@
           "type": "Running",
           "duration": "10:06",
           "pace": "8:13"
+        },
+        {
+          "date": "12/31/25",
+          "distance": 4.84,
+          "type": "Running",
+          "duration": "51:40",
+          "pace": "10:40"
         }
       ]
     },
@@ -6095,8 +6102,8 @@
     "Alfredo": {
       "name": "Alfredo",
       "stats": {
-        "totalActivities": 98,
-        "totalDistance": 298.47,
+        "totalActivities": 99,
+        "totalDistance": 300.48,
         "activityTypes": [
           "Running",
           "Walking"
@@ -6788,13 +6795,20 @@
           "type": "Running",
           "duration": "1:37:21",
           "pace": "12:15"
+        },
+        {
+          "date": "12/30/25",
+          "distance": 2.01,
+          "type": "Running",
+          "duration": "25:51",
+          "pace": "12:52"
         }
       ]
     }
   },
   "metadata": {
-    "lastUpdated": "2025-12-31T02:13:09.617432",
+    "lastUpdated": "2025-12-31T18:01:16.064288",
     "totalRunners": 10,
-    "totalActivities": 952
+    "totalActivities": 954
   }
 }
