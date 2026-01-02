@@ -1765,7 +1765,7 @@
     }
 
     // Global variables for sorting
-    let currentSortColumn = null;
+    let currentSortColumn = 'totalDistance';
     let currentSortDirection = 'desc';
     let allAchievements = [];
     let achievementsInitialized = false;
@@ -2639,7 +2639,7 @@
     function resetAchievements() {
       achievementsInitialized = false;
       allAchievements = [];
-      currentSortColumn = null;
+      currentSortColumn = 'totalDistance';
       currentSortDirection = 'desc';
     }
 
@@ -2818,7 +2818,7 @@
       const fontSizes = getFontSizes();
       const isMobileDevice = isMobile();
       document.getElementById("daysInfo").innerHTML =
-        `<span class="text-green-600">${daysSoFar} Days Passed</span> | <span class="text-blue-600">${daysRemaining} Days Remaining</span> <span class="text-purple-600">(${weeksRemaining} Weeks)</span>`;
+        `<span class="text-green-600">Challenge Ended</span>`;
 
       // Custom legend plugin
       const customLegendPlugin = {
